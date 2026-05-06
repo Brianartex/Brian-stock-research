@@ -17,7 +17,7 @@
     line-height: 1.6;
   }
   .container {
-    max-width: 600px;
+    max-width: 640px;
     padding: 40px;
     text-align: center;
   }
@@ -32,6 +32,25 @@
     font-size: 15px;
     margin-bottom: 40px;
   }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #30363d;
+  }
+  .section-header:first-of-type { margin-top: 0; }
+  .section-icon { font-size: 20px; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8b949e;
+  }
+
   .doc-card {
     background: #161b22;
     border: 1px solid #30363d;
@@ -65,7 +84,7 @@
     font-size: 13px;
     color: #8b949e;
   }
-  .doc-card .tag {
+  .tag {
     display: inline-block;
     background: rgba(63, 185, 80, 0.12);
     color: #3fb950;
@@ -78,20 +97,20 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
-  .doc-card .tag.geo {
+  .tag.geo {
     background: rgba(240, 136, 62, 0.12);
     color: #f0883e;
     border-color: rgba(240, 136, 62, 0.25);
   }
-  .doc-card .tag.archive {
+  .tag.archive {
     background: rgba(188, 140, 255, 0.12);
     color: #bc8cff;
     border-color: rgba(188, 140, 255, 0.25);
   }
-  .doc-card .tag.new {
-    background: rgba(248, 81, 73, 0.12);
-    color: #f85149;
-    border-color: rgba(248, 81, 73, 0.25);
+  .tag.primary {
+    background: rgba(88, 166, 255, 0.15);
+    color: #58a6ff;
+    border-color: rgba(88, 166, 255, 0.3);
   }
   .footer {
     margin-top: 40px;
@@ -106,33 +125,44 @@
   <p class="subtitle">May 2026 Research Reports</p>
 
 
-  <a href="Tech_Stock_Basket_Analysis_May_2026_v4.html" class="doc-card">
-    <div class="doc-date">Latest — May 6, 2026</div>
-    <h2>Tier 1–2 Battered Tech Basket v4</h2>
-    <p>Updated deep dive on DOCU, OKTA, SNOW, TEAM, TWLO (Tier 1) and PATH, RNG, ZM (Tier 2). Expandable layout — click any card to collapse/expand bull-bear analysis. TEAM +22–30% and TWLO +24% post-earnings confirmed.</p>
-    <span class="tag">SaaS · Beaten-Down · Expandable Layout</span>
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- Battered Tech Stocks -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-icon">💻</span>
+    <span class="section-title">Battered Tech Stocks</span>
+  </div>
+
+  <a href="Tech_Stock_Basket_Analysis_May_2026_v2.html" class="doc-card">
+    <div class="doc-date">Primary Document — May 6, 2026</div>
+    <h2>Tier 1–3 Battered Tech Basket v2 (Living)</h2>
+    <p>Full 16-stock master document with expandable layout. All Tier 1, 2, and 3 stocks in one file with collapsible sections. Contains April baseline analysis plus embedded &ldquo;Updates This Week&rdquo; with TEAM earnings beat, TWLO guidance raise, OKTA AI Agents GA, SNOW full-year confirmation, and RNG earnings preview.</p>
+    <span class="tag primary">Full Breadth · Living Document · Expandable</span>
   </a>
+
+  <a href="Tech_Stock_Basket_Analysis_May_2026_v4.html" class="doc-card">
+    <div class="doc-date">Quick Reference — May 6, 2026</div>
+    <h2>Tier 1–2 Battered Tech Basket v4</h2>
+    <p>Condensed view covering the 8 highest-conviction Tier 1 &amp; 2 stocks (DOCU, OKTA, SNOW, TEAM, TWLO, ZM, PATH, RNG). Same expandable layout. TEAM +22–30% and TWLO +24% post-earnings confirmed.</p>
+    <span class="tag">Tier 1–2 Only · Quick Reference · Expandable</span>
+  </a>
+
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- Geopolitical Winners -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-icon">🌏</span>
+    <span class="section-title">Geopolitical Winners</span>
+  </div>
 
   <a href="Geopolitical_Growth_Stocks_May_2026_v2.html" class="doc-card">
-    <div class="doc-date">Latest — May 6, 2026</div>
+    <div class="doc-date">May 6, 2026</div>
     <h2>High Potential Growth Sectors v2</h2>
-    <p>Nuclear, fertilizer, helium/semiconductors, water infrastructure, petrochemical alternatives, defense/cybersecurity, and China/emerging markets. 7 sectors with bull 🐂 + bear 🐻 expert council analysis for each.</p>
-    <span class="tag geo">Geopolitical Winners · Expandable Layout</span>
+    <p>7 sectors: Nuclear, Fertilizer, Helium/Semiconductors, Water Infrastructure, Petrochemical Alternatives, Defense/Cybersecurity, and China/Emerging Markets. Bull 🐂 + Bear 🐻 expert council analysis for each sector.</p>
+    <span class="tag geo">Geopolitical Winners · Expandable</span>
   </a>
 
-  <a href="Tech_Stock_Basket_Analysis_May_2026_v3.html" class="doc-card">
-    <div class="doc-date">Previous — May 6, 2026</div>
-    <h2>Tier 1–2 Battered Tech Basket v3</h2>
-    <p>Prior version with all content expanded (no collapsible sections). Same data as v4, just a different layout preference.</p>
-    <span class="tag archive">Archive</span>
-  </a>
-
-  <a href="Tech_Stock_Basket_Analysis_April_2026_v2.html" class="doc-card">
-    <div class="doc-date">Initial Research — April 29, 2026 (Archive)</div>
-    <h2>Tier 1–3 Battered Tech Basket v2</h2>
-    <p>Full baseline analysis covering all 16 stocks across Tier 1, Tier 2, and Tier 3. Includes counter-analysis, full ranking table, and 5-year compounding thesis.</p>
-    <span class="tag archive">Full Baseline · Archive</span>
-  </a>
 
   <div class="footer">
     Reports generated by Hermes Agent Research · For informational purposes only

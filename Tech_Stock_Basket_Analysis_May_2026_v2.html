@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Tier 1–3 Battered Tech Basket v2 (Living) &mdash; May 6, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --border: #30363d;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-muted: #6e7681;
+    --accent-green: #3fb950;
+    --accent-red: #f85149;
+    --accent-yellow: #d29922;
+    --accent-blue: #58a6ff;
+    --accent-purple: #bc8cff;
+    --accent-orange: #f0883e;
+    --bull-bg: rgba(63, 185, 80, 0.08);
+    --bear-bg: rgba(248, 81, 73, 0.08);
+    --tier2-bg: rgba(88, 166, 255, 0.05);
+    --tier3-bg: rgba(188, 140, 255, 0.05);
+    --conclusion-bg: rgba(88, 166, 255, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  .report-header {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1c2128 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 36px;
+  }
+
+
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 40px;
+  }
+  .site-nav a {
+    font-size: 13px;
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .site-nav a:hover { text-decoration: underline; }
+
+  .report-header .version-badge {
+    display: inline-block;
+    background: rgba(88, 166, 255, 0.15);
+    border: 1px solid rgba(88, 166, 255, 0.3);
+    color: var(--accent-blue);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  .report-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .report-header .subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  .report-header .meta-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .report-header .meta-item {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .report-header .meta-item strong {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer {
+    margin: 24px 40px;
+    background: rgba(210, 153, 34, 0.08);
+    border: 1px solid rgba(210, 153, 34, 0.25);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .disclaimer strong {
+    color: var(--accent-yellow);
+    font-weight: 600;
+  }
+
+  /* ── INTRO ── */
+  .intro-section {
+    padding: 0 40px 32px;
+    max-width: 1200px;
+  }
+
+  .intro-section p {
+    color: var(--text-secondary);
+    max-width: 860px;
+    margin-bottom: 16px;
+  }
+
+  .thesis-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent-blue);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    max-width: 860px;
+  }
+
+  .thesis-box .thesis-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 8px;
+  }
+
+  .thesis-box p {
+    color: var(--text-primary);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  /* ── SECTOR ANALYSIS ── */
+  .sector-section {
+    padding: 0 40px 32px;
+    max-width: 1200px;
+  }
+
+  .sector-section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.01em;
+  }
+
+  .sector-conclusion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .sector-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+
+  .sector-box.bull-sect { border-top: 3px solid var(--accent-green); }
+  .sector-box.bear-sect { border-top: 3px solid var(--accent-red); }
+
+  .sector-box h3 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .sector-box.bull-sect h3 { color: var(--accent-green); }
+  .sector-box.bear-sect h3 { color: var(--accent-red); }
+
+  .sector-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sector-box ul li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .sector-box.bull-sect ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent-green); font-size: 11px; }
+  .sector-box.bear-sect ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent-red); font-size: 11px; }
+
+  .gs-callout {
+    background: rgba(88, 166, 255, 0.06);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 16px;
+  }
+
+  .gs-callout .gs-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 8px;
+  }
+
+  .gs-callout p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+
+  /* ── STOCK CARDS ── */
+  .stocks-section {
+    padding: 0 40px 40px;
+    max-width: 1200px;
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.01em;
+  }
+
+  .tier-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 40px 0 24px;
+  }
+
+  .tier-divider .tier-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .tier-divider .tier-label.tier-1 {
+    background: rgba(63, 185, 80, 0.15);
+    color: var(--accent-green);
+    border: 1px solid rgba(63, 185, 80, 0.3);
+  }
+
+  .tier-divider .tier-label.tier-2 {
+    background: rgba(88, 166, 255, 0.12);
+    color: var(--accent-blue);
+    border: 1px solid rgba(88, 166, 255, 0.25);
+  }
+
+  .tier-divider .tier-label.tier-3 {
+    background: rgba(188, 140, 255, 0.12);
+    color: var(--accent-purple);
+    border: 1px solid rgba(188, 140, 255, 0.25);
+  }
+
+  .tier-divider .tier-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .tier-intro {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .stock-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+
+  .stock-card.tier-2-card { border-color: rgba(88, 166, 255, 0.2); }
+  .stock-card.tier-3-card { border-color: rgba(188, 140, 255, 0.2); }
+
+  .stock-card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .stock-title-group .ticker-badge {
+    display: inline-block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--accent-blue);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .tier-2-card .ticker-badge { color: var(--accent-blue); }
+  .tier-3-card .ticker-badge { color: var(--accent-purple); }
+
+  .stock-title-group h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: inline;
+    margin-right: 14px;
+  }
+
+  .stock-title-group .sector-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+    vertical-align: middle;
+  }
+
+  .stock-price-group {
+    text-align: right;
+  }
+
+  .stock-price-group .current-price {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .stock-price-group .from-high {
+    font-size: 13px;
+    color: var(--accent-red);
+    font-weight: 500;
+  }
+
+  .stock-price-group .high-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: block;
+  }
+
+  /* Price Action Bar */
+  .price-action-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pa-cell {
+    background: var(--surface2);
+    padding: 10px 16px;
+    text-align: center;
+  }
+
+  .pa-cell-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .pa-cell-value { font-size: 14px; font-weight: 600; }
+  .pa-cell-value.positive { color: var(--accent-green); }
+  .pa-cell-value.negative { color: var(--accent-red); }
+  .pa-cell-value.neutral { color: var(--accent-yellow); }
+  .pa-cell-value.flat { color: var(--text-secondary); }
+
+  .pa-cell-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  .reversal-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 4px;
+  }
+
+  .reversal-badge.confirmed {
+    background: rgba(63, 185, 80, 0.15);
+    color: var(--accent-green);
+    border: 1px solid rgba(63, 185, 80, 0.3);
+  }
+
+  .reversal-badge.partial {
+    background: rgba(210, 153, 34, 0.15);
+    color: var(--accent-yellow);
+    border: 1px solid rgba(210, 153, 34, 0.3);
+  }
+
+  .reversal-badge.negative {
+    background: rgba(248, 81, 73, 0.15);
+    color: var(--accent-red);
+    border: 1px solid rgba(248, 81, 73, 0.3);
+  }
+
+  /* Fundamentals Grid */
+  .fundamentals-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .fund-cell {
+    background: var(--surface);
+    padding: 12px 16px;
+  }
+
+  .fund-cell-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .fund-cell-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .fund-cell-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Bull/Bear Rows */
+  .bb-section { padding: 16px 24px; }
+
+  .bb-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .bb-block {
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+
+  .bb-block.bull {
+    background: var(--bull-bg);
+    border: 1px solid rgba(63, 185, 80, 0.2);
+  }
+
+  .bb-block.bear {
+    background: var(--bear-bg);
+    border: 1px solid rgba(248, 81, 73, 0.2);
+  }
+
+  .bb-block h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .bb-block.bull h4 { color: var(--accent-green); }
+  .bb-block.bear h4 { color: var(--accent-red); }
+
+  .bb-block ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .bb-block ul li {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .bb-block.bull ul li::before { content: '+'; position: absolute; left: 0; color: var(--accent-green); font-weight: 700; }
+  .bb-block.bear ul li::before { content: '−'; position: absolute; left: 0; color: var(--accent-red); font-weight: 700; }
+
+  /* Verdict */
+  .verdict-row {
+    background: var(--surface2);
+    padding: 14px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .verdict-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .verdict-text { font-size: 13.5px; color: var(--text-primary); line-height: 1.5; }
+
+  .verdict-text .verdict-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  .verdict-text .verdict-tag.strong-buy { background: rgba(63, 185, 80, 0.2); color: var(--accent-green); border: 1px solid rgba(63, 185, 80, 0.4); }
+  .verdict-text .verdict-tag.buy { background: rgba(63, 185, 80, 0.1); color: var(--accent-green); border: 1px solid rgba(63, 185, 80, 0.25); }
+  .verdict-text .verdict-tag.hold { background: rgba(210, 153, 34, 0.1); color: var(--accent-yellow); border: 1px solid rgba(210, 153, 34, 0.25); }
+  .verdict-text .verdict-tag.speculative { background: rgba(248, 81, 73, 0.1); color: var(--accent-red); border: 1px solid rgba(248, 81, 73, 0.25); }
+  .verdict-text .verdict-tag.skip { background: rgba(110, 118, 129, 0.15); color: var(--text-muted); border: 1px solid rgba(110, 118, 129, 0.3); }
+
+  /* ── OVERALL CONCLUSIONS ── */
+  .conclusions-section {
+    padding: 0 40px 40px;
+    max-width: 1200px;
+  }
+
+  .basket-ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 28px;
+  }
+
+  .basket-ranking-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--border);
+    background: var(--surface);
+  }
+
+  .basket-ranking-table td {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .basket-ranking-table tr:hover td { background: rgba(88, 166, 255, 0.04); }
+  .basket-ranking-table .rank-num { font-weight: 700; color: var(--text-primary); font-size: 15px; }
+  .basket-ranking-table .ticker { font-family: 'Courier New', monospace; font-weight: 700; font-size: 13px; }
+  .basket-ranking-table .tier-1-tick { color: var(--accent-green); }
+  .basket-ranking-table .tier-2-tick { color: var(--accent-blue); }
+  .basket-ranking-table .tier-3-tick { color: var(--accent-purple); }
+
+  .basket-ranking-table .rank-tier {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  .basket-ranking-table .rank-tier.tier-1 { background: rgba(63, 185, 80, 0.15); color: var(--accent-green); border: 1px solid rgba(63, 185, 80, 0.3); }
+  .basket-ranking-table .rank-tier.tier-2 { background: rgba(88, 166, 255, 0.1); color: var(--accent-blue); border: 1px solid rgba(88, 166, 255, 0.25); }
+  .basket-ranking-table .rank-tier.tier-3 { background: rgba(188, 140, 255, 0.1); color: var(--accent-purple); border: 1px solid rgba(188, 140, 255, 0.25); }
+
+  /* Counter-Analysis */
+  .counter-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+
+  .counter-section h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .counter-section h3 .icon { font-size: 18px; }
+  .counter-section h4 { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-top: 16px; margin-bottom: 8px; }
+  .counter-section p, .counter-section li { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+  .counter-section ul { list-style: none; padding: 0; margin-bottom: 12px; }
+  .counter-section ul li { padding: 4px 0; padding-left: 16px; position: relative; }
+  .counter-section ul li::before { content: '⚠'; position: absolute; left: 0; font-size: 10px; top: 6px; }
+
+  .weak-premise {
+    background: rgba(248, 81, 73, 0.06);
+    border: 1px solid rgba(248, 81, 73, 0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+  }
+
+  .weak-premise h4 { font-size: 12px; font-weight: 700; color: var(--accent-red); margin-top: 0; margin-bottom: 6px; }
+
+  /* Final Recommendation Box */
+  .final-rec-box {
+    background: var(--conclusion-bg);
+    border: 1px solid rgba(88, 166, 255, 0.25);
+    border-radius: 12px;
+    padding: 24px 28px;
+  }
+
+  .final-rec-box h3 { font-size: 15px; font-weight: 700; color: var(--accent-blue); margin-bottom: 16px; }
+  .final-rec-box h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 16px; margin-bottom: 8px; }
+  .final-rec-box h4.tier-h { color: var(--accent-green); }
+  .final-rec-box h4.tier-m { color: var(--accent-blue); }
+  .final-rec-box h4.tier-l { color: var(--accent-purple); }
+  .final-rec-box p, .final-rec-box li { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .final-rec-box ul { list-style: none; padding: 0; margin-bottom: 8px; }
+  .final-rec-box ul li { padding: 3px 0; padding-left: 14px; position: relative; }
+  .final-rec-box ul li::before { content: '•'; position: absolute; left: 0; color: var(--accent-blue); }
+
+  /* Footer */
+  .report-footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 40px;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .fundamentals-grid { grid-template-columns: repeat(3, 1fr); }
+    .price-action-bar { grid-template-columns: repeat(2, 1fr); }
+    .bb-grid { grid-template-columns: 1fr; }
+    .sector-conclusion-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .report-header, .intro-section, .sector-section, .stocks-section, .conclusions-section { padding-left: 20px; padding-right: 20px; }
+    .disclaimer { margin-left: 20px; margin-right: 20px; }
+    .fundamentals-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+.expandable { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 0; }
+  summary.expandable-summary {
+    background: var(--surface2); padding: 12px 20px; font-size: 13px; font-weight: 600;
+    color: var(--accent-blue); cursor: pointer; display: flex; align-items: center; gap: 10px;
+    transition: background .15s; list-style: none; border-bottom: 1px solid transparent;
+  }
+  summary.expandable-summary:hover { background: #2d333b; }
+  summary.expandable-summary::-webkit-details-marker { display: none; }
+  summary.expandable-summary::before { content: '▶'; font-size: 10px; color: var(--accent-blue); transition: transform .2s; flex-shrink: 0; }
+  details[open] summary.expandable-summary::before { transform: rotate(90deg); }
+  details[open] summary.expandable-summary { border-bottom-color: var(--border); }
+  .expandable-body { background: var(--surface); }
+  .expandable-body .back-to-top {
+    display: inline-block; font-size: 11px; color: var(--accent-blue); text-decoration: none;
+    margin-bottom: 12px; font-weight: 500; padding: 14px 20px 0; display: block;
+  }
+  .expandable-body .back-to-top:hover { text-decoration: underline; }
+  .site-nav {
+    position: sticky; top: 0; z-index: 100; background: var(--surface);
+    border-bottom: 1px solid var(--border); padding: 10px 40px;
+    display: flex; align-items: center; gap: 12px; overflow-x: auto; white-space: nowrap; flex-wrap: wrap;
+  }
+  .site-nav a { font-size: 12px; color: var(--accent-blue); text-decoration: none; font-weight: 500; flex-shrink: 0; }
+  .site-nav a:hover { text-decoration: underline; }
+  .site-nav .nav-sep { color: var(--text-muted); font-size: 12px; }
+  .site-nav .nav-label { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
+  .site-nav .tier-jump {
+    font-size: 11px; color: var(--text-secondary); text-decoration: none; padding: 2px 8px;
+    border-radius: 4px; border: 1px solid var(--border); transition: all .15s;
+  }
+  .site-nav .tier-jump:hover {
+    background: var(--surface2); color: var(--text-primary); border-color: var(--accent-blue); text-decoration: none;
+  }
+  .key-event-box {
+    background: rgba(88, 166, 255, 0.06); border: 1px solid rgba(88, 166, 255, 0.15);
+    border-radius: 8px; padding: 14px 18px; margin: 14px 18px 0; font-size: 13px; color: var(--text-secondary);
+  }
+  .key-event-box strong { color: var(--accent-blue); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- HEADER -->
+<!-- ═══════════════════════════════════════════════ -->
+<nav class="site-nav"><a href="index.html">← Research Home</a></nav>
+<div class="report-header">
+  <div class="version-badge">v2 — Initial Research | April 29, 2026</div>
+  <h1>Tier 1–3 Battered Tech Basket</h1>
+  <div class="subtitle">Full Baseline Analysis — 16 Stocks, 3 Tiers | April 29, 2026 (Archive)</div>
+  <div class="meta-row">
+    <div class="meta-item"><strong>Date:</strong> April 29, 2026</div>
+    <div class="meta-item"><strong>Coverage:</strong> 16 Stocks — 3 Tiers</div>
+    <div class="meta-item"><strong>Version:</strong> v2 (expanded from v1)</div>
+    <div class="meta-item"><strong>Data:</strong> Public filings, earnings calls, Yahoo Finance, Macrotrends</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- DISCLAIMER -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="disclaimer">
+  <strong>Important Disclosure:</strong> This report is prepared for informational and educational purposes only. It does not constitute investment advice, a recommendation to buy or sell any security, or an offer or solicitation of an offer to buy or sell any security. All data is sourced from publicly available information including company filings, earnings transcripts, and financial data providers. All price data is approximate as of April 29, 2026. Past performance is not indicative of future results. Always conduct your own due diligence and consult a qualified financial advisor before making investment decisions.
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- EXECUTIVE SUMMARY / THESIS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="intro-section">
+  <p>
+    This expanded v2 report provides deep-dive research on 16 companies across three tiers — 9 Tier 1 companies (from v1) plus 7 additional companies in Tier 2 and Tier 3 that merit consideration based on similar financial and price characteristics. The core thesis holds that a category of high-quality software companies trading at historically distressed valuations represents one of the most compelling risk/reward setups in public equity markets in years.
+  </p>
+
+  <div class="thesis-box">
+    <div class="thesis-label">Core Thesis — v2 Expanded</div>
+    <p>
+      Buy a basket of 20–30 equal-weight names fitting these criteria — profitable or approaching profitability, growing, generating free cash flow, with fortress balance sheets — trading 70%+ below their 2021 peaks. Hold for 5+ years. The market is wrong about AI "killing" these businesses, and the cash flow statements will eventually prove it. The key variable this report adds to pure financial analysis: <strong>price momentum and reversal confirmation</strong>. A stock can be cheap and fundamentally solid — but if it's still in a downtrend with no signs of reversal, it can stay cheap for years.
+    </p>
+  </div>
+
+  <p>
+    <strong>Tier Definitions:</strong><br>
+    • <strong style="color:var(--accent-green)">Tier 1</strong> — The original 9 names, fitting the strict criteria most precisely (70%+ below 2021 highs, profitable or approaching profitability, strong FCF).<br>
+    • <strong style="color:var(--accent-blue)">Tier 2</strong> — Companies that either narrowly miss one criterion (VEEV is only ~47% below ATH) or are early in their turnaround arc, but where the financial quality is exceptional and the price is compelling.<br>
+    • <strong style="color:var(--accent-purple)">Tier 3</strong> — Higher-risk/higher-scrutiny names that may be relevant for a broader basket but require more caution: either GAAP-unprofitable, or facing structural competitive challenges, or with an acquisition/PE event altering the investment thesis.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTOR ANALYSIS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="sector-section">
+  <h2>📊 Sector Analysis: Is the "AI Will Kill SaaS" Thesis Real?</h2>
+
+  <p style="font-size:13px; color: var(--text-secondary); max-width: 860px; margin-bottom: 16px;">
+    Before analyzing individual stocks, we must address the central premise: Are these companies facing <em>cyclical</em> disdain (which creates the opportunity) or <em>secular</em> decline (which would make them value traps)? We examine both sides rigorously.
+  </p>
+
+  <div class="sector-conclusion-grid">
+    <div class="sector-box bull-sect">
+      <h3>Bear Case for "AI Will Kill SaaS" — Is Overblown</h3>
+      <ul>
+        <li><strong>Enterprise software has structural moats:</strong> Deep integrations, customer data, workflow embedded in processes — can't be swapped out by AI prompts alone</li>
+        <li><strong>AI is an enhancement, not a replacement:</strong> Goldman Sachs March 2026 "Will AI Eat Software?" analysis concluded AI is more likely to reinforce existing software incumbents than displace them</li>
+        <li><strong>Switching costs are real:</strong> These companies have millions of users, petabytes of customer data, and enterprise contracts that don't get cancelled because a new AI tool launched</li>
+        <li><strong>Actual renewal rates hold:</strong> Customer concentration and renewal rate data contradicts the "everyone is leaving" narrative</li>
+        <li><strong>AWS CEO Matt Garman (Feb 2026):</strong> Publicly stated AI disruption fears for SaaS are overblown</li>
+      </ul>
+    </div>
+    <div class="sector-box bear-sect">
+      <h3>Bull Case for "AI Will Kill SaaS" — Risks Are Real</h3>
+      <ul>
+        <li><strong>Microsoft bundles Power Automate + Copilot free</strong> with Office 365/Azure — displaces UiPath, Atlassian, and others from the enterprise stack</li>
+        <li><strong>Freemium AI agents can replicate workflows</strong> these platforms charge for — unit economics of incumbents are threatened</li>
+        <li><strong>Data gravity is eroding:</strong> Snowflake's moat vs. Microsoft Fabric — Fabric is deeply integrated into Office 365/Azure, making data gravity less relevant</li>
+        <li><strong>Video conferencing was "commoditized"</strong> — Zoom went from 50x P/E to a value stock in 3 years — the same can happen to other categories</li>
+        <li><strong>The "forced selling" mechanism is weaker now:</strong> Many hedge funds already rotated out in 2022–2025 — who is left to do the forced selling that creates the ideal setup?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="gs-callout">
+    <div class="gs-label">Goldman Sachs — "Will AI Eat Software?" (March 2026)</div>
+    <p>
+      Goldman's 31-page analysis concluded that AI is <strong>more likely to become a reinforcement for most enterprise software than a replacement</strong>. For horizontal productivity software (Jira, Confluence, Zoom), the risks are higher. For vertical software with deep workflow integration and switching costs (DocuSign, Okta, Veeva), the moats hold. The report specifically noted that <strong>bundling by hyperscalers</strong> (Microsoft Fabric, Google Workspace AI) represents the most credible existential threat to several names in this basket — and that the threat is most acute for companies without strong vertical differentiation.
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TIER 1 STOCKS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="stocks-section">
+
+  
+  <div class="update-banner">
+    <div class="update-banner-label">&#128240; Major Updates &mdash; Week of May 6, 2026</div>
+    <table class="update-table">
+      <thead>
+        <tr><th>Ticker</th><th>Event</th><th>Impact</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="ticker-chip team">TEAM</span></td><td>Q3 FY2026 beat: $1.787B revenue (+5.2%), EPS $1.75 vs $1.33 expected</td><td><span class="impact-badge positive">+22&ndash;30% in session</span></td></tr>
+        <tr><td><span class="ticker-chip twlo">TWLO</span></td><td>Q1 CY2026 beat: $1.41B revenue (+4.7%), raised FY26 guidance to 14&ndash;15%</td><td><span class="impact-badge positive">+24% post-market</span></td></tr>
+        <tr><td><span class="ticker-chip okta">OKTA</span></td><td>&ldquo;Okta for AI Agents&rdquo; GA April 30 &mdash; 40% contract value uplift, already 30% of Q4 bookings</td><td><span class="impact-badge positive">Bullish catalyst</span></td></tr>
+        <tr><td><span class="ticker-chip snow">SNOW</span></td><td>FY2026: $4.68B revenue (+29.16%). Q4 product revenue $1.22B (+30% YoY)</td><td><span class="impact-badge positive">Confirmed growth</span></td></tr>
+        <tr><td><span class="ticker-chip rng">RNG</span></td><td>Q1 2026 earnings expected ~May 7 &mdash; AI Communications momentum print</td><td><span class="impact-badge neutral">TBD</span></td></tr>
+        <tr><td><span class="ticker-chip geopol">GEOPOL</span></td><td>Iran conflict week 7+: Strait of Hormuz closed, helium/semiconductor costs rising</td><td><span class="impact-badge negative">Cost headwind</span></td></tr>
+      </tbody>
+    </table>
+    <p class="update-note">Per-company &ldquo;Recent Update&rdquo; boxes are embedded inside each stock card below. Collapsed cards still show the ticker &amp; company name.</p>
+  </div>
+
+<div class="tier-divider">
+    <span class="tier-label tier-1">Tier 1 — Core Basket (9 Stocks)</span>
+    <div class="tier-line"></div>
+  
+<details class="expandable" id="docu">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">DOCU</span>
+    <span class="expandable-name">DocuSign Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">DOCU</span>
+        <h2>DocuSign Inc.</h2>
+        <span class="sector-tag">E-Signature / Agreement Cloud</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$45–50</div>
+        <div class="from-high">~84% below 2021 high of ~$314</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−30%</div><div class="pa-cell-sub">from ~$75 in Oct 2025</div><span class="reversal-badge negative">✗ NO REVERSAL</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−25%</div><div class="pa-cell-sub">from ~$65 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value negative">−27.6%</div><div class="pa-cell-sub">severe recent drop</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">~−30%</div><div class="pa-cell-sub">continuing to fall</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY25)</div><div class="fund-cell-value">$2.98B</div><div class="fund-cell-sub">+8% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF (FY25)</div><div class="fund-cell-value">$920M</div><div class="fund-cell-sub">~31% FCF margin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">82.3%</div><div class="fund-cell-sub">non-GAAP, exceptional</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">$2.8B</div><div class="fund-cell-sub">fortress balance sheet</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Op. Margin</div><div class="fund-cell-value">~10.5%</div><div class="fund-cell-sub">Q4, expanding</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>Financially most impressive in basket: 82% gross margins, 31% FCF margins, $920M FCF on $3B revenue</li>
+          <li>At ~15x forward earnings, this is cheap for a cash-generating dominant market leader</li>
+          <li>E-signature market still growing 11% CAGR; DocuSign holds 35–40% market share with network effects</li>
+          <li>Agreement AI (Intelligent Agreement Management) is a genuine upsell — existing customers pay more for AI-assisted workflows</li>
+          <li>Balance sheet has $2.8B net cash = zero bankruptcy risk; can acquire competitors or weather downturns</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>The 30% drop in 30 days suggests something more than sentiment — likely earnings guidance cut or competitive news coming</li>
+          <li>Microsoft and Google bundle free e-signature tools — disintermediation risk for simpler use cases</li>
+          <li>Growth decelerating: from 20%+ historical to 8% — market repricing for permanently lower growth</li>
+          <li>AI could automate agreement process end-to-end, potentially making DocuSign less central</li>
+          <li>Adobe Sign (25–30% market share) and others taking share from DocuSign</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict</div>
+      <div class="verdict-text">
+        <span class="verdict-tag strong-buy">STRONG BUY — Fundamentals vs. Price Divergence</span>
+        The fundamentals are arguably the best in the entire basket — exceptional margins, massive FCF, dominant market position. But the price action is alarming: down 27% in just the last 30 days. This is either a panicked flush before a reversal, or the market is telling you something you don't yet know. <em>Highest risk/reward in the basket — wait for the selling to exhaust itself, then build a position.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="okta">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">OKTA</span>
+    <span class="expandable-name">Okta Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">OKTA</span>
+        <h2>Okta Inc.</h2>
+        <span class="sector-tag">Identity & Access Management</span>
+      </div>
+<div class="update-box">
+      <div class="update-label">&#9889; Recent Update &mdash; May 6, 2026</div>
+      <p><strong>&ldquo;Okta for AI Agents&rdquo; launched General Availability &mdash; April 30.</strong> New product extends identity security to AI agents, adds ~40% contract value uplift. Already representing 30% of Q4 FY2026 bookings. CFO Tighe: &ldquo;expected to be accretive to growth for FY28 and FY29.&rdquo; <em>Q1 FY2027 results early June are the next key catalyst.</em></p>
+    </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$76</div>
+        <div class="from-high">~73% below 2021 high of ~$280</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−20%</div><div class="pa-cell-sub">from ~$95 in Oct 2025</div><span class="reversal-badge partial">◑ EMERGING</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−15%</div><div class="pa-cell-sub">from ~$90 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value positive">+4.7%</div><div class="pa-cell-sub">stabilizing from $62 low</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">−11%</div><div class="pa-cell-sub">down but off lows</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY26)</div><div class="fund-cell-value">~$2.9B</div><div class="fund-cell-sub">+13% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Op. Cash Flow</div><div class="fund-cell-value">$884M</div><div class="fund-cell-sub">~30% margin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">~73–75%</div><div class="fund-cell-sub">solid</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Net Income</div><div class="fund-cell-value">Profitable</div><div class="fund-cell-sub">$23M Q4 FY25</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Op. Margin</div><div class="fund-cell-value">~10%+</div><div class="fund-cell-sub">turning profitable</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>Identity security is one of few sectors with genuine secular growth — every app, every user, every device needs authentication</li>
+          <li>30% FCF margins + GAAP profitability = financial profile closest to DOCU in this group</li>
+          <li>AI = MORE security threats = MORE identity management needs — cybersecurity is a rising-tide sector</li>
+          <li>Bounced from $62 (oversold) — the January 2026 panic low was likely the bottom; now forming a base</li>
+          <li>Auth0 acquisition has been integrated; cross-sell momentum building</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Microsoft Entra (Azure AD) is a direct competitor bundled with Azure — Microsoft's scale is a structural threat</li>
+          <li>Past LAPSUS cyber breach (2022) and governance issues have lingering reputational overhang</li>
+          <li>Passwordless auth (FIDO2, passkeys) could reduce long-term need for Okta as AI-driven security evolves</li>
+          <li>Competitive pure-plays (CyberArk, Zscaler) are growing faster and taking share</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict</div>
+      <div class="verdict-text">
+        <span class="verdict-tag buy">BUY — Strongest Secular Growth Story</span>
+        Okta has the best combination of fundamental quality AND reversal signal emerging. The $62 low in January 2026 was likely the panic bottom. Identity security is the most durable secular growth story among all 16 names — every AI-powered app needs more authentication, not less. <em>One of the two best entries in the basket.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="snow">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">SNOW</span>
+    <span class="expandable-name">Snowflake Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">SNOW</span>
+        <h2>Snowflake Inc.</h2>
+        <span class="sector-tag">Cloud Data Platform</span>
+      </div>
+<div class="update-box">
+      <div class="update-label">&#9889; Recent Update &mdash; May 6, 2026</div>
+      <p><strong>FY2026 full year confirmed:</strong> Revenue $4.68B (+29.16%). Q4 product revenue $1.22B (+30% YoY, 96% of total). Product gross margin ~73%. Consensus target ~$175 (~40% upside from ~$122). <em>The base-building thesis is intact. Watch for AI data warehouse customer additions in Q4 call commentary.</em></p>
+    </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$141</div>
+        <div class="from-high">~70% below 2021 high of ~$400</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−30%</div><div class="pa-cell-sub">from ~$200 in Oct 2025</div><span class="reversal-badge negative">✗ NO REVERSAL</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">−33%</div><div class="pa-cell-sub">from ~$211 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value negative">−5.6%</div><div class="pa-cell-sub">still falling</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">−34%</div><div class="pa-cell-sub">brutal year</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY26)</div><div class="fund-cell-value">$4.7B</div><div class="fund-cell-sub">+30% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Adj. FCF (FY26)</div><div class="fund-cell-value">~$1.2B</div><div class="fund-cell-sub">~25% FCF margin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">~62–65%</div><div class="fund-cell-sub">⚠️ Lower than peers</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">$4.8B</div><div class="fund-cell-sub">fortress</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Rev. Retention</div><div class="fund-cell-value">>115%</div><div class="fund-cell-sub">excellent</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>30% growth at $4.7B revenue scale is the best growth rate in the basket — Snowflake is still genuinely growing</li>
+          <li>25% FCF margins and $4.8B cash = fortress balance sheet; no financial risk</li>
+          <li>Net revenue retention of 115%+ means existing customers are spending 15% more YoY — healthy unit economics</li>
+          <li>Cortex AI (AI-powered analytics) is a real product generating incremental revenue from existing customers</li>
+          <li>AI overall = more data created = more Snowflake usage — data gravity theory holds in an AI world</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Microsoft Fabric is the <strong>existential threat</strong>: deep integration with Office 365, Teams, Azure, and Power BI</li>
+          <li>62–65% gross margins are the lowest in this basket — Snowflake is more infrastructure than classic software</li>
+          <li>Databricks competing aggressively on AI/data engineering — Nvidia partnership gives Databricks credibility</li>
+          <li>Down 33% in 90 days without reversal — institutional investors clearly reducing positions</li>
+          <li>Stock was 100x+ forward sales at peak; even at $141 it isn't obviously cheap on earnings</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict</div>
+      <div class="verdict-text">
+        <span class="verdict-tag hold">HOLD — Best Growth, Most Credible Existential Threat</span>
+        Snowflake is the only company in this basket that is still growing at 30%+ AND has a fortress balance sheet. But Microsoft Fabric is the single most credible competitive threat to any company in this basket, and Snowflake is the most exposed. The 90-day downtrend is a warning sign. <em>Worth a position but monitor Microsoft Fabric adoption closely.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="rng">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">RNG</span>
+    <span class="expandable-name">RingCentral Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">RNG</span>
+        <h2>RingCentral Inc.</h2>
+        <span class="sector-tag">UCaaS / Enterprise Communications</span>
+      </div>
+<div class="update-box">
+      <div class="update-label">&#9889; Recent Update &mdash; May 6, 2026</div>
+      <p><strong>Q1 2026 earnings expected ~May 7.</strong> AI Communications platform momentum is the key watch. The baseline noted RingCentral as &ldquo;already reversed to new 52-week highs&rdquo; in April &mdash; this week's print will confirm or challenge that characterization. <em>AI Video Messaging and Glance WCME adoption are the metrics to watch.</em></p>
+    </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$40</div>
+        <div class="from-high">~95% below 2021 high of ~$520</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value positive">+~67%</div><div class="pa-cell-sub">from ~$24 in Oct 2025</div><span class="reversal-badge confirmed">✓ REVERSAL CONFIRMED</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value positive">+~40%</div><div class="pa-cell-sub">from ~$28 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value positive">+14.6%</div><div class="pa-cell-sub">from ~$35 in Mar 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value positive">+38%</div><div class="pa-cell-sub">at new 52wk highs</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY25)</div><div class="fund-cell-value">$2.5B</div><div class="fund-cell-sub">+5% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF (FY25)</div><div class="fund-cell-value">$530M</div><div class="fund-cell-sub">~21% FCF margin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">~80%+</div><div class="fund-cell-sub">excellent</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">Positive</div><div class="fund-cell-sub">strong balance sheet</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Op. Margin</div><div class="fund-cell-value">~5%</div><div class="fund-cell-sub">doubling in 2026</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>FCF doubling story: SBC declining from ~15% of revenue → 3–4% over 3–4 years = massive GAAP profit expansion</li>
+          <li>$530M FCF on $2.5B revenue at ~10x FCF = historically cheap for a growing platform</li>
+          <li>Already at new 52-week high — technical breakout confirms institutional confidence</li>
+          <li>Avaya/Cisco enterprise customers migrating to cloud UC — secular tailwind</li>
+          <li>Agentic AI features (RingCentral Intelligence) are new upsell potential</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Market only growing ~6%/year — slow secular growth limits upside</li>
+          <li>Microsoft Teams is free with Office 365 — commoditization pressure is real and ongoing</li>
+          <li>Already rallied 62% from 52-week low — less "battered" than it appears</li>
+          <li>Telecom regulatory risk (FCC) adds uncertainty</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict</div>
+      <div class="verdict-text">
+        <span class="verdict-tag hold">HOLD — Already Reversed</span>
+        RingCentral is the most technically confirmed reversal in the basket — already hitting new 52-week highs. The FCF doubling story is legitimate, but the market may already be pricing it in. The 6-month gain of ~67% means the "bath" may have already happened. <em>Fine to own in basket but not the highest-conviction entry point.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="team">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">TEAM</span>
+    <span class="expandable-name">Atlassian Corporation</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">TEAM</span>
+        <h2>Atlassian Corporation</h2>
+        <span class="sector-tag">Collaboration / Project Management</span>
+      </div>
+<div class="update-box">
+      <div class="update-label">&#9889; Recent Update &mdash; May 6, 2026</div>
+      <p><strong>Q3 FY2026 earnings beat (reported May 5):</strong> Revenue $1.787B (+5.2% beat), Adj. EPS $1.75 vs $1.33 expected. Stock surged <strong>+22&ndash;30% in session.</strong> This confirms the reversal signal from the April baseline. <em>Q4 FY2026 now becomes the key confirmation print.</em></p>
+    </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$70–80</div>
+        <div class="from-high">~74% below 2021 high of ~$350</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−50%</div><div class="pa-cell-sub">from ~$150 in Oct 2025</div><span class="reversal-badge partial">◑ EMERGING</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−40%</div><div class="pa-cell-sub">massive Q1 decline</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value positive">+6.3%</div><div class="pa-cell-sub">bounce from $56 low</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">−57%</div><div class="pa-cell-sub">brutal year</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY25)</div><div class="fund-cell-value">~$2.8B</div><div class="fund-cell-sub">+30% subscription</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF (FY25)</div><div class="fund-cell-value">~$750M</div><div class="fund-cell-sub">~27% FCF margin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">~81–82%</div><div class="fund-cell-sub">excellent</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Earnings</div><div class="fund-cell-value">Loss</div><div class="fund-cell-sub">⚠️ GAAP unprofitable</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Cloud Growth</div><div class="fund-cell-value">~26%</div><div class="fund-cell-sub">but decelerating</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>$56 was likely the panic bottom — bounced 40%+ from lows in a short period = strong reversal signal</li>
+          <li>10% workforce reduction creates real cost discipline — accelerates path to GAAP profitability</li>
+          <li>Cloud migration (Data Center → Cloud) still has enterprise runway, especially in enterprise</li>
+          <li>AI product "Rovo" could be meaningful — Atlassian has world's largest corpus of work data to train on</li>
+          <li>81% gross margins + 27% FCF margins = excellent business economics despite current pain</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Revenue growth collapsing: from 30%+ to 15% in a year — this is not a temporary slowdown</li>
+          <li>GAAP unprofitable — in a higher-rate environment, unprofitable companies are penalized</li>
+          <li>Data Center to Cloud migration was the big tailwind of last 5 years — largely complete</li>
+          <li>Microsoft (Copilot in Teams) and Linear are both eating Jira's lunch in different segments</li>
+          <li>10% workforce cut is a red flag — management doesn't have confidence in the business</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict</div>
+      <div class="verdict-text">
+        <span class="verdict-tag speculative">HIGH RISK / HIGH REWARD</span>
+        The most dramatic price action in the basket — down 40% in 90 days followed by a sharp bounce. The fundamental deterioration is real (growth collapsing from 30% to 15%) but the bounce from $56 suggests the market is differentiating between "growth collapse" and "business failure." <em>Include as high-risk/high-reward satellite position, not core basket holding.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="twlo">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">TWLO</span>
+    <span class="expandable-name">Twilio Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">TWLO</span>
+        <h2>Twilio Inc.</h2>
+        <span class="sector-tag">CPaaS / Communications Platform</span>
+      </div>
+<div class="update-box">
+      <div class="update-label">&#9889; Recent Update &mdash; May 6, 2026</div>
+      <p><strong>Q1 CY2026 earnings beat:</strong> Revenue $1.41B (+4.7% beat). Raised FY26 guidance to 14&ndash;15% growth from prior 11.5&ndash;12.5%. Stock +24% post-market. <em>Confirms the turnaround thesis. Watch for consumer segment stabilization.</em></p>
+    </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$141</div>
+        <div class="from-high">~86% below 2021 high of ~$400</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value positive">+~20%</div><div class="pa-cell-sub">from ~$120 in Oct 2025</div><span class="reversal-badge confirmed">✓ REVERSAL CONFIRMED</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value positive">+~20%</div><div class="pa-cell-sub">from ~$120 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value positive">+7.8%</div><div class="pa-cell-sub">from 52wk low ~$92</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value flat">~Flat</div><div class="pa-cell-sub">vs. software sector</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY25)</div><div class="fund-cell-value">$5.07B</div><div class="fund-cell-sub">+14% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF Margin</div><div class="fund-cell-value">~18.7%</div><div class="fund-cell-sub">Q4 FY25</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">49.9%</div><div class="fund-cell-sub">⚠️ LOW vs. peers</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">~$2B</div><div class="fund-cell-sub">positive</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Organic Growth</div><div class="fund-cell-value">~12%</div><div class="fund-cell-sub">Q4, accelerating</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>$5B revenue at 14% growth with 86% decline from peak = extraordinary valuation reset</li>
+          <li>IDC named Twilio a leader in communications engagement platforms — competitive moat confirmed</li>
+          <li>Segment customer data platform creates unique data integration moat competitors can't easily replicate</li>
+          <li>AI voice and SMS use cases growing — every AI agent needs to send messages/calls</li>
+          <li>Dollar-based net retention positive — existing customers expanding usage</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>49.9% gross margin is a <strong>structural problem</strong>, not cyclical — more services than software</li>
+          <li>Commoditized SMS/voice API — AWS (Amazon SNS), Google (Firebase) offer direct substitutes</li>
+          <li>FCF is real but low margin profile means less pricing power long-term</li>
+          <li>Segment acquisition integration still proving itself — not yet clear it created durable moat</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict</div>
+      <div class="verdict-text">
+        <span class="verdict-tag hold">HOLD — Structurally Interesting but Financially Different</span>
+        Twilio is the most "services-like" business in this basket, not classic SaaS. The 49.9% gross margin is a red flag that the competitive moat is thinner than peers. The reversal from 52-week lows is real, but the thesis depends on whether you believe the AI communications platform story. <em>Acceptable basket component but not a core holding.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="zm">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">ZM</span>
+    <span class="expandable-name">Zoom Video Communications</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">ZM</span>
+        <h2>Zoom Video Communications</h2>
+        <span class="sector-tag">Video Conferencing / UC</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$91</div>
+        <div class="from-high">~84% below 2021 high of ~$568</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value positive">+~30%</div><div class="pa-cell-sub">from ~$70 in Oct 2025</div><span class="reversal-badge partial">◑ PARTIAL</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value positive">+~30%</div><div class="pa-cell-sub">from ~$70 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value positive">+13.4%</div><div class="pa-cell-sub">continuing to recover</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value positive">+17%</div><div class="pa-cell-sub">decent bounce</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY25)</div><div class="fund-cell-value">~$4.6B</div><div class="fund-cell-sub">+3.3% — saturated</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF Margin</div><div class="fund-cell-value">~35%</div><div class="fund-cell-sub">exceptional</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">~74%</div><div class="fund-cell-sub">solid</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">>$5B</div><div class="fund-cell-sub">fortress</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Op. Margin</div><div class="fund-cell-value">~20%</div><div class="fund-cell-sub">excellent profitability</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>$5B+ net cash = zero risk of financial distress; can buy back stock, acquire, or weather any downturn</li>
+          <li>35% FCF margins at this scale is exceptional — this is a cash-flow machine</li>
+          <li>AI Companion being integrated across Zoom Workplace creates upsell without disrupting core product</li>
+          <li>Enterprise customers (Fortune 500) still pay for Zoom — Rooms and Phone add-ons growing</li>
+          <li>At ~15x forward earnings, stock is not demanding much from the business</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Revenue growth of 3.3% means this is <strong>not a growth company anymore</strong></li>
+          <li>Microsoft Teams is free with Office 365 — relentless free competition</li>
+          <li>Video conferencing has been commoditized — the "moat" has proven to be thin</li>
+          <li>Stock went from 50x+ P/E to ~15x — multiples don't re-expand for commodity businesses</li>
+          <li>The 84% decline from 2021 high reflects rational repricing, not irrational panic</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict</div>
+      <div class="verdict-text">
+        <span class="verdict-tag hold">HOLD — Deep Value but Secular Stagnation</span>
+        Zoom is a classic "cigar butt" value stock — the balance sheet is incredible, the FCF is real, the price is cheap. But the growth narrative is dead. For a basket that wants compounding names over 5–10 years, Zoom is the weakest compounder. <em>Include for stability, not upside.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="path">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">PATH</span>
+    <span class="expandable-name">UiPath Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">PATH</span>
+        <h2>UiPath Inc.</h2>
+        <span class="sector-tag">Robotic Process Automation (RPA)</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$10.38</div>
+        <div class="from-high">~80% below 2021 high of ~$90</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−35%</div><div class="pa-cell-sub">from ~$16 in Oct 2025</div><span class="reversal-badge negative">✗ NO REVERSAL</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−35%</div><div class="pa-cell-sub">continuing to fall</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value negative">−20%+</div><div class="pa-cell-sub">new 52wk low April '26</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">−35.5%</div><div class="pa-cell-sub">worst in basket</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY26)</div><div class="fund-cell-value">$1.61B</div><div class="fund-cell-sub">+13% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF (FY26)</div><div class="fund-cell-value">~$328M</div><div class="fund-cell-sub">~20% FCF margin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">87–91%</div><div class="fund-cell-sub">software at 91%</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">~$2.5B</div><div class="fund-cell-sub">strong</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Profitability</div><div class="fund-cell-value">Unprofitable</div><div class="fund-cell-sub">⚠️ GAAP loss</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>Agentic AI is the BEST possible narrative for UiPath — AI agents need to automate workflows, which is exactly what UiPath does</li>
+          <li>91% software gross margins are world-class; $1.6B revenue growing 13% at scale is solid</li>
+          <li>WorkFusion acquisition adds AI agent capabilities — "agentic automation" thesis is UiPath's to lose</li>
+          <li>At ~6x forward earnings, extremely cheap if business stabilizes</li>
+          <li>Enterprise automation is sticky — replacing UiPath means re-engineering hundreds of workflows</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li><strong>Still making new 52-week lows in April 2026</strong> — no bottom, no reversal, no buyer interest</li>
+          <li>GAAP unprofitable — in a world where AI is commoditizing everything, unprofitable is a liability</li>
+          <li>Microsoft Power Automate bundled free with Office 365 — friction of switching being eliminated</li>
+          <li>AI agents from OpenAI/Anthropic could compete directly with UiPath for workflow automation</li>
+          <li>The AI agent narrative is double-edged: agents can USE UiPath OR REPLACE UiPath's purpose</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict</div>
+      <div class="verdict-text">
+        <span class="verdict-tag speculative">SPECULATIVE — No Bottom Yet</span>
+        The most speculative name in the basket. The price is cheap, the AI narrative is potentially perfectly aligned, but there is no evidence of a bottom — the stock is making new lows as we speak. The bull case requires a successful AI pivot AND market recognition. <em>Do not add to basket until at least 30 days without making a new 52-week low.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="smar">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">SMAR</span>
+    <span class="expandable-name">Smartsheet Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">SMAR</span>
+        <h2>Smartsheet Inc.</h2>
+        <span class="sector-tag">Work Management Platform</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$56</div>
+        <div class="from-high">~65% below 2021 high of ~$180</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value neutral">~Stable</div><div class="pa-cell-sub">range-bound all year</div><span class="reversal-badge partial">◑ N/A — M&A</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value neutral">~Stable</div><div class="pa-cell-sub">acquisition anchored</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value neutral">+0.9%</div><div class="pa-cell-sub">anchored</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value neutral">~Flat</div><div class="pa-cell-sub">PE acquisition anchored</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY25)</div><div class="fund-cell-value">~$900M</div><div class="fund-cell-sub">+17% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF Margin</div><div class="fund-cell-value">~22%</div><div class="fund-cell-sub">Q3 FY25</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">~81%</div><div class="fund-cell-sub">excellent</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Acquisition Price</div><div class="fund-cell-value">$56.47</div><div class="fund-cell-sub">68% premium to pre-announce</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Acquisition Status</div><div class="fund-cell-value">Pending</div><div class="fund-cell-sub">⚠️ Regulatory risk</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>If deal closes at $56.47, investors get a guaranteed ~68% premium to pre-announcement prices</li>
+          <li>Strong fundamentals: 81% gross margins, 22% FCF margins, 17% revenue growth — good business</li>
+          <li>PE buyer (Volition Capital / Henderson) likely did thorough diligence — deal price reflects full value</li>
+          <li>Work management market is growing — Smartsheet is category leader in enterprise orchestration</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>If deal breaks (regulatory or financing), stock crashes back to ~$33–35 — 40% decline</li>
+          <li>Trading at acquisition price means no "battered" discount — you're paying for the deal, not the business</li>
+          <li>PE acquisition of SaaS often means cost-cutting, not product innovation post-acquisition</li>
+          <li>Not a "basket" stock in the traditional sense — it's a merger arbitrage play</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict</div>
+      <div class="verdict-text">
+        <span class="verdict-tag skip">SKIP — M&A Arb, Not Investment Thesis</span>
+        Smartsheet is not a battered public market story — it's an M&A arbitrage situation with a pending acquisition. It belongs in a different framework entirely. For the "battered basket" thesis, remove Smartsheet and add something else.
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+
+<div class="tier-divider">
+    <span class="tier-label tier-2">Tier 2 — Near-Qualifiers & Turnaround Candidates (4 Stocks)</span>
+    <div class="tier-line"></div>
+  
+<details class="expandable" id="asan">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">ASAN</span>
+    <span class="expandable-name">Asana Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card tier-2-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">ASAN</span>
+        <h2>Asana Inc.</h2>
+        <span class="sector-tag">Work Management / Collaboration</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$6.30</div>
+        <div class="from-high">~87% below 2021 high of ~$50+</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">−57%</div><div class="pa-cell-sub">from ~$14.60 in Oct 2025</div><span class="reversal-badge partial">◑ BOTTOMING?</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−55%</div><div class="pa-cell-sub">from ~$13–14 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value positive">+4.75%</div><div class="pa-cell-sub">bouncing from lows</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">Large decline</div><div class="pa-cell-sub">50%+ crash in 2026</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY2026)</div><div class="fund-cell-value">$790.81M</div><div class="fund-cell-sub">+9.2% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF Margin</div><div class="fund-cell-value">9.7%</div><div class="fund-cell-sub">FY2026; 13.3% in FY2027</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">87.84%</div><div class="fund-cell-sub">elite — among highest in SaaS</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">Positive</div><div class="fund-cell-sub">~$200M buyback auth.</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Status</div><div class="fund-cell-value">Improving</div><div class="fund-cell-sub">approaching breakeven</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>87.84% gross margins are elite — among the highest in SaaS for a company at this revenue scale</li>
+          <li>FCF margin expanding from 9.7% → 13.3% in FY2027 = path to GAAP profitability is real and accelerating</li>
+          <li>At ~$6, stock trades at ~2x forward sales — extraordinarily cheap for an 87% GM business</li>
+          <li>AI Work Hub positioning Asana as AI-native work management platform — real differentiation</li>
+          <li>Q4 FY2026 beat on revenue and expanded GAAP operating margin by 17+ percentage points</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Revenue growth of only 9% is decelerating — from 30%+ historical to single digits is alarming</li>
+          <li>Competition from Linear, Notion, and Microsoft Project intensifying in work management space</li>
+          <li>The 50%+ crash in 2026 suggests market is pricing for business model deterioration</li>
+          <li>GAAP unprofitable — cost structure still requires revenue growth to justify valuations</li>
+          <li>AI differentiation is not unique to Asana — every competitor is adding AI features simultaneously</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict — Tier 2</div>
+      <div class="verdict-text">
+        <span class="verdict-tag buy">BUY — Extraordinary Valuation at $6</span>
+        At ~$6, Asana trades at approximately 2x forward sales with 88% gross margins. That is an extraordinarily cheap price for a company approaching GAAP profitability with a clear FCF expansion path. The 57% decline in 6 months reflects growth fear, not business failure. <em>Watch for 2 consecutive quarters of revenue stabilization above 8% before establishing a full position.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="mndy">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">MNDY</span>
+    <span class="expandable-name">Monday.com Ltd.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card tier-2-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">MNDY</span>
+        <h2>Monday.com Ltd.</h2>
+        <span class="sector-tag">Work Management / Low-Code Platform</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$67</div>
+        <div class="from-high">~79% below 2021 high of ~$315+</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">−64%</div><div class="pa-cell-sub">from ~$188 in Oct 2025</div><span class="reversal-badge partial">◑ NEAR BOTTOM</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−45%</div><div class="pa-cell-sub">from ~$120–130 Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value neutral">~Flat</div><div class="pa-cell-sub">stabilizing</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">Large decline</div><div class="pa-cell-sub">From ~$122 start of year</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY2025)</div><div class="fund-cell-value">$1.45B</div><div class="fund-cell-sub">+18–19% guidance FY2026</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF</div><div class="fund-cell-value">$312.9M</div><div class="fund-cell-sub">~22% FCF margin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">89.2%</div><div class="fund-cell-sub">among highest in all SaaS</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">Positive</div><div class="fund-cell-sub">substantial</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Op. Income</div><div class="fund-cell-value">$2.4M Q4</div><div class="fund-cell-sub">razor-thin but positive</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>89.2% gross margins are among the highest in all of SaaS — exceptional business model quality</li>
+          <li>$312.9M FCF on $1.45B revenue; trading at ~11.5x FCF is cheap for this quality level</li>
+          <li>Bounced from ~$57.50 52-wk low and stabilizing in $66–70 range — possible bottom forming</li>
+          <li>Revenue guidance for FY2026: $1.452–1.462B (+18–19%) — solid growth at $1.4B+ scale</li>
+          <li>monday.com's low-code platform is AI-native — AI Work Automation driving enterprise adoption</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Stock down 76% from 52-wk high and still falling — not yet a confirmed reversal</li>
+          <li>Trading at 11x FCF with 9% revenue deceleration from 25% to 18% — growth is slowing materially</li>
+          <li>Microsoft and Asana competing aggressively in the same work management category</li>
+          <li>GAAP profitability razor-thin ($2.4M Q4 operating income) — not the quality profit you'd want at this scale</li>
+          <li>From $315 all-time high in 2021, consistent downtrend — no来过 bounce yet</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict — Tier 2</div>
+      <div class="verdict-text">
+        <span class="verdict-tag buy">STRONG BUY CANDIDATE — 89% GMs at 11x FCF</span>
+        Monday.com has some of the best gross margins in all of SaaS at 89.2%, combined with 22% FCF margins and 18–19% growth at $1.4B+ scale. The stock is down 64% in 6 months, stabilizing near $66–70. If it holds the $57–66 support range for 30 days, it becomes a high-conviction buy. <em>The risk/reward here is exceptional for a company of this quality.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="bill">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">BILL</span>
+    <span class="expandable-name">Bill.com Holdings</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card tier-2-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">BILL</span>
+        <h2>Bill.com Holdings</h2>
+        <span class="sector-tag">SMB Financial Automation</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$37</div>
+        <div class="from-high">~82% below 2021 high of ~$220+</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−35%</div><div class="pa-cell-sub">from ~$50–55 in Oct 2025</div><span class="reversal-badge negative">✗ NO REVERSAL</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−25%</div><div class="pa-cell-sub">from ~$45–50 Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value negative">Hitting new lows</div><div class="pa-cell-sub">new 52wk Apr 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">Large decline</div><div class="pa-cell-sub">from ~$55+ start of year</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY2026)</div><div class="fund-cell-value">~$1.5B+</div><div class="fund-cell-sub">+14% total, +17% core</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF</div><div class="fund-cell-value">Positive</div><div class="fund-cell-sub">growing, improving</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">~79%</div><div class="fund-cell-sub">est., solid</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">Positive</div><div class="fund-cell-sub">strong</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Status</div><div class="fund-cell-value">Loss</div><div class="fund-cell-sub">⚠️ GAAP loss; narrowing</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>Core revenue (mid-market ERP integration) growing 17% — the core business is healthy</li>
+          <li>AI-powered Autonomous Accounting platform is genuine differentiation — saves SMBs hours/week</li>
+          <li>New 52-wk low in April 2026 creates extreme oversold setup — potential flush before bounce</li>
+          <li>EV/FCF multiple compressed dramatically from 2021 peaks — valuation reset is aggressive</li>
+          <li>SMB financial automation market still underpenetrated — secular tailwind intact</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>GAAP unprofitable with GAAP operating margin still negative (-5.51%) — cost structure concerns</li>
+          <li>Hit new 52-week low in April 2026 — the selling has not stopped</li>
+          <li>Q2 FY2026 revenue beat but stock still fell — market losing confidence in the story</li>
+          <li>Sage, QuickBooks (Intuit), and Oracle competing in the same SMB financial automation space</li>
+          <li>Higher interest rate environment hurts SMB-focused fintech like BILL more than enterprise</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict — Tier 2</div>
+      <div class="verdict-text">
+        <span class="verdict-tag speculative">SPECULATIVE — No Bottom Yet</span>
+        Bill.com has healthy 17% core revenue growth and a secular tailwind in SMB financial automation. However, the stock is making new 52-week lows as of April 2026, GAAP losses are ongoing, and the market is clearly losing patience. <em>Watch for 30 days without a new low before building any position. The fundamental story is there but the timing is wrong.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="veev">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">VEEV</span>
+    <span class="expandable-name">Veeva Systems Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card tier-2-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">VEEV</span>
+        <h2>Veeva Systems Inc.</h2>
+        <span class="sector-tag">Life Sciences Cloud / Pharma SaaS</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$158</div>
+        <div class="from-high">~47% below 2021 high of ~$300</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value neutral">Flat/slight down</div><div class="pa-cell-sub">~$160–170 Oct 2025</div><span class="reversal-badge partial">◑ STABLE</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value neutral">Flat/slight down</div><div class="pa-cell-sub">~$170 Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value neutral">Stable</div><div class="pa-cell-sub">~$160–170 range</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value neutral">Modest decline</div><div class="pa-cell-sub">essentially flat</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY2026)</div><div class="fund-cell-value">$3.2B</div><div class="fund-cell-sub">+16% (Q4 $836M)</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF Margin</div><div class="fund-cell-value">~38%</div><div class="fund-cell-sub">non-GAAP, world-class</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">74.46%</div><div class="fund-cell-sub">solid</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Op. Margin</div><div class="fund-cell-value">~29%</div><div class="fund-cell-sub">non-GAAP Q4</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Profitable</div><div class="fund-cell-value">Yes</div><div class="fund-cell-sub">consistently</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>Veeva is the dominant life sciences cloud platform — essentially a monopoly in pharma cloud data</li>
+          <li>74% gross margins + 38% non-GAAP FCF margins = world-class profitability at $3B+ revenue scale</li>
+          <li>16% revenue growth at $3.2B scale is solid; guidance beat on Q4 FY2026 confirmed</li>
+          <li>AI in life sciences (clinical trials, drug discovery) creates new data products for Veeva</li>
+          <li>Vault platform stickiness is extreme — switching costs among highest in enterprise SaaS</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Only ~47% below 2021 high — <strong>NOT fitting the 70% "bath" criteria</strong>; less distressed than basket peers</li>
+          <li>Stock essentially flat over 6 months — no reversal, no bath, no immediate catalyst</li>
+          <li>Veeva's moat is largely in life sciences — any pharma R&D spend slowdown hurts directly</li>
+          <li>Oracle, Salesforce (Life Sciences Cloud), and MEDidata competing for same workloads</li>
+          <li>The 47% decline from ATH doesn't match the '70% below 2021 highs' thesis requirement</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict — Tier 2</div>
+      <div class="verdict-text">
+        <span class="verdict-tag hold">MONITOR — Exceptional Business, Wrong Criteria Fit</span>
+        Veeva is one of the finest businesses in all of enterprise software — a genuine monopoly in life sciences cloud with 38% FCF margins and consistent GAAP profitability. However, at only ~47% below its 2021 high, it doesn't meet the strict "70% below 2021 highs" criterion that defines this basket. It belongs in a different, higher-quality framework. <em>Include in a separate "high-quality SaaS" portfolio, not this basket.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+
+<div class="tier-divider">
+    <span class="tier-label tier-3">Tier 3 — Higher Risk / Higher Scrutiny (3 Stocks)</span>
+    <div class="tier-line"></div>
+  
+<details class="expandable" id="ddog">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">DDOG</span>
+    <span class="expandable-name">Datadog Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card tier-3-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">DDOG</span>
+        <h2>Datadog Inc.</h2>
+        <span class="sector-tag">Cloud Monitoring / Observability</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$131</div>
+        <div class="from-high">~67% below 2021 high of ~$199</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−13%</div><div class="pa-cell-sub">from ~$150 in Oct 2025</div><span class="reversal-badge confirmed">✓ REVERSAL EMERGING</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−6%</div><div class="pa-cell-sub">from ~$140 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value positive">+13.6%</div><div class="pa-cell-sub">strong bounce</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value positive">Up ~13%</div><div class="pa-cell-sub">from Jan lows</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (TTM)</div><div class="fund-cell-value">$3.43B</div><div class="fund-cell-sub">+29.2% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF</div><div class="fund-cell-value">$914.7M</div><div class="fund-cell-sub">~26.7% FCF margin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">80.4%</div><div class="fund-cell-sub">excellent</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Margin</div><div class="fund-cell-value">3.1%</div><div class="fund-cell-sub">profitable</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">Positive</div><div class="fund-cell-sub">strong</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>At $3.43B revenue with 29% growth, Datadog is the clear category leader in cloud monitoring</li>
+          <li>$914.7M FCF with 26.7% FCF margin — this is a high-quality FCF business</li>
+          <li>80.4% gross margins + GAAP profitable = financial profile closest to basket requirements</li>
+          <li>AI operations (AIOps) is a genuine secular tailwind — every AI deployment needs monitoring</li>
+          <li>Guggenheim upgrade to Buy in April 2026 + 13.6% one-month gain confirms reversal is underway</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Only ~67% below 2021 highs — <strong>not quite meeting the 70% "battered" threshold</strong></li>
+          <li>Competition from AWS CloudWatch, Google Operations, and New Relic is intense and growing</li>
+          <li>At ~48x forward earnings, stock is not as cheap as the "battered" narrative suggests</li>
+          <li>Large enterprises increasingly building in-house monitoring tools vs. paying for Datadog</li>
+          <li>AI coding assistants could reduce demand for developer monitoring tools (observability)</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict — Tier 3</div>
+      <div class="verdict-text">
+        <span class="verdict-tag hold">HOLD — Excellent Quality But Doesn't Meet 70% Criterion</span>
+        Datadog has the financial quality that belongs in this basket — 29% growth, 27% FCF margins, 80% gross margins, GAAP profitable. The reversal signal is emerging (13.6% in 30 days). However, at ~67% below ATH, it falls just short of the 70% threshold. <em>Watch for further weakness that could push it closer to the required threshold, or upgrade to Tier 2 if the reversal fully confirms.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="s">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">S</span>
+    <span class="expandable-name">SentinelOne Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card tier-3-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">S</span>
+        <h2>SentinelOne Inc.</h2>
+        <span class="sector-tag">Cybersecurity / Endpoint AI</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$14</div>
+        <div class="from-high">~83% below 2021/IPO float levels</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−22%</div><div class="pa-cell-sub">from ~$17–18 in Oct 2025</div><span class="reversal-badge partial">◑ BOUNCING</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−18%</div><div class="pa-cell-sub">from ~$17 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value positive">Positive</div><div class="pa-cell-sub">bouncing from lows</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">Large decline</div><div class="pa-cell-sub">from ~$47 start of 2025</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY2026)</div><div class="fund-cell-value">$1B</div><div class="fund-cell-sub">+22% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF (Q4 FY26)</div><div class="fund-cell-value">$51.7M</div><div class="fund-cell-sub">~5% FCF margin — thin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">~79%</div><div class="fund-cell-sub">est., solid</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">~$1B+</div><div class="fund-cell-sub">strong</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Status</div><div class="fund-cell-value">Loss</div><div class="fund-cell-sub">⚠️ FCF pos. Q4 only</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>Just crossed $1B revenue (FY2026) + 22% growth = milestone company in cybersecurity</li>
+          <li>AI-native security platform is the right positioning — AI-powered threat detection is a differentiator</li>
+          <li>FCF positive in Q4 FY2026 — turning point from growth-stage to profitability-stage</li>
+          <li>Purple AI (AI analyst) is a genuine product differentiator vs. legacy vendors like CrowdStrike</li>
+          <li>Cybersecurity is a structurally growing market — every AI-era company needs endpoint security</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>FCF margin of only ~5% is razor-thin — not the quality FCF profile the basket requires</li>
+          <li>CrowdStrike is the dominant endpoint security player with 24%+ revenue growth — S is gaining share but slowly</li>
+          <li>Stock down ~69% from start of 2025 ($47.55 → $14.59) — steep decline, not yet bottomed</li>
+          <li>Only 22% growth vs CrowdStrike's 29%+ — SentinelOne is the slower-growing competitor</li>
+          <li>GAAP margins still negative — FCF positive in one quarter doesn't mean business model works</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict — Tier 3</div>
+      <div class="verdict-text">
+        <span class="verdict-tag speculative">SPECULATIVE — Watch for 2+ Consecutive FCF Positive Quarters</span>
+        SentinelOne is an interesting AI-native cybersecurity story at a milestone $1B revenue mark. But the FCF margin is razor-thin (5%), GAAP is still unprofitable, and it's the slower-growing competitor to CrowdStrike. The reversal from the $11.81 low is encouraging. <em>Do not add until at least 2 consecutive quarters of FCF positive, or until the stock shows 30 days without making new lows.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+<details class="expandable" id="rpd">
+  <summary class="expandable-summary">
+    <span class="expandable-arrow">&#9654;</span>
+    <span class="expandable-ticker">RPD</span>
+    <span class="expandable-name">Rapid7 Inc.</span>
+    <a href="#top" class="expandable-top-link" onclick="event.stopPropagation();">&#8593; Top</a>
+  </summary>
+  <div class="expandable-body">
+<div class="stock-card tier-3-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">RPD</span>
+        <h2>Rapid7 Inc.</h2>
+        <span class="sector-tag">Cybersecurity / MDR</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$22</div>
+        <div class="from-high">~80% below 2021 high of ~$110</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−25%</div><div class="pa-cell-sub">from ~$25–30 in Oct 2025</div><span class="reversal-badge negative">✗ NO REVERSAL</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−10%</div><div class="pa-cell-sub">from ~$22–25 Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value negative">Near new lows</div><div class="pa-cell-sub">flat/bad performance</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">Declining</div><div class="pa-cell-sub">cut 2026 outlook Feb '26</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY2025)</div><div class="fund-cell-value">$859.8M</div><div class="fund-cell-sub">slow growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF Margin</div><div class="fund-cell-value">~6–7%</div><div class="fund-cell-sub">weak</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">70.3%</div><div class="fund-cell-sub">adequate</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">ARR</div><div class="fund-cell-value">~$840M</div><div class="fund-cell-sub">flat YoY</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Acquisition</div><div class="fund-cell-value">Thoma Bravo</div><div class="fund-cell-sub">⚠️ PE deal pending</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>Thoma Bravo acquisition at ~$22/share provides a floor — or at minimum a known reference point</li>
+          <li>Managed Detection and Response (MDR) is a high-growth service within cybersecurity</li>
+          <li>If deal closes, investors get Thoma Bravo's operational expertise behind the business</li>
+          <li>Generative AI in security operations (SecOps) creates upsell potential for Rapid7's platform</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Thoma Bravo taking private at ~$22 means stock is essentially dead as a public market investment</li>
+          <li>ARR essentially flat YoY (~$840M) — this is a no-growth business</li>
+          <li>Cut 2026 outlook in February 2026 and stock dropped 33.6% — guidance disaster</li>
+          <li>If deal falls through, stock likely returns to sub-$20 territory</li>
+          <li>FCF margin of 6–7% is weak — not the quality profile the basket requires</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict — Tier 3</div>
+      <div class="verdict-text">
+        <span class="verdict-tag skip">SKIP — PE Acquisition Removes from Public Basket</span>
+        Rapid7 is essentially delisting via Thoma Bravo buyout. Once a PE acquisition is pending, the public market investment thesis is superseded by deal risk (regulatory approval, financing conditions, etc.). This is a different risk profile entirely and doesn't belong in a public-market battered basket. <em>If you want PE deal exposure, there are cleaner ways to get it.</em>
+      </div>
+    </div>
+  </div>
+  </div>
+</details>
+
+</div>
+  <div class="tier-intro">These three names have compelling elements but carry elevated risks: either structural competitive concerns, ongoing GAAP unprofitability, or external events (PE acquisition) that materially alter the investment thesis. They may be appropriate for a broader basket with higher risk tolerance, but require more active monitoring and smaller position sizes.</div>
+
+  <!-- ─── DDOG ─── -->
+  <div class="stock-card tier-3-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">DDOG</span>
+        <h2>Datadog Inc.</h2>
+        <span class="sector-tag">Cloud Monitoring / Observability</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$131</div>
+        <div class="from-high">~67% below 2021 high of ~$199</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−13%</div><div class="pa-cell-sub">from ~$150 in Oct 2025</div><span class="reversal-badge confirmed">✓ REVERSAL EMERGING</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−6%</div><div class="pa-cell-sub">from ~$140 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value positive">+13.6%</div><div class="pa-cell-sub">strong bounce</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value positive">Up ~13%</div><div class="pa-cell-sub">from Jan lows</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (TTM)</div><div class="fund-cell-value">$3.43B</div><div class="fund-cell-sub">+29.2% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF</div><div class="fund-cell-value">$914.7M</div><div class="fund-cell-sub">~26.7% FCF margin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">80.4%</div><div class="fund-cell-sub">excellent</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Margin</div><div class="fund-cell-value">3.1%</div><div class="fund-cell-sub">profitable</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">Positive</div><div class="fund-cell-sub">strong</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>At $3.43B revenue with 29% growth, Datadog is the clear category leader in cloud monitoring</li>
+          <li>$914.7M FCF with 26.7% FCF margin — this is a high-quality FCF business</li>
+          <li>80.4% gross margins + GAAP profitable = financial profile closest to basket requirements</li>
+          <li>AI operations (AIOps) is a genuine secular tailwind — every AI deployment needs monitoring</li>
+          <li>Guggenheim upgrade to Buy in April 2026 + 13.6% one-month gain confirms reversal is underway</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Only ~67% below 2021 highs — <strong>not quite meeting the 70% "battered" threshold</strong></li>
+          <li>Competition from AWS CloudWatch, Google Operations, and New Relic is intense and growing</li>
+          <li>At ~48x forward earnings, stock is not as cheap as the "battered" narrative suggests</li>
+          <li>Large enterprises increasingly building in-house monitoring tools vs. paying for Datadog</li>
+          <li>AI coding assistants could reduce demand for developer monitoring tools (observability)</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict — Tier 3</div>
+      <div class="verdict-text">
+        <span class="verdict-tag hold">HOLD — Excellent Quality But Doesn't Meet 70% Criterion</span>
+        Datadog has the financial quality that belongs in this basket — 29% growth, 27% FCF margins, 80% gross margins, GAAP profitable. The reversal signal is emerging (13.6% in 30 days). However, at ~67% below ATH, it falls just short of the 70% threshold. <em>Watch for further weakness that could push it closer to the required threshold, or upgrade to Tier 2 if the reversal fully confirms.</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── S (SentinelOne) ─── -->
+  <div class="stock-card tier-3-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">S</span>
+        <h2>SentinelOne Inc.</h2>
+        <span class="sector-tag">Cybersecurity / Endpoint AI</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$14</div>
+        <div class="from-high">~83% below 2021/IPO float levels</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−22%</div><div class="pa-cell-sub">from ~$17–18 in Oct 2025</div><span class="reversal-badge partial">◑ BOUNCING</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−18%</div><div class="pa-cell-sub">from ~$17 in Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value positive">Positive</div><div class="pa-cell-sub">bouncing from lows</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">Large decline</div><div class="pa-cell-sub">from ~$47 start of 2025</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY2026)</div><div class="fund-cell-value">$1B</div><div class="fund-cell-sub">+22% growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF (Q4 FY26)</div><div class="fund-cell-value">$51.7M</div><div class="fund-cell-sub">~5% FCF margin — thin</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">~79%</div><div class="fund-cell-sub">est., solid</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Net Cash</div><div class="fund-cell-value">~$1B+</div><div class="fund-cell-sub">strong</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">GAAP Status</div><div class="fund-cell-value">Loss</div><div class="fund-cell-sub">⚠️ FCF pos. Q4 only</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>Just crossed $1B revenue (FY2026) + 22% growth = milestone company in cybersecurity</li>
+          <li>AI-native security platform is the right positioning — AI-powered threat detection is a differentiator</li>
+          <li>FCF positive in Q4 FY2026 — turning point from growth-stage to profitability-stage</li>
+          <li>Purple AI (AI analyst) is a genuine product differentiator vs. legacy vendors like CrowdStrike</li>
+          <li>Cybersecurity is a structurally growing market — every AI-era company needs endpoint security</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>FCF margin of only ~5% is razor-thin — not the quality FCF profile the basket requires</li>
+          <li>CrowdStrike is the dominant endpoint security player with 24%+ revenue growth — S is gaining share but slowly</li>
+          <li>Stock down ~69% from start of 2025 ($47.55 → $14.59) — steep decline, not yet bottomed</li>
+          <li>Only 22% growth vs CrowdStrike's 29%+ — SentinelOne is the slower-growing competitor</li>
+          <li>GAAP margins still negative — FCF positive in one quarter doesn't mean business model works</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict — Tier 3</div>
+      <div class="verdict-text">
+        <span class="verdict-tag speculative">SPECULATIVE — Watch for 2+ Consecutive FCF Positive Quarters</span>
+        SentinelOne is an interesting AI-native cybersecurity story at a milestone $1B revenue mark. But the FCF margin is razor-thin (5%), GAAP is still unprofitable, and it's the slower-growing competitor to CrowdStrike. The reversal from the $11.81 low is encouraging. <em>Do not add until at least 2 consecutive quarters of FCF positive, or until the stock shows 30 days without making new lows.</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── RPD ─── -->
+  <div class="stock-card tier-3-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">RPD</span>
+        <h2>Rapid7 Inc.</h2>
+        <span class="sector-tag">Cybersecurity / MDR</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="high-label">Current price (approx.)</div>
+        <div class="current-price">~$22</div>
+        <div class="from-high">~80% below 2021 high of ~$110</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell"><div class="pa-cell-label">6-Month</div><div class="pa-cell-value negative">~−25%</div><div class="pa-cell-sub">from ~$25–30 in Oct 2025</div><span class="reversal-badge negative">✗ NO REVERSAL</span></div>
+      <div class="pa-cell"><div class="pa-cell-label">90-Day</div><div class="pa-cell-value negative">~−10%</div><div class="pa-cell-sub">from ~$22–25 Jan 2026</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">30-Day</div><div class="pa-cell-value negative">Near new lows</div><div class="pa-cell-sub">flat/bad performance</div></div>
+      <div class="pa-cell"><div class="pa-cell-label">YTD</div><div class="pa-cell-value negative">Declining</div><div class="pa-cell-sub">cut 2026 outlook Feb '26</div></div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell"><div class="fund-cell-label">Revenue (FY2025)</div><div class="fund-cell-value">$859.8M</div><div class="fund-cell-sub">slow growth</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">FCF Margin</div><div class="fund-cell-value">~6–7%</div><div class="fund-cell-sub">weak</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Gross Margin</div><div class="fund-cell-value">70.3%</div><div class="fund-cell-sub">adequate</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">ARR</div><div class="fund-cell-value">~$840M</div><div class="fund-cell-sub">flat YoY</div></div>
+      <div class="fund-cell"><div class="fund-cell-label">Acquisition</div><div class="fund-cell-value">Thoma Bravo</div><div class="fund-cell-sub">⚠️ PE deal pending</div></div>
+    </div>
+    <div class="bb-section">
+      <div class="bb-grid">
+        <div class="bb-block bull"><h4>Bull Case</h4><ul>
+          <li>Thoma Bravo acquisition at ~$22/share provides a floor — or at minimum a known reference point</li>
+          <li>Managed Detection and Response (MDR) is a high-growth service within cybersecurity</li>
+          <li>If deal closes, investors get Thoma Bravo's operational expertise behind the business</li>
+          <li>Generative AI in security operations (SecOps) creates upsell potential for Rapid7's platform</li>
+        </ul></div>
+        <div class="bb-block bear"><h4>Bear Case</h4><ul>
+          <li>Thoma Bravo taking private at ~$22 means stock is essentially dead as a public market investment</li>
+          <li>ARR essentially flat YoY (~$840M) — this is a no-growth business</li>
+          <li>Cut 2026 outlook in February 2026 and stock dropped 33.6% — guidance disaster</li>
+          <li>If deal falls through, stock likely returns to sub-$20 territory</li>
+          <li>FCF margin of 6–7% is weak — not the quality profile the basket requires</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="verdict-row">
+      <div class="verdict-label">Research Verdict — Tier 3</div>
+      <div class="verdict-text">
+        <span class="verdict-tag skip">SKIP — PE Acquisition Removes from Public Basket</span>
+        Rapid7 is essentially delisting via Thoma Bravo buyout. Once a PE acquisition is pending, the public market investment thesis is superseded by deal risk (regulatory approval, financing conditions, etc.). This is a different risk profile entirely and doesn't belong in a public-market battered basket. <em>If you want PE deal exposure, there are cleaner ways to get it.</em>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end stocks-section -->
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- OVERALL CONCLUSIONS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="conclusions-section">
+
+  <h2 class="section-title">📋 Complete Basket Rankings — All 16 Stocks</h2>
+
+  <table class="basket-ranking-table">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Ticker</th>
+        <th>Company</th>
+        <th>Tier</th>
+        <th>Reversal Status</th>
+        <th>Fundamental Quality</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rank-num">1</td>
+        <td class="ticker tier-1-tick">DOCU</td>
+        <td>DocuSign</td>
+        <td><span class="rank-tier tier-1">T1</span></td>
+        <td>❌ Still falling (−27% in 30d)</td>
+        <td>★★★★★ FCF 31%, Net Cash $2.8B</td>
+        <td><span class="rank-tier tier-1">Strongest risk/reward — await flush</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">2</td>
+        <td class="ticker tier-1-tick">OKTA</td>
+        <td>Okta</td>
+        <td><span class="rank-tier tier-1">T1</span></td>
+        <td>◑ Emerging (bounced from $62)</td>
+        <td>★★★★☆ FCF 30%, GAAP profitable</td>
+        <td><span class="rank-tier tier-1">Best secular growth + bottom forming</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">3</td>
+        <td class="ticker tier-2-tick">MNDY</td>
+        <td>Monday.com</td>
+        <td><span class="rank-tier tier-2">T2</span></td>
+        <td>◑ Near bottom ($57–70 range)</td>
+        <td>★★★★★ 89% GM, 22% FCF, $1.45B rev</td>
+        <td><span class="rank-tier tier-2">89% GMs at 11x FCF — exceptional</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">4</td>
+        <td class="ticker tier-2-tick">ASAN</td>
+        <td>Asana</td>
+        <td><span class="rank-tier tier-2">T2</span></td>
+        <td>◑ BOTTOMING? (57% drop, stabilizing)</td>
+        <td>★★★★☆ 88% GM, FCF positive</td>
+        <td><span class="rank-tier tier-2">2x forward sales, 88% GMs — extraordinary</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">5</td>
+        <td class="ticker tier-1-tick">SNOW</td>
+        <td>Snowflake</td>
+        <td><span class="rank-tier tier-1">T1</span></td>
+        <td>❌ Still falling (−33% in 90d)</td>
+        <td>★★★★☆ 30% growth, $4.8B cash</td>
+        <td><span class="rank-tier tier-1">Best growth story — watch MSFT threat</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">6</td>
+        <td class="ticker tier-1-tick">RNG</td>
+        <td>RingCentral</td>
+        <td><span class="rank-tier tier-1">T1</span></td>
+        <td>✓ Confirmed reversal (new 52wk high)</td>
+        <td>★★★★☆ FCF $530M, SBC declining</td>
+        <td><span class="rank-tier tier-2">Already reversed — less bath upside</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">7</td>
+        <td class="ticker tier-1-tick">TEAM</td>
+        <td>Atlassian</td>
+        <td><span class="rank-tier tier-1">T1</span></td>
+        <td>◑ Emerging bounce (from $56 low)</td>
+        <td>★★★☆☆ FCF 27%, but growth collapsing</td>
+        <td><span class="rank-tier tier-2">High risk/reward satellite position</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">8</td>
+        <td class="ticker tier-1-tick">TWLO</td>
+        <td>Twilio</td>
+        <td><span class="rank-tier tier-1">T1</span></td>
+        <td>✓ Confirmed reversal (from $92 low)</td>
+        <td>★★★☆☆ $5B rev, 49% GM ⚠️</td>
+        <td><span class="rank-tier tier-2">Acceptable — low GM is structural concern</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">9</td>
+        <td class="ticker tier-3-tick">DDOG</td>
+        <td>Datadog</td>
+        <td><span class="rank-tier tier-3">T3</span></td>
+        <td>✓ Reversal emerging (+13.6% 30d)</td>
+        <td>★★★★☆ 29% growth, 27% FCF, 80% GM</td>
+        <td><span class="rank-tier tier-2">Quality fits T1 but only 67% below ATH</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">10</td>
+        <td class="ticker tier-1-tick">ZM</td>
+        <td>Zoom</td>
+        <td><span class="rank-tier tier-1">T1</span></td>
+        <td>◑ Partial (bouncing but growth dead)</td>
+        <td>★★★★☆ 35% FCF, $5B net cash</td>
+        <td><span class="rank-tier tier-2">Deep value / basket stabilizer only</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">11</td>
+        <td class="ticker tier-2-tick">VEEV</td>
+        <td>Veeva Systems</td>
+        <td><span class="rank-tier tier-2">T2</span></td>
+        <td>◑ Stable (flat, not reversed)</td>
+        <td>★★★★★ 38% FCF, monopoly in life sciences</td>
+        <td><span class="rank-tier tier-2">Excellent biz but only 47% below ATH</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">12</td>
+        <td class="ticker tier-2-tick">BILL</td>
+        <td>Bill.com</td>
+        <td><span class="rank-tier tier-2">T2</span></td>
+        <td>❌ Still making new lows</td>
+        <td>★★★☆☆ 17% core growth, GAAP loss</td>
+        <td><span class="rank-tier tier-3">Speculative — wait for bottom</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">13</td>
+        <td class="ticker tier-1-tick">PATH</td>
+        <td>UiPath</td>
+        <td><span class="rank-tier tier-1">T1</span></td>
+        <td>❌ Still making new lows</td>
+        <td>★★★☆☆ 91% GM, but GAAP loss</td>
+        <td><span class="rank-tier tier-3">Speculative — avoid until bottom confirmed</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">14</td>
+        <td class="ticker tier-3-tick">S</td>
+        <td>SentinelOne</td>
+        <td><span class="rank-tier tier-3">T3</span></td>
+        <td>◑ Bouncing from $11.81 low</td>
+        <td>★★★☆☆ $1B rev, 22% growth, 5% FCF</td>
+        <td><span class="rank-tier tier-3">Speculative — need 2+ FCF+ quarters</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">15</td>
+        <td class="ticker tier-1-tick">SMAR</td>
+        <td>Smartsheet</td>
+        <td><span class="rank-tier tier-1">T1</span></td>
+        <td>◑ N/A (PE acquisition)</td>
+        <td>★★★☆☆ Good biz, wrong context</td>
+        <td><span class="rank-tier tier-3">Skip — M&A arb, not basket story</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">16</td>
+        <td class="ticker tier-3-tick">RPD</td>
+        <td>Rapid7</td>
+        <td><span class="rank-tier tier-3">T3</span></td>
+        <td>❌ No reversal — PE deal</td>
+        <td>★★☆☆☆ Flat ARR, 6% FCF, PE deal</td>
+        <td><span class="rank-tier tier-3">Skip — PE acquisition delists stock</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Counter-Analysis -->
+  <div class="counter-section">
+    <h3><span class="icon">🔍</span> Counter-Analysis: Flaws, Weak Spots, and Things That Could Go Wrong</h3>
+
+    <div class="weak-premise">
+      <h4>⚠️ Critical Flaw #1: The "Forced Selling" Mechanism May Be Weak in 2026 vs. 2002</h4>
+      <p>
+        The 2002 analog works because hedge funds that owned tech in 1999 were FORCED to sell in 2001–2002 as their LBO funds expired and public market tech exposure triggered fund-level margin calls. In 2026, most institutional tech investors have already rotated out of these names over the past 3–4 years. The forced selling from 2022–2025 may have already accomplished the equivalent of what happened in 2002. If true, there is no "forced seller" left to create the final washout that makes the basket entry so powerful.
+      </p>
+    </div>
+
+    <div class="weak-premise">
+      <h4>⚠️ Critical Flaw #2: "AI Will Kill SaaS" May Actually Be True This Time</h4>
+      <p>
+        The 2002 analogy breaks down on a crucial point: in 2002, the internet companies that got crushed were impaired but ultimately survived because the internet itself wasn't going to eat their lunch. In 2026, the AI threat is different in character: if a natural language AI agent can complete the workflow that Jira, Asana, Zoom, DocuSign, and UiPath charge for, the "switching cost moat" is not a permanent barrier — it's just a temporary friction that AI is actively working to eliminate. The comparison to 2002 may be too optimistic.
+      </p>
+    </div>
+
+    <div class="weak-premise">
+      <h4>⚠️ Critical Flaw #3: Most Names Are Only 65–75% Down, Not 80–90%</h4>
+      <p>
+        The thesis calls for "70% to 85% below 2021 highs." In reality, many names are only at the 65–75% decline range. This means the market has already done meaningful work in repricing these names. The ones that are truly 85%+ down (RingCentral, Twilio, Zoom) have specific structural problems that may justify further decline. The ones with cleaner balance sheets (DocuSign, Okta, Monday.com) are only 73–79% down — the easy money may have already been made.
+      </p>
+    </div>
+
+    <div class="weak-premise">
+      <h4>⚠️ Critical Flaw #4: Dollar-Cost Averaging Is Required, Not Optional</h4>
+      <p>
+        Buying a "basket" implies equal weighting at one point in time. But the historical precedent requires buying continuously throughout a multi-year bottoming period. If DocuSign drops another 30% next quarter, buying equal weights today means putting significant capital into a falling knife. True discipline requires a pre-committed DCA schedule, not a one-time basket purchase.
+      </p>
+    </div>
+
+    <div class="weak-premise">
+      <h4>⚠️ Critical Flaw #5: The Basket Requires 20–30 Names; We Analyzed 16</h4>
+      <p>
+        The original thesis calls for a 20–30 name basket specifically to diversify away company-specific risk. With only 16 names analyzed (and 2–3 of those are M&A/PE situations that should be removed), this report has done roughly 50–65% of the necessary work. The remaining 4–14 names in a real basket may look very different from the ones analyzed here. Some may be better entries; some may be worse.
+      </p>
+    </div>
+
+    <h4>Things That Would Validate the Bull Case</h4>
+    <ul>
+      <li>At least 2–3 names in the basket report AI-driven revenue acceleration in next 2 earnings seasons</li>
+      <li>Microsoft Copilot/Entra/Fabric fails to meaningfully displace at least one of the key names</li>
+      <li>FCF conversion continues to improve — companies use FCF for buybacks, dividends, or accretive M&A</li>
+      <li>A large-cap tech company (Apple, Google, Microsoft) makes a strategic acquisition of one of the basket names</li>
+      <li>Monday.com and Asana both stabilize revenue growth above 12% — validates the work management category thesis</li>
+    </ul>
+
+    <h4>Things That Would Confirm the Bear Case</h4>
+    <ul>
+      <li>Any company missing Q2 or Q3 2026 earnings and guiding down — particularly DOCU and PATH given their recent price action</li>
+      <li>Microsoft Fabric adoption exceeding analyst expectations — monitor Snowflake's net new customer acquisition rate quarterly</li>
+      <li>Microsoft 365 Copilot embedding Power Automate + Teams showing measurable displacement of RingCentral, Atlassian, or UiPath</li>
+      <li>Any company in the basket announcing additional layoffs or business restructuring beyond what's already disclosed</li>
+      <li>BILL or PATH continuing to make new 52-week lows through Q2 2026 — would suggest the "bath" has further to go</li>
+    </ul>
+  </div>
+
+  <!-- Final Recommendation -->
+  <div class="final-rec-box">
+    <h3>🏁 Final Recommendation: How to Use This Report — v2</h3>
+
+    <h4 class="tier-h">Core Holdings — Build Full Positions Over Time (Tier 1)</h4>
+    <ul>
+      <li><strong>DOCU — DocuSign:</strong> Financially the most impressive in the basket. Wait for the current 30-day selling to exhaust, then begin building a position. Use limit orders 10–15% below current market.</li>
+      <li><strong>OKTA — Okta:</strong> Best combination of fundamental quality, secular growth, and emerging reversal signal. The $62 January 2026 low is likely the bottom. Begin accumulating on any pullback toward $68–72.</li>
+    </ul>
+
+    <h4 class="tier-h">Strong Buy Candidates — Watch for Confirmation (Tier 2)</h4>
+    <ul>
+      <li><strong>MNDY — Monday.com:</strong> 89.2% gross margins are among the highest in all of SaaS. If it holds the $57–66 support range for 30 days, it becomes a Tier 1-quality entry at a Tier 2 price.</li>
+      <li><strong>ASAN — Asana:</strong> At ~2x forward sales with 88% gross margins and a path to GAAP profitability, this is one of the most undervalued names in the entire 16-stock universe. Monitor for 2 consecutive quarters of revenue stabilization.</li>
+    </ul>
+
+    <h4 class="tier-m">Satellite Positions — Smaller Weight, Active Monitoring (All Tiers)</h4>
+    <ul>
+      <li><strong>SNOW — Snowflake:</strong> Best pure growth story. Keep on watchlist. Build position if it breaks below $118 (new low) and shows 2 consecutive weeks without making new lows.</li>
+      <li><strong>TEAM — Atlassian:</strong> High risk/reward. The Q1 2026 decline was brutal (-57% YTD). The bounce from $56 is encouraging but fundamentals need monitoring. Limit to 5% of basket allocation.</li>
+      <li><strong>RNG — RingCentral:</strong> Already reversed to new 52-week highs. Less "bath" upside but solid FCF story. Acceptable basket component but not highest conviction.</li>
+      <li><strong>DDOG — Datadog:</strong> If it breaks below $115, it would cross the 70% threshold and become a Tier 1 candidate. Currently a high-quality hold at the edge of the criteria.</li>
+    </ul>
+
+    <h4 class="tier-l">Avoid or Monitor — Do Not Add Until Conditions Change</h4>
+    <ul>
+      <li><strong>PATH — UiPath:</strong> No bottom confirmed. Do not add until the selling pressure stops. Rule: no position unless stock goes 30 consecutive days without making a new 52-week low.</li>
+      <li><strong>BILL — Bill.com:</strong> Still making new 52-week lows. Healthier 17% core growth, but market losing patience. Same rule as PATH: 30 days without new low before adding.</li>
+      <li><strong>S — SentinelOne:</strong> Need 2 consecutive quarters of FCF positive before adding. Currently too thin (5% FCF margin) to qualify for core basket.</li>
+      <li><strong>ZM — Zoom:</strong> Include for basket stability only. It will not compound at high rates, but it also won't go to zero. Deep value, not high-growth.</li>
+      <li><strong>TWLO — Twilio:</strong> Structurally acceptable but the 49.9% gross margin is a red flag. Acceptable as a basket filler but not a core holding.</li>
+      <li><strong>VEEV — Veeva Systems:</strong> Move to a separate "high-quality SaaS" portfolio. It doesn't meet the 70% decline criterion for this basket.</li>
+      <li><strong>SMAR — Smartsheet:</strong> Remove from basket. M&A arbitrage situation, not a market-cap-weighted investment thesis.</li>
+      <li><strong>RPD — Rapid7:</strong> Remove from basket. PE acquisition delists the stock, changing the investment thesis entirely.</li>
+    </ul>
+
+    <h4 style="color: var(--text-primary); margin-top: 20px; font-size: 13px;">Position Construction Rules for v2</h4>
+    <ul>
+      <li>Equal-weight across all basket positions — do not over-weight the names you feel most confident about (that's active risk, not diversification)</li>
+      <li>Pre-commit to a DCA schedule: buy 1/3 of each target position immediately, 1/3 in 60 days, 1/3 in 120 days</li>
+      <li>Set a basket-level stop: if more than 5 of 16 names make new 52-week lows simultaneously, reassess the entire thesis</li>
+      <li>Hold for minimum 5 years — the thesis explicitly requires time for the compounding math to work</li>
+      <li>Consider adding the best Tier 2 names (MNDY, ASAN) to the basket as they confirm their reversals — they have the financial quality to backstop the basket's risk profile</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="report-footer">
+  Prepared for informational purposes only. Not investment advice. Data sourced from public filings, earnings transcripts, Yahoo Finance, Macrotrends, MarketBeat, and Investing.com as of April 29, 2026. All price data is approximate. This report was prepared without compensation.
+</div>
+
+</body>
+</html>
