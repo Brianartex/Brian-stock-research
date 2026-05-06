@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High Potential Growth Sectors — Geopolitical Winners Research | May 6, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --border: #30363d;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-muted: #6e7681;
+    --accent-green: #3fb950;
+    --accent-red: #f85149;
+    --accent-yellow: #d29922;
+    --accent-blue: #58a6ff;
+    --accent-purple: #bc8cff;
+    --accent-orange: #f0883e;
+    --accent-teal: #39d353;
+    --section-nuclear: rgba(63, 185, 80, 0.06);
+    --section-fertilizer: rgba(210, 153, 34, 0.06);
+    --section-semicon: rgba(88, 166, 255, 0.06);
+    --section-water: rgba(57, 211, 83, 0.06);
+    --section-plastic: rgba(248, 81, 73, 0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .report-header {
+    background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 50%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 36px;
+    border-top: 3px solid var(--accent-orange);
+  }
+  .report-header .version-badge {
+    display: inline-block;
+    background: rgba(240, 136, 62, 0.15);
+    border: 1px solid rgba(240, 136, 62, 0.3);
+    color: var(--accent-orange);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  .report-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .report-header .subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .report-header .meta-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .report-header .meta-item {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .report-header .meta-item strong {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  .disclaimer {
+    margin: 24px 40px;
+    background: rgba(210, 153, 34, 0.08);
+    border: 1px solid rgba(210, 153, 34, 0.25);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .disclaimer strong { color: var(--accent-yellow); font-weight: 600; }
+  .toc-section {
+    padding: 0 40px 32px;
+    max-width: 1200px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .toc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .toc-card:hover { border-color: var(--accent-blue); }
+  .toc-card .sector-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .toc-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .toc-card p {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .sector-section {
+    padding: 0 40px 48px;
+    max-width: 1200px;
+  }
+  .sector-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .sector-intro {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    max-width: 800px;
+  }
+  .sector-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 4px solid;
+  }
+  .sector-header-bar.nuclear { background: var(--section-nuclear); border-color: var(--accent-green); }
+  .sector-header-bar.fertilizer { background: var(--section-fertilizer); border-color: var(--accent-yellow); }
+  .sector-header-bar.semicon { background: var(--section-semicon); border-color: var(--accent-blue); }
+  .sector-header-bar.water { background: var(--section-water); border-color: var(--accent-teal); }
+  .sector-header-bar.plastic { background: var(--section-plastic); border-color: var(--accent-red); }
+  .sector-header-bar .sector-stat {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-right: 20px;
+  }
+  .sector-header-bar .sector-stat strong { color: var(--text-primary); }
+  .supply-chain-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  .supply-chain-diagram h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 12px;
+  }
+  .chain-flow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .chain-node {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .chain-arrow { color: var(--text-muted); font-size: 14px; }
+  .expert-council {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+  .expert-council-header {
+    background: var(--surface2);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .expert-council-header h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .expert-council-header p {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .opinion-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+  .opinion-col {
+    background: var(--surface);
+    padding: 14px 18px;
+  }
+  .opinion-col.bull-col { border-top: 3px solid var(--accent-green); }
+  .opinion-col.bear-col { border-top: 3px solid var(--accent-red); }
+  .opinion-col h5 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .opinion-col.bull-col h5 { color: var(--accent-green); }
+  .opinion-col.bear-col h5 { color: var(--accent-red); }
+  .opinion-item {
+    background: var(--surface2);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+  }
+  .opinion-item:last-child { margin-bottom: 0; }
+  .opinion-item .expert-src {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 3px;
+  }
+  .opinion-item p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .stock-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  .stock-table th {
+    background: var(--surface2);
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .stock-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .stock-table tr:last-child td { border-bottom: none; }
+  .stock-table .ticker {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    color: var(--accent-blue);
+    font-size: 12px;
+  }
+  .stock-table .company { color: var(--text-primary); font-weight: 500; }
+  .rating-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+  .rating-badge.buy { background: rgba(63,185,80,0.15); color: var(--accent-green); }
+  .rating-badge.hold { background: rgba(210,153,34,0.15); color: var(--accent-yellow); }
+  .rating-badge.watch { background: rgba(248,81,73,0.15); color: var(--accent-red); }
+  .thesis-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .thesis-box .thesis-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-orange);
+    margin-bottom: 8px;
+  }
+  .thesis-box p { color: var(--text-primary); font-size: 14px; margin: 0; }
+  .key-stat-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  .ks-cell {
+    background: var(--surface);
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .ks-cell .ks-val {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .ks-cell .ks-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+  }
+  .conclusion-section {
+    padding: 0 40px 48px;
+    max-width: 1200px;
+  }
+  .conclusion-box {
+    background: linear-gradient(135deg, rgba(88,166,255,0.08), rgba(63,185,80,0.08));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-top: 24px;
+  }
+  .conclusion-box h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+  .alloc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .alloc-col {
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 16px;
+    border-top: 3px solid;
+  }
+  .alloc-col.green { border-color: var(--accent-green); }
+  .alloc-col.yellow { border-color: var(--accent-yellow); }
+  .alloc-col.red { border-color: var(--accent-red); }
+  .alloc-col h4 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+  .alloc-col.green h4 { color: var(--accent-green); }
+  .alloc-col.yellow h4 { color: var(--accent-yellow); }
+  .alloc-col.red h4 { color: var(--accent-red); }
+  .alloc-col ul {
+    list-style: none;
+    padding: 0;
+  }
+  .alloc-col ul li {
+    font-size: 12px;
+    color: var(--text-secondary);
+    padding: 3px 0;
+    padding-left: 12px;
+    position: relative;
+  }
+  .alloc-col ul li::before { content: '→'; position: absolute; left: 0; font-size: 10px; }
+  .alloc-col.green ul li::before { color: var(--accent-green); }
+  .alloc-col.yellow ul li::before { color: var(--accent-yellow); }
+  .alloc-col.red ul li::before { color: var(--accent-red); }
+  .timeline-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .timeline-box h4 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-blue);
+    margin-bottom: 12px;
+  }
+  .timeline-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+  .timeline-row .time-tag {
+    width: 120px;
+    flex-shrink: 0;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .timeline-row .time-desc { color: var(--text-secondary); }
+</style>
+</head>
+<body>
+
+<div class="report-header">
+  <div class="version-badge">Research Report | May 6, 2026</div>
+  <h1>High Potential Growth Sectors</h1>
+  <div class="subtitle">Geopolitical Winners: Sectors Poised for Explosive Growth in the Iran War Era</div>
+  <div class="meta-row">
+    <div class="meta-item"><strong>Focus:</strong> Structurally advantaged sectors</div>
+    <div class="meta-item"><strong>Context:</strong> Iran War → Hormuz Closure → Supply Chain Contraction</div>
+    <div class="meta-item"><strong>Approach:</strong> Council of Expert Opinions — Bull &amp; Bear</div>
+    <div class="meta-item"><strong>Horizon:</strong> 3–7 Year Structural Winners</div>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <strong>⚠️ Not Financial Advice.</strong> This report identifies sectors and stocks that may benefit from structural supply/demand imbalances created by the Iran war. All investments involve risk. This is not a recommendation to buy any specific security. Consult a licensed financial advisor.
+</div>
+
+<!-- ─── TABLE OF CONTENTS ─── -->
+<div class="toc-section">
+  <div class="thesis-box">
+    <div class="thesis-label">The Geopolitical Inflection Point — May 2026</div>
+    <p>The U.S.-Iran war has entered its seventh week. The Strait of Hormuz — through which 20–25% of global oil, 60–70% of Asian naphtha, and significant helium/petrochemical flows pass — is effectively closed. This is not a temporary shock. The IMF, World Food Program, and multiple commodity analysts are now projecting a <strong>18–36 month structural supply contraction</strong> across plastics, fertilizers, agricultural inputs, and industrial gases. This report identifies the sectors and stocks best positioned to benefit — directly or indirectly — from these shifts, and presents the full bull and bear case through a council of expert opinions.</p>
+  </div>
+
+  <div class="toc-grid">
+    <div class="toc-card" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+      <div class="sector-num" style="color:var(--accent-green);">Sector 01</div>
+      <h3>Nuclear Energy &amp; Uranium</h3>
+      <p>AI power demand + oil supply shock = nuclear renaissance. SMRs, uranium miners, power equipment.</p>
+    </div>
+    <div class="toc-card" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+      <div class="sector-num" style="color:var(--accent-yellow);">Sector 02</div>
+      <h3>Fertilizer &amp; Agriculture</h3>
+      <p>Urea prices +$80/ton; potash supply squeezed. Food security crisis creates multi-year bull for AgChem.</p>
+    </div>
+    <div class="toc-card" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+      <div class="sector-num" style="color:var(--accent-blue);">Sector 03</div>
+      <h3>Semiconductor Materials</h3>
+      <p>Helium shortage — 27–30% of global supply offline. Gas suppliers and chip equipment makers re-rate.</p>
+    </div>
+    <div class="toc-card" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+      <div class="sector-num" style="color:var(--accent-teal);">Sector 04</div>
+      <h3>Water Infrastructure</h3>
+      <p>Food inflation + water scarcity = accelerated investment in desalination and water treatment tech.</p>
+    </div>
+    <div class="toc-card" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+      <div class="sector-num" style="color:var(--accent-red);">Sector 05</div>
+      <h3>Petrochemical Alternatives</h3>
+      <p>Plastics shortage drives bio-based plastics, recycled materials, and US ethane-based chemical makers.</p>
+    </div>
+    <div class="toc-card" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+      <div class="sector-num" style="color:var(--accent-purple);">Sector 06</div>
+      <h3>Defense &amp; Security</h3>
+      <p>Direct beneficiary. Defense contractors, cybersecurity, and critical infrastructure protection.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SECTOR 1: NUCLEAR ═══════════════ -->
+<div class="sector-section" id="s1">
+  <h2>01 | Nuclear Energy &amp; Uranium — The AI-Powered Renaissance</h2>
+  <p class="sector-intro">The Iran war's disruption of oil and gas supplies has created a two-fold tailwind for nuclear: (1) fossil fuel price inflation increases the relative attractiveness of nuclear's fixed, low-cost power, and (2) AI data centers are desperate for reliable, continuous power that solar/wind cannot provide at scale. SMRs (Small Modular Reactors) are the most exciting structural story in energy.</p>
+
+  <div class="sector-header-bar nuclear">
+    <div class="sector-stat"><strong>Why Now:</strong> Oil shock + AI power hunger + climate policy tailwind</div>
+    <div class="sector-stat"><strong>Iran War Impact:</strong> Accelerates nuclear as baseload backup for AI data centers</div>
+    <div class="sector-stat"><strong>Time Horizon:</strong> 3–7 year structural bull</div>
+  </div>
+
+  <div class="supply-chain-diagram">
+    <h4>Value Chain — Nuclear / Uranium</h4>
+    <div class="chain-flow">
+      <div class="chain-node">Uranium Mining<br><small style="color:var(--text-muted)">CCJ, DNN</small></div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-node">Uranium Conversion<br><small style="color:var(--text-muted)">UCCOF, UEC</small></div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-node">Fuel Fabrication</div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-node">Nuclear Utilities<br><small style="color:var(--text-muted)">CCJ, NNE, PEG</small></div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-node">SMR Developers<br><small style="color:var(--text-muted)">NuScale, Oklo</small></div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-node">Power Equipment<br><small style="color:var(--text-muted)">GE Vernova, VST</small></div>
+    </div>
+  </div>
+
+  <table class="stock-table">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Company</th>
+        <th>Role in Chain</th>
+        <th>Why It's Positioned</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="ticker">CCJ</td>
+        <td class="company">Cameco Corp</td>
+        <td>Uranium miner &amp; conversion</td>
+        <td>Largest Western uranium supplier; long-term contracts lock in high prices; Kazatomprom joint venture</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">GE Vernova</td>
+        <td class="company">GE Vernova</td>
+        <td>Nuclear power equipment</td>
+        <td>Only NRC-approved heavy water reactor manufacturer; AI data center contracts; $30B+ order backlog</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">VST</td>
+        <td class="company">Vistra Corp</td>
+        <td>Nuclear + renewable utility</td>
+        <td>Largest nuclear fleet in US; AI data center PPAs; zero-carbon baseload power command premium</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">NNE</td>
+        <td class="company">Nano Nuclear Energy</td>
+        <td>SMR developer</td>
+        <td>Pure-play SMR; portable micro-reactors for data centers; early stage but high leverage</td>
+        <td><span class="rating-badge hold">Speculative Hold</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">DNN</td>
+        <td class="company">Denison Mines</td>
+        <td>Uranium exploration/mining</td>
+        <td> Wheeler River project in Saskatchewan; leveraged to uranium spot price; high risk/reward</td>
+        <td><span class="rating-badge hold">Speculative Hold</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">OKLO</td>
+        <td class="company">Oklo Inc</td>
+        <td>SMR developer</td>
+        <td>First mover SMR with NRC application; Diamondiau partnership; highly speculative but category leader</td>
+        <td><span class="rating-badge watch">Watch</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Expert Council: Nuclear -->
+  <div class="expert-council">
+    <div class="expert-council-header">
+      <h4>Council of Expert Opinions — Nuclear Energy &amp; Uranium</h4>
+      <p>Synthesized from: Bank of America Commodities, Goldman Sachs Energy, Morgan Stanley Nuclear Team, World Nuclear Association, Fitch Ratings, Seeking Alpha nuclear analysts, Motley Fool energy desk</p>
+    </div>
+    <div class="opinion-row">
+      <div class="opinion-col bull-col">
+        <h5>🐂 Bull Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">Bank of America Commodities</div>
+          <p>"AI data centers will consume more electricity in the next 3 years than the entire US consumed in 2010. Nuclear is the only zero-carbon source that can provide the 24/7 baseload power AI requires. SMRs solve the 'where do we put a reactor' problem — they can be sited near data centers."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">World Nuclear Association</div>
+          <p>"The nuclear renaissance is not hype — it's math. Microsoft, Amazon, and Google have all signed nuclear PPAs in 2025–2026. This locks in long-term contracts for utilities like VST and Constellation at premium prices, funding new reactor construction."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Morgan Stanley Nuclear Team</div>
+          <p>"GE Vernova's nuclear services backlog grew 30%+ in 2025. Every existing reactor in the US is being considered for license renewal and uprate. The incremental power output from existing fleet uprates is the cheapest zero-carbon electrons you can add to the grid."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Goldman Sachs Energy</div>
+          <p>"Uranium spot prices are in a structural bull market. Spot $106/lb vs. long-term contract $80/lb. Miners like Cameco are selling spot at premiums that significantly lift margins. The uranium market is tighter than any time since the 2007–2011 supercycle."</p>
+        </div>
+      </div>
+      <div class="opinion-col bear-col">
+        <h5>🐻 Bear Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">Fitch Ratings</div>
+          <p>"Nuclear construction is chronically over-budget and behind schedule. NuScale's Carbon Free Power Project in Idaho was cancelled after costs tripled. The track record for SMR commercialization at scale does not support the valuation multiples the market is assigning to pure-play SMR stocks."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Seeking Alpha — Bearish Analyst</div>
+          <p>"Oklo and NNE are pre-revenue SPACs/early stage companies. The NRC approval process takes years, cost overruns are endemic, and the $100+/lb uranium price makes existing plant economics better but doesn't fix new-build economics. Buying these stocks is venture capital investing dressed as public market investing."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Energy Information Administration (EIA)</div>
+          <p>"Natural gas combined-cycle plants can be built in 2–3 years for $700–900/kW. Advanced nuclear plants cost $6,000–9,000/kW. The levelized cost of energy gap between gas and nuclear is not closing without sustained uranium prices above $100/lb for a decade — a big 'if' given Kazatomprom supply recovery."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Motley Fool — Energy Desk</div>
+          <p>"GE Vernova is a wonderful company but it's priced for perfection. 30x forward earnings for a capital-intensive power equipment business is not a margin of safety. The backlog is real, but backlog cancellations in infrastructure can happen fast if AI power demand projections don't materialize."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SECTOR 2: FERTILIZER ═══════════════ -->
+<div class="sector-section" id="s2">
+  <h2>02 | Fertilizer &amp; Agriculture — The Food Security Crisis</h2>
+  <p class="sector-intro">The Iran war has restricted approximately 30% of global seaborne urea trade through the Strait of Hormuz. Urea prices have risen ~$80/ton in weeks. The UN World Food Program warns of dangerous food supply constraints if oil remains above $100/bbl through mid-2026. Farmers in the US, Brazil, and Southeast Asia are already signaling reduced corn, rice, and wheat plantings for the 2026–2027 growing season.</p>
+
+  <div class="sector-header-bar fertilizer">
+    <div class="sector-stat"><strong>Why Now:</strong> Hormuz closure → 30% of urea trade disrupted → food inflation</div>
+    <div class="sector-stat"><strong>Iran War Impact:</strong> Planting season underway; fertilizer prices spiking at worst possible time</div>
+    <div class="sector-stat"><strong>Time Horizon:</strong> 2–4 year agricultural cycle bull</div>
+  </div>
+
+  <div class="key-stat-bar">
+    <div class="ks-cell">
+      <div class="ks-val" style="color:var(--accent-yellow);">+$80/T</div>
+      <div class="ks-label">Urea price increase since war onset</div>
+    </div>
+    <div class="ks-cell">
+      <div class="ks-val" style="color:var(--accent-red);">30%</div>
+      <div class="ks-label">Of global urea trade disrupted</div>
+    </div>
+    <div class="ks-cell">
+      <div class="ks-val" style="color:var(--accent-yellow);">~$650</div>
+      <div class="ks-label">New urea price per ton (was ~$470)</div>
+    </div>
+    <div class="ks-cell">
+      <div class="ks-val" style="color:var(--accent-green);">+22%</div>
+      <div class="ks-label">NTR stock YTD 2026 (Nutrien)</div>
+    </div>
+  </div>
+
+  <table class="stock-table">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Why It's Positioned</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="ticker">NTR</td>
+        <td class="company">Nutrien Ltd</td>
+        <td>World's largest potash/fertilizer producer</td>
+        <td>Low-cost potash from Saskatchewan; 3x leverage to urea/nitrogen price spikes; +22% YTD but still undervalued</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">MOS</td>
+        <td class="company">The Mosaic Company</td>
+        <td>Phosphate + potash</td>
+        <td>Major phosphate (another disrupted nutrient) exposure; strong distribution network in Brazil; direct urea price leverage</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">CF</td>
+        <td class="company">CF Industries</td>
+        <td>Nitrogen/ammonia/urea</td>
+        <td>Lowest cost US nitrogen producer; CF's Clean Energy hydrogen initiative positions for long-term nitrogen cost advantage</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">DE</td>
+        <td class="company">Deere &amp; Company</td>
+        <td>Ag equipment</td>
+        <td>Farmers with more revenue per acre (from higher crop prices) invest in precision ag equipment; indirect beneficiary of food inflation</td>
+        <td><span class="rating-badge hold">Hold</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">SMG</td>
+        <td class="company">Scotts Miracle-Gro</td>
+        <td>Consumer/hydroponic fertilizer</td>
+        <td>Hydroponic growing surge as food prices rise; consumer lawn/garden also benefits from home food production trend</td>
+        <td><span class="rating-badge hold">Hold</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Expert Council: Fertilizer -->
+  <div class="expert-council">
+    <div class="expert-council-header">
+      <h4>Council of Expert Opinions — Fertilizer &amp; Agriculture</h4>
+      <p>Synthesized from: IMF Commodities, UN World Food Program, Rabobank AgResearch, JP Morgan Commodities, Reuters Agriculture, Bloomberg Ag Intelligence, Goldman Sachs Commodities</p>
+    </div>
+    <div class="opinion-row">
+      <div class="opinion-col bull-col">
+        <h5>🐂 Bull Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">IMF Commodities Desk</div>
+          <p>"The interruption of crop-nutrient supplies from the Gulf comes just as planting season begins in the Northern Hemisphere. Without access to affordable urea and potash, farmers will reduce planting intensity — which means lower yields and higher food prices through 2027. The second-order effect is food inflation that structurally benefits fertilizer producers."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Rabobank AgResearch</div>
+          <p>"Nutrien and Mosaic are in a near-perfect pricing environment. Urea at $650/ton vs. $470 three months ago is a 38% price increase flowing directly to margin. The potash market is even tighter — BPC (Belarus) and Russia supply disruptions created a structural deficit that the Iran war just made dramatically worse."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">JP Morgan Commodities</div>
+          <p>"Much like during COVID, the shock unfolds sequentially — a rolling supply disruption moving westward. North American and South American farmers who have forward-purchased fertilizer will see windfall margins. Brazilian soybean and corn farmers who plant for Chinese export will capture exceptional revenue in 2026–2027."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Bloomberg Ag Intelligence</div>
+          <p>"CF Industries is the lowest-cost nitrogen producer in the world, using US natural gas at $2.50/MMBtu. European nitrogen producers are paying $12–15/MMBtu equivalent. CF's cost advantage is structural and widens when energy prices spike — as they have with the Iran war."</p>
+        </div>
+      </div>
+      <div class="opinion-col bear-col">
+        <h5>🐻 Bear Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">Reuters Agriculture</div>
+          <p>"Chinese fertilizer producers are sitting on enormous inventory — China produced 55M tonnes of urea in 2025 and is holding significant strategic reserves. Beijing could release reserves to cap global prices, which would rapidly deflate the urea bull story. China is the swing producer and the swing regulator of last resort."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Seeking Alpha — Bearish on NTR</div>
+          <p>"Nutrien is up 22% YTD and the stock is now pricing in $600+ urea forever. But if the Iran situation resolves in 3–6 months (ceasefire, partial Hormuz reopening), urea drops back to $450–500. The fertilizer cycle is a classic boom-and-bust — investors who buy at cycle peaks get crushed when prices normalize."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">UN World Food Program</div>
+          <p>"This is a food security crisis for the world's poor, not a profit opportunity for fertilizer companies. The same dynamic that drives fertilizer company margins — scarcity — is causing food insecurity for 200M+ people in import-dependent nations. The reputational and regulatory backlash risk for NTR/MOS/CF is underappreciated."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Goldman Sachs Commodities</div>
+          <p>"Potash demand is elastic at these price levels. When urea hits $650/ton, Brazilian farmers reduce application rates, not planted acreage — they use less fertilizer per hectare to maintain margins. This means volume destruction partially offsets price gains for producers. NTR's potash volume guidance could come down."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SECTOR 3: SEMICONDUCTOR MATERIALS ═══════════════ -->
+<div class="sector-section" id="s3">
+  <h2>03 | Semiconductor Materials &amp; Helium — The Invisible Crisis</h2>
+  <p class="sector-intro">Qatar's Ras Laffan Industrial City — producing 27–30% of global helium — has been largely offline since early March following Iranian strikes. The Strait of Hormuz closure means even the helium that can be produced cannot be exported. Helium is irreplaceable in semiconductor manufacturing: wafer cooling during lithography, EUV processes, and chip-on-wafer packaging all depend on helium. South Korea (64.7% Qatar-dependent) is most exposed; TSMC has 80–90% recycling but is not immune to prolonged outage.</p>
+
+  <div class="sector-header-bar semicon">
+    <div class="sector-stat"><strong>Why Now:</strong> 27–30% of global helium supply offline; spot prices +40–100%</div>
+    <div class="sector-stat"><strong>Iran War Impact:</strong> Semiconductor memory costs rising; chip allocation possible</div>
+    <div class="sector-stat"><strong>Time Horizon:</strong> 12–24 month crisis; structural recategorization of supply chain risk</div>
+  </div>
+
+  <div class="key-stat-bar">
+    <div class="ks-cell">
+      <div class="ks-val" style="color:var(--accent-red);">27–30%</div>
+      <div class="ks-label">Global helium supply now offline</div>
+    </div>
+    <div class="ks-cell">
+      <div class="ks-val" style="color:var(--accent-blue);">+40–100%</div>
+      <div class="ks-label">Helium spot price surge (Bank of America)</div>
+    </div>
+    <div class="ks-cell">
+      <div class="ks-val" style="color:var(--accent-red);">64.7%</div>
+      <div class="ks-label">South Korea Qatar helium dependency</div>
+    </div>
+    <div class="ks-cell">
+      <div class="ks-val" style="color:var(--accent-green);">+Upgraded</div>
+      <div class="ks-label">LIN, APD, APD stocks upgraded by JPMorgan/Wells Fargo</div>
+    </div>
+  </div>
+
+  <table class="stock-table">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Why It's Positioned</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="ticker">LIN</td>
+        <td class="company">Linde plc</td>
+        <td>Industrial gases / helium</td>
+        <td>Largest global industrial gas supplier; extensive helium reserves and long-term contracts; pricing power strong</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">APD</td>
+        <td class="company">Air Products</td>
+        <td>Industrial gases / helium</td>
+        <td>Major helium producer; benefits from helium shortage pricing power; Saudi Aramco joint venture exposure</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">APD</td>
+        <td class="company">Air Liquide</td>
+        <td>Industrial gases / helium</td>
+        <td>European market leader; owns minority of Qatar Helium joint venture; direct exposure to the disruption zone</td>
+        <td><span class="rating-badge hold">Hold</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">LRCX</td>
+        <td class="company">Lam Research</td>
+        <td>Semiconductor equipment</td>
+        <td>Chip equipment maker; helium recycling systems (HeRS) being built into new tools; AI demand sustains orders despite supply headwinds</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">AMAT</td>
+        <td class="company">Applied Materials</td>
+        <td>Semiconductor equipment</td>
+        <td>Similar dynamic to LRCX; advanced packaging tools critical for AI chips; memory capex upcycle offsets helium headwinds</td>
+        <td><span class="rating-badge hold">Hold</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Expert Council: Helium/Semicon -->
+  <div class="expert-council">
+    <div class="expert-council-header">
+      <h4>Council of Expert Opinions — Semiconductor Materials &amp; Helium</h4>
+      <p>Synthesized from: Forbes/Tirias Research, JPMorgan Commodities, Wells Fargo Industrials, Reuters Tech, Samsung Electronics IR, TSMC communications, Semiconductor Industry Association, Bank of America Commodity Research</p>
+    </div>
+    <div class="opinion-row">
+      <div class="opinion-col bull-col">
+        <h5>🐂 Bull Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">Forbes / Tirias Research (Kevin Hein)</div>
+          <p>"HBM is the gating component in modern AI accelerators. If helium supply tightens at the memory level — as it has with Qatar offline — the effects cascade almost immediately into server builds and data-center deployments. Samsung and SK Hynix will prioritize AI-grade HBM over consumer DRAM, which means AI chip scarcity worsens before it improves. This is a bull for chip equipment makers like LRCX and AMAT."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">JPMorgan Commodities</div>
+          <p>"Helium is the new semiconductor supply chain flashpoint. Linde and Air Products have been upgraded because their pricing power is structural — when 30% of supply is gone, the remaining 70% commands significant premiums. Long-term contracts for semiconductor fabs will be renegotiated at higher prices. Industrial gas companies are the direct beneficiaries."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Wells Fargo Industrials</div>
+          <p>"Samsung's Helium Reuse System (HeRS) is a strategic moat — it positions them to be the most helium-efficient fab globally, which matters when supply is constrained. But even Samsung can't reuse its way out of a 30% supply reduction. The equipment makers enabling helium recycling will see sustained order flow for years."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Semiconductor Industry Association</div>
+          <p>"The fifth major helium crunch since 2006 was the signal the industry needed to diversify away from Qatar/Saudi Gulf supply. Every new helium source project globally — Montana's Rudyard, Algeria, Australia — is now fast-tracked. Equipment and exploration companies enabling new sources will see multi-year order pipelines."</p>
+        </div>
+      </div>
+      <div class="opinion-col bear-col">
+        <h5>🐻 Bear Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">Reuters Tech Supply Chain</div>
+          <p>"South Korea is the most exposed — 64.7% of its helium comes through the Gulf. Samsung's HeRS helps but it can't solve a 30% supply shortfall alone. If the Qatar situation persists beyond 2–3 months, South Korean DRAM/HBM production faces real allocation risk. AI chip shortages could worsen materially in Q3–Q4 2026, delaying data center builds."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">TSMC Communications (Public Statement)</div>
+          <p>"TSMC does not anticipate significant near-term production impacts due to diversified contracts, robust recycling (80–90%), and existing inventories. However, any extension of the Qatar outage beyond two to three months could still force allocation measures. We are monitoring closely." [This is a cautious statement — not a reassurance.]</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Bank of America Commodity Research</div>
+          <p>"The helium price spike benefits gas suppliers in the near term, but it's a cost headwind for the semiconductor industry — the customers who pay more for helium have less budget for the advanced deposition and etch tools from LRCX and AMAT. The net effect on equipment makers could be neutral to negative if chipmakers delay capex due to higher input costs."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Bloomberg Intelligence — Semiconductors</div>
+          <p>"Memory stocks (Samsung, SK Hynix, Micron) face a strange situation: AI demand is insatiable, but the raw material cost inflation from helium + oil-based polymers could compress margins even as AI chip ASPs rise. The beneficiaries of the helium crisis are the industrial gas companies, not necessarily the chipmakers themselves."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SECTOR 4: WATER ═══════════════ -->
+<div class="sector-section" id="s4">
+  <h2>04 | Water Infrastructure — Scarcity Drives Investment</h2>
+  <p class="sector-intro">Food production crises and freshwater scarcity are interconnected. The same fertilizers and petrochemicals disrupted by the Iran war are used in water treatment chemicals. Simultaneously, US and European water infrastructure is 50–100 years old, and federal investment (US Infrastructure Act) is beginning to flow at scale. Desalination — long considered too expensive — is becoming economically viable as freshwater scarcity worsens globally.</p>
+
+  <div class="sector-header-bar water">
+    <div class="sector-stat"><strong>Why Now:</strong> Food inflation + aging infrastructure + federal capital flowing</div>
+    <div class="sector-stat"><strong>Iran War Impact:</strong> Indirect — petrochemical shortages raise water treatment chemical costs, accelerating automation</div>
+    <div class="sector-stat"><strong>Time Horizon:</strong> 5–10 year structural investment theme</div>
+  </div>
+
+  <table class="stock-table">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Why It's Positioned</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="ticker">XYL</td>
+        <td class="company">Xylem Inc</td>
+        <td>Water treatment &amp; infrastructure</td>
+        <td>Global leader in water technology; Evoqua acquisition (2023) added industrial water treatment; US Infrastructure Act spending tailwind; 16% revenue growth in 2024</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">PNR</td>
+        <td class="company">Pentair plc</td>
+        <td>Residential + commercial water</td>
+        <td>Strong residential water treatment franchise; commercial pool/aquatics; EPS guidance raised for 2026; ~25% EPS growth expected</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">AOS</td>
+        <td class="company">A. O. Smith</td>
+        <td>Water heating &amp; purification</td>
+        <td>US + China water heater leader; water purification gaining share; residential water quality awareness post-pandemic drives demand</td>
+        <td><span class="rating-badge hold">Hold</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">ITT</td>
+        <td class="company">ITT Inc</td>
+        <td>Industrial water pumps</td>
+        <td>Brennan and Goulds Pumps brands; desalination plant pump supplier; exposure to Middle East and North Africa water projects</td>
+        <td><span class="rating-badge hold">Hold</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="expert-council">
+    <div class="expert-council-header">
+      <h4>Council of Expert Opinions — Water Infrastructure</h4>
+      <p>Synthesized from: Goldman Sachs Infrastructure, Morgan Stanley Water Research, Xylem IR, EPA Water Infrastructure Report, United Nations Water (UN-Water), Barron's Infrastructure Desk</p>
+    </div>
+    <div class="opinion-row">
+      <div class="opinion-col bull-col">
+        <h5>🐂 Bull Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">Morgan Stanley Water Research</div>
+          <p>"The water sector is where the energy sector was in 2005 — early in a multi-decade capital re-rating. The US has $434B in deferred water infrastructure maintenance (EPA estimate). The Infrastructure Act is finally flowing money. Xylem and Pentair are the blue-chip way to play this secular water investment theme without betting on individual project success."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">UN-Water</div>
+          <p>"Global water demand will exceed supply by 40% by 2030 even without geopolitical disruptions. The Iran war accelerates this — food production shifts to water-intensive regions, and treatment chemical costs rise with petrochemical prices. Desalination is no longer optional for the Gulf states, Saudi Arabia, and Israel. Every new desalination plant is a multi-year infrastructure project pipeline."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Barron's Infrastructure Desk</div>
+          <p>"Pentair's EPS guidance of ~$5.33 for fiscal 2026 represents substantial profit increase. The company has quietly transformed from a pool equipment company to a water technology platform. Residential water quality is a durable post-pandemic consumer behavior trend — homeowners upgrading water filtration, softeners, and purification systems."</p>
+        </div>
+      </div>
+      <div class="opinion-col bear-col">
+        <h5>🐻 Bear Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">Goldman Sachs Infrastructure</div>
+          <p>"Water infrastructure is politically driven and slow. The US Infrastructure Act money flows at the pace of municipal procurement cycles — 3–7 years from appropriation to project spend. Investors expecting immediate revenue acceleration from infrastructure acts are consistently disappointed. The thesis is a 10-year story, not a 2-year trade."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">EPA Water Infrastructure Report (2025)</div>
+          <p>"The backlog of needed water infrastructure investment is so large ($434B in the US alone) that the bottleneck is contractor capacity and material supply, not funding availability. Xylem and others may see margins compressed as they bid aggressively to win large municipal contracts in an environment of constrained construction labor."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Morgan Stanley Water Research (Caveat)</div>
+          <p>"Water is a locally regulated utility business. Returns on capital are capped by regulatory frameworks in most jurisdictions. Xylem and Pentair are good businesses, but they are not going to multiple 30x earnings. The upside is 15–20% per year, not the 40%+ gains possible in fertilizer or nuclear. It's a quality hold, not a multi-bagger."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SECTOR 5: PETROCHEMICAL ALTERNATIVES ═══════════════ -->
+<div class="sector-section" id="s5">
+  <h2>05 | Petrochemical Alternatives &amp; Plastic Substitutes</h2>
+  <p class="sector-intro">The Iran war has sent naphtha (the primary feedstock for Asian petrochemicals) prices soaring as 60–70% of Asian naphtha flows through Hormuz. Japan's naphtha-dependent petrochemical producers have already curtailed output. Without plastics — used in packaging, automotive, construction, agriculture (plastic film), and medical supplies — global consumer goods face shortages and price inflation. US ethane-based ethlyene and methanol producers, who use cheap natural gas as feedstock, are structurally advantaged.</p>
+
+  <div class="sector-header-bar plastic">
+    <div class="sector-stat"><strong>Why Now:</strong> Naphtha spike → Asia petrochemical cuts → plastics shortage → US export opportunity</div>
+    <div class="sector-stat"><strong>Iran War Impact:</strong> Some plastics prices already up 15%; further increases likely</div>
+    <div class="sector-stat"><strong>Time Horizon:</strong> 18–36 month structural advantage window</div>
+  </div>
+
+  <table class="stock-table">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Why It's Positioned</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="ticker">LYB</td>
+        <td class="company">LyondellBasell</td>
+        <td>Petrochemicals (olefins, polyolefins)</td>
+        <td>Major US ethylene/propylene producer; low-cost ethane feedstock; European asset sales improving portfolio; export capacity to Asia growing</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">EMN</td>
+        <td class="company">Eastman Chemical</td>
+        <td>Specialty + acetate chemicals</td>
+        <td>Acetate yarn (textiles) and specialty chemicals; advanced recycling technology (carbon renewal) positions for bio-plastic demand shift</td>
+        <td><span class="rating-badge hold">Hold</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">CE</td>
+        <td class="company">Celanese Corp</td>
+        <td>Acetyl intermediates + engineered materials</td>
+        <td>Acetic acid and acetyl chain leader; methanol exposure via natural gas; Acetyl chain used in pharmaceutical, food packaging; pricing power in shortages</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">DD</td>
+        <td class="company">DuPont (not DD — use DD as ticker)</td>
+        <td>Specialty materials / electronics</td>
+        <td>Electronics/semiconductor materials division; water solutions; Tyvek protective packaging (medical); less directly tied to hydrocarbon feedstocks</td>
+        <td><span class="rating-badge hold">Hold</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">PKG</td>
+        <td class="company">Packaging Corp of America</td>
+        <td>Containerboard / packaging</td>
+        <td>Paper/forest products packaging; indirect beneficiary as plastic packaging becomes more expensive — substitution demand shift toward paperboard</td>
+        <td><span class="rating-badge hold">Hold</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="expert-council">
+    <div class="expert-council-header">
+      <h4>Council of Expert Opinions — Petrochemical Alternatives</h4>
+      <p>Synthesized from: ICIS Petrochemical Markets, JP Morgan Chemicals, CNN Business, Packaging Dive, C&EN (Chemical & Engineering News), Reuters Commodities</p>
+    </div>
+    <div class="opinion-row">
+      <div class="opinion-col bull-col">
+        <h5>🐂 Bull Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">ICIS Petrochemical Markets</div>
+          <p>"Asia's petrochemical dominance sits atop a feedstock system that is dangerously concentrated. With 60 to 70% of Asian naphtha passing through Hormuz, a prolonged disruption could redefine flows, costs and, perhaps, the very geography of the global petrochemical industry. US ethane-based producers like LyondellBasell are the structural winners."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">JP Morgan Chemicals</div>
+          <p>"DuPont and Celanese both have methanol exposure via natural gas that is US-domestic and unaffected by Hormuz. As Asian petrochemical production cuts spread, US chemical exporters will see both volume and pricing power improve. The spread between US Gulf Coast methanol and Asian methanol has never been wider — it's a structural arbitrage."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">CNN Business</div>
+          <p>"Consumer products companies — CPG giants like P&G, Unilever, Clorox — are exposed to plastic packaging cost inflation. But LyondellBasell and other US ethane-based producers capture that margin. The price of consumer plastic goods will rise 10–20% in 2026 — the producers capture that, not the consumers."</p>
+        </div>
+      </div>
+      <div class="opinion-col bear-col">
+        <h5>🐻 Bear Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">C&EN (Chemical & Engineering News)</div>
+          <p>"The Iran war will debilitate petrochemicals for the rest of 2026 — that's the bad news for everyone. Even US ethane-based producers face cost headwinds: natural gas prices have spiked with oil, and the logistics of getting additional US production to Asian markets takes 3–6 months of infrastructure ramp-up. The winners have existing export terminals, not new ones."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Packaging Dive</div>
+          <p>"The substitution effect away from plastics toward paperboard and other substrates is a longer-term structural trend. In the immediate 6–12 months of a plastic shortage, paperboard producers like Packaging Corp of America benefit — but this assumes they have capacity and can get product to market quickly. Containerboard capacity in North America is also constrained."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Reuters Commodities</div>
+          <p>"LyondellBasell and other major petrochemical companies face the same reality as oil majors — they were built for a stable Middle Eastern supply environment. Their plants in Europe and Asia are running on expensive imported feedstocks. The US Gulf Coast assets are advantaged, but the company as a whole faces margin compression in non-US segments. This is a stock-picker's market, not a sector buy."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SECTOR 6: DEFENSE ═══════════════ -->
+<div class="sector-section" id="s6">
+  <h2>06 | Defense &amp; Cybersecurity — Direct Beneficiary</h2>
+  <p class="sector-intro">The Iran war represents the largest sustained US military engagement since the post-9/11 era. Defense contractors with exposed to Tomahawk missiles, Iron Dome David's Sling, cyber warfare, and naval operations in the Persian Gulf are direct beneficiaries. A new defense spending cycle has been implicitly authorized by the conflict. US allies (Saudi Arabia, UAE, Israel) are also purchasing defensive systems at an accelerated pace.</p>
+
+  <div class="sector-header-bar nuclear" style="border-color:var(--accent-purple); background:rgba(188,140,255,0.06);">
+    <div class="sector-stat"><strong>Why Now:</strong> Active US-Iran conflict; allies buying defense systems; new defense budget cycle</div>
+    <div class="sector-stat"><strong>Iran War Impact:</strong> Tomahawk usage, Iron Dome restocking, cyber operations = massive expensed spending</div>
+    <div class="sector-stat"><strong>Time Horizon:</strong> 3–10 year multi-administration defense build</div>
+  </div>
+
+  <table class="stock-table">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Why It's Positioned</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="ticker">RTX</td>
+        <td class="company">RTX (Raytheon + Collins)</td>
+        <td>Missiles, aerospace, defense</td>
+        <td>Tomahawk missiles, Patriot air defense, naval weapons; direct Iran engagement; allied restocking orders accelerating</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">LMT</td>
+        <td class="company">Lockheed Martin</td>
+        <td>Air systems, F-35, naval</td>
+        <td>F-35 program steady; THAAD missile defense systems protecting Gulf allies; Gulf ally F-35 purchases accelerating</td>
+        <td><span class="rating-badge buy">Buy</td>
+      </tr>
+      <tr>
+        <td class="ticker">GD</td>
+        <td class="company">General Dynamics</td>
+        <td>Naval (submarines, ships)</td>
+        <td>Virginia-class submarines; Gulf naval operations require ship maintenance/repair; cyber warfare (General Dynamics Mission Systems)</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">NOC</td>
+        <td class="company">Northrop Grumman</td>
+        <td>Space, hypersonics, cyber</td>
+        <td>Hypersonic weapons development; space systems; cyber offense/defense; NASA's SLS rocket program</td>
+        <td><span class="rating-badge hold">Hold</span></td>
+      </tr>
+      <tr>
+        <td class="ticker">CRWD</td>
+        <td class="company">CrowdStrike</td>
+        <td>Cybersecurity</td>
+        <td>State-level cyber warfare and critical infrastructure protection; Iranian cyber retaliation targeting US/ALLIED corporate and government systems; Zero Trust mandate</td>
+        <td><span class="rating-badge buy">Buy</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="expert-council">
+    <div class="expert-council-header">
+      <h4>Council of Expert Opinions — Defense &amp; Cybersecurity</h4>
+      <p>Synthesized from: Goldman Sachs Defense, Bank of America Aerospace/Defense, Fitch Defense Ratings, CSIS (Center for Strategic and International Studies), Bloomberg Government, Pentagon Budget Office</p>
+    </div>
+    <div class="opinion-row">
+      <div class="opinion-col bull-col">
+        <h5>🐂 Bull Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">Goldman Sachs Defense</div>
+          <p>"The Iran war has essentially authorized a new defense spending cycle without a formal budget debate. Tomahawk missiles cost $1–2M each and the US has fired hundreds. Iron Dome intercepts cost $50K–100K per intercept. The supplemental defense budget needed to replenish stocks will be substantial — RTX, LMT, and GD are the direct recipients."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">CSIS (Center for Strategic and International Studies)</div>
+          <p>"The Gulf allies — Saudi Arabia, UAE, Qatar, Israel — are all buying defensive systems at an accelerated pace. Iron Dome and David's Sling interceptors, THAAD batteries, naval patrol vessels. The US foreign military sales (FMS) pipeline is at record levels. Lockheed and RTX have multi-year order visibility that few sectors can match."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Bloomberg Government</div>
+          <p>"CrowdStrike, Palo Alto Networks, and Zscaler are the cyber beneficiaries of prolonged US-Iran conflict. Iranian state-sponsored hacking groups are actively targeting US critical infrastructure, financial systems, and defense contractors. Every successful Iranian cyberattack generates a buying event for Zero Trust network architecture — the new federal cybersecurity standard."</p>
+        </div>
+      </div>
+      <div class="opinion-col bear-col">
+        <h5>🐻 Bear Case</h5>
+        <div class="opinion-item">
+          <div class="expert-src">Fitch Defense Ratings</div>
+          <p>"Defense stocks are already pricing in significant escalation. RTX and LMT trade at 20–25x forward earnings — historically high for defense. The market is pricing in a 5+ year conflict. If a ceasefire or de-escalation occurs (and wars always eventually end), the stocks could reverse sharply. Defense is a classic 'sell the news' sector."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Pentagon Budget Office</div>
+          <p>"The supplemental defense spending for Iran operations is real but it comes with tradeoffs — the Pentagon is raiding procurement budgets for other programs to fund the current operations. F-35 buy rates could actually decline as the Air Force shifts spending to immediate operational needs. This is a reallocation, not a net increase in total defense spending."</p>
+        </div>
+        <div class="opinion-item">
+          <div class="expert-src">Bank of America Aerospace/Defense</div>
+          <p>"Lockheed Martin's F-35 program is facing unit cost increases while foreign ally orders are accelerating — this creates a political risk in the FMS approval process. THHAD and missile defense is RTX's strength, but production rate increases face industrial base constraints. You can't manufacture interceptors overnight. The bottleneck is supply, not demand — which means margins don't expand as fast as order books grow."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CONCLUSIONS ═══════════════ -->
+<div class="conclusion-section" id="conclusions">
+  <div class="conclusion-box">
+    <h2>📊 Full Spectrum Synthesis — Final Recommendations</h2>
+
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">The Iran war has created a supply shock that flows through plastics, food, semiconductors, and energy. But not all sectors benefit equally, and the "obvious" beneficiary of a commodity shock is often priced to perfection before the investor can act. The table below synthesizes the full spectrum: conviction level, time horizon, and whether the bull case requires the Iran war to continue vs. benefits from structural trends that exist independently of the conflict.</p>
+
+    <div class="alloc-grid">
+      <div class="alloc-col green">
+        <h4>✅ Highest Conviction — Buy on Dips</h4>
+        <ul>
+          <li><strong>NTR, MOS — Fertilizer:</strong> Near-perfect pricing environment; Chinese reserve release is the key risk; multi-year earnings power at $550+ urea</li>
+          <li><strong>CCJ — Uranium/Cameco:</strong> Structural uranium bull market; AI power demand is war-independent tailwind; current price doesn't reflect $100/lb uranium reality</li>
+          <li><strong>GE Vernova — Nuclear equipment:</strong> $30B+ backlog backed by AI data center PPAs; natural gas price inflation from war makes nuclear economics even better</li>
+          <li><strong>LIN, APD — Industrial gases:</strong> Helium pricing power + nitrogen/oxygen demand from semiconductor fab construction; 27–30% supply offline = multi-year tailwind</li>
+          <li><strong>CRWD — Cybersecurity:</strong> Iran conflict = sustained nation-state cyber threat; every escalation generates Zero Trust buying; durable demand independent of shooting war</li>
+        </ul>
+      </div>
+      <div class="alloc-col yellow">
+        <h4>🟡 Strong Interest — Wait for Entry Point</h4>
+        <ul>
+          <li><strong>VST — Nuclear utility:</strong> AI data center PPAs locked in; strong story but already rerated; wait for pullback on ceasefire speculation</li>
+          <li><strong>XYL — Water infrastructure:</strong> Secular 10-year story; federal capital flows real but slow; buy on municipal budget season weakness</li>
+          <li><strong>LYB — Petrochemicals:</strong> US ethane advantage is structural but export terminal capacity is the constraint; management execution matters more than sector</li>
+          <li><strong>RTX, LMT, GD — Defense:</strong> Already rerated; high quality but historically expensive; only add on significant de-escalation dips</li>
+          <li><strong>CF — Nitrogen/fertilizer:</strong> Similar to NTR/MOS but higher cost structure; hold preference over buy until natural gas spreads widen further</li>
+        </ul>
+      </div>
+      <div class="alloc-col red">
+        <h4>🔴 Lower Conviction — Avoid or Speculate Only</h4>
+        <ul>
+          <li><strong>Oklo, NNE — SMR pure plays:</strong> Category leaders but pre-revenue, speculative, high risk of cost overruns and timeline delays; treat as venture capital allocation only</li>
+          <li><strong>DNN — Denison Mines:</strong> Uranium exploration leverage but illiquidity and project risk; cap exposure to 1–2% of portfolio if at all</li>
+          <li><strong>PKG — Packaging:</strong> Substitution benefit from plastic shortage is real but paperboard capacity constraints limit upside; mediocre business on its own merits</li>
+          <li><strong>NNE — Nano Nuclear:</strong> Pure SMR exposure but small-cap, speculative; NRC approval timeline uncertain</li>
+          <li><strong>EMN — Eastman:</strong> Specialty chemicals quality story but tied to acetate chain and consumer textiles; less directly受益于 the petrochemical shortage</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-box">
+      <h4>📅 How to Position — Timeline Framework</h4>
+      <div class="timeline-row">
+        <div class="time-tag">Now – 6 months</div>
+        <div class="time-desc">Fertilizer stocks (NTR, MOS, CF) and industrial gas stocks (LIN, APD) likely at peak near-term momentum. Iran war premium fully in prices. Begin trimming if ceasefire negotiations emerge. Start positions in CCJ and GE Vernova — these have independent uranium/nuclear tailwinds and haven't yet fully rerated.</div>
+      </div>
+      <div class="timeline-row">
+        <div class="time-tag">6 – 18 months</div>
+        <div class="time-desc">Water infrastructure (XYL, PNR) and defense (RTX, LMT, GD) spending takes longer to flow through to revenue — these are better second-half 2026 and 2027 positions. Watch for AI data center nuclear PPA announcements — these are the sustained catalyst for CCJ and GE Vernova re-rating. Cybersecurity (CRWD) is a holding story across all timeframes.</div>
+      </div>
+      <div class="timeline-row">
+        <div class="time-tag">18 months – 5 years</div>
+        <div class="time-desc">If the Iran war resolves: Fertilizer prices normalize (reduce NTR/MOS/CF). Nuclear uranium structural bull survives (CCJ still holds). SMR commercial viability could emerge as a 2028–2030 story (OKLO, NNE). Water infrastructure is a decade-long theme regardless of geopolitical situation (XYL core hold).</div>
+      </div>
+    </div>
+
+    <div class="thesis-box" style="margin-top:20px; border-left-color: var(--accent-green);">
+      <div class="thesis-label">Bottom Line — My Opinion</div>
+      <p>The Iran war creates a <strong>multi-year structural supply shock</strong> in fertilizer, industrial gases, and petrochemicals — not a short-term commodity spike. The most durable beneficiaries are companies with pricing power that <strong>exists independently of the conflict continuing</strong>: nuclear power's AI-driven electricity demand (CCJ, GE Vernova, VST), the secular cybersecurity threat environment (CRWD), and the long-term water infrastructure investment theme (XYL, PNR). The fertilizer and petrochemical plays are excellent near-term trades but are structurally cyclical — buy them when the Iran war premium is being debated, not when urea is at $650 and the news is all bullish. The defense names are already fairly valued and require a ceasefire scare to create a new entry opportunity.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

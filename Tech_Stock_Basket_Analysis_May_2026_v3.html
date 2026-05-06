@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tier 1–2 Battered Tech Basket — Deep Dive Research Report v3 | May 6, 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --border: #30363d;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-muted: #6e7681;
+    --accent-green: #3fb950;
+    --accent-red: #f85149;
+    --accent-yellow: #d29922;
+    --accent-blue: #58a6ff;
+    --accent-purple: #bc8cff;
+    --accent-orange: #f0883e;
+    --bull-bg: rgba(63, 185, 80, 0.08);
+    --bear-bg: rgba(248, 81, 73, 0.08);
+    --conclusion-bg: rgba(88, 166, 255, 0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .report-header {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1c2128 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 36px;
+  }
+  .report-header .version-badge {
+    display: inline-block;
+    background: rgba(88, 166, 255, 0.15);
+    border: 1px solid rgba(88, 166, 255, 0.3);
+    color: var(--accent-blue);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  .report-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .report-header .subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .report-header .meta-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .report-header .meta-item {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .report-header .meta-item strong {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  .disclaimer {
+    margin: 24px 40px;
+    background: rgba(210, 153, 34, 0.08);
+    border: 1px solid rgba(210, 153, 34, 0.25);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .disclaimer strong { color: var(--accent-yellow); font-weight: 600; }
+  .intro-section {
+    padding: 0 40px 32px;
+    max-width: 1200px;
+  }
+  .intro-section p {
+    color: var(--text-secondary);
+    max-width: 860px;
+    margin-bottom: 16px;
+  }
+  .thesis-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent-blue);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    max-width: 860px;
+  }
+  .thesis-box .thesis-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 8px;
+  }
+  .thesis-box p { color: var(--text-primary); font-size: 14px; margin: 0; }
+  .update-box {
+    background: rgba(63, 185, 80, 0.08);
+    border: 1px solid rgba(63, 185, 80, 0.25);
+    border-left: 4px solid var(--accent-green);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    max-width: 860px;
+  }
+  .update-box .update-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    margin-bottom: 8px;
+  }
+  .update-box p, .update-box li { color: var(--text-secondary); font-size: 13px; margin: 0; }
+  .update-box ul { margin-top: 8px; padding-left: 18px; }
+  .stocks-section {
+    padding: 0 40px 40px;
+    max-width: 1200px;
+  }
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.01em;
+  }
+  .tier-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 40px 0 24px;
+  }
+  .tier-divider .tier-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .tier-divider .tier-label.tier-1 {
+    background: rgba(63, 185, 80, 0.15);
+    color: var(--accent-green);
+    border: 1px solid rgba(63, 185, 80, 0.3);
+  }
+  .tier-divider .tier-label.tier-2 {
+    background: rgba(88, 166, 255, 0.12);
+    color: var(--accent-blue);
+    border: 1px solid rgba(88, 166, 255, 0.25);
+  }
+  .tier-divider .tier-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .tier-intro {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .stock-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .stock-card.tier-2-card { border-color: rgba(88, 166, 255, 0.2); }
+  .stock-card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .stock-title-group .ticker-badge {
+    display: inline-block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--accent-green);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-family: 'Courier New', monospace;
+  }
+  .tier-2-card .ticker-badge { color: var(--accent-blue); }
+  .stock-title-group h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: inline;
+    margin-right: 14px;
+  }
+  .stock-title-group .sector-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+    vertical-align: middle;
+  }
+  .stock-price-group { text-align: right; }
+  .stock-price-group .current-price {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .stock-price-group .from-high {
+    font-size: 13px;
+    color: var(--accent-red);
+    font-weight: 500;
+  }
+  .stock-price-group .high-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: block;
+  }
+  .price-action-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .pa-cell {
+    background: var(--surface2);
+    padding: 10px 16px;
+    text-align: center;
+  }
+  .pa-cell-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .pa-cell-value { font-size: 14px; font-weight: 600; }
+  .pa-cell-value.positive { color: var(--accent-green); }
+  .pa-cell-value.negative { color: var(--accent-red); }
+  .pa-cell-value.neutral { color: var(--accent-yellow); }
+  .pa-cell-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .reversal-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 4px;
+  }
+  .reversal-badge.confirmed {
+    background: rgba(63, 185, 80, 0.15);
+    color: var(--accent-green);
+    border: 1px solid rgba(63, 185, 80, 0.3);
+  }
+  .reversal-badge.partial {
+    background: rgba(210, 153, 34, 0.15);
+    color: var(--accent-yellow);
+    border: 1px solid rgba(210, 153, 34, 0.3);
+  }
+  .reversal-badge.negative {
+    background: rgba(248, 81, 73, 0.15);
+    color: var(--accent-red);
+    border: 1px solid rgba(248, 81, 73, 0.3);
+  }
+  .fundamentals-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .fund-cell {
+    background: var(--surface);
+    padding: 12px 16px;
+  }
+  .fund-cell-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .fund-cell-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .fund-cell-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .bb-section { padding: 16px 24px; }
+  .bb-section h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 16px;
+  }
+  .bb-section h4:first-child { margin-top: 0; }
+  .bb-section h4.bull-h { color: var(--accent-green); }
+  .bb-section h4.bear-h { color: var(--accent-red); }
+  .bb-section ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 16px;
+  }
+  .bb-section ul li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+  .bb-section ul li::before { content: '→'; position: absolute; left: 0; color: var(--text-muted); font-size: 11px; }
+  .verdict-box {
+    background: var(--conclusion-bg);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 0 24px 16px;
+  }
+  .verdict-box .verdict-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 8px;
+  }
+  .verdict-box p { font-size: 13px; color: var(--text-primary); margin: 0; }
+  .verdict-box p + p { margin-top: 8px; }
+  .key-event-box {
+    background: rgba(240, 136, 62, 0.08);
+    border: 1px solid rgba(240, 136, 62, 0.25);
+    border-left: 3px solid var(--accent-orange);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 24px 0;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .key-event-box strong { color: var(--accent-orange); }
+  .final-rec-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 0 40px 40px;
+    max-width: 1120px;
+  }
+  .final-rec-box h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+  .final-rec-box h4.tier-h {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    margin: 16px 0 10px;
+  }
+  .final-rec-box ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 16px;
+  }
+  .final-rec-box ul li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .final-rec-box ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent-blue); font-size: 11px; }
+  .rec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .rec-col {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .rec-col h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .rec-col.holds h4 { color: var(--accent-yellow); }
+  .rec-col.avoid h4 { color: var(--accent-red); }
+  .rec-col ul { margin: 0; }
+  .rec-col ul li::before { color: var(--text-muted); }
+  .update-strip {
+    background: linear-gradient(90deg, rgba(63,185,80,0.06), rgba(88,166,255,0.06));
+    border-bottom: 1px solid var(--border);
+    padding: 12px 40px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .update-strip strong { color: var(--accent-blue); }
+</style>
+</head>
+<body>
+
+<div class="report-header">
+  <div class="version-badge">v3 — May 6, 2026</div>
+  <h1>Tier 1–2 Battered Tech Basket</h1>
+  <div class="subtitle">Deep Dive Research Report — Updated May 2026</div>
+  <div class="meta-row">
+    <div class="meta-item"><strong>Coverage:</strong> 8 Tier 1 &amp; Tier 2 stocks</div>
+    <div class="meta-item"><strong>Prior Version:</strong> v2 — April 29, 2026</div>
+    <div class="meta-item"><strong>Analyst:</strong> Hermes Agent Research</div>
+    <div class="meta-item"><strong>Horizon:</strong> 5+ Year Compound</div>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <strong>⚠️ Not Financial Advice.</strong> This report is for informational and educational purposes only. All investment involves risk. Consult a licensed financial advisor before making any investment decisions. Prices and data as of early May 2026.
+</div>
+
+<div class="update-strip">
+  <strong>Major Update This Week:</strong> 3 stocks upgraded (TEAM +22–30%, TWLO +24%, OKTA AI Agents GA April 30) | 2 stocks with fresh earnings (SNOW FY26 +29%, TEAM Q3 +5.2% beat) | New geopolitical context: Iran war reshaping semiconductor cost structure globally.
+</div>
+
+<div class="intro-section">
+  <div class="thesis-box">
+    <div class="thesis-label">Core Investment Thesis</div>
+    <p>The thesis remains intact from v2: beaten-down mid-cap SaaS names with strong FCF, defensible moats, and the balance sheet staying power to survive a 2–3 year macro digestion period will compound dramatically over a 5-year horizon. The Iran conflict adds a new macro wrinkle — semiconductor supply costs rising at the same moment AI driving datacenter buildout is already tight on helium and advanced chips.</p>
+  </div>
+
+  <div class="update-box">
+    <div class="update-label">What Changed Since v2 (April 29)</div>
+    <ul>
+      <li><strong>TEAM:</strong> Q3 FY2026 crushed estimates — revenue $1.787B (+5.2% beat), EPS $1.75 vs $1.33 expected. Stock +22–30% post-report.</li>
+      <li><strong>TWLO:</strong> Q1 CY2026 massive beat — $1.41B revenue (4.7% beat), raised FY26 guidance to 14–15% from 11.5–12.5%. Stock surged ~24% post-earnings.</li>
+      <li><strong>SNOW:</strong> FY2026 full year revenue $4.68B (+29.16%), Q4 product revenue $1.22B (+30% YoY). Beats continue.</li>
+      <li><strong>OKTA:</strong> "Okta for AI Agents" reached General Availability April 30 — new product line adding ~40% contract value uplift to deals. Stock near 52-week lows (~60s–70s) pricing in 9% FY27 guidance risk.</li>
+      <li><strong>Macro:</strong> Iran war now in week 7+; Strait of Hormuz effectively closed; ~27–30% of global helium supply offline; urea prices +$80/ton; plastics up 15%+; semiconductor memory costs rising.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="stocks-section">
+
+  <!-- ──────────────── TIER 1 ──────────────── -->
+
+  <div class="tier-divider">
+    <div class="tier-label tier-1">Tier 1</div>
+    <div class="tier-line"></div>
+    <div style="font-size:12px;color:var(--text-muted);">High conviction · 5+ year holds · Begin accumulating on weakness</div>
+  </div>
+  <div class="tier-intro">Companies that meet all three criteria: (1) Demonstrated FCF positive with expanding margins, (2) Secular tailwind with defensible moat, (3) Currently reversing or base-building after significant decline from ATH.</div>
+
+  <!-- DOCU -->
+  <div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">DOCU</span>
+        <h2>DocuSign</h2>
+        <span class="sector-tag">eSignature / Contract Cloud</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="current-price">~$72–75</div>
+        <div class="from-high">–58% from ~$178 ATH</div>
+        <div class="high-label">52-wk range: ~$55–178</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell">
+        <div class="pa-cell-label">From ATH</div>
+        <div class="pa-cell-value negative">–58%</div>
+        <div class="pa-cell-sub">~$178 → ~$73</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Revenue Growth (FY2026)</div>
+        <div class="pa-cell-value neutral">+8.2%</div>
+        <div class="pa-cell-sub">FY2026: $3.22B full year</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">FCF Margin</div>
+        <div class="pa-cell-value positive">~23%</div>
+        <div class="pa-cell-sub">~740M FCF on $3.22B</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Reversion Signal</div>
+        <div class="pa-cell-value neutral">PARTIAL</div>
+        <span class="reversal-badge partial">Basing — confirming</span>
+      </div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell">
+        <div class="fund-cell-label">Revenue (TTM)</div>
+        <div class="fund-cell-value">$3.22B</div>
+        <div class="fund-cell-sub">FY2026 full year</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Gross Margin</div>
+        <div class="fund-cell-value">~80%</div>
+        <div class="fund-cell-sub">Software/SaaS high quality</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">EPS (GAAP)</div>
+        <div class="fund-cell-value">$5.23</div>
+        <div class="fund-cell-sub">Up 1,352% from $0.36 in 2023</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Forward P/E</div>
+        <div class="fund-cell-value">~14x</div>
+        <div class="fund-cell-sub">Very compressed for moat</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Consensus Target</div>
+        <div class="fund-cell-value">~$90</div>
+        <div class="fund-cell-sub">~20–25% upside</div>
+      </div>
+    </div>
+    <div class="key-event-box">
+      <strong>Key Near-Term Catalysts:</strong> Q4 FY2026 beat ($836.9M, +8% YoY) — watch for FY2027 guidance confirmation. Management projecting $4.0B revenue by 2029 (+7.5% CAGR). EPS trajectory improving sharply as operating leverage kicks in.
+    </div>
+    <div class="verdict-box">
+      <div class="verdict-label">Analyst Verdict — May 2026</div>
+      <p><strong>Bull Case:</strong> DocuSign is the most financially impressive name in the basket — massive EPS swing from $0.36 to $5.23 shows operating leverage working. At ~14x forward earnings it is pricing in zero growth re-acceleration. The AI envelope signing + intelligent deal management features are early but real. Q4 beat + stabilization at ~$72–75 suggests the $55–60 band from January 2026 was the true bottom.</p>
+      <p style="margin-top:8px;"><strong>Bear Case:</strong> 8% revenue growth is below SaaS sector average (15–20%). Core eSignature market may be saturating. Monday.com, Adobe Sign, and Salesforce increasingly competitive. The AI features have not yet moved the needle on growth rates. At ~14x PE the stock is cheap for a reason — the market doesn't believe the acceleration story yet.</p>
+    </div>
+    <div class="bb-section">
+      <h4 class="bull-h">Bull Case</h4>
+      <ul>
+        <li>Massive EPS expansion ($0.36 → $5.23) shows operating leverage is real and accelerating</li>
+        <li>14x forward PE is pricing in dramatic failure — a single beat-and-raise cycle re-rates it to 20x+ easily</li>
+        <li>AI envelope intelligence could unlock additional $500M+ ACV in contract lifecycle management</li>
+        <li>FCF conversion strong — buybacks or dividends possible as cash accumulates</li>
+        <li>Management has guided $4B revenue by 2029 — achievable at 7–8% with AI upsell</li>
+      </ul>
+      <h4 class="bear-h">Bear Case</h4>
+      <ul>
+        <li>8% revenue growth is below sector norms — may reflect category saturation rather than market share loss</li>
+        <li>Adobe Sign and Microsoft (built into Office365) represent existential competitive pressure in core eSign</li>
+        <li>No confirmed reversal — stock has bounced from lows but not on heavy volume or fundamental catalyst</li>
+        <li>International expansion slower than expected — Europe data residency requirements add cost</li>
+        <li>If macro softens further, enterprise seat reductions could accelerate</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- OKTA -->
+  <div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">OKTA</span>
+        <h2>Okta</h2>
+        <span class="sector-tag">Identity & Access Management / AI Agents</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="current-price">~$63–67</div>
+        <div class="from-high">–46% from ~$128 ATH</div>
+        <div class="high-label">52-wk range: ~$63–128</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell">
+        <div class="pa-cell-label">From ATH</div>
+        <div class="pa-cell-value negative">–46%</div>
+        <div class="pa-cell-sub">~$128 → ~$65</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Revenue Growth (FY2026)</div>
+        <div class="pa-cell-value neutral">+11%</div>
+        <div class="pa-cell-sub">Q4: $761M (+11%)</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">FCF Margin</div>
+        <div class="pa-cell-value positive">~29.6%</div>
+        <div class="pa-cell-sub">$863M FCF / $2.92B revenue</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Reversion Signal</div>
+        <div class="pa-cell-value neutral">PARTIAL</div>
+        <span class="reversal-badge partial">At bottom — awaiting catalyst</span>
+      </div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell">
+        <div class="fund-cell-label">Revenue (TTM)</div>
+        <div class="fund-cell-value">$2.92B</div>
+        <div class="fund-cell-sub">FY2026 full year (+29% from FY2025)</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Gross Margin</div>
+        <div class="fund-cell-value">77.4%</div>
+        <div class="fund-cell-sub">Stable, sector-competitive</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Operating Income</div>
+        <div class="fund-cell-value">$149M</div>
+        <div class="fund-cell-sub">First FY positive ever (turning point)</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">P/FCF</div>
+        <div class="fund-cell-value">~13x</div>
+        <div class="fund-cell-sub">Major upgrade candidate at this multiple</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Consensus Target</div>
+        <div class="fund-cell-value">$101</div>
+        <div class="fund-cell-sub">~50% upside from current ~$65</div>
+      </div>
+    </div>
+    <div class="key-event-box">
+      <strong>⚡ Major Catalyst: "Okta for AI Agents" GA April 30, 2026.</strong> New product extending identity security to AI agents — adds ~40% contract value uplift when included in deals, already representing 30% of Q4 bookings. CFO Tighe: "expected to be accretive to growth for FY28 and FY29." AI agent identity is an entirely new category.
+    </div>
+    <div class="verdict-box">
+      <div class="verdict-label">Analyst Verdict — May 2026</div>
+      <p><strong>Bull Case:</strong> The most compelling risk/reward in Tier 1. 50% upside to consensus $101 target at the same time the stock is near its 52-week low. "Okta for AI Agents" is not priced in — the market is focused on the 9% FY27 growth guide (which includes a ~1-point professional services headwind) rather than the FY28+ acceleration from AI agent deals. $1B buyback signals management confidence. $863M FCF at 13x is a generational entry.</p>
+      <p style="margin-top:8px;"><strong>Bear Case:</strong> 9% FY27 guidance is real and represents a growth rate below most SaaS peers. Net revenue retention flat at ~106% for multiple quarters — no pricing power expansion. AI agent market is early and unproven. If Okta for AI Agents doesn't convert pipeline to revenue by FY28, the stock has limited re-rating potential. Anthropic product launches have triggered sharp selloffs. Q1 FY27 results (early June) are the near-term test.</p>
+    </div>
+    <div class="bb-section">
+      <h4 class="bull-h">Bull Case</h4>
+      <ul>
+        <li>50% upside to consensus $101 price target — highest conviction call in the basket</li>
+        <li>First full year of operating income profitability ($149M) is a major structural inflection</li>
+        <li>AI Agents opportunity is a new TAM — identity security for agentic AI workforce is nascent but real</li>
+        <li>13x P/FCF is pricing in recession — not pricing in AI re-acceleration scenario</li>
+        <li>$1B buyback underway — 875K shares already repurchased in January 2026</li>
+        <li>AWS Marketplace momentum (~$750M contract value, +45%+ in FY26)</li>
+      </ul>
+      <h4 class="bear-h">Bear Case</h4>
+      <ul>
+        <li>9% FY27 guidance is a real ceiling — market is right to be cautious until Q1 FY27 results confirm</li>
+        <li>Flat NRR at ~106% means existing customers aren't expanding — pure new logo growth required</li>
+        <li>AI agent category unproven — enterprise buyers cautious about agent security spending</li>
+        <li>Anthropic and other IdP competitors continue to take share in workforce identity</li>
+        <li>If Q1 FY27 guidance (early June) disappoints, stock could test $55–60</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SNOW -->
+  <div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">SNOW</span>
+        <h2>Snowflake</h2>
+        <span class="sector-tag">Data Cloud / AI Infrastructure</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="current-price">~$115–130</div>
+        <div class="from-high">–48% from ~$237 ATH</div>
+        <div class="high-label">52-wk range: ~$95–237</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell">
+        <div class="pa-cell-label">From ATH</div>
+        <div class="pa-cell-value negative">–48%</div>
+        <div class="pa-cell-sub">~$237 → ~$122</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Revenue Growth (FY2026)</div>
+        <div class="pa-cell-value positive">+29.2%</div>
+        <div class="pa-cell-sub">Q4: $1.28B (+30.1% YoY)</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Product Gross Margin</div>
+        <div class="pa-cell-value neutral">~73%</div>
+        <div class="pa-cell-sub">Consistently high</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Reversion Signal</div>
+        <div class="pa-cell-value positive">CONFIRMED</div>
+        <span class="reversal-badge confirmed">Breaking out of 6-month base</span>
+      </div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell">
+        <div class="fund-cell-label">Revenue (FY2026)</div>
+        <div class="fund-cell-value">$4.68B</div>
+        <div class="fund-cell-sub">Full year, +29.16%</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Q4 Product Revenue</div>
+        <div class="fund-cell-value">$1.22B</div>
+        <div class="fund-cell-sub">+30% YoY, 96% of total revenue</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">GAAP EPS</div>
+        <div class="fund-cell-value">–$3.95</div>
+        <div class="fund-cell-sub">Still unprofitable on GAAP basis</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">P/S (TTM)</div>
+        <div class="fund-cell-value">~6.5x</div>
+        <div class="fund-cell-sub">Compression from 40x at ATH</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Consensus Target</div>
+        <div class="fund-cell-value">~$175</div>
+        <div class="fund-cell-sub">~40% upside from ~$122</div>
+      </div>
+    </div>
+    <div class="key-event-box">
+      <strong>Iran War Impact:</strong> Snowflake's AI/data warehouse customers (especially hyperscalers and enterprise AI builders) face rising semiconductor costs from helium shortages — but this is an indirect headwind to Snowflake's customers' spending capacity, not Snowflake directly. SNOW's AI Cortex layer (SQL + LLM integration) is a differentiator in the data cloud space.
+    </div>
+    <div class="verdict-box">
+      <div class="verdict-label">Analyst Verdict — May 2026</div>
+      <p><strong>Bull Case:</strong> Snowflake is the pure-play growth name in the basket with 29%+ revenue growth at a 6.5x P/S. AI is driving data infrastructure spending, not reducing it. The Cortex layer (LLM + SQL) is an increasingly important differentiator. 30%+ beat in Q4 and 29% full-year growth is not a company in trouble — it's a company that got swept up in the 2025–2026 SaaS derating. Data gravity is real: once enterprises commit data to Snowflake they tend to expand usage.</p>
+      <p style="margin-top:8px;"><strong>Bear Case:</strong> GAAP unprofitable at –$3.95 EPS. Microsoft Fabric (and AWS Redshift, Google BigQuery) represent native competition that ships free with existing cloud contracts. If enterprise IT budgets tighten due to economic slowdown, Snowflake is a discretionary data spend that gets cut. The P/S multiple can compress further if growth decelerates toward 20%, which would require a further price drop to generate returns.</p>
+    </div>
+    <div class="bb-section">
+      <h4 class="bull-h">Bull Case</h4>
+      <ul>
+        <li>29% revenue growth at 6.5x P/S — cheapest this stock has ever been relative to growth</li>
+        <li>AI workloads require more data infrastructure, not less — Snowflake positioned as neutral data cloud</li>
+        <li>Cortex (LLM + SQL) adds AI-native query layer competitive against pure LLM query tools</li>
+        <li>Consensus $175 target implies ~40% upside — strong risk/reward at current levels</li>
+        <li>Q4 product revenue beat confirms large enterprise adoption continues</li>
+        <li>Data gravity: switching cost once data is loaded is significant</li>
+      </ul>
+      <h4 class="bear-h">Bear Case</h4>
+      <ul>
+        <li>Still GAAP loss-making — $1.33B annual loss means capital-intensive operations</li>
+        <li>Microsoft Fabric is free-included for M365 customers — existential competitive threat</li>
+        <li>If growth decelerates to ~20% in FY2027, P/S could compress to 4–5x (further –20–30% downside)</li>
+        <li>Iran war → semiconductor cost inflation → enterprise IT budgets tighten → data cloud discretionary</li>
+        <li>Hyperscalers increasingly building proprietary ML/AI pipelines that bypass Snowflake</li>
+        <li>Analyst community still split on profitability timeline</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">TEAM</span>
+        <h2>Atlassian</h2>
+        <span class="sector-tag">Collaboration / AI-Powered Work Management</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="current-price">~$85–90</div>
+        <div class="from-high">–55% from ~$197 ATH</div>
+        <div class="high-label">52-wk range: ~$56–197</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell">
+        <div class="pa-cell-label">From ATH</div>
+        <div class="pa-cell-value negative">–55%</div>
+        <div class="pa-cell-sub">~$197 → ~$88</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Revenue Growth (Q3 FY2026)</div>
+        <div class="pa-cell-value positive">+14%</div>
+        <div class="pa-cell-sub">Q3: $1.787B (+5.2% beat)</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">EPS (Adjusted)</div>
+        <div class="pa-cell-value positive">$1.75</div>
+        <div class="pa-cell-sub">vs $1.33 expected — massive beat</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Reversion Signal</div>
+        <div class="pa-cell-value positive">CONFIRMED</div>
+        <span class="reversal-badge confirmed">+22–30% post-earnings surge</span>
+      </div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell">
+        <div class="fund-cell-label">Revenue (TTM)</div>
+        <div class="fund-cell-value">~$6.3B</div>
+        <div class="fund-cell-sub">Q3 FY2026 annualizes ~$7.1B</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Gross Margin</div>
+        <div class="fund-cell-value">~82%</div>
+        <div class="fund-cell-sub">High-quality software</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Cloud Revenue Growth</div>
+        <div class="fund-cell-value">~20%+</div>
+        <div class="fund-cell-sub">AI-driven migration accelerating</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">FCF Margin</div>
+        <div class="fund-cell-value">~25%+</div>
+        <div class="fund-cell-sub">Self-funding AI investments</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Consensus Target</div>
+        <div class="fund-cell-value">~$150</div>
+        <div class="fund-cell-sub">~65% upside from ~$90</div>
+      </div>
+    </div>
+    <div class="key-event-box">
+      <strong>⚡ Explosive Q3 FY2026 Reaction:</strong> Revenue $1.787B beat consensus $1.697B by 5.2%. EPS $1.75 crushed $1.33 expected. Stock surged 22–30% in a single session. This is the confirmation of the Atlassian reversal thesis — the Q1 2026 –57% YTD decline was overdone. AI features in Jira and Confluence are driving enterprise seat expansion.
+    </div>
+    <div class="verdict-box">
+      <div class="verdict-label">Analyst Verdict — May 2026</div>
+      <p><strong>Bull Case:</strong> Q3 FY2026 was a vindication. The AI-driven work management platform is resonating with enterprises. 82% gross margins, 25%+ FCF margins, self-funding AI R&D without dilution. At ~$90 (up from ~$70 post-earnings low), the stock still has ~65% upside to consensus $150 target. Atlassian is a Tier 1 name that recovered from the dead — this is exactly the type of reversal this basket was designed to capture.</p>
+      <p style="margin-top:8px;"><strong>Bear Case:</strong> The Q3 beat was partly a relief rally after terrible Q1 2026. Need to see Q4 FY2026 confirmation to validate the sustained reversal. Enterprise Jira/Confluence spending is competitive with Monday.com, Asana, and now Microsoft Loop. AI features are available across all these platforms — Atlassian's moat is distribution and integration, not AI differentiation. The jump from $88 to $150 requires multiple years of continued outperformance.</p>
+    </div>
+    <div class="bb-section">
+      <h4 class="bull-h">Bull Case</h4>
+      <ul>
+        <li>Q3 FY2026 confirmed reversal: $1.75 EPS vs $1.33 expected is a generational beat</li>
+        <li>65% upside to $150 consensus target — highest absolute upside in the basket</li>
+        <li>AI features in Jira/Confluence are driving enterprise consolidation of work management</li>
+        <li>82% gross margins + 25%+ FCF margins = self-funding growth with no equity dilution needed</li>
+        <li>Data center / DevOps product (Opsgenie, Statuspage) benefits from AI ops trend</li>
+        <li>Deep enterprise integration (Jira + 10,000+ apps) creates switching cost moat</li>
+      </ul>
+      <h4 class="bear-h">Bear Case</h4>
+      <ul>
+        <li>Q3 beat was partially a relief rally — need Q4 confirmation before adding aggressively</li>
+        <li>Work management category becoming crowded: Microsoft Loop, Monday.com, Asana all competing</li>
+        <li>Non-AI features (Confluence search, Jira workflows) still lag AI-native competitors</li>
+        <li>Q1 2026 YTD decline of –57% shows this stock can move fast in both directions</li>
+        <li>Enterprise annual contracts = lumpy revenue recognition; quarters can be volatile</li>
+        <li>International growth slower — enterprise adoption slower in EMEA and Asia</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TWLO -->
+  <div class="stock-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">TWLO</span>
+        <h2>Twilio</h2>
+        <span class="sector-tag">CPaaS / AI Communications Platform</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="current-price">~$100–115</div>
+        <div class="from-high">–60% from ~$270 ATH</div>
+        <div class="high-label">52-wk range: ~$65–270</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell">
+        <div class="pa-cell-label">From ATH</div>
+        <div class="pa-cell-value negative">–60%</div>
+        <div class="pa-cell-sub">~$270 → ~$108</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Revenue Growth (Q1 CY2026)</div>
+        <div class="pa-cell-value positive">+16%</div>
+        <div class="pa-cell-sub">Q1: $1.41B (+4.7% beat, 20% reported)</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Gross Margin</div>
+        <div class="pa-cell-value neutral">~49.6%</div>
+        <div class="pa-cell-sub">Improving but lowest in class</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Reversion Signal</div>
+        <div class="pa-cell-value positive">CONFIRMED</div>
+        <span class="reversal-badge confirmed">+24% post-earnings</span>
+      </div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell">
+        <div class="fund-cell-label">Revenue (TTM)</div>
+        <div class="fund-cell-value">~$5.4B</div>
+        <div class="fund-cell-sub">Full year 2026 guide: +14–15%</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Organic Growth</div>
+        <div class="fund-cell-value">~10–11%</div>
+        <div class="fund-cell-sub">Ex-acquisition; the true growth rate</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Non-GAAP Gross Margin</div>
+        <div class="fund-cell-value">49.6%</div>
+        <div class="fund-cell-sub">Largest beat in 11 quarters</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">FY2026 Guidance</div>
+        <div class="fund-cell-value">+14–15%</div>
+        <div class="fund-cell-sub">Raised from prior 11.5–12.5%</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">AI-Driven Demand</div>
+        <div class="fund-cell-value">HIGH</div>
+        <div class="fund-cell-sub">One AI function driving outsized demand</div>
+      </div>
+    </div>
+    <div class="key-event-box">
+      <strong>⚡ AI-Driven Demand Surge:</strong> Twilio cited "unprecedented demand for one AI function" as primary driver of Q1 beat. Raised FY2026 growth guidance to 14–15% from 11.5–12.5%. The 49.6% non-GAAP gross margin was the largest beat in 11 quarters. The market is reconsidering Twilio's AI narrative — this is no longer just a legacy CPaaS story.
+    </div>
+    <div class="verdict-box">
+      <div class="verdict-label">Analyst Verdict — May 2026</div>
+      <p><strong>Bull Case:</strong> Twilio's Q1 CY2026 was a turning point — the 49.6% gross margin beat and AI-driven demand surge changed the narrative. At 60%+ off its ATH, the stock is pricing in dramatic failure. If the AI function demand is real and sustained (likely tied to AI agent customer interaction/verification use cases), Twilio could re-rate from a 2x P/S to a 4–5x P/S growth story. 14–15% growth guidance raised mid-year is the sign of real momentum.</p>
+      <p style="margin-top:8px;"><strong>Bear Case:</strong> 49.6% gross margin — while improving — is still the lowest quality margin in the basket. CPaaS is a commoditizing market (Vonage, MessageBird, Plivo competing). The "one AI function" driver lacks specifics and could be lumpy. Revenue is heavily weighted to North America. The Segment customer data platform has been a mixed blessing — strategic vision is right but integration costs have been higher than expected.</p>
+    </div>
+    <div class="bb-section">
+      <h4 class="bull-h">Bull Case</h4>
+      <ul>
+        <li>Q1 2026 was the largest revenue beat in 11 quarters — clearly inflecting positively</li>
+        <li>One AI function driving unprecedented demand suggests a new growth vector</li>
+        <li>Full-year guidance raised by ~250bps mid-year — management confidence signal</li>
+        <li>At 60% off ATH, even modest multiple expansion generates strong absolute returns</li>
+        <li>Segment data platform + Twilio communications = unique AI data + delivery moat</li>
+        <li>Global SMS/API messaging demand continues to grow as the OS of customer engagement</li>
+      </ul>
+      <h4 class="bear-h">Bear Case</h4>
+      <ul>
+        <li>49.6% gross margin is structurally below peers (DOCU 80%, TEAM 82%, OKTA 77%)</li>
+        <li>CPaaS market is commoditizing — price competition from Plivo, Vonage, AWS SNS</li>
+        <li>"One AI function" lacks specificity — could be lumpy one-time enterprise deal, not durable</li>
+        <li>Segment platform integration costs have persisted longer than expected</li>
+        <li>Revenue still heavily North America centric — international expansion slow</li>
+        <li>GAAP profitability elusive — watch for sustained non-GAAP to GAAP conversion</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ──────────────── TIER 2 ──────────────── -->
+
+  <div class="tier-divider">
+    <div class="tier-label tier-2">Tier 2</div>
+    <div class="tier-line"></div>
+    <div style="font-size:12px;color:var(--text-muted);">Strong candidates · Confirm reversal before full position · Active monitoring required</div>
+  </div>
+  <div class="tier-intro">Companies that meet 2 of 3 Tier 1 criteria. Often have better absolute upside but require more timing discipline. Begin accumulating only after reversal is confirmed over 30+ days without new lows.</div>
+
+  <!-- PATH -->
+  <div class="stock-card tier-2-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">PATH</span>
+        <h2>UiPath</h2>
+        <span class="sector-tag">Robotic Process Automation / AI Automation</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="current-price">~$18–22</div>
+        <div class="from-high">–55% from ~$45 ATH</div>
+        <div class="high-label">52-wk range: ~$14–45</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell">
+        <div class="pa-cell-label">From ATH</div>
+        <div class="pa-cell-value negative">–55%</div>
+        <div class="pa-cell-sub">~$45 → ~$20</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Revenue Growth (FY2026)</div>
+        <div class="pa-cell-value neutral">+13%</div>
+        <div class="pa-cell-sub">Q4: $481M (+13.6% growth)</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">ARR</div>
+        <div class="pa-cell-value">$1.85B</div>
+        <div class="pa-cell-sub">+11% YoY, Q4 FY2026</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Reversion Signal</div>
+        <div class="pa-cell-value neutral">PARTIAL</div>
+        <span class="reversal-badge partial">New products helping — monitoring</span>
+      </div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell">
+        <div class="fund-cell-label">Revenue (FY2026)</div>
+        <div class="fund-cell-value">~$1.61B</div>
+        <div class="fund-cell-sub">TTM, +12.65%</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Net Revenue Retention</div>
+        <div class="fund-cell-value">~112%</div>
+        <div class="fund-cell-sub">Slight decline from prior periods</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Gross Margin</div>
+        <div class="fund-cell-value">~78%</div>
+        <div class="fund-cell-sub">Consistently high</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">FY2027 Guidance</div>
+        <div class="fund-cell-value">~9%</div>
+        <div class="pa-cell-value negative">Below expectations</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">P/S (TTM)</div>
+        <div class="fund-cell-value">~3.5x</div>
+        <div class="fund-cell-sub">Very depressed</div>
+      </div>
+    </div>
+    <div class="key-event-box">
+      <strong>⚠️ Watch: FY2027 Guidance Cut.</strong> Management guided ~9% revenue growth for FY2027, down from 13% in FY2026 — a significant sandbag. The market initially sold the stock on this guidance. However, UiPath's automation platform remains the leader in enterprise RPA+AI, and the NRR of 112% shows existing customers are still expanding. The 30% revenue beat in Q4 is the positive offset.
+    </div>
+    <div class="verdict-box">
+      <div class="verdict-label">Analyst Verdict — May 2026</div>
+      <p><strong>Bull Case:</strong> UiPath at 3.5x P/S with 13% growth and 78% gross margins is deeply depressed. The AI Agent moat in enterprise automation is real — every large enterprise needs workflow automation and UiPath has the deepest integrations. If the 9% guide is conservative (as management often is), actual Q1 FY2027 results could surprise to the upside. Watch for $100K+ ARR customer growth as the enterprise AI spending cycle hits automation.</p>
+      <p style="margin-top:8px;"><strong>Bear Case:</strong> The 9% FY2027 guide is a real deceleration. Microsoft's Power Automate is free-included with M365 and gaining share in lower-end automation. UiPath's high-end enterprise position is defensible but the growth ceiling just fell. 112% NRR declining means existing customers aren't expanding as fast. The path to 15%+ growth requires AI agent products to generate entirely new workflows — unproven at scale.</p>
+    </div>
+    <div class="bb-section">
+      <h4 class="bull-h">Bull Case</h4>
+      <ul>
+        <li>3.5x P/S is a deeply depressed multiple — priced for bankruptcy, not slowdown</li>
+        <li>78% gross margins and $1.85B ARR = substantial installed base generating recurring revenue</li>
+        <li>AI Agents create new workflow categories UiPath is uniquely positioned to automate</li>
+        <li>Q4 beat shows large enterprise demand remains strong despite guidance concerns</li>
+        <li>112% NRR means existing customers still expanding — not losing customers</li>
+      </ul>
+      <h4 class="bear-h">Bear Case</h4>
+      <ul>
+        <li>9% FY2027 guidance is a real growth deceleration — the market is right to be cautious</li>
+        <li>Microsoft Power Automate free-with-M365 is existential threat at the low end</li>
+        <li>NRR declining from prior levels — upsell momentum slowing</li>
+        <li>UiPath's platform is complex — enterprise deals take 6–18 months to close</li>
+        <li>International growth (APAC, EMEA) lagging vs. North America expectations</li>
+        <li>Competition from ServiceNow, Automation Anywhere, and open-source (LangChain agents)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- RNG -->
+  <div class="stock-card tier-2-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">RNG</span>
+        <h2>RingCentral</h2>
+        <span class="sector-tag">Cloud Communications / UCaaS</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="current-price">~$55–65</div>
+        <div class="from-high">–30% from ~$90 ATH</div>
+        <div class="high-label">52-wk range: ~$35–90</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell">
+        <div class="pa-cell-label">From ATH</div>
+        <div class="pa-cell-value neutral">–30%</div>
+        <div class="pa-cell-sub">~$90 → ~$58</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Revenue Growth (Q4 2025)</div>
+        <div class="pa-cell-value neutral">~5%</div>
+        <div class="pa-cell-sub">Mature, steady</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">EPS (Q4 2025)</div>
+        <div class="pa-cell-value positive">$1.18</div>
+        <div class="pa-cell-sub">Beat expectations</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Reversion Signal</div>
+        <div class="pa-cell-value neutral">LATE STAGE</div>
+        <span class="reversal-badge partial">+40% past month — less upside</span>
+      </div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell">
+        <div class="fund-cell-label">Revenue (TTM)</div>
+        <div class="fund-cell-value">$2.52B</div>
+        <div class="fund-cell-sub">+4.8% YoY</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">EPS (TTM)</div>
+        <div class="fund-cell-value">$0.48</div>
+        <div class="fund-cell-sub">Low EPS but stable</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">P/E</div>
+        <div class="fund-cell-value">~85x</div>
+        <div class="pa-cell-value negative">Expensive on near-term EPS</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">FCF Margin</div>
+        <div class="fund-cell-value">~15%</div>
+        <div class="fund-cell-sub">Positive and growing</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Q1 2026 Earnings</div>
+        <div class="fund-cell-value">May 7</div>
+        <div class="fund-cell-sub">Pending — key near-term catalyst</div>
+      </div>
+    </div>
+    <div class="key-event-box">
+      <strong>Pending Catalyst:</strong> Q1 2026 earnings report due May 7, 2026. Analysts forecast EPS $1.17 and revenue $642.7M. The stock is up ~40% in the past month — this may be front-running the earnings beat. Less "bath" upside remaining vs. other names in the basket, but the FCF story remains solid for long-term holders.
+    </div>
+    <div class="verdict-box">
+      <div class="verdict-label">Analyst Verdict — May 2026</div>
+      <p><strong>Bull Case:</strong> RingCentral has already completed most of its reversal — up 40% in the past month. The FCF story is solid and the Microsoft Teams competition concern has largely been priced out. For long-term holders who want a steadier, lower-volatility component in the basket, RNG fills that role. The Q1 2026 beat (if it comes) would confirm the story.</p>
+      <p style="margin-top:8px;"><strong>Bear Case:</strong> At 85x P/E with only 5% revenue growth, the stock is pricing in significant premium. Microsoft Teams telephony integration continues to take share in the mid-market. RingCentral's enterprise opportunity is constrained by the fact that its competitors include Microsoft itself. Less "battered" than other names — less recovery upside.</p>
+    </div>
+    <div class="bb-section">
+      <h4 class="bull-h">Bull Case</h4>
+      <ul>
+        <li>Already reversed — steady upward trajectory confirms business stability</li>
+        <li>Q4 2025 EPS beat ($1.18 vs expected) shows execution</li>
+        <li>15% FCF margins generate real cash for buybacks or dividends</li>
+        <li>Enterprise UCaaS adoption still in early innings globally</li>
+        <li>AI integration (RingCentral AI) could re-energize growth narrative</li>
+      </ul>
+      <h4 class="bear-h">Bear Case</h4>
+      <ul>
+        <li>Already rallied 40% — less "bath" upside than other basket names</li>
+        <li>85x P/E with only 5% growth is very expensive for a mature company</li>
+        <li>Microsoft Teams telephony free-inclusion is ongoing competitive pressure</li>
+        <li>International expansion slow — North America saturation risk</li>
+        <li>Q1 2026 earnings miss could trigger sharp reversal of recent gains</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ZM -->
+  <div class="stock-card tier-2-card">
+    <div class="stock-card-header">
+      <div class="stock-title-group">
+        <span class="ticker-badge">ZM</span>
+        <h2>Zoom Communications</h2>
+        <span class="sector-tag">Video Communications / AI-Enhanced UC</span>
+      </div>
+      <div class="stock-price-group">
+        <div class="current-price">~$60–70</div>
+        <div class="from-high">–70% from ~$225 ATH</div>
+        <div class="high-label">52-wk range: ~$55–110</div>
+      </div>
+    </div>
+    <div class="price-action-bar">
+      <div class="pa-cell">
+        <div class="pa-cell-label">From ATH</div>
+        <div class="pa-cell-value negative">–70%</div>
+        <div class="pa-cell-sub">~$225 → ~$65</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Revenue Growth (FY2026)</div>
+        <div class="pa-cell-value neutral">~5%</div>
+        <div class="pa-cell-sub">Q4: $1.247B (+5.3%)</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">FY2027 Target</div>
+        <div class="pa-cell-value positive">Above $5B</div>
+        <div class="pa-cell-sub">Revenue target above $5B</div>
+      </div>
+      <div class="pa-cell">
+        <div class="pa-cell-label">Reversion Signal</div>
+        <div class="pa-cell-value neutral">STABLE</div>
+        <span class="reversal-badge partial">Not declining — consolidating</span>
+      </div>
+    </div>
+    <div class="fundamentals-grid">
+      <div class="fund-cell">
+        <div class="fund-cell-label">Revenue (FY2026)</div>
+        <div class="fund-cell-value">~$4.9B</div>
+        <div class="fund-cell-sub">Full year FY2026</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Enterprise Customers</div>
+        <div class="fund-cell-value">Growing</div>
+        <div class="fund-cell-sub">Large enterprise + CCI driving beats</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Gross Margin</div>
+        <div class="fund-cell-value">~73%</div>
+        <div class="fund-cell-sub">Stable, high quality</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">AI Integration</div>
+        <div class="pa-cell-value positive">Active</div>
+        <div class="fund-cell-sub">Zoom AI Companion driving retention</div>
+      </div>
+      <div class="fund-cell">
+        <div class="fund-cell-label">Dividend Yield</div>
+        <div class="fund-cell-value">~1.2%</div>
+        <div class="fund-cell-sub">Income component to hold</div>
+      </div>
+    </div>
+    <div class="key-event-box">
+      <strong>Zoom's AI Pivot:</strong> Zoom has moved beyond pure video to AI Companion driving retention in enterprise. The CCI (Zoom Contact Center) product is growing rapidly and becoming a meaningful revenue stream. Q4 FY2026 revenue of $1.247B (+5.3%) was a beat, and FY2027 revenue target set above $5B signals continued steady growth. The stock is not declining further — it's in a long-term consolidation phase.
+    </div>
+    <div class="verdict-box">
+      <div class="verdict-label">Analyst Verdict — May 2026</div>
+      <p><strong>Bull Case:</strong> Zoom is a cash flow machine with 73% gross margins, a growing dividend (~1.2% yield), and a proven AI pivot story. At 70% below its ATH, it's the most stable name in the basket — appropriate for a 10–15% basket allocation as the "anchor" stock. The enterprise bundling strategy (Meetings + Phone + Chat + CCI) is driving larger contract values. AI Companion reduces churn and increases wallet share.</p>
+      <p style="margin-top:8px;"><strong>Bear Case:</strong> 5% revenue growth is not a high-growth story — Zoom is a slow-growing value/utility stock at this point. The Microsoft Teams and Google Meet competition has largely stabilized at a level that means Zoom won't grow faster than 8–10% organically. The days of 40%+ growth are gone permanently. Treat this as a dividend income name, not a compounder.</p>
+    </div>
+    <div class="bb-section">
+      <h4 class="bull-h">Bull Case</h4>
+      <ul>
+        <li>73% gross margins + 5% growth = high quality, stable business model</li>
+        <li>Dividend yield (~1.2%) provides income while waiting for re-rating</li>
+        <li>AI Companion demonstrably reduces churn — NRR improving</li>
+        <li>CCI (Contact Center) growing rapidly — new revenue stream diversifying from video</li>
+        <li>Enterprise bundling drives larger ACV — customers buying more Zoom products</li>
+        <li>Microsoft Teams competition has plateaued — Zoom stabilized its market share</li>
+      </ul>
+      <h4 class="bear-h">Bear Case</h4>
+      <ul>
+        <li>5% growth is not a high-growth story — P/E should be 15–20x, not 25–30x</li>
+        <li>Teams free-inclusion permanently caps Zoom's pricing power in mid-market</li>
+        <li>International expansion minimal — North America-centric risk</li>
+        <li>GAAP profitability improving but not spectacular — still transitioning from hypergrowth</li>
+        <li>Best days of compounding (2019–2021) are over — different animal now</li>
+        <li>Re-rating to 20x+ P/E requires growth acceleration — unlikely without new product breakout</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ──────────────── FINAL RECOMMENDATION ──────────────── -->
+
+<div class="final-rec-box">
+  <h3>🏁 Final Recommendation: Tier 1–2 Basket — v3 May 2026</h3>
+
+  <h4 class="tier-h">Core Tier 1 Positions — Build Full Positions (May–July 2026)</h4>
+  <ul>
+    <li><strong>OKTA — Okta:</strong> The single highest-conviction call in the basket. 50% upside to $101 consensus, trading at 13x P/FCF near 52-week lows, first year of operating income profitability, AI Agents GA April 30 adding 40% contract value uplift. Begin accumulating on any pullback to $60–65. Q1 FY27 (early June) confirmation.</li>
+    <li><strong>SNOW — Snowflake:</strong> Best pure growth story at cheapest P/S in basket (6.5x). 29% revenue growth, 40% upside to $175 consensus. AI data infrastructure secular tailwind. Monitor for sustained break above $130 to confirm base.</li>
+    <li><strong>TEAM — Atlassian:</strong> Vindicated by Q3 FY2026 beat. 65% upside to $150 consensus. 82% gross margins, 25%+ FCF margins, self-funding AI. Already reversed +22–30% post-earnings — add on any pullback to $75–80.</li>
+    <li><strong>DOCU — DocuSign:</strong> Most financially impressive turnaround ($0.36 → $5.23 EPS). 14x forward PE pricing in failure. Watch for FY2027 guidance to confirm 10%+ growth re-acceleration. Long-term hold at current levels.</li>
+    <li><strong>TWLO — Twilio:</strong> AI narrative re-born. Q1 CY2026 16% growth + raised guidance to 14–15%. 49.6% gross margin beat largest in 11 quarters. "One AI function" demand surge could be durable. Accept as basket component (not core).</li>
+  </ul>
+
+  <h4 class="tier-h">Tier 2 Watchlist — Confirm Reversal First</h4>
+  <ul>
+    <li><strong>PATH — UiPath:</strong> Deeply discounted (3.5x P/S) but 9% FY2027 guide is real concern. Hold off until 30 consecutive days without new 52-week low. Microsoft Power Automate is the existential competitive risk to monitor quarterly.</li>
+    <li><strong>RNG — RingCentral:</strong> Already reversed (+40% past month). Less bath upside. Acceptable as steady basket component but not highest conviction. Q1 earnings May 7 — key near-term test.</li>
+    <li><strong>ZM — Zoom:</strong> Treat as income/value hold, not growth compounder. 1.2% dividend, 73% gross margins, stable 5% growth. Good anchor for 10–15% of basket allocation. Not a multi-bagger but won't go to zero.</li>
+  </ul>
+
+  <div class="rec-grid">
+    <div class="rec-col holds">
+      <h4>🟡 Actions This Month</h4>
+      <ul>
+        <li>Begin OKTA accumulation at $60–68 (highest conviction)</li>
+        <li>Monitor SNOW for sustained break above $130</li>
+        <li>Wait for TEAM pullback to $75–80 before adding</li>
+        <li>Q1 FY2027 OKTA results early June = key inflection</li>
+        <li>RNG Q1 earnings May 7 — watch for beat confirmation</li>
+      </ul>
+    </div>
+    <div class="rec-col avoid">
+      <h4>🔴 Risks to Monitor</h4>
+      <ul>
+        <li>Iran war → semiconductor cost inflation → enterprise IT budget cuts → all SaaS names exposed</li>
+        <li>OKTA Q1 FY2027 guidance miss (early June) could push stock to $50s</li>
+        <li>PATH FY2027 deceleration confirmed — could fall further toward $12–14</li>
+        <li>ZM competitive plateau may break if Teams adds zoom-like features</li>
+        <li>Macro slowdown → enterprise seat rationalization hits all names simultaneously</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
