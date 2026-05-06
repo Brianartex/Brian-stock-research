@@ -103,17 +103,71 @@
     border-color: rgba(240, 136, 62, 0.25);
   }
   .tag.archive {
-    background: rgba(188, 140, 255, 0.12);
-    color: #bc8cff;
-    border-color: rgba(188, 140, 255, 0.25);
+    background: rgba(110, 118, 129, 0.12);
+    color: #8b949e;
+    border-color: rgba(110, 118, 129, 0.25);
   }
   .tag.primary {
     background: rgba(88, 166, 255, 0.15);
     color: #58a6ff;
     border-color: rgba(88, 166, 255, 0.3);
   }
+
+  /* ── Archive section ── */
+  .archive-section {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+  }
+  .archive-toggle {
+    background: none;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #6e7681;
+    font-size: 12px;
+    font-family: inherit;
+    padding: 6px 14px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .archive-toggle:hover {
+    border-color: #58a6ff;
+    color: #58a6ff;
+  }
+  .archive-list {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+    text-align: left;
+  }
+  .archive-list.open { display: flex; }
+  .archive-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .archive-item:hover { border-color: #30363d; }
+  .archive-item .arch-icon { font-size: 14px; }
+  .archive-item .arch-title {
+    font-size: 12px;
+    color: #8b949e;
+    flex: 1;
+  }
+  .archive-item .arch-date {
+    font-size: 11px;
+    color: #484f58;
+  }
+
   .footer {
-    margin-top: 40px;
+    margin-top: 32px;
     font-size: 12px;
     color: #6e7681;
   }
@@ -122,7 +176,7 @@
 <body>
 <div class="container">
   <h1>📊 Brian's Stock Research</h1>
-  <p class="subtitle">June 2026 Research Reports</p>
+  <p class="subtitle">May 2026 Research Reports</p>
 
 
   <!-- ═══════════════════════════════════════════════ -->
@@ -133,18 +187,11 @@
     <span class="section-title">Battered Tech Stocks</span>
   </div>
 
-  <a href="Tech_Stock_Basket_Analysis_May_2026_v2.html" class="doc-card">
-    <div class="doc-date">Primary Document — June 8, 2026 — StockStory Cross-Referenced</div>
-    <h2>Tier 1–3 Battered Tech Basket v2 (Living)</h2>
-    <p>Full 16-stock master document with expandable layout. All Tier 1, 2, and 3 stocks cross-referenced against StockStory data — growth rates contextualized against historical deceleration, valuation flags noted, bull/bear balance restored throughout.</p>
-    <span class="tag primary">Full Breadth · Living Document · Expandable</span>
-  </a>
-
-  <a href="Tech_Stock_Basket_Analysis_May_2026_v4.html" class="doc-card">
-    <div class="doc-date">Quick Reference — May 6, 2026</div>
-    <h2>Tier 1–2 Battered Tech Basket v4</h2>
-    <p>Condensed view covering the 8 highest-conviction Tier 1 &amp; 2 stocks (DOCU, OKTA, SNOW, TEAM, TWLO, ZM, PATH, RNG). Same expandable layout. TEAM +22–30% and TWLO +24% post-earnings confirmed.</p>
-    <span class="tag">Tier 1–2 Only · Quick Reference · Expandable</span>
+  <a href="Tech_Stock_Basket_May_2026.html" class="doc-card">
+    <div class="doc-date">Primary — May 2026</div>
+    <h2>17-Stock Battered Tech Basket (May 2026)</h2>
+    <p>Full 17-stock master document: 6 battered survivors (DOCU, SNOW, OKTA, MNDY, VEEV, DDOG) + 11 new Sandisk-type/infrastructure candidates (ANET, AMKR, QCOM, NTAP, ETN, GLW, LUMN, AEP, VST, MU, STX). Sticky left TOC with scroll-highlight. Bear/Bull/My Call per card. SKIP list of 10 culled names.</p>
+    <span class="tag primary">Full Breadth · Living Document · Sticky TOC</span>
   </a>
 
 
@@ -156,20 +203,42 @@
     <span class="section-title">Geopolitical Winners</span>
   </div>
 
-  <a href="Geopolitical_Growth_Stocks_May_2026_v2.html" class="doc-card">
-    <div class="doc-date">May 6, 2026</div>
-    <h2>High Potential Growth Sectors v2 (Original)</h2>
-    <p>7 sectors: Nuclear, Fertilizer, Helium/Semiconductors, Water Infrastructure, Petrochemical Alternatives, Defense/Cybersecurity, and China/Emerging Markets. Bull 🐂 + Bear 🐻 expert council analysis for each sector.</p>
-    <span class="tag geo">Geopolitical Winners · Expandable</span>
+  <a href="Geopolitical_Growth_Stocks_May_2026.html" class="doc-card">
+    <div class="doc-date">Primary — May 2026</div>
+    <h2>High Potential Growth Sectors — Supply Shock Edition v2</h2>
+    <p>8 sectors: Oil & Energy, Fertilizer, Nuclear Power, Plastics & Chemicals, Helium, Water Infrastructure, Grid & Power, Defense & Cybersecurity. Iran war Hormuz closure analysis: cascading second/third-order supply shock effects. Sticky left TOC. Bear/Bull/My Call for each sector.</p>
+    <span class="tag geo">Geopolitical · Iran War · Supply Shock · Sticky TOC</span>
   </a>
 
-  <a href="High_Potential_Growth_Sectors_June_2026.html" class="doc-card">
-    <div class="doc-date">June 8, 2026 — UPDATED</div>
-    <h2>High Potential Growth Sectors — Supply Shock Edition</h2>
-    <p>Oil/energy, fertilizers/urea, helium, and nuclear power sectors. Iran war supply shock analysis: urea +50%, helium +40–100% (27–30% supply removed), oil demand contraction thesis. Bull + Bear council with full expert spectrum for each sector.</p>
-    <span class="tag geo">Geopolitical · Iran War · Supply Shock · Expandable</span>
-  </a>
 
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- Archived Older Versions -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="archive-section">
+    <button class="archive-toggle" onclick="document.getElementById('arch-list').classList.toggle('open'); this.textContent = document.getElementById('arch-list').classList.contains('open') ? '▲ Hide older versions' : '▼ Show older versions'">▼ Show older versions</button>
+    <div id="arch-list" class="archive-list">
+      <a href="Tech_Stock_Basket_Analysis_May_2026_v2.html" class="archive-item">
+        <span class="arch-icon">💾</span>
+        <span class="arch-title">Tier 1–3 Battered Tech Basket v2</span>
+        <span class="arch-date">May 2026</span>
+      </a>
+      <a href="Tech_Stock_Basket_Analysis_May_2026_v4.html" class="archive-item">
+        <span class="arch-icon">💾</span>
+        <span class="arch-title">Tier 1–2 Battered Tech Basket v4 (condensed)</span>
+        <span class="arch-date">May 2026</span>
+      </a>
+      <a href="Geopolitical_Growth_Stocks_May_2026_v2.html" class="archive-item">
+        <span class="arch-icon">💾</span>
+        <span class="arch-title">Geopolitical Winners v2 (7-sector original)</span>
+        <span class="arch-date">May 2026</span>
+      </a>
+      <a href="Tech_Stock_Basket_Analysis_April_2026_v2.html" class="archive-item">
+        <span class="arch-icon">💾</span>
+        <span class="arch-title">Battered Tech Basket v2 (April 2026)</span>
+        <span class="arch-date">April 2026</span>
+      </a>
+    </div>
+  </div>
 
   <div class="footer">
     Reports generated by Hermes Agent Research · For informational purposes only
