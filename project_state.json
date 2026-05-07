@@ -1,0 +1,147 @@
+{
+  "project": "Brian stock research site",
+  "repo": "https://github.com/Brianartex/Brian-stock-research.git",
+  "pages_url": "https://Brianartex.github.io/Brian-stock-research/",
+  "last_updated": "2026-05-07T13:20:00-04:00",
+  "last_session_summary": "Fixed v2 (non-visual) and v2_visual. v2_visual had 2 orphan stats-blocks (outside details) that were fixed. New discovery: Analysis v3/v4 files have DIFFERENT structure (div-based, not details-based) and v3 has 3/5 cards already updated. Geopolitical uses expandable sector sections, not per-stock cards. These need different approaches.",
+  "current_task": "Fix Tech v3/v4 and Geopolitical v2/v2_visual \u2014 same stats-insertion approach as v2",
+  "files": {
+    "index.html": {
+      "status": "current",
+      "notes": "Two-doc layout with archive section. CRT background applied."
+    },
+    "Tech_Stock_Basket_May_2026_v2.html": {
+      "status": "done",
+      "notes": "15 active stock cards, stats inserted after card-body opening. Orphan stats-block (138 lines) removed.",
+      "done_date": "2026-05-07",
+      "live_url": "https://Brianartex.github.io/Brian-stock-research/Tech_Stock_Basket_May_2026_v2.html"
+    },
+    "Tech_Stock_Basket_Analysis_May_2026_v3.html": {
+      "status": "in_progress",
+      "notes": "DIFFERENT STRUCTURE: No details elements. 5 div-based stock cards. 3 of 5 have quick-stats already. Needs different approach than v2.",
+      "yfinance_tickers": [
+        "DOCU",
+        "SNOW",
+        "OKTA",
+        "MNDY",
+        "VEEV",
+        "DDOG",
+        "ANET",
+        "GLW",
+        "AMKR",
+        "ETN",
+        "LUMN",
+        "QCOM",
+        "NTAP",
+        "AEP",
+        "VST",
+        "STX",
+        "MU"
+      ],
+      "skip_tickers": [
+        "STX",
+        "MU"
+      ]
+    },
+    "Tech_Stock_Basket_Analysis_May_2026_v4.html": {
+      "status": "pending",
+      "notes": "DIFFERENT STRUCTURE: 8 expandable details + 5 div cards. Needs inspection before applying fix.",
+      "yfinance_tickers": [
+        "DOCU",
+        "SNOW",
+        "OKTA",
+        "MNDY",
+        "VEEV",
+        "DDOG",
+        "ANET",
+        "GLW",
+        "AMKR",
+        "ETN",
+        "LUMN",
+        "QCOM",
+        "NTAP",
+        "AEP",
+        "VST",
+        "STX",
+        "MU"
+      ],
+      "skip_tickers": [
+        "STX",
+        "MU"
+      ]
+    },
+    "Tech_Stock_Basket_May_2026_v2_visual.html": {
+      "status": "done",
+      "notes": "17 stock cards (15 active + STX/MU skip). Orphan stats-blocks removed. quick-stats inserted in 15 cards.",
+      "yfinance_tickers": [
+        "DOCU",
+        "SNOW",
+        "OKTA",
+        "MNDY",
+        "VEEV",
+        "DDOG",
+        "ANET",
+        "GLW",
+        "AMKR",
+        "ETN",
+        "LUMN",
+        "QCOM",
+        "NTAP",
+        "AEP",
+        "VST",
+        "STX",
+        "MU"
+      ],
+      "skip_tickers": [
+        "STX",
+        "MU"
+      ],
+      "preserve": [
+        "Chart.js CDN",
+        "inline SVG sparklines",
+        "charts section canvas elements"
+      ]
+    },
+    "Geopolitical_Growth_Stocks_May_2026_v2.html": {
+      "status": "pending",
+      "notes": "COMPLETELY DIFFERENT STRUCTURE: 8 sector expandable sections (not per-stock). Uses expandable class and key-stat-bar. Needs sector-level stats insertion.",
+      "preserve": []
+    },
+    "Geopolitical_Growth_Stocks_May_2026_v2_visual.html": {
+      "status": "pending",
+      "notes": "Geopolitical visual \u2014 same approach + preserve Chart.js, sector charts, spike charts",
+      "preserve": [
+        "Chart.js CDN",
+        "sectorChart canvas",
+        "spikeChart canvas",
+        "charts section"
+      ]
+    }
+  },
+  "approach": {
+    "stats_fix": "Per-card positional regex: (1) replace entire <style> block with clean CSS; (2) remove stat-row div; (3) remove orphan stats-section/fund-section block between card-body close and verdict-footer; (4) insert quick-stats HTML after card-body opening div; (5) inject hamburger nav HTML+JS",
+    "data_source": "/tmp/stock_data.json (yfinance price data), /tmp/stock_margins.json (margin data)",
+    "key_patterns": {
+      "find_cards": "<details class=\"stock-card\">",
+      "get_ticker": "<span class=\"stock-ticker\">(TICKER)</span>",
+      "card_body": "<div class=\"stock-card-body\">",
+      "stat_row_removal": "\\n        <div class=\"stat-row\">.*?\\n        </div>\\n",
+      "orphan_removal": "<!-- Price Action \\+ Fundamentals Stats -->.*?<div class=\"verdict-footer",
+      "combined_line": "</div>\\n        <div class=\"analysis-col",
+      "insert_after": "<div class=\"stock-card-body\">\\n",
+      "quick_stats_class": "quick-stats"
+    },
+    "hamburger_html": "mobile-topbar + nav-overlay divs injected after <body>",
+    "hamburger_js": "inline IIFE script: click handlers for hamburger-btn, nav-close-btn, overlay click-to-close"
+  },
+  "pending": [
+    "Tech_Stock_Basket_May_2026_v3.html \u2014 apply stats fix",
+    "Tech_Stock_Basket_May_2026_v4.html \u2014 apply stats fix",
+    "Tech_Stock_Basket_May_2026_v2_visual.html \u2014 apply stats fix + preserve visual",
+    "Geopolitical_Growth_Stocks_May_2026_v2.html \u2014 apply stats fix (different stock set)",
+    "Geopolitical_Growth_Stocks_May_2026_v2_visual.html \u2014 apply stats fix + preserve visual",
+    "Push all 5 updated files to GitHub",
+    "Verify all docs on GitHub Pages"
+  ],
+  "blockers": []
+}
