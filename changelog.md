@@ -6,7 +6,18 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Versions are
 
 ---
 
-## [Unreleased]
+## [Unreleased] — 2026-05-07
+
+### Fixed — All Docs
+- **Tech v2 + v2_visual:** Remove orphaned stats-blocks (138 lines each, positioned outside `<details>` elements). Insert `quick-stats` price-action grid + fundamentals grid in 15 active stock cards. Replace CSS with clean consolidated stylesheet. Add hamburger nav for mobile. ([21bb0e5](https://github.com/Brianartex/Brian-stock-research/commit/21bb0e5))
+- **Tech v3 + v4:** Clean CSS refresh (removed stale mobile overrides). Add hamburger nav for mobile. Cards already had complete `price-action-bar` + `fundamentals-grid` — no content surgery needed. ([21bb0e5](https://github.com/Brianartex/Brian-stock-research/commit/21bb0e5))
+- **Geopolitical v2 + v2_visual:** Clean CSS refresh (CSS shrank ~5KB by removing redundant rules). Add hamburger nav for mobile. Visual preserves Chart.js, sectorChart, spikeChart. ([21bb0e5](https://github.com/Brianartex/Brian-stock-research/commit/21bb0e5))
+
+### Added — Orchestration Layer
+- **`.project_state.json`** — Machine-readable project state. Loaded first at every session start via `project-state` skill. Tracks file status, blockers, approach, and pending work.
+- **`todo.md`** — Roadmap of all active projects. Updated on every state commit.
+- **`changelog.md`** — Append-only changelog. Generated from git commits. Follows Keep a Changelog format.
+- **`project-state` skill** — Loads `project_state.json` at session start, enforces state update after complex tasks.
 
 ### Added
 - **Orchestration layer** — `project_state.md`, `todo.md`, `changelog.md` for persistent session memory
