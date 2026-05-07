@@ -330,15 +330,16 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
 .mobile-topbar{display:none;position:fixed;top:0;left:0;right:0;height:48px;background:var(--surface);border-bottom:1px solid var(--border);z-index:300;align-items:center;justify-content:space-between;padding:0 16px}
 .mobile-topbar .mt-title{font-size:13px;font-weight:600;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100vw - 80px)}
-.hamburger-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:6px 8px;cursor:pointer;display:flex;flex-direction:column;gap:4px}
+.hamburger-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:6px 8px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:36px}
 .hamburger-btn span{display:block;width:18px;height:2px;background:var(--text-secondary);border-radius:2px}
 .hamburger-btn:hover span{background:var(--accent-blue)}
-#nav-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(13,17,23,.97);z-index:400;flex-direction:column;padding:20px;overflow-y:auto}
+#nav-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(13,17,23,.98);z-index:400;flex-direction:column;padding:20px;overflow-y:auto}
 #nav-overlay.open{display:flex}
-#nav-overlay .nav-close-btn{align-self:flex-end;background:none;border:1px solid var(--border);border-radius:6px;padding:8px 14px;color:var(--text-secondary);font-size:13px;cursor:pointer;margin-bottom:20px}
+#nav-overlay .nav-close-btn{align-self:flex-end;background:none;border:1px solid var(--border);border-radius:6px;padding:8px 14px;color:var(--text-secondary);font-size:14px;cursor:pointer;margin-bottom:24px}
 #nav-overlay .nav-close-btn:hover{border-color:var(--accent-blue);color:var(--accent-blue)}
-#nav-overlay .overlay-brand{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-#nav-overlay .toc-item{padding:10px 0;font-size:15px;border-left:none;border-bottom:1px solid var(--border);color:var(--text-secondary);display:block;text-decoration:none}
+#nav-overlay .overlay-brand{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+#nav-overlay .toc-section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:8px 0}
+#nav-overlay .toc-item{padding:10px 0;font-size:14px;border-left:none;border-bottom:1px solid var(--border);color:var(--text-secondary);display:block;text-decoration:none}
 #nav-overlay .toc-item:hover{color:var(--accent-blue);background:none;border-left:none}
 
 </style>
@@ -351,9 +352,9 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
   <span class="mt-title">Geopolitical Winners — May 2026</span>
 </div>
 <div id="nav-overlay">
-  <button class="nav-close-btn" id="nav-close-btn">Close</button>
+  <button class="nav-close-btn" id="nav-close-btn" aria-label="Close navigation">✕ Close</button>
   <div class="overlay-brand">Brian Stock Research</div>
-  <div class="toc-section-label">Navigation</div>
+  <div class="toc-section-label">📋 Navigation</div>
 <a class="toc-item" href="#thesis">Supply Shock Thesis</a>
 <a class="toc-item" href="#s1" data-toc="s1">01 · Oil & Energy</a>
 <a class="toc-item" href="#s2" data-toc="s2">02 · Fertilizer</a>
