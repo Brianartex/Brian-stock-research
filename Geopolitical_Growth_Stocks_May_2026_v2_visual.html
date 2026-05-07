@@ -12,7 +12,7 @@
   --border: #30363d;
   --text-primary: #e6edf3;
   --text-secondary: #8b949e;
-  --text-muted: #6e7681;
+  --text-muted: #78808c;
   --accent-green: #3fb950;
   --accent-red: #f85149;
   --accent-yellow: #d29922;
@@ -230,7 +230,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 .expandable-body { background: var(--surface); padding: 20px 22px; }
 .expandable-body .back-to-top { display: inline-block; font-size: 11px; color: var(--accent-orange); text-decoration: none; margin-bottom: 12px; font-weight: 500; }
 .expandable-body .back-to-top:hover { text-decoration: underline; }
-.expandable-body h4 { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin: 18px 0 8px; color: var(--accent-blue); }
+.expandable-body h3 { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin: 18px 0 8px; color: var(--accent-blue); }
 .expandable-body h4:first-child { margin-top: 0; }
 .expandable-body p { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.6; }
 .expandable-body ul { font-size: 13px; color: var(--text-secondary); margin: 0 0 12px 20px; line-height: 1.7; }
@@ -260,7 +260,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 /* ── EXPERT COUNCIL ── */
 .expert-council { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 16px 0; }
 .expert-council-header { background: var(--surface); padding: 12px 18px; border-bottom: 1px solid var(--border); }
-.expert-council-header h4 { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
+.expert-council-header h3 { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
 .expert-council-header p { font-size: 11px; color: var(--text-muted); }
 .opinion-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
 .opinion-col { background: var(--surface); padding: 14px 18px; }
@@ -276,7 +276,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
 /* ── DEEP DIVE BOX ── */
 .deep-dive { background: var(--surface2); border-radius: 8px; padding: 16px 18px; margin: 12px 0; }
-.deep-dive h4 { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 12px; }
+.deep-dive h3 { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 12px; }
 .deep-dive ul { font-size: 12px; color: var(--text-secondary); margin-left: 18px; line-height: 1.7; }
 .deep-dive ul li strong { color: var(--text-primary); }
 
@@ -285,17 +285,9 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
 /* ── MOBILE RESPONSIVE ── */
 @media (max-width: 768px) {
-  .toc-sidebar { display: none;
-  body { padding-left: 0 !important; } }
-  .page-content { margin-left: 0; }
-  .report-header, .disclaimer, .intro-section, .sector-section { padding-left: 20px; padding-right: 20px; }
-  .key-stat-bar { grid-template-columns: repeat(2, 1fr); }
-  .opinion-row { grid-template-columns: 1fr; }
-}
-
-/* ── MOBILE RESPONSIVE ── */
-@media (max-width: 768px) {
-  .toc-sidebar { display: none; }
+  .toc-sidebar { display: none !important; }
+  .mobile-topbar { display: flex !important; }
+  body { padding-left: 0 !important; padding-top: 48px; }
   .page-content { margin-left: 0; }
   .report-header, .disclaimer, .intro-section, .sector-section { padding-left: 20px; padding-right: 20px; }
   .key-stat-bar { grid-template-columns: repeat(2, 1fr); }
@@ -327,14 +319,58 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px; }
 .chart-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; }
 .chart-card h3 { font-size: 14px; font-weight: 700; color: #e6edf3; margin-bottom: 12px; }
-.chart-desc { font-size: 12px; color: #6e7681; margin-bottom: 14px; }
+.chart-desc { font-size: 12px; color: #78808c; margin-bottom: 14px; }
 .chart-canvas-wrap { position: relative; height: 200px; }
 @media (max-width: 768px) { .charts-grid { grid-template-columns: 1fr; } }
+
+
+:focus-visible{outline:2px solid var(--accent-blue);outline-offset:2px}
+.skip-link:focus{left:20px!important;top:20px!important;width:auto!important;height:auto!important;overflow:visible!important}
+
+/* ── MOBILE HAMBURGER NAV ── */
+.mobile-topbar{display:none;position:fixed;top:0;left:0;right:0;height:48px;background:var(--surface);border-bottom:1px solid var(--border);z-index:300;align-items:center;justify-content:space-between;padding:0 16px}
+.hamburger-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:6px 8px;cursor:pointer;display:flex;flex-direction:column;gap:4px}
+.hamburger-btn span{display:block;width:18px;height:2px;background:var(--text-secondary);border-radius:2px}
+#nav-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(13,17,23,.98);z-index:400;flex-direction:column;padding:20px;overflow-y:auto}
+#nav-overlay.open{display:flex}
+#nav-overlay .nav-close-btn{align-self:flex-end;background:none;border:1px solid var(--border);border-radius:6px;padding:8px 14px;color:var(--text-secondary);font-size:14px;cursor:pointer;margin-bottom:24px}
+#nav-overlay .overlay-brand{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+#nav-overlay .toc-section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:8px 0}
+#nav-overlay .toc-item{padding:10px 0;font-size:14px;border-left:none;border-bottom:1px solid var(--border);color:var(--text-secondary);display:block;text-decoration:none}
+body.nav-open{overflow:hidden}
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background:#fff;color:#000;padding:8px 16px;border-radius:4px;font-weight:600" onfocus="this.style.left='20px';this.style.top='20px';this.style.width='auto';this.style.height='auto';this.style.overflow='visible'" onblur="this.style.left='-9999px';this.style.top='auto';this.style.width='1px';this.style.height='1px';this.style.overflow='hidden'">Skip to main content</a>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MOBILE HAMBURGER NAV -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="mobile-topbar">
+  <button class="hamburger-btn" id="hamburger-btn" aria-label="Open navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+  <span class="mt-title">Brian Stock Research</span>
+</div>
+
+<div id="nav-overlay">
+  <button class="nav-close-btn" id="nav-close-btn" aria-label="Close navigation">✕</button>
+  <div class="overlay-brand">Brian Stock Research</div>
+  <div class="toc-section-label">Navigation</div>
+  <a class="toc-item" href="#thesis">Supply Shock Thesis</a>
+  <a class="toc-item" href="#s1" data-toc="s1">01 · Oil & Energy</a>
+  <a class="toc-item" href="#s2" data-toc="s2">02 · Fertilizer</a>
+  <a class="toc-item" href="#s3" data-toc="s3">03 · Nuclear Power</a>
+  <a class="toc-item" href="#s4" data-toc="s4">04 · Plastics & Chemicals</a>
+  <a class="toc-item" href="#s5" data-toc="s5">05 · Helium</a>
+  <a class="toc-item" href="#s6" data-toc="s6">06 · Water Infrastructure</a>
+  <a class="toc-item" href="#s7" data-toc="s7">07 · Grid & Power</a>
+  <a class="toc-item" href="#s8" data-toc="s8">08 · Defense</a>
+  <a class="toc-item" href="#references">📚 References & Sources</a>
+</div>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- LEFT SIDEBAR TOC -->
@@ -474,11 +510,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val dn">-1.8%</div><div class="ks-label">Global oil demand contraction est.</div></div>
         </div>
 
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>The Iran war has removed approximately 27-30% of global seaborne oil trade from the market. Iran was producing approximately 3.5-4 million barrels per day before the war. While some of this production may continue domestically, zero barrels are currently flowing through Hormuz to global markets. Additionally, the war has created significant insurance and tanker company reluctance to route any tankers through the Persian Gulf — even those from Saudi Arabia, UAE, and Kuwait — due to war risk insurance premiums that make such voyages economically unviable. This means the actual supply removal is larger than Iran's production alone: it is affecting all Gulf state exports.</p>
 
         <div class="deep-dive">
-          <h4>⛽ Deep Dive: The Supply-Demand Balance</h4>
+          <h3>⛽ Deep Dive: The Supply-Demand Balance</h3>
           <ul>
             <li><strong>Saudi Arabia (10M bbl/day):</strong> Still producing but can't ship via Hormuz without war risk insurance. Alternative routing via Red Sea is also threatened by Yemen Houthi activity. Net export capability significantly reduced.</li>
             <li><strong>UAE (4M bbl/day):</strong> Dubai and Abu Dhabi have some overland pipeline alternative (Tapline to Red Sea) but capacity is limited. Fujairah terminal still operational but tanker access is constrained.</li>
@@ -489,7 +525,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🔋 Deep Dive: The Demand Destruction Threshold</h4>
+          <h3>🔋 Deep Dive: The Demand Destruction Threshold</h3>
           <ul>
             <li><strong>$100/bbl:</strong> Airlines begin fuel surcharges. Long-haul routes become marginally unprofitable. Consumer discretionary spending on travel begins to slow.</li>
             <li><strong>$130/bbl:</strong> Significant demand destruction begins. Shipping companies slow speeds to save fuel. Trucking companies begin passing costs to consumers. Inflationary pressure on all goods.</li>
@@ -510,7 +546,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Oil &amp; Energy</h4>
+            <h3>Council of Expert Opinions — Oil &amp; Energy</h3>
             <p>IEA | OPEC+ Joint Ministeria | Goldman Sachs Commodities | Morgan Stanley | EIA | Citi Research | Reuters Breakingviews | FT Energy Voice</p>
           </div>
           <div class="opinion-row">
@@ -554,11 +590,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val">$650/T</div><div class="ks-label">New urea price/ton</div></div>
           <div class="ks-cell"><div class="ks-val up">+22%</div><div class="ks-label">NTR stock YTD 2026</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>The Strait of Hormuz closure has cut off approximately 30% of global seaborne urea trade at the precise moment Northern Hemisphere farmers are entering their primary planting season. Urea — the world's most-used nitrogen fertilizer — is now $650/ton, up $80/ton in weeks. The UN World Food Program estimates that if oil prices remain above $100/bbl through mid-2026, the number of people experiencing acute food insecurity globally rises by 80-120 million. North American farmers who locked in fertilizer contracts pre-war have a significant cost advantage over European and Asian farmers paying spot prices.</p>
 
         <div class="deep-dive">
-          <h4>🌾 Deep Dive: The Three Nutrients That Matter</h4>
+          <h3>🌾 Deep Dive: The Three Nutrients That Matter</h3>
           <ul>
             <li><strong>Nitrogen (N) — Urea:</strong> Most-used fertilizer globally. Produced from natural gas via Haber-Bosch. Gulf states (Saudi Arabia, Oman, Qatar, UAE) are major exporters via Hormuz. <em>Disruption: Direct — Hormuz closure cuts 30% of global urea trade.</em></li>
             <li><strong>Phosphate (P):</strong> Mined primarily in Morocco/Western Sahara (80% of reserves), US, and Jordan. <em>Disruption: Indirect — energy inflation raises production costs.</em></li>
@@ -567,7 +603,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🇧🇷 Deep Dive: Brazil — The Swing Factor</h4>
+          <h3>🇧🇷 Deep Dive: Brazil — The Swing Factor</h3>
           <ul>
             <li>Brazil's fertilizer import dependency: nitrogen (83%), phosphate (50%), potash (95%) — nearly all imported</li>
             <li>Brazil is the world's largest exporter of soybeans, corn, and beef. It is the most agriculture-dependent major economy on this list.</li>
@@ -578,7 +614,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🇺🇸 Deep Dive: US Farmers — The Lucky Ones</h4>
+          <h3>🇺🇸 Deep Dive: US Farmers — The Lucky Ones</h3>
           <ul>
             <li>US fertilizer self-sufficiency is high — domestic production covers approximately 85% of nitrogen fertilizer demand via natural gas-based Haber-Bosch.</li>
             <li>US corn Belt farmers largely locked in urea contracts in Q4 2025 at $450-470/ton. They are now applying fertilizer at roughly $300-350/acre vs. $500-600/acre for European competitors.</li>
@@ -599,7 +635,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Fertilizer &amp; Agriculture</h4>
+            <h3>Council of Expert Opinions — Fertilizer &amp; Agriculture</h3>
             <p>UN World Food Programme | FAO Rome | Bloomberg Commodities | Rabobank Ag Research | USDA | DTN Fertilizer | PotashCorp Annual Report | Goldman Sachs Agriculture</p>
           </div>
           <div class="opinion-row">
@@ -642,11 +678,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val up">+40%</div><div class="ks-label">CCJ stock 2026 YTD</div></div>
           <div class="ks-cell"><div class="ks-val">8–10</div><div class="ks-label">AI nuclear PPAs signed 2025–26</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>AI data centers are the largest new source of electricity demand in a generation — and they need power that is <em>continuous</em>, <em>reliable</em>, and <em>zero-carbon</em> to meet corporate sustainability commitments. Solar and wind cannot deliver baseload power at the density AI campuses require. Nuclear is the only proven, dispatchable zero-carbon source that can power a 100MW+ AI campus 24/7. Google, Microsoft, Amazon, and Meta have collectively signed 8-10 nuclear power purchase agreements since 2025. The Iran war accelerates this thesis: oil and gas price spikes make the fixed, predictable cost of nuclear power more economically attractive relative to gas peaker plants.</p>
 
         <div class="deep-dive">
-          <h4>🔬 Deep Dive: Why SMRs Are Different This Time</h4>
+          <h3>🔬 Deep Dive: Why SMRs Are Different This Time</h3>
           <ul>
             <li><strong>First NRC-Approved Design:</strong> NuScale Power is the only SMR developer with an NRC-approved design. Its Carbon Free Power Project (Idaho) was cancelled in 2023 after costs tripled — but lessons are being applied to subsequent projects.</li>
             <li><strong>Factory Manufacturing:</strong> Traditional reactors are bespoke construction projects. SMRs are designed for factory fabrication and modular assembly on-site — the same way Boeing builds airplanes. This should reduce cost overruns and construction timelines.</li>
@@ -656,7 +692,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>💰 Deep Dive: The Uranium Supply-Demand Balance</h4>
+          <h3>💰 Deep Dive: The Uranium Supply-Demand Balance</h3>
           <ul>
             <li><strong>Kazatomprom (Kazakhstan):</strong> Produces ~40% of Western uranium. 2022 guidance cuts reduced supply by 15%. Even with $100+/lb uranium, bringing new mines online takes 7-10 years.</li>
             <li><strong>Uranium Spot vs. Contract:</strong> Spot price at $106/lb vs. long-term contract prices at ~$80/lb — the gap signals a tighter physical market than contracts reflect.</li>
@@ -678,7 +714,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Nuclear Energy</h4>
+            <h3>Council of Expert Opinions — Nuclear Energy</h3>
             <p>Bank of America Commodities | Goldman Sachs Energy | Morgan Stanley Nuclear | World Nuclear Association | Fitch Ratings | Seeking Alpha | EIA</p>
           </div>
           <div class="opinion-row">
@@ -723,11 +759,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val dn">$1,400/T</div><div class="ks-label">New ethylene price/ton</div></div>
           <div class="ks-cell"><div class="ks-val up">+15%</div><div class="ks-label">US natgas-based ethane advantage</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>Ethylene, propylene, methanol, and hundreds of other petrochemical precursors are all derived from natural gas and oil. When oil prices spike and Gulf state exports are disrupted, the petrochemical supply chain is severely impacted. The Middle East (Saudi Arabia, UAE, Qatar, Iran, Kuwait) is the world's largest exporter of plastics precursors — polyethylene, polypropylene, PVC, and methanol. Hormuz closure means these exports stop. The result is a global shortage of the building blocks for virtually all manufactured goods: packaging, automotive parts, electronics, construction materials, medical devices, and consumer goods.</p>
 
         <div class="deep-dive">
-          <h4>🧪 Deep Dive: The Petrochemical Chain</h4>
+          <h3>🧪 Deep Dive: The Petrochemical Chain</h3>
           <ul>
             <li><strong>Ethylene → Polyethylene (PE):</strong> The world's most produced plastic. Used in packaging (films, bags, wrap), containers, pipes. Gulf states are the largest PE exporters. Saudi SABIC and UAE Borouge are the key players.</li>
             <li><strong>Propylene → Polypropylene (PP):</strong> Second most produced plastic. Used in automotive parts, appliances, packaging, textiles. Price has spiked 40-60% since Hormuz closure.</li>
@@ -737,7 +773,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🌿 Deep Dive: The Alternative Plastics Opportunity</h4>
+          <h3>🌿 Deep Dive: The Alternative Plastics Opportunity</h3>
           <ul>
             <li><strong>Bioplastics (PLA, PHA):</strong> Made from fermented plant starch (corn, sugarcane). Not dependent on oil. As oil-derived plastics become scarce and expensive, bioplastics become economically viable for single-use applications (packaging, cutlery, agricultural film).</li>
             <li><strong>Recycled PET (rPET):</strong> Bottle-to-bottle recycling becomes more valuable when virgin PET is scarce. Companies with recycled plastic supply chains benefit from the spread between virgin and recycled resin narrowing.</li>
@@ -759,7 +795,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Plastics &amp; Petrochemicals</h4>
+            <h3>Council of Expert Opinions — Plastics &amp; Petrochemicals</h3>
             <p>S&P Global Commodity Insights | ICIS Chemical Market Analytics | BASF Annual Report | Goldman Sachs Chemicals | Bloomberg Petrochemicals | American Chemistry Council | Reuters Commodities</p>
           </div>
           <div class="opinion-row">
@@ -802,11 +838,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val">~6 months</div><div class="ks-label">Global helium stockpile depletion</div></div>
           <div class="ks-cell"><div class="ks-val">2-4 yrs</div><div class="ks-label">New source lead time</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>Helium is not just for balloons. It is a critical industrial gas used in: <strong>(1) semiconductor manufacturing</strong> (wafer fabrication, particularly the critical ASML EUV lithography machines), <strong>(2) MRI magnets</strong> (hospital diagnostic equipment), <strong>(3) rocketry</strong> (liquid hydrogen fuel pressurization), <strong>(4) fiber optic cable manufacturing</strong> (draw towers require inert atmosphere), and <strong>(5) nuclear reactors</strong> (primary coolant for some advanced reactor designs). The Iran war has removed Qatar's Ras Laffan helium plant — one of the world's three largest — from the market. Combined with Russia's helium export restrictions, this leaves global semiconductor manufacturers with a critical shortage of a non-substitutable resource.</p>
 
         <div class="deep-dive">
-          <h4>💎 Deep Dive: Why Helium Is Non-Substitutable in Semiconductors</h4>
+          <h3>💎 Deep Dive: Why Helium Is Non-Substitutable in Semiconductors</h3>
           <ul>
             <li><strong>ASML EUV Machines:</strong> ASML's Extreme Ultraviolet lithography machines — the machines that make the most advanced AI chips — require liquid helium to cool the mirrors to near absolute zero. There is no substitute. If a semiconductor fab runs out of helium, its EUV machines stop working.</li>
             <li><strong>Wafer Fab Cooling:</strong> Helium's thermal conductivity is 6x that of nitrogen — it is uniquely effective at removing heat from wafer fabrication processes. At the precision required for 3nm and 2nm chip manufacturing, nitrogen cooling is inadequate.</li>
@@ -816,7 +852,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🏭 Deep Dive: The Supply Landscape</h4>
+          <h3>🏭 Deep Dive: The Supply Landscape</h3>
           <ul>
             <li><strong>Qatar (Ras Laffan):</strong> The world's largest helium plant, operated by RasGas/QatarEnergy. Supplies roughly 25-30% of global helium. Currently offline due to Hormuz closure — tankers cannot load at Ras Laffan's port without passing through Hormuz.</li>
             <li><strong>Russia (Amur Region, Orenburg):</strong> Russia's new Amur helium plant was supposed to come online 2025-2026, adding significant new supply. But Western sanctions, war risk, and logistics challenges have slowed commissioning. Russia is also restricting helium exports to "friendly" nations only.</li>
@@ -836,7 +872,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Helium</h4>
+            <h3>Council of Expert Opinions — Helium</h3>
             <p>ASML Holdings | SEMI Industry Association | USGS Helium Survey | Goldman Sachs Commodities | Bloomberg Commodities | Nature Magazine | Intel Fab Engineering | semiconductor industry analyst</p>
           </div>
           <div class="opinion-row">
@@ -879,11 +915,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val">$200B</div><div class="ks-label">Water treatment market by 2030</div></div>
           <div class="ks-cell"><div class="ks-val">$150B</div><div class="ks-label">US water infrastructure gap</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>A single large AI datacenter (100-200MW) consumes 1-5 million gallons of water per day for cooling. Microsoft, Google, Meta, and Amazon are collectively building dozens of new AI campuses. The water consumption of these AI campuses is quietly becoming a major constraint — especially in the American Southwest (Arizona, Nevada, Texas), where datacenters are being built in water-stressed regions. The Iran war worsens this: oil price spikes drive up fertilizer and food prices, making agricultural water use more expensive, creating political pressure to restrict datacenter water consumption in favor of farming.</p>
 
         <div class="deep-dive">
-          <h4>💧 Deep Dive: The Water-Energy-Food Nexus</h4>
+          <h3>💧 Deep Dive: The Water-Energy-Food Nexus</h3>
           <ul>
             <li><strong>AI Datacenter Water Consumption:</strong> Cooling a 100MW datacenter requires 1-3 million gallons/day. Microsoft's West Valley campus (Utah) and Google's Mesa, Arizona campus have both faced local opposition over water consumption. Nevada's Switch datacenters in Reno consumed so much water that they became a political issue.</li>
             <li><strong>The Southwest Water Crisis:</strong> Lake Mead (Colorado River) is at historic low levels. Arizona, Nevada, and Southern California share this water supply. Any additional large water user in this region faces regulatory and political risk.</li>
@@ -904,7 +940,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Water Infrastructure</h4>
+            <h3>Council of Expert Opinions — Water Infrastructure</h3>
             <p>Xylem Annual Report | EPA Water Infrastructure | Goldman Sachs Global Infrastructure | Morgan Stanley Water | Circle of Blue | NASA GRACE | FAO Water | MIT Water Group</p>
           </div>
           <div class="opinion-row">
@@ -947,11 +983,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val">12-18 mo</div><div class="ks-label">Transformer lead times</div></div>
           <div class="ks-cell"><div class="ks-val up">3.25x</div><div class="ks-label">Grid equipment market growth</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>The US electrical grid was designed for a 20th century economy. It was not designed to handle the sudden, massive electricity demand of AI datacenters. More than 50% of planned US datacenter projects are being delayed because there is no available grid capacity to connect them. This is not a GPU supply problem — it is a power grid problem. The solution is a multi-decade, multi-hundred-billion dollar buildout of electrical transmission infrastructure, transformer capacity, switchgear, and grid management software. This is the most underappreciated AI infrastructure theme of 2026.</p>
 
         <div class="deep-dive">
-          <h4>⚡ Deep Dive: Why The Grid Is The Bottleneck</h4>
+          <h3>⚡ Deep Dive: Why The Grid Is The Bottleneck</h3>
           <ul>
             <li><strong>Datacenter Power Demand:</strong> A 100MW AI datacenter draws the equivalent power of 75,000 homes. The interconnection queue — the process of getting a new large load connected to the grid — averages 18-24 months in PJM (the largest US grid operator) and 30-36 months in ERCOT (Texas).</li>
             <li><strong>Transformer Shortage:</strong> Medium voltage transformers (the equipment that connects large loads to the grid) have lead times of 12-18 months, up from 4-6 weeks pre-COVID. This is the physical bottleneck. No amount of GPU supply can fix a missing transformer.</li>
@@ -961,7 +997,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🔌 Deep Dive: The Equipment That Matters</h4>
+          <h3>🔌 Deep Dive: The Equipment That Matters</h3>
           <ul>
             <li><strong>Medium Voltage Transformers:</strong> The key bottleneck equipment. Connects large industrial loads (datacenters, factories) to the grid. Global MV transformer market is dominated by ABB, Siemens, and Eaton. Domestic US production is limited — most MV transformers are imported from Korea (Hyundai), Japan (Hitachi), and Europe.</li>
             <li><strong>Switchgear:</strong> The protective devices that control and isolate electrical equipment. Required at every grid connection point. Eaton (ETN) and Siemens are the primary US suppliers.</li>
@@ -983,7 +1019,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Grid &amp; Power Infrastructure</h4>
+            <h3>Council of Expert Opinions — Grid &amp; Power Infrastructure</h3>
             <p>Goldman Sachs Infrastructure | Morgan Stanley Utilities | FERC | ABB Annual Report | Eaton Investor Presentation | EIA Electricity | Goldman Sachs Energy | Bernstein Research</p>
           </div>
           <div class="opinion-row">
@@ -1028,11 +1064,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val up">$200B+</div><div class="ks-label">Missile defense spending est.</div></div>
           <div class="ks-cell"><div class="ks-val">3x</div><div class="ks-label">State-sponsored cyberattacks surge</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>The Iran war has created a new defense spending dynamic in the Middle East and globally. The US is providing significant military support to regional allies while simultaneously rebuilding its own stockpiles of precision-guided munitions (PGMs) that have been depleted in Ukraine and Israel. US allies in the Gulf (Saudi Arabia, UAE, Bahrain, Qatar) are dramatically increasing defense spending on air defense, missile defense, and cybersecurity. NATO members in Europe are accelerating defense spending in response to Russian escalation alongside the Iran conflict. This is a multi-year defense spending cycle — not a one-quarter event.</p>
 
         <div class="deep-dive">
-          <h4>🎯 Deep Dive: What the Iran War Means for Defense Budgets</h4>
+          <h3>🎯 Deep Dive: What the Iran War Means for Defense Budgets</h3>
           <ul>
             <li><strong>US Supplemental Defense Spending:</strong> Congress has passed multiple supplemental defense funding bills for US operations in the Middle East. These add $50-80B to the base defense budget for 2026-2027. This is incremental spending above the $886B base.</li>
             <li><strong>Precision-Guided Munitions (PGMs):</strong> The war has accelerated the use of Tomahawk missiles, JDAM kits, and other PGMs. US stockpiles have been drawn down and must be replenished — this creates a multi-year procurement cycle for Lockheed Martin (Tomahawk), Boeing (JDAM kits), and Raytheon (air-to-ground munitions).</li>
@@ -1042,7 +1078,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🔐 Deep Dive: Cybersecurity — The Unseen Front</h4>
+          <h3>🔐 Deep Dive: Cybersecurity — The Unseen Front</h3>
           <ul>
             <li><strong>State-Sponsored Cyberattacks Surge:</strong> Microsoft reports a 3x increase in state-sponsored cyberattacks from Iranian-affiliated actors since the war began. Targets include: US financial infrastructure, defense contractors, energy grid operators, water utilities, and telecommunications companies.</li>
             <li><strong>CISA (Cybersecurity and Infrastructure Security Agency) Alert:</strong> CISA issued a rare "SHIELDS UP" equivalent alert for US critical infrastructure in March 2026. All critical infrastructure operators are required to report cyber incidents within 24 hours.</li>
@@ -1063,7 +1099,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Defense &amp; Cybersecurity</h4>
+            <h3>Council of Expert Opinions — Defense &amp; Cybersecurity</h3>
             <p>Goldman Sachs Defense | Morgan Stanley Aerospace-Defense | Bloomberg Defense | CSIS | RAND Corporation | CrowdStrike Q1 2026 Earnings | Lockheed Martin Investor Day | CSIS Cybersecurity</p>
           </div>
           <div class="opinion-row">
@@ -1359,6 +1395,26 @@ function renderGeoCharts() {
 }
 
 document.addEventListener('DOMContentLoaded', function(){ renderGeoSparklines(); renderGeoCharts(); });
+</script>
+
+
+<script>
+(function(){
+  var btn=document.getElementById("hamburger-btn");
+  var sidebar=document.querySelector(".toc-sidebar");
+  if(!btn||!sidebar)return;
+  btn.addEventListener("click",function(){
+    sidebar.classList.toggle("mobile-open");
+    document.body.classList.toggle("nav-open");
+  });
+  // Close when clicking a TOC link
+  sidebar.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click",function(){
+      sidebar.classList.remove("mobile-open");
+      document.body.classList.remove("nav-open");
+    });
+  });
+})();
 </script>
 
 </body>
