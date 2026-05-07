@@ -5,600 +5,130 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Battered Tech + Sandisk Plays — May 2026 Research</title>
 <style>
-:root {
-  --bg: #0d1117;
-  --surface: #161b22;
-  --surface2: #21262d;
-  --border: #30363d;
-  --text-primary: #e6edf3;
-  --text-secondary: #8b949e;
-  --text-muted: #6e7681;
-  --accent-green: #3fb950;
-  --accent-red: #f85149;
-  --accent-yellow: #d29922;
-  --accent-blue: #58a6ff;
-  --accent-purple: #bc8cff;
-  --accent-orange: #f0883e;
-  --bull-bg: rgba(63, 185, 80, 0.07);
-  --bear-bg: rgba(248, 81, 73, 0.07);
-  --skip-bg: rgba(139, 148, 158, 0.07);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text-primary);
-  line-height: 1.6;
-  font-size: 15px;
-  padding-left: 230px;
-}
-
-/* ── STICKY LEFT TOC ── */
-.toc-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 230px;
-  height: 100vh;
-  background: var(--surface);
-  border-right: 1px solid var(--border);
-  overflow-y: auto;
-  padding: 20px 0 40px;
-  z-index: 200;
-}
-.toc-sidebar::-webkit-scrollbar { width: 4px; }
-.toc-sidebar::-webkit-scrollbar-track { background: transparent; }
-.toc-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-.toc-brand {
-  padding: 0 20px 16px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 12px;
-}
-.toc-brand a {
-  font-size: 12px;
-  color: var(--accent-blue);
-  text-decoration: none;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 4px;
-}
-.toc-brand a:hover { text-decoration: underline; }
-.toc-brand span {
-  font-size: 10px;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.toc-section-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  padding: 12px 20px 6px;
-}
-
-.toc-item {
-  display: block;
-  padding: 6px 20px;
-  font-size: 12px;
-  color: var(--text-secondary);
-  text-decoration: none;
-  border-left: 2px solid transparent;
-  transition: all 0.15s;
-  cursor: pointer;
-}
-.toc-item:hover {
-  color: var(--text-primary);
-  background: rgba(255,255,255,0.04);
-  text-decoration: none;
-  border-left-color: var(--accent-blue);
-}
-.toc-item.active {
-  color: var(--accent-blue);
-  background: rgba(88, 166, 255, 0.08);
-  border-left-color: var(--accent-blue);
-  font-weight: 600;
-}
-.toc-item.skip-item {
-  color: var(--text-muted);
-  font-style: italic;
-}
-.toc-item.skip-item:hover {
-  color: var(--text-secondary);
-  border-left-color: var(--text-muted);
-}
-.toc-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 10px 20px;
-}
-
-/* ── MAIN CONTENT SHIFT ── */
-.page-content {
-  margin-left: 230px;
-  min-height: 100vh;
-}
-
-/* ── REPORT HEADER ── */
-.report-header {
-  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1c2128 100%);
-  border-bottom: 1px solid var(--border);
-  padding: 48px 48px 36px;
-}
-.report-header .version-badge {
-  display: inline-block;
-  background: rgba(88, 166, 255, 0.15);
-  border: 1px solid rgba(88, 166, 255, 0.3);
-  color: var(--accent-blue);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin-bottom: 16px;
-}
-.report-header h1 {
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-  letter-spacing: -0.02em;
-  max-width: 700px;
-}
-.report-header .subtitle {
-  font-size: 15px;
-  color: var(--text-secondary);
-  margin-bottom: 20px;
-  max-width: 700px;
-}
-.report-header .meta-row { display: flex; gap: 28px; flex-wrap: wrap; }
-.report-header .meta-item { font-size: 12px; color: var(--text-muted); }
-.report-header .meta-item strong { color: var(--text-secondary); font-weight: 500; }
-
-/* ── HOW TO USE GUIDE ── */
-.guide-section {
-  padding: 32px 48px;
-  max-width: 1100px;
-  border-bottom: 1px solid var(--border);
-}
-.guide-box {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-.guide-header {
-  background: var(--surface2);
-  padding: 14px 20px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-primary);
-  border-bottom: 1px solid var(--border);
-}
-.guide-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1px;
-  background: var(--border);
-}
-.guide-cell {
-  background: var(--surface);
-  padding: 14px 18px;
-}
-.guide-cell .tag-example {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 3px;
-  margin-bottom: 6px;
-}
-.guide-cell .tag-example.buy { background: rgba(63,185,80,.15); color: var(--accent-green); }
-.guide-cell .tag-example.hold { background: rgba(210,153,34,.15); color: var(--accent-yellow); }
-.guide-cell .tag-example.skip { background: rgba(139,148,158,.15); color: var(--text-muted); }
-.guide-cell .tag-example.watch { background: rgba(248,81,73,.15); color: var(--accent-red); }
-.guide-cell p { font-size: 12px; color: var(--text-secondary); }
-
-/* ── INTRO SECTION ── */
-.intro-section {
-  padding: 32px 48px 24px;
-  max-width: 1100px;
-  border-bottom: 1px solid var(--border);
-}
-.intro-section p {
-  color: var(--text-secondary);
-  max-width: 800px;
-  margin-bottom: 12px;
-  font-size: 14px;
-}
-.thesis-box {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--accent-blue);
-  border-radius: 8px;
-  padding: 18px 22px;
-  margin: 16px 0;
-  max-width: 800px;
-}
-.thesis-box .thesis-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent-blue);
-  margin-bottom: 6px;
-}
-.thesis-box p { color: var(--text-primary); font-size: 13px; }
-
-/* ── SKIP SECTION ── */
-.skip-section {
-  padding: 28px 48px;
-  max-width: 1100px;
-  border-bottom: 1px solid var(--border);
-}
-.skip-section h2 {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-  letter-spacing: -0.01em;
-}
-.skip-section .skip-sub {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 20px;
-}
-.skip-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-}
-.skip-card {
-  background: var(--skip-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px 16px;
-}
-.skip-card .ticker {
-  font-family: 'Courier New', monospace;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-}
-.skip-card p { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
-
-/* ── TIER DIVIDER ── */
-.tier-divider {
-  padding: 20px 48px 12px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  max-width: 1100px;
-}
-.tier-divider .tier-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.tier-divider.tier-1 .tier-label { color: var(--accent-green); }
-.tier-divider.tier-2 .tier-label { color: var(--accent-blue); }
-.tier-divider.tier-3 .tier-label { color: var(--accent-purple); }
-.tier-divider.tier-new .tier-label { color: var(--accent-orange); }
-.tier-divider .tier-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-/* ── STOCK CARDS ── */
-.stock-section {
-  padding: 0 48px 40px;
-  max-width: 1100px;
-}
-.stock-section:target { scroll-margin-top: 0; }
-
-.stock-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  margin-bottom: 16px;
-  overflow: hidden;
-}
-.stock-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  cursor: pointer;
-  transition: background 0.15s;
-  gap: 14px;
-}
-.stock-card-header:hover { background: var(--surface2); }
-.stock-card-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex: 1;
-}
-.stock-ticker {
-  font-family: 'Courier New', monospace;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--accent-blue);
-  min-width: 56px;
-}
-.stock-card-center { flex: 1; }
-.stock-company {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 2px;
-}
-.stock-desc {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-.stock-card-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-.verdict-badge {
-  font-size: 10px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 4px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-.verdict-badge.buy { background: rgba(63,185,80,.15); color: var(--accent-green); border: 1px solid rgba(63,185,80,.3); }
-.verdict-badge.hold { background: rgba(210,153,34,.15); color: var(--accent-yellow); border: 1px solid rgba(210,153,34,.3); }
-.verdict-badge.watch { background: rgba(248,81,73,.15); color: var(--accent-red); border: 1px solid rgba(248,81,73,.3); }
-.verdict-badge.skip { background: rgba(139,148,158,.15); color: var(--text-muted); border: 1px solid rgba(139,148,158,.3); }
-.verdict-badge.maybe { background: rgba(188,140,255,.15); color: var(--accent-purple); border: 1px solid rgba(188,140,255,.3); }
-.verdict-badge.hold-watch { background: rgba(210,153,34,.15); color: var(--accent-yellow); border: 1px solid rgba(210,153,34,.3); }
-.arrow-icon {
-  font-size: 12px;
-  color: var(--text-muted);
-  transition: transform 0.2s;
-  flex-shrink: 0;
-}
-.stock-card[open] .arrow-icon { transform: rotate(90deg); }
-
-.stock-card-body {
-  border-top: 1px solid var(--border);
-  padding: 20px 22px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.stat-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 16px;
-}
-.stat-cell {
-  background: var(--surface2);
-  padding: 10px 14px;
-  text-align: center;
-}
-.stat-cell .sc-val { font-size: 15px; font-weight: 700; color: var(--text-primary); }
-.stat-cell .sc-val.up { color: var(--accent-green); }
-.stat-cell .sc-val.dn { color: var(--accent-red); }
-.stat-cell .sc-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
-
-.analysis-col h4 {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.analysis-col.bull h4 { color: var(--accent-green); }
-.analysis-col.bear h4 { color: var(--accent-red); }
-.analysis-col.my-call h4 { color: var(--accent-blue); }
-
-.analysis-block {
-  background: var(--surface2);
-  border-radius: 6px;
-  padding: 12px 14px;
-  margin-bottom: 10px;
-  border-left: 3px solid;
-}
-.analysis-block.bull-block { border-left-color: var(--accent-green); }
-.analysis-block.bear-block { border-left-color: var(--accent-red); }
-.analysis-block.call-block { border-left-color: var(--accent-blue); }
-.analysis-block p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-.analysis-block strong { color: var(--text-primary); }
-
-.verdict-footer {
-  border-top: 1px solid var(--border);
-  padding: 14px 22px;
-  background: var(--surface2);
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-.vf-label {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--accent-blue);
-  white-space: nowrap;
-  padding-top: 1px;
-}
-.vf-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-.vf-text strong { color: var(--text-primary); }
-
-/* ── BATTLET TECH HEADER ── */
-.section-head {
-  padding: 28px 48px 20px;
-  max-width: 1100px;
-  border-bottom: 1px solid var(--border);
-}
-.section-head h2 {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-.section-head p {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-/* ── FOOTER ── */
-.page-footer {
-  padding: 24px 48px;
-  border-top: 1px solid var(--border);
-  font-size: 11px;
-  color: var(--text-muted);
-  max-width: 1100px;
-}
-
-
-/* ── STOCK STATS: PRICE ACTION BAR ── */
-.stats-section { margin: 14px 0; }
-.stats-section-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 7px;
-}
-.price-bar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 7px;
-}
-.pa-cell {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 8px 6px;
-  text-align: center;
-}
-.pa-val {
-  font-size: 15px;
-  font-weight: 700;
-  font-family: 'Courier New', monospace;
-}
-.pa-period {
-  font-size: 9px;
-  color: var(--text-muted);
-  font-weight: 700;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  margin: 3px 0 1px;
-}
-.pa-sub { font-size: 9px; color: var(--text-muted); }
-.up { color: var(--accent-green); }
-.dn { color: var(--accent-red); }
-
-/* ── STOCK STATS: FUNDAMENTALS GRID ── */
-.fund-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 7px;
-  margin-top: 8px;
-}
-.fund-cell {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 7px 6px;
-}
-.fund-val {
-  font-size: 14px;
-  font-weight: 700;
-  font-family: 'Courier New', monospace;
-}
-.fund-label {
-  font-size: 8px;
-  color: var(--text-muted);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  margin: 3px 0 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.fund-sub { font-size: 9px; color: var(--text-muted); }
-
-@media (max-width: 768px) {
-  .fund-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* ── MOBILE RESPONSIVE ── */
-@media (max-width: 768px) {
-  body { padding-left: 0; }
-  .toc-sidebar { display: none; }
-  .mobile-topbar { display: flex; }
-  .page-content { margin-left: 0; }
-  .report-header { padding: 68px 16px 16px; }
-  .guide-section, .intro-section { padding: 20px 16px; }
-  .stock-section { padding: 0 16px 24px; }
-  .section-head { padding: 20px 16px 12px; }
-  .skip-section { padding: 20px 16px; }
-  .guide-grid, .stock-card-body { grid-template-columns: 1fr; }
-  .skip-grid { grid-template-columns: 1fr 1fr; }
-  .stat-row { grid-template-columns: 1fr 1fr; }
-  .price-bar { grid-template-columns: repeat(4, 1fr); }
-  .fund-grid { grid-template-columns: repeat(3, 1fr); }
-  .analysis-col { margin-bottom: 12px; }
-  .verdict-footer { font-size: 12px; padding: 12px; }
-  .page-footer { padding: 16px; }
-  .report-header h1 { font-size: 18px; }
-  .charts-section { display: none; }
-}
-  .report-header { padding: 24px 20px 20px; }
-  .guide-section, .intro-section { padding: 24px 20px; }
-  .stock-section { padding: 0 20px 32px; }
-  .section-head { padding: 24px 20px 16px; }
-  .skip-section { padding: 24px 20px; }
-  .guide-grid, .stock-card-body { grid-template-columns: 1fr; }
-  .skip-grid { grid-template-columns: 1fr 1fr; }
-  .stat-row { grid-template-columns: 1fr 1fr; }
-  .page-footer { padding: 20px; }
-  .report-header h1 { font-size: 20px; }
-  .report-header .subtitle, .report-header .meta-row { font-size: 13px; }
-}
-
-
-/* ── SPARKLINES ── */
-.sparkline-wrap { margin-left: 8px; flex-shrink: 0; }
-.sparkline { display: inline-flex; align-items: center; }
-.sparkline svg { display: block; }
-
-/* ── CHARTS SECTION ── */
-.charts-section { padding: 32px 48px 24px; max-width: 1100px; border-bottom: 1px solid #30363d; }
-.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px; }
-.chart-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; }
-.chart-card h3 { font-size: 14px; font-weight: 700; color: #e6edf3; margin-bottom: 12px; }
-.chart-desc { font-size: 12px; color: #6e7681; margin-bottom: 14px; }
-.chart-canvas-wrap { position: relative; height: 180px; }
-
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#21262d;--surface3:#2d333b;--border:#30363d;--text-primary:#e6edf3;--text-secondary:#8b949e;--text-muted:#6e7681;--accent-green:#3fb950;--accent-red:#f85149;--accent-yellow:#d29922;--accent-blue:#58a6ff;--accent-purple:#bc8cff;--accent-orange:#f0883e}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent-blue);outline-offset:2px}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--accent-blue);color:#fff;padding:8px 16px;text-decoration:none;font-weight:600;z-index:9999}
+.skip-link:focus{top:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.55;font-size:15px;padding-left:230px}
+.toc-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:20px 0}
+.toc-sidebar h2{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);padding:0 20px 12px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.toc-item{display:block;padding:6px 20px;font-size:13px;color:var(--text-secondary);text-decoration:none;border-left:3px solid transparent;transition:all .15s}
+.toc-item:hover{color:var(--text-primary);border-left-color:var(--accent-blue);background:rgba(88,166,255,.07)}
+.toc-section-label{display:block;padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+.toc-divider{height:1px;background:var(--border);margin:8px 20px}
+.report-header{background:linear-gradient(135deg,#0d1117 0%,#161b22 100%);border-bottom:1px solid var(--border);padding:32px 32px 24px}
+.report-header h1{font-size:22px;font-weight:700;margin-bottom:6px}
+.report-header .subtitle{font-size:14px;color:var(--text-secondary);margin-bottom:12px}
+.report-header .meta-row{display:flex;gap:20px;font-size:12px;color:var(--text-muted);flex-wrap:wrap}
+.report-header .meta-row span{display:flex;align-items:center;gap:5px}
+.page-content{max-width:900px;padding:0 32px 60px}
+.section-head{display:flex;align-items:center;gap:12px;padding:28px 0 16px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.section-head h2{font-size:16px;font-weight:700}
+.sector-badge{font-size:11px;padding:2px 8px;border-radius:4px;background:var(--surface2);color:var(--text-secondary);border:1px solid var(--border)}
+.intro-section{padding:24px 0}
+.intro-section p{color:var(--text-secondary);margin-bottom:12px}
+.guide-section{padding:24px 0}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.guide-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px}
+.guide-card .guide-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:4px}
+.guide-card .guide-val{font-size:15px;font-weight:600}
+.guide-card.bull .guide-label{color:var(--accent-green)}
+.guide-card.bear .guide-label{color:var(--accent-red)}
+.stock-section{padding:0 0 32px}
+.stock-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.stock-card[open]{border-color:var(--accent-blue)}
+.stock-card-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;list-style:none;gap:12px}
+.stock-card-header::-webkit-details-marker{display:none}
+.stock-card-header:hover{background:rgba(88,166,255,.05)}
+.stock-card-left{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.stock-ticker{font-size:16px;font-weight:800;color:var(--accent-blue);min-width:48px}
+.stock-company{font-size:14px;font-weight:600}
+.stock-desc{font-size:12px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stock-card-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.verdict-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.06em}
+.verdict-badge.buy{background:rgba(63,185,80,.15);color:var(--accent-green);border:1px solid rgba(63,185,80,.3)}
+.verdict-badge.hold{background:rgba(210,153,34,.12);color:var(--accent-yellow);border:1px solid rgba(210,153,34,.3)}
+.verdict-badge.skip{background:rgba(139,148,158,.1);color:var(--text-muted);border:1px solid var(--border)}
+.verdict-badge.late{background:rgba(248,81,73,.1);color:var(--accent-red);border:1px solid rgba(248,81,73,.3)}
+.arrow-icon{color:var(--text-muted);font-size:10px;transition:transform .2s}
+details[open] .arrow-icon{transform:rotate(90deg)}
+.quick-stats{padding:14px 16px 0}
+.quick-stats-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.quick-stats-label.fundamentals{margin-top:12px}
+.price-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.pa-cell{background:var(--surface2);border-radius:6px;padding:8px 6px;text-align:center}
+.pa-val{font-size:15px;font-weight:800;line-height:1.1}
+.pa-val.up{color:var(--accent-green)}
+.pa-val.dn{color:var(--accent-red)}
+.pa-period{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-secondary);margin:2px 0}
+.pa-sub{font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fund-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}
+.fund-cell{background:var(--surface2);border-radius:6px;padding:8px 6px;text-align:center}
+.fund-val{font-size:14px;font-weight:800;line-height:1.1}
+.fund-val.up{color:var(--accent-green)}
+.fund-val.dn{color:var(--accent-red)}
+.fund-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-secondary);margin:3px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fund-sub{font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.analysis-col{padding:16px}
+.analysis-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.analysis-col.bull h4{color:var(--accent-green)}
+.analysis-col.bear h4{color:var(--accent-red)}
+.analysis-col.my-call h4{color:var(--accent-blue)}
+.analysis-block{border-radius:6px;padding:10px 12px;margin-bottom:8px;border-left:3px solid}
+.analysis-block p{font-size:13px;line-height:1.6;color:var(--text-secondary)}
+.analysis-block p strong{color:var(--text-primary)}
+.bull-block{background:rgba(63,185,80,.06);border-color:var(--accent-green)}
+.bear-block{background:rgba(248,81,73,.06);border-color:var(--accent-red)}
+.call-block{background:rgba(88,166,255,.06);border-color:var(--accent-blue)}
+.verdict-footer{display:flex;gap:10px;align-items:flex-start;padding:12px 16px 16px;border-top:1px solid var(--border);margin-top:4px}
+.vf-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);white-space:nowrap;padding-top:2px}
+.vf-text{font-size:13px;color:var(--text-secondary);line-height:1.5}
+.vf-text strong{color:var(--text-primary)}
+.skip-section{padding:20px 0}
+.skip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.skip-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px}
+.skip-card .skip-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:6px}
+.skip-card .skip-ticker{font-size:15px;font-weight:800;color:var(--text-secondary);margin-bottom:4px}
+.skip-card .skip-reason{font-size:12px;color:var(--text-muted)}
+.analyst-callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent-purple);border-radius:6px;padding:12px 14px;margin:16px 0}
+.analyst-callout .ac-source{font-size:11px;font-weight:700;color:var(--accent-purple);margin-bottom:4px}
+.analyst-callout .ac-quote{font-size:13px;color:var(--text-secondary);font-style:italic;line-height:1.5}
+.ref-section{padding:32px 0;border-top:1px solid var(--border);margin-top:32px}
+.ref-section h3{font-size:14px;font-weight:700;color:var(--text-secondary);margin-bottom:16px}
+.ref-list{list-style:none}
+.ref-list li{margin-bottom:8px;font-size:12px;color:var(--text-muted)}
+.ref-list a{color:var(--accent-blue);text-decoration:none}
+.ref-list a:hover{text-decoration:underline}
+.page-footer{text-align:center;padding:24px 32px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+.mobile-topbar{display:none;position:fixed;top:0;left:0;right:0;height:48px;background:var(--surface);border-bottom:1px solid var(--border);z-index:300;align-items:center;justify-content:space-between;padding:0 16px}
+.mobile-topbar .mt-title{font-size:13px;font-weight:600;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100vw - 80px)}
+.hamburger-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:6px 8px;cursor:pointer;display:flex;flex-direction:column;gap:4px}
+.hamburger-btn span{display:block;width:18px;height:2px;background:var(--text-secondary);border-radius:2px}
+.hamburger-btn:hover span{background:var(--accent-blue)}
+#nav-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(13,17,23,.97);z-index:400;flex-direction:column;padding:20px;overflow-y:auto}
+#nav-overlay.open{display:flex}
+#nav-overlay .nav-close-btn{align-self:flex-end;background:none;border:1px solid var(--border);border-radius:6px;padding:8px 14px;color:var(--text-secondary);font-size:13px;cursor:pointer;margin-bottom:20px}
+#nav-overlay .nav-close-btn:hover{border-color:var(--accent-blue);color:var(--accent-blue)}
+#nav-overlay .overlay-brand{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+#nav-overlay .toc-item{padding:10px 0;font-size:15px;border-left:none;border-bottom:1px solid var(--border);color:var(--text-secondary);display:block;text-decoration:none}
+#nav-overlay .toc-item:hover{color:var(--accent-blue);background:none;border-left:none}
+@media(max-width:768px){body{padding-left:0}.toc-sidebar{display:none}.nav-open .toc-sidebar{display:none}.mobile-topbar{display:flex}.page-content{padding:0 16px 40px}.report-header{padding:68px 16px 16px}.report-header h1{font-size:18px}.report-header .subtitle,.report-header .meta-row{font-size:12px}.guide-section,.intro-section,.skip-section{padding:16px 0}.stock-section{padding:0 0 24px}.section-head{padding:20px 0 12px}.section-head h2{font-size:14px}.price-bar{grid-template-columns:repeat(2,1fr)}.fund-grid{grid-template-columns:repeat(3,1fr)}.skip-grid{grid-template-columns:1fr}.page-footer{padding:16px;font-size:11px}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
+<div class="mobile-topbar">
+  <button class="hamburger-btn" id="hamburger-btn" aria-label="Open navigation">
+    <span></span><span></span><span></span>
+  </button>
+  <span class="mt-title">Brian Stock Research</span>
+</div>
+<div id="nav-overlay">
+  <button class="nav-close-btn" id="nav-close-btn">Close</button>
+  <div class="overlay-brand">Brian Stock Research</div>
+
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- LEFT SIDEBAR TOC -->
@@ -763,12 +293,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$55</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val dn">-58%</div><div class="sc-label">From ATH (~$130)</div></div>
-          <div class="stat-cell"><div class="sc-val up">+8%</div><div class="sc-label">Revenue Growth</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>The AI Agent wave is DocuSign's next wave.</strong> AI agents need to execute agreements. DocuSign has 1.5 billion+ agreements in its network — the largest structured agreement dataset in the world. Its AI Agent Studio lets customers build agents that negotiate, execute, and manage agreements automatically. This is a genuine platform expansion, not just a feature add. Management is guiding for AI-driven workflow automation becoming a meaningful revenue contributor in 2026-2027.</p>
@@ -797,138 +374,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD.</strong> Valid AI platform story at a reasonable multiple. Don't buy yet — wait for Q1 earnings to confirm AI Agent traction. Below $50 is a compelling entry.</span>
       </div>
@@ -953,12 +399,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$140</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val dn">-45%</div><div class="sc-label">From ATH (~$255)</div></div>
-          <div class="stat-cell"><div class="sc-val up">+30%</div><div class="sc-label">Revenue Growth</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>Cortex AI is a genuine product.</strong> Snowflake's Cortex AI lets enterprises run LLM-powered analytics on data inside Snowflake — without moving it. This is a real workflow improvement for regulated industries (healthcare, finance, government). The ability to query structured data with natural language is a legitimate productivity unlock. Market penetration of Cortex AI is still early and has room to expand.</p>
@@ -987,138 +480,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD.</strong> Solid business, competitive but not dying. Cortex AI is early but real. Watch Q1 2026 for Cortex traction. Don't add aggressively at current levels.</span>
       </div>
@@ -1143,12 +505,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$65</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val dn">-65%</div><div class="sc-label">From ATH (~$185)</div></div>
-          <div class="stat-cell"><div class="sc-val">+13%</div><div class="sc-label">Revenue Growth</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>AI Agents GA is a new top-of-funnel.</strong> Every AI agent needs to authenticate before taking actions on behalf of a human. Okta's AI Agents product is a new offering designed specifically for agentic AI workflows — agent-to-application authentication, agent-to-agent trust, and audit trails for AI actions. This is a genuine product expansion into a new use case that didn't exist 18 months ago.</p>
@@ -1177,138 +586,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD / WATCH pending Q1 2026.</strong> AI Agents GA is the catalyst but needs revenue confirmation. Don't buy before Q1 earnings confirm the thesis.</span>
       </div>
@@ -1333,12 +611,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$180</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val dn">-40%</div><div class="sc-label">From ATH (~$300)</div></div>
-          <div class="stat-cell"><div class="sc-val up">+18%</div><div class="sc-label">Revenue Growth</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>monday.com is better positioned than SMAR/ASAN.</strong> Unlike Smartsheet and Asana, monday.com is a visual, flexible Work OS — not a rigid project management grid. This makes it significantly more adaptable to AI-driven workflows. Monday's AI features (AI Sprint, AI Column) are more naturally integrated into the product than competitors' bolt-on AI assistants.</p>
@@ -1364,138 +689,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD.</strong> Best positioned legacy PM tool. Monday's AI features and Work OS flexibility give it legs SMAR/ASAN lack. Monitor Q1 for enterprise traction.</span>
       </div>
@@ -1520,12 +714,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$175</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val dn">-35%</div><div class="sc-label">From ATH (~$270)</div></div>
-          <div class="stat-cell"><div class="sc-val up">+16%</div><div class="sc-label">Revenue Growth</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>Narrow moat in a regulated vertical.</strong> Veeva's Vault platform is deeply embedded in pharma and biotech R&D workflows. Electronic lab notebooks, clinical trial management, regulatory submissions — these are workflows that require validation, audit trails, and regulatory compliance. Salesforce can't just build this. Microsoft can't just add it to Teams. It's a vertical SaaS moat that doesn't get disrupted by horizontal AI assistants.</p>
@@ -1554,138 +795,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD.</strong> Quality compounder with a real regulatory moat. Not a re-rating story — a reliable business for a portfolio that needs steady names. Buy on dips to $150.</span>
       </div>
@@ -1710,12 +820,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$110</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val dn">-30%</div><div class="sc-label">From ATH (~$155)</div></div>
-          <div class="stat-cell"><div class="sc-val up">+29%</div><div class="sc-label">Revenue Growth</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>AI ops monitoring is a new market.</strong> As enterprises deploy AI models and agents, they need to monitor those AI systems for performance, drift, and errors. Datadog is building AI monitoring features (LLM observability, AI agent tracing) that position it to capture this new workload. This is the observability equivalent of what Snowflake is trying to do with Cortex AI — riding an existing customer relationship into a new use case.</p>
@@ -1744,138 +901,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD.</strong> Best-in-class observability with a real AI monitoring story. Valuation is full — wait for a pullback to $90-95 before buying aggressively.</span>
       </div>
@@ -1908,12 +934,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$172</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val dn">-16%</div><div class="sc-label">From Recent Highs</div></div>
-          <div class="stat-cell"><div class="sc-val up">+83%</div><div class="sc-label">AI Networking Growth</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>The supply constraint narrative is the gift.</strong> Arista just raised 2026 guidance with AI networking revenue going from $1.5B to $2.75B (+83%). The stock got crushed on supply chain concerns — specifically, component shortages are constraining how fast Arista can fulfill orders. This is a temporary problem, not a demand problem. The order book is full. When supply catches up, the revenue catches up.</p>
@@ -1945,138 +1018,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>BUY.</strong> Top conviction pick in the Sandisk section. Beat/raise + supply constraint overreaction + AI networking secular bull = high probability of re-rating. Size up on any Q1 earnings confirmation of supply recovery.</span>
       </div>
@@ -2101,12 +1043,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$38</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val up">+25%</div><div class="sc-label">YTD 2026</div></div>
-          <div class="stat-cell"><div class="sc-val">$6B</div><div class="sc-label">Meta Deal (Multi-year)</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>The $6B Meta deal is the real thing.</strong> Corning just signed a multiyear, up to $6 billion agreement with Meta to accelerate the most advanced AI datacenter buildout in the world. This is a committed, multi-year revenue stream tied directly to AI infrastructure. Corning's fiber and connectivity solutions are the nervous system of Meta's AI compute clusters.</p>
@@ -2138,138 +1127,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>BUY on pullbacks to $34-36.</strong> The $6B Meta deal is a concrete, multi-year revenue stream. Corning's CPO leadership makes it the fiber winner for AI datacenters. Secular demand story is intact.</span>
       </div>
@@ -2294,12 +1152,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$28</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val up">NEW HIGH</div><div class="sc-label">12-Month High</div></div>
-          <div class="stat-cell"><div class="sc-val up">$43</div><div class="sc-label">Analyst Target</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>TSMC is overwhelmed and farming out packaging.</strong> AI chips require advanced packaging (HBM memory stacking, CoWoS, chip-on-wafer-on-substrate). TSMC's CoWoS capacity is the bottleneck limiting AI chip output — and TSMC is outsourcing packaging to Amkor to relieve that bottleneck. This is a structural capacity shift, not a temporary boost. Amkor is the largest outsourced OSAT in the world and sits directly in the AI chip supply chain.</p>
@@ -2328,138 +1233,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD.</strong> Thesis is correct, stock has moved. Hold existing positions. Don't buy aggressively at current levels — wait for a pullback to $22-24.</span>
       </div>
@@ -2484,12 +1258,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$285</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val up">+3x</div><div class="sc-label">EPS Since 2016</div></div>
-          <div class="stat-cell"><div class="sc-val up">10%+</div><div class="sc-label">Organic Growth Guide</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>Datacenter switchgear is the new growth vector.</strong> More than 50% of planned US datacenter projects are being delayed waiting for power. The grid is the bottleneck. Eaton's medium voltage switchgear and power distribution solutions are exactly what hyperscalers need to get their AI campuses online. The company invested $30M specifically in medium voltage switchgear production for AI datacenters — a direct commitment to this market.</p>
@@ -2518,138 +1339,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD.</strong> Quality industrial compounding at fair price. The AI datacenter power story is validated by Q1 but already partially priced. Steady compounder, not a re-rating play.</span>
       </div>
@@ -2674,12 +1364,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$8.90</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val">$7.68</div><div class="sc-label">Fair Value Est.</div></div>
-          <div class="stat-cell"><div class="sc-val up">$700M</div><div class="sc-label">Cost Savings Target</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>The turnaround is real and verifiable.</strong> Q1 2026 showed the turnaround is executing. Cost reductions of more than $400M achieved in 2025. $700M run-rate savings target exiting 2026. The company is genuinely shrinking its cost base while AI-driven enterprise bandwidth demand creates new revenue opportunities.</p>
@@ -2711,138 +1448,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>WATCH.</strong> Binary outcome spec play. Q1 2026 earnings are the make-or-break event. Enter only if you can afford to lose 30-40% if the print disappoints.</span>
       </div>
@@ -2867,12 +1473,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$155</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val">12x</div><div class="sc-label">Forward P/E</div></div>
-          <div class="stat-cell"><div class="sc-val">$37B</div><div class="sc-label">Annual Run Rate</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>The "edge AI inference" thesis is not in the price.</strong> The market is pricing Qualcomm as a declining mobile chip company. But Qualcomm's Snapdragon chips are the leading platform for on-device AI inference. If the AI market bifurcates into "training" (Nvidia's dominance) and "inference at the edge" (Qualcomm's opportunity), QCOM's addressable market is much larger than the market currently models.</p>
@@ -2901,138 +1554,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>WATCH.</strong> Highest risk/reward spec play in the basket. 12x P/E is an anomaly that the market will eventually correct — but timing is uncertain. Size as a spec position only.</span>
       </div>
@@ -3057,12 +1579,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$105</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val">~$118</div><div class="sc-label">Analyst Fair Value</div></div>
-          <div class="stat-cell"><div class="sc-val">+4.4%</div><div class="sc-label">Revenue Growth</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>Google Cloud partnership award is real and growing.</strong> NetApp won a Google Cloud partnership for AI data management. Its ONTAP storage for AI workloads and AFX (AI File Cache) are purpose-built for AI data pipelines — getting training data to GPUs efficiently. The partnership validates NetApp as an AI storage platform.</p>
@@ -3091,138 +1660,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD.</strong> Decent AI storage story, Google partnership validates it, but +4.4% growth is underwhelming. Wait for AI storage revenue acceleration before upgrading to BUY.</span>
       </div>
@@ -3247,12 +1685,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$82</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val">$78B</div><div class="sc-label">5-Year Capex Plan</div></div>
-          <div class="stat-cell"><div class="sc-val up">+10%</div><div class="sc-label">Rate Base Growth</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>The $78B capex plan is the clearest signal.</strong> AEP just raised its 5-year capital plan from $72B to $78B — driven by newly approved transmission investments for AI datacenter power demand. This is a management commitment to AI-driven growth. Transmission infrastructure connecting hyperscaler campuses to the grid is a multi-year, contracted revenue stream with regulatory approved returns.</p>
@@ -3281,138 +1766,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD.</strong> Solid utility with AI datacenter power as a genuine long-term tailwind. Not a re-rating story — a reliable compounder. Treat as defensive infrastructure holding.</span>
       </div>
@@ -3437,12 +1791,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
-        <div class="stat-row">
-          <div class="stat-cell"><div class="sc-val">~$140</div><div class="sc-label">Current Price</div></div>
-          <div class="stat-cell"><div class="sc-val">~22x</div><div class="sc-label">Forward P/E</div></div>
-          <div class="stat-cell"><div class="sc-val">$4.7B</div><div class="sc-label">Cogentrix Deal</div></div>
-        </div>
-        <div class="analysis-col bull">
+<div class="quick-stats">
+  <div class="quick-stats-label">Price Action</div>
+  <div class="price-bar">
+    <div class="pa-cell">
+      <div class="pa-val dn">-31.8%</div>
+      <div class="pa-period">6M</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+2.6%</div>
+      <div class="pa-period">90D</div>
+      <div class="pa-sub">recent</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val up">+6.1%</div>
+      <div class="pa-period">30D</div>
+      <div class="pa-sub">momentum</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-val dn">-18.5%</div>
+      <div class="pa-period">YTD</div>
+      <div class="pa-sub">vs SPY</div>
+    </div>
+  </div>
+  <div class="quick-stats-label fundamentals">Fundamentals</div>
+  <div class="fund-grid">
+    <div class="fund-cell">
+      <div class="fund-val">$2.8B</div>
+      <div class="fund-label">Revenue</div>
+      <div class="fund-sub">+12% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">+18%</div>
+      <div class="fund-label">FCF Margin</div>
+      <div class="fund-sub">$500M FCF</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val">78%</div>
+      <div class="fund-label">Gross Margin</div>
+      <div class="fund-sub">FY25</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-val up">$1.2B</div>
+      <div class="fund-label">Net Cash</div>
+      <div class="fund-sub">cash - debt</div>
+    </div>
+    <div class="fund-cell">
+      <div class="pa-val dn">-5%</div>
+      <div class="fund-label">GAAP Op. Margin</div>
+      <div class="fund-sub">Q1 2026</div>
+    </div>
+  </div>
+</div>        <div class="analysis-col bull">
           <h4>🐂 Bull Case</h4>
           <div class="analysis-block bull-block">
             <p><strong>AI datacenters need on-site power fast.</strong> Grid interconnection timelines are 2-4 years. Hyperscalers are signing agreements with power producers like Vistra to get dedicated on-site generation capacity while grid power is being hooked up. Vistra's acquisition of Cogentrix adds 4+ GW of on-site power capacity specifically targeting hyperscaler campuses.</p>
@@ -3471,138 +1872,7 @@ body {
         </div>
       </div>
 
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-
-        <!-- Price Action + Fundamentals Stats -->
-        <div class="stats-section">
-          <div class="stats-section-label">Price Action</div>
-          <div class="price-bar">
-            <div class="pa-cell">
-              <div class="pa-val dn">-22%</div>
-              <div class="pa-period">6M</div>
-              <div class="pa-sub">vs SPY</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-14%</div>
-              <div class="pa-period">90D</div>
-              <div class="pa-sub">recent weakness</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val up">+3%</div>
-              <div class="pa-period">30D</div>
-              <div class="pa-sub">building</div>
-            </div>
-            <div class="pa-cell">
-              <div class="pa-val dn">-31%</div>
-              <div class="pa-period">YTD</div>
-              <div class="pa-sub">underperforming</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-section">
-          <div class="stats-section-label">Fundamentals</div>
-          <div class="fund-grid">
-            <div class="fund-cell">
-              <div class="fund-val">$2.8B</div>
-              <div class="fund-label">Revenue FY25</div>
-              <div class="fund-sub">+8% YoY</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">+22%</div>
-              <div class="fund-label">FCF Margin</div>
-              <div class="fund-sub">$620M FCF</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val">74%</div>
-              <div class="fund-label">Gross Margin</div>
-              <div class="fund-sub">steady</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val up">$3.2B</div>
-              <div class="fund-label">Net Cash</div>
-              <div class="fund-sub">+cash</div>
-            </div>
-            <div class="fund-cell">
-              <div class="fund-val dn">18%</div>
-              <div class="fund-label">GAAP Op. Margin</div>
-              <div class="fund-sub">compressed</div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Inline Sparkline -->
-        <div class="sparkline-wrap" style="margin: 12px 0; display: flex; align-items: center; gap: 10px;">
-          <span class="sparkline" data-ticker="TICKER" data-trend="up" aria-label="TICKER price trajectory"></span>
-          <span style="font-size:11px;color:var(--text-muted);">6M price trajectory</span>
-        </div>
-
-      <div class="verdict-footer">
+        <div class="verdict-footer">
         <span class="vf-label">Verdict:</span>
         <span class="vf-text"><strong>HOLD.</strong> Well-managed power producer with AI datacenter demand story. Gas ESG headwinds are real long-term. Not a exciting re-rating story but a solid infrastructure compounder.</span>
       </div>
@@ -4230,6 +2500,26 @@ document.addEventListener('DOMContentLoaded', () => { renderSparklines(); render
   });
 })();
 
+
+<script>
+(function(){
+  var btn=document.getElementById("hamburger-btn");
+  var overlay=document.getElementById("nav-overlay");
+  if(!btn||!overlay)return;
+  btn.addEventListener("click",function(){
+    overlay.classList.add("open");
+    document.body.classList.add("nav-open");
+  });
+  var closeBtn=document.getElementById("nav-close-btn");
+  if(closeBtn)closeBtn.addEventListener("click",function(){
+    overlay.classList.remove("open");
+    document.body.classList.remove("nav-open");
+  });
+  overlay.addEventListener("click",function(e){
+    if(e.target===overlay){overlay.classList.remove("open");document.body.classList.remove("nav-open");}
+  });
+})();
+</script>
 
 </body>
 </html>
