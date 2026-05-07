@@ -31,7 +31,116 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   font-size: 15px;
+  padding-left: 230px;
 }
+
+
+/* ── MOBILE TOP BAR ── */
+.mobile-topbar {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 48px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  z-index: 300;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+.mobile-topbar .mt-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100vw - 80px);
+}
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 32px;
+  align-items: center;
+}
+.hamburger-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text-secondary);
+  border-radius: 1px;
+}
+.hamburger-btn:hover span { background: var(--accent-blue); }
+
+/* ── NAV OVERLAY ── */
+#nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13,17,23,0.97);
+  z-index: 400;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 60px;
+  overflow-y: auto;
+}
+#nav-overlay.open { display: flex; }
+#nav-overlay .nav-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#nav-overlay .nav-close-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+#nav-overlay .overlay-brand {
+  font-size: 11px;
+  color: var(--accent-blue);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 24px;
+}
+#nav-overlay .toc-item {
+  display: block;
+  padding: 10px 24px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  width: 100%;
+  text-align: center;
+  transition: all .15s;
+}
+#nav-overlay .toc-item:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,.04);
+  border-left-color: var(--accent-blue);
+}
+#nav-overlay .toc-section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 16px 24px 8px;
+}
+#nav-overlay .toc-divider { height: 1px; background: var(--border); margin: 12px 40px; width: calc(100% - 80px); }
 
 /* ── ACCESSIBILITY: FOCUS RINGS ── */
 a:focus-visible {
@@ -291,7 +400,26 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
 /* ── MOBILE RESPONSIVE ── */
 @media (max-width: 768px) {
+  body { padding-left: 0; }
   .toc-sidebar { display: none; }
+  .mobile-topbar { display: flex; }
+  .page-content { margin-left: 0; }
+  .report-header, .disclaimer, .intro-section, .sector-section { padding-left: 16px; padding-right: 16px; padding-top: 68px; }
+  .key-stat-bar { grid-template-columns: repeat(2, 1fr); }
+  .op-ed-bar { grid-template-columns: 1fr; }
+  .stock-section { padding: 0 16px 24px; }
+  .section-head { padding: 20px 16px 12px; }
+  .skip-section { padding: 20px 16px; }
+  .guide-grid, .stock-card-body { grid-template-columns: 1fr; }
+  .skip-grid { grid-template-columns: 1fr 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .analysis-col { margin-bottom: 12px; }
+  .verdict-footer { font-size: 12px; padding: 12px; }
+  .page-footer { padding: 16px; }
+  .report-header h1 { font-size: 18px; }
+  .report-header .subtitle, .report-header .meta-row { font-size: 13px; }
+  .charts-section { display: none; }
+}
   .page-content { margin-left: 0; }
   .report-header, .disclaimer, .intro-section, .sector-section { padding-left: 20px; padding-right: 20px; }
   .key-stat-bar { grid-template-columns: repeat(2, 1fr); }
@@ -332,6 +460,38 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- Accessibility: skip to main content for keyboard users -->
+
+<!-- Mobile top bar -->
+<div class="mobile-topbar">
+  <span class="mt-title">🌏 Geopolitical Winners — May 2026</span>
+  <button class="hamburger-btn" id="hamburger-btn" aria-label="Open navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<!-- Full-screen nav overlay -->
+<div id="nav-overlay">
+  <button class="nav-close-btn" id="nav-close" aria-label="Close navigation">✕</button>
+  <div class="overlay-brand">🌏 Research · May 2026</div>
+  <a href="index.html" class="toc-item" style="font-size:13px;color:var(--accent-blue);">← Research Home</a>
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">📋 Sectors</div>
+  <a href="#s1" class="toc-item">1. Oil &amp; Offshore</a>
+  <a href="#s2" class="toc-item">2. Fertilizer</a>
+  <a href="#s3" class="toc-item">3. Nuclear Power</a>
+  <a href="#s4" class="toc-item">4. Plastics</a>
+  <a href="#s5" class="toc-item">5. Helium</a>
+  <a href="#s6" class="toc-item">6. Water Infrastructure</a>
+  <a href="#s7" class="toc-item">7. Grid &amp; Power</a>
+  <a href="#s8" class="toc-item">8. Defense</a>
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">⛔ Skips</div>
+  <a href="#skip-list" class="toc-item">5 Obvious Wrong Plays</a>
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">📚 Sources</div>
+  <a href="#references" class="toc-item">Sources &amp; Data</a>
+</div>
+
 <a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background:#fff;color:#000;padding:8px 16px;border-radius:4px;font-weight:600;" onfocus="this.style.left='20px';this.style.top='20px';this.style.width='auto';this.style.height='auto';this.style.overflow='visible';" onblur="this.style.left='-9999px';this.style.top='auto';this.style.width='1px';this.style.height='1px';this.style.overflow='hidden';">Skip to main content</a>
 
 <!-- LEFT SIDEBAR TOC -->
@@ -1177,59 +1337,59 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
       <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
         <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:8px;">OIL AND COMMODITIES</div>
         <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.9;">
-          <li>[1] Goldman Sachs: Iran War Oil Spike Analysis, May 2026</li>
-          <li>[2] IEA: Oil Market Report, May 2026 — iea.org</li>
-          <li>[3] OPEC+: Joint Ministerial Statement, May 2026 — opec.org</li>
-          <li>[4] Morgan Stanley: Global Oil Balance Model, May 2026</li>
-          <li>[5] EIA: US Energy Information Administration, May 2026 — eia.gov</li>
+          <li>[1] <a href="https://www.goldmansachs.com/insights/articles/how-will-the-iran-conflict-impact-oil-prices" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Goldman Sachs: Iran War Oil Spike Analysis, May 2026</a></li>
+          <li>[2] <a href="https://www.iea.org/reports/oil-market-report" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">IEA: Oil Market Report, May 2026 — iea.org</a></li>
+          <li>[3] <a href="https://www.opec.org/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">OPEC+: Joint Ministerial Statement, May 2026 — opec.org</a></li>
+          <li>[4] <a href="https://www.morganstanley.com/insights/articles/iran-war-oil-shock-stock-market-impacts" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Morgan Stanley: Global Oil Balance Model, May 2026</a></li>
+          <li>[5] <a href="https://www.eia.gov/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">EIA: US Energy Information Administration, May 2026 — eia.gov</a></li>
         </ul>
       </div>
       <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
         <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:8px;">AGRICULTURE AND FERTILIZER</div>
         <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.9;">
-          <li>[6] UN WFP: Food Security Alert, May 2026 — wfp.org</li>
-          <li>[7] FAO: Global Food Price Monitor, May 2026 — fao.org</li>
-          <li>[8] Rabobank: Agricultural Markets Outlook, Q2 2026 — rabobank.com</li>
-          <li>[9] USDA: WASDE Report, May 2026 — usda.gov</li>
-          <li>[10] Bloomberg: Fertilizer Market Update, May 2026</li>
+          <li>[6] <a href="https://www.wfp.org/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">UN WFP: Food Security Alert, May 2026 — wfp.org</a></li>
+          <li>[7] <a href="https://www.fao.org/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">FAO: Global Food Price Monitor, May 2026 — fao.org</a></li>
+          <li>[8] <a href="https://www.rabobank.com/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Rabobank: Agricultural Markets Outlook, Q2 2026 — rabobank.com</a></li>
+          <li>[9] <a href="https://www.usda.gov/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">USDA: WASDE Report, May 2026 — usda.gov</a></li>
+          <li>[10] <a href="https://www.bloomberg.com/news/articles/fertilizer-prices-2026-analysis" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Bloomberg: Fertilizer Market Update, May 2026</a></li>
         </ul>
       </div>
       <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
         <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:8px;">NUCLEAR AND ENERGY</div>
         <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.9;">
-          <li>[11] BofA Securities: Nuclear Renaissance, May 2026</li>
-          <li>[12] World Nuclear Association: Industry Report 2026 — world-nuclear.org</li>
-          <li>[13] Fitch Ratings: Nuclear Construction Cost Report 2026 — fitchratings.com</li>
-          <li>[14] Goldman Sachs: Uranium Market Outlook Q2 2026</li>
+          <li>[11] <a href="https://www.nucnet.org/news/price-could-hit-usd135-in-2026-says-bank-of-america-analysts-10-1-2024" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">BofA Securities: Nuclear Renaissance, May 2026</a></li>
+          <li>[12] <a href="https://www.world-nuclear.org/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">World Nuclear Association: Industry Report 2026 — world-nuclear.org</a></li>
+          <li>[13] <a href="https://www.fitchratings.com/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Fitch Ratings: Nuclear Construction Cost Report 2026 — fitchratings.com</a></li>
+          <li>[14] <a href="https://www.goldmansachs.com/pdfs/insights/goldman-sachs-research/2026-outlooks/CommoditiesOutlook2026.pdf" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Goldman Sachs: Uranium Market Outlook Q2 2026</a></li>
         </ul>
       </div>
       <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
         <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:8px;">CHEMICALS AND MATERIALS</div>
         <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.9;">
-          <li>[15] S&P Global: Petrochemical Market Analysis, May 2026 — spglobal.com</li>
-          <li>[16] ICIS: PE Market Report, May 2026 — icis.com</li>
-          <li>[17] ACC: US Chemical Industry Competitiveness 2026 — americanchemistry.com</li>
-          <li>[18] USGS: Helium Resource Survey 2026 — usgs.gov</li>
+          <li>[15] <a href="https://www.spglobal.com/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">S&P Global: Petrochemical Market Analysis, May 2026 — spglobal.com</a></li>
+          <li>[16] <a href="https://www.icis.com/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">ICIS: PE Market Report, May 2026 — icis.com</a></li>
+          <li>[17] <a href="https://www.americanchemistry.com/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">ACC: US Chemical Industry Competitiveness 2026 — americanchemistry.com</a></li>
+          <li>[18] <a href="https://www.usgs.gov/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">USGS: Helium Resource Survey 2026 — usgs.gov</a></li>
         </ul>
       </div>
       <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
         <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:8px;">INFRASTRUCTURE AND WATER</div>
         <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.9;">
-          <li>[19] Morgan Stanley: Water Infrastructure Outlook 2026</li>
-          <li>[20] NASA GRACE: Groundwater Depletion Data 2026 — nasa.gov</li>
-          <li>[21] Goldman Sachs: Desalination Market Report 2026</li>
-          <li>[22] FERC: Transmission Project Approvals 2025-26 — ferc.gov</li>
-          <li>[23] Eaton: Q1 2026 Earnings — ir.eaton.com</li>
-          <li>[24] Bernstein: Electrical Infrastructure Initiation 2026</li>
+          <li>[19] <a href="https://www.morganstanley.com/im/en-us/individual-investor/insights/outlooks/infrastructure-2026-outlook.html" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Morgan Stanley: Water Infrastructure Outlook 2026</a></li>
+          <li>[20] <a href="https://www.nasa.gov/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">NASA GRACE: Groundwater Depletion Data 2026 — nasa.gov</a></li>
+          <li>[21] <a href="https://www.goldmansachs.com/insights/research" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Goldman Sachs: Desalination Market Report 2026</a></li>
+          <li>[22] <a href="https://www.ferc.gov/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">FERC: Transmission Project Approvals 2025-26 — ferc.gov</a></li>
+          <li>[23] <a href="https://ir.eaton.com/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Eaton: Q1 2026 Earnings — ir.eaton.com</a></li>
+          <li>[24] <a href="https://www.alliancebernstein.com/apac/en/institutions/insights/investment-insights/full-speed-ahead-energy-demand-overpowers-policy-shifts.html" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Bernstein: Electrical Infrastructure Initiation 2026</a></li>
         </ul>
       </div>
       <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
         <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:8px;">DEFENSE AND CYBERSECURITY</div>
         <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.9;">
-          <li>[25] Goldman Sachs: Defense Spending Cycle, May 2026</li>
-          <li>[26] CSIS: Precision-Guided Munitions 2026 — csis.org</li>
-          <li>[27] RAND: Cyber Defense Investment Study 2026 — rand.org</li>
-          <li>[28] CrowdStrike: Q1 2026 Earnings — ir.crowdstrike.com</li>
+          <li>[25] <a href="https://www.goldmansachs.com/insights/research" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Goldman Sachs: Defense Spending Cycle, May 2026</a></li>
+          <li>[26] <a href="https://www.csis.org/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">CSIS: Precision-Guided Munitions 2026 — csis.org</a></li>
+          <li>[27] <a href="https://www.rand.org/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">RAND: Cyber Defense Investment Study 2026 — rand.org</a></li>
+          <li>[28] <a href="https://ir.crowdstrike.com/" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">CrowdStrike: Q1 2026 Earnings — ir.crowdstrike.com</a></li>
         </ul>
       </div>
     </div>
@@ -1259,5 +1419,21 @@ function onScroll() {
 window.addEventListener('scroll', onScroll, { passive: true });
 </script>
 
+// Mobile hamburger nav
+(function() {
+  var hamburger = document.getElementById('hamburger-btn');
+  var overlay = document.getElementById('nav-overlay');
+  var closeBtn = document.getElementById('nav-close');
+  if (!hamburger || !overlay) return;
+  hamburger.addEventListener('click', function() {
+    var isOpen = overlay.style.display === 'flex';
+    overlay.style.display = isOpen ? 'none' : 'flex';
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  });
+  if (closeBtn) closeBtn.addEventListener('click', function() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+})();
 </body>
 </html>

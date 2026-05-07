@@ -15,8 +15,43 @@
     justify-content: center;
     min-height: 100vh;
     line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
   }
+
+  /* CRT background image — faded + scanlines */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('https://imgs.search.brave.com/5EwRnyR7MeR8orOFNmLgjneO0ockGZIZDDTCU_TOX_U/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9taWls/dGFybnlpLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyNi8w/My9abnlzaGVuZW5q/LXYtU2F1ZGl2c2t5/ai1BcmF2aXlpLUUt/My1TZW50cnktQVdB/Q1MtUG92aXRyeWFu/eWgtc3lsLVNTSEEu/Rm90by1UaGVJbnRl/bEZyb2ctMS5qcGc');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.12;
+    z-index: 0;
+    filter: blur(2px) saturate(0.4);
+  }
+
+  /* Scanline overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.18) 2px,
+      rgba(0, 0, 0, 0.18) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
   .container {
+    position: relative;
+    z-index: 2;
     max-width: 640px;
     padding: 40px;
     text-align: center;

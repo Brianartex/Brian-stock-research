@@ -31,6 +31,7 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   font-size: 15px;
+  padding-left: 230px;
 }
 
 /* ── STICKY LEFT TOC ── */
@@ -284,7 +285,26 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
 /* ── MOBILE RESPONSIVE ── */
 @media (max-width: 768px) {
+  body { padding-left: 0; }
   .toc-sidebar { display: none; }
+  .mobile-topbar { display: flex; }
+  .page-content { margin-left: 0; }
+  .report-header, .disclaimer, .intro-section, .sector-section { padding-left: 16px; padding-right: 16px; padding-top: 68px; }
+  .key-stat-bar { grid-template-columns: repeat(2, 1fr); }
+  .op-ed-bar { grid-template-columns: 1fr; }
+  .stock-section { padding: 0 16px 24px; }
+  .section-head { padding: 20px 16px 12px; }
+  .skip-section { padding: 20px 16px; }
+  .guide-grid, .stock-card-body { grid-template-columns: 1fr; }
+  .skip-grid { grid-template-columns: 1fr 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .analysis-col { margin-bottom: 12px; }
+  .verdict-footer { font-size: 12px; padding: 12px; }
+  .page-footer { padding: 16px; }
+  .report-header h1 { font-size: 18px; }
+  .charts-section { display: none; }
+}
+
   .page-content { margin-left: 0; }
   .report-header, .disclaimer, .intro-section, .sector-section { padding-left: 20px; padding-right: 20px; }
   .key-stat-bar { grid-template-columns: repeat(2, 1fr); }
@@ -333,6 +353,39 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
+
+<!-- Mobile top bar -->
+<div class="mobile-topbar">
+  <span class="mt-title">🌏 Geopolitical Visual — May 2026</span>
+  <button class="hamburger-btn" id="hamburger-btn" aria-label="Open navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<!-- Full-screen nav overlay -->
+<div id="nav-overlay">
+  <button class="nav-close-btn" id="nav-close" aria-label="Close navigation">✕</button>
+  <div class="overlay-brand">🌏 Research · May 2026</div>
+  <a href="index.html" class="toc-item" style="font-size:13px;color:var(--accent-blue);">← Research Home</a>
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">📋 Sectors</div>
+  <a href="#s1" class="toc-item">1. Oil &amp; Offshore</a>
+  <a href="#s2" class="toc-item">2. Fertilizer</a>
+  <a href="#s3" class="toc-item">3. Nuclear Power</a>
+  <a href="#s4" class="toc-item">4. Plastics</a>
+  <a href="#s5" class="toc-item">5. Helium</a>
+  <a href="#s6" class="toc-item">6. Water Infrastructure</a>
+  <a href="#s7" class="toc-item">7. Grid &amp; Power</a>
+  <a href="#s8" class="toc-item">8. Defense</a>
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">⛔ Skips</div>
+  <a href="#skip-list" class="toc-item">5 Obvious Wrong Plays</a>
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">📚 Sources</div>
+  <a href="#references" class="toc-item">Sources &amp; Data</a>
+</div>
+
+
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- LEFT SIDEBAR TOC -->
@@ -1086,6 +1139,20 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
   <!-- FOOTER -->
     <!-- ANALYST CALLS -->
+
+        <!-- Sector Sparkline -->
+        <div class="sparkline-wrap" style="margin: 14px 0; display: flex; align-items: center; gap: 10px;">
+          <span class="sparkline" data-ticker="SECTOR" data-trend="up" aria-label="Sector price trajectory"></span>
+          <span style="font-size:11px;color:var(--text-muted);">6M trajectory</span>
+        </div>
+
+
+        <!-- Sector Sparkline -->
+        <div class="sparkline-wrap" style="margin: 14px 0; display: flex; align-items: center; gap: 10px;">
+          <span class="sparkline" data-ticker="SECTOR" data-trend="up" aria-label="Sector price trajectory"></span>
+          <span style="font-size:11px;color:var(--text-muted);">6M trajectory</span>
+        </div>
+
   <div class="analyst-call" id="ac-sector-oil">
     <div class="ac-header">
       <span class="ac-badge hold">HOLD</span>
@@ -1095,6 +1162,13 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <p><strong>Entry:</strong> Entry below 80 USD WTI is a compelling value entry.</p>
     <p><strong>Trigger:</strong> If Brent breaks above 160 USD sustained, downgrade to WATCH. If Hormuz reopens, oil falls to 90-100 fast.</p>
   </div>
+
+
+        <!-- Sector Sparkline -->
+        <div class="sparkline-wrap" style="margin: 14px 0; display: flex; align-items: center; gap: 10px;">
+          <span class="sparkline" data-ticker="SECTOR" data-trend="up" aria-label="Sector price trajectory"></span>
+          <span style="font-size:11px;color:var(--text-muted);">6M trajectory</span>
+        </div>
 
   <div class="analyst-call" id="ac-sector-fertilizer">
     <div class="ac-header">
@@ -1106,6 +1180,13 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <p><strong>Trigger:</strong> If natural gas prices stay elevated, North American cost advantage shrinks. Watch Q2 application season.</p>
   </div>
 
+
+        <!-- Sector Sparkline -->
+        <div class="sparkline-wrap" style="margin: 14px 0; display: flex; align-items: center; gap: 10px;">
+          <span class="sparkline" data-ticker="SECTOR" data-trend="up" aria-label="Sector price trajectory"></span>
+          <span style="font-size:11px;color:var(--text-muted);">6M trajectory</span>
+        </div>
+
   <div class="analyst-call" id="ac-sector-nuclear">
     <div class="ac-header">
       <span class="ac-badge buy">BUY</span>
@@ -1115,6 +1196,13 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <p><strong>Entry:</strong> Buy any significant pullback.</p>
     <p><strong>Trigger:</strong> Regulatory approval delays for SMRs would be the key risk to monitor.</p>
   </div>
+
+
+        <!-- Sector Sparkline -->
+        <div class="sparkline-wrap" style="margin: 14px 0; display: flex; align-items: center; gap: 10px;">
+          <span class="sparkline" data-ticker="SECTOR" data-trend="up" aria-label="Sector price trajectory"></span>
+          <span style="font-size:11px;color:var(--text-muted);">6M trajectory</span>
+        </div>
 
   <div class="analyst-call" id="ac-sector-plastics">
     <div class="ac-header">
@@ -1126,6 +1214,13 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <p><strong>Trigger:</strong> If new US ethane export capacity is delayed, cost advantage widens further.</p>
   </div>
 
+
+        <!-- Sector Sparkline -->
+        <div class="sparkline-wrap" style="margin: 14px 0; display: flex; align-items: center; gap: 10px;">
+          <span class="sparkline" data-ticker="SECTOR" data-trend="up" aria-label="Sector price trajectory"></span>
+          <span style="font-size:11px;color:var(--text-muted);">6M trajectory</span>
+        </div>
+
   <div class="analyst-call" id="ac-sector-helium">
     <div class="ac-header">
       <span class="ac-badge hold">HOLD</span>
@@ -1135,6 +1230,13 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <p><strong>Entry:</strong> Hold and accumulate on weakness.</p>
     <p><strong>Trigger:</strong> If semiconductor demand softens, helium prices could reverse some gains.</p>
   </div>
+
+
+        <!-- Sector Sparkline -->
+        <div class="sparkline-wrap" style="margin: 14px 0; display: flex; align-items: center; gap: 10px;">
+          <span class="sparkline" data-ticker="SECTOR" data-trend="up" aria-label="Sector price trajectory"></span>
+          <span style="font-size:11px;color:var(--text-muted);">6M trajectory</span>
+        </div>
 
   <div class="analyst-call" id="ac-sector-water">
     <div class="ac-header">
@@ -1146,6 +1248,13 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <p><strong>Trigger:</strong> If AI datacenter buildout accelerates beyond current projections, water becomes a 2027-plus re-rating story.</p>
   </div>
 
+
+        <!-- Sector Sparkline -->
+        <div class="sparkline-wrap" style="margin: 14px 0; display: flex; align-items: center; gap: 10px;">
+          <span class="sparkline" data-ticker="SECTOR" data-trend="up" aria-label="Sector price trajectory"></span>
+          <span style="font-size:11px;color:var(--text-muted);">6M trajectory</span>
+        </div>
+
   <div class="analyst-call" id="ac-sector-grid">
     <div class="ac-header">
       <span class="ac-badge buy">BUY</span>
@@ -1155,6 +1264,13 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <p><strong>Entry:</strong> Buy ETN, NEE, and VST on any pullback as core infrastructure positions.</p>
     <p><strong>Trigger:</strong> Fed rate cuts would accelerate grid investment economics. Watch FERC approval pace.</p>
   </div>
+
+
+        <!-- Sector Sparkline -->
+        <div class="sparkline-wrap" style="margin: 14px 0; display: flex; align-items: center; gap: 10px;">
+          <span class="sparkline" data-ticker="SECTOR" data-trend="up" aria-label="Sector price trajectory"></span>
+          <span style="font-size:11px;color:var(--text-muted);">6M trajectory</span>
+        </div>
 
   <div class="analyst-call" id="ac-sector-defense">
     <div class="ac-header">
@@ -1357,6 +1473,40 @@ function renderGeoCharts() {
 
 document.addEventListener('DOMContentLoaded', function(){ renderGeoSparklines(); renderGeoCharts(); });
 </script>
+
+</body>
+</html>
+
+// Inline SVG sparklines for visual docs
+(function() {
+  var wraps = document.querySelectorAll('.sparkline');
+  wraps.forEach(function(el) {
+    var trend = el.getAttribute('data-trend') || 'up';
+    var color = trend === 'up' ? '#3fb950' : '#f85149';
+    var pts = trend === 'up'
+      ? '0,28 15,22 30,25 45,18 60,20 75,12 90,8 100,5'
+      : '0,5 15,8 30,12 45,18 60,20 75,22 90,25 100,28';
+    el.innerHTML = '<svg width="100" height="28" viewBox="0 0 100 28" aria-label="price trajectory" role="img"><polyline fill="none" stroke="' + color + '" stroke-width="1.5" points="' + pts + '"/></svg>';
+  });
+})();
+
+// Mobile hamburger nav
+(function() {
+  var hamburger = document.getElementById('hamburger-btn');
+  var overlay = document.getElementById('nav-overlay');
+  var closeBtn = document.getElementById('nav-close');
+  if (!hamburger || !overlay) return;
+  hamburger.addEventListener('click', function() {
+    var isOpen = overlay.style.display === 'flex';
+    overlay.style.display = isOpen ? 'none' : 'flex';
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  });
+  if (closeBtn) closeBtn.addEventListener('click', function() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+})();
+
 
 </body>
 </html>
