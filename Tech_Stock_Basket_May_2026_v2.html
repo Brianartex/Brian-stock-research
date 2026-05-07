@@ -479,55 +479,42 @@ a:focus-visible {
 }
 
 /* ── MOBILE RESPONSIVE ── */
-@media (max-width: 768px) {
-  .toc-sidebar { display: none; }
-  .page-content { margin-left: 0; }
-  .report-header { padding: 24px 20px 20px; }
-  .guide-section, .intro-section { padding: 24px 20px; }
-  .stock-section { padding: 0 20px 32px; }
-  .section-head { padding: 24px 20px 16px; }
-  .skip-section { padding: 24px 20px; }
-  .guide-grid, .stock-card-body { grid-template-columns: 1fr; }
-  .skip-grid { grid-template-columns: 1fr 1fr; }
-  .stat-row { grid-template-columns: 1fr 1fr; }
-  .page-footer { padding: 20px; }
-  .report-header h1 { font-size: 20px; }
-  .report-header .subtitle, .report-header .meta-row { font-size: 13px; }
+
+/* ── Mobile: ≤768px ── */
+@media(max-width:768px){
+  .toc-sidebar{display:none!important}
+  .mobile-topbar{display:flex!important}
+  body{padding-left:0!important;padding-top:48px}
+  body.nav-open{overflow:hidden}
+  .page-content,.main-content,.content-wrapper{margin-left:0;padding:12px}
+  .stock-card,.expandable{width:100%!important;margin:8px 0!important}
+  .stock-card-header{flex-direction:column;align-items:flex-start;gap:8px}
+  .stock-card-body,.expandable-body{padding:12px!important}
+  .price-action-bar{grid-template-columns:repeat(2,1fr)!important}
+  .fundamentals-grid{grid-template-columns:repeat(2,1fr)!important}
+  .pa-cell,.fund-cell{padding:8px 10px!important}
+  .pa-cell-value{font-size:12px!important}
+  .fund-cell-value{font-size:12px!important}
+  .report-header h1,.banner h1{font-size:20px!important}
+  h2{font-size:17px!important}
+  h3{font-size:15px!important}
+  .verdict-box,.bb-section{padding:12px!important;margin:0 8px 12px!important}
+  .charts-grid{grid-template-columns:1fr!important}
+  .rec-grid{grid-template-columns:1fr!important}
+  .update-strip{padding:8px 16px!important;font-size:12px!important}
+  .final-rec-box{margin:0 8px 20px!important;padding:16px!important}
+  li{font-size:13px}
+  p{font-size:14px}
 }
 
-
-.mobile-topbar{display:none;position:fixed;top:0;left:0;right:0;height:48px;background:var(--surface);border-bottom:1px solid var(--border);z-index:300;align-items:center;justify-content:space-between;padding:0 16px}
-.mobile-topbar .mt-title{font-size:13px;font-weight:600;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100vw - 80px)}
-.hamburger-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:6px 8px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:36px}
-.hamburger-btn span{display:block;width:18px;height:2px;background:var(--text-secondary);border-radius:2px}
-.hamburger-btn:hover span{background:var(--accent-blue)}
-#nav-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(13,17,23,.98);z-index:400;flex-direction:column;padding:20px;overflow-y:auto}
-#nav-overlay.open{display:flex}
-#nav-overlay .nav-close-btn{align-self:flex-end;background:none;border:1px solid var(--border);border-radius:6px;padding:8px 14px;color:var(--text-secondary);font-size:14px;cursor:pointer;margin-bottom:24px}
-#nav-overlay .nav-close-btn:hover{border-color:var(--accent-blue);color:var(--accent-blue)}
-#nav-overlay .overlay-brand{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border)}
-#nav-overlay .toc-section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:8px 0}
-#nav-overlay .toc-item{padding:10px 0;font-size:14px;border-left:none;border-bottom:1px solid var(--border);color:var(--text-secondary);display:block;text-decoration:none}
-#nav-overlay .toc-item:hover{color:var(--accent-blue);background:none;border-left:none}
-
-
-.price-action-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
-.pa-cell{background:var(--surface2);padding:10px 12px;text-align:center}
-.pa-cell-label{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px}
-.pa-cell-value{font-size:13px;font-weight:600}
-.pa-cell-value.up{color:var(--accent-green)}
-.pa-cell-value.down{color:var(--accent-red)}
-.pa-cell-sub{font-size:9px;color:var(--text-muted);margin-top:1px}
-.reversal-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.04em;padding:2px 6px;border-radius:3px;margin-top:4px}
-.reversal-badge.up{background:rgba(63,185,80,.15);color:var(--accent-green);border:1px solid rgba(63,185,80,.3)}
-.reversal-badge.down{background:rgba(248,81,73,.15);color:var(--accent-red);border:1px solid rgba(248,81,73,.3)}
-.reversal-badge.partial{background:rgba(210,153,34,.15);color:var(--accent-yellow);border:1px solid rgba(210,153,34,.3)}
-.fundamentals-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
-.fund-cell{background:var(--surface);padding:10px 12px}
-.fund-cell-label{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px}
-.fund-cell-value{font-size:13px;font-weight:600;color:var(--text-primary)}
-.fund-cell-sub{font-size:9px;color:var(--text-muted);margin-top:1px}
-@media(max-width:768px){.price-action-bar{grid-template-columns:repeat(2,1fr)}.fundamentals-grid{grid-template-columns:repeat(2,1fr)}}
+/* ── Small mobile: ≤412px (Galaxy S21) ── */
+@media(max-width:412px){
+  .pa-cell-value{font-size:11px!important}
+  .fund-cell-value{font-size:11px!important}
+  .stock-card-header{font-size:13px!important}
+  .report-header h1,.banner h1{font-size:18px!important}
+  .mt-title{font-size:12px!important}
+}
 
 </style>
 </head>

@@ -291,56 +291,42 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 .page-footer { padding: 24px 48px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-muted); max-width: 1100px; }
 
 /* ── MOBILE RESPONSIVE ── */
-@media (max-width: 768px) {
-  .toc-sidebar { display: none; }
-  .page-content { margin-left: 0; }
-  .report-header, .disclaimer, .intro-section, .sector-section { padding-left: 20px; padding-right: 20px; }
-  .key-stat-bar { grid-template-columns: repeat(2, 1fr); }
-  .opinion-row { grid-template-columns: 1fr; }
+
+/* ── Mobile: ≤768px ── */
+@media(max-width:768px){
+  .toc-sidebar{display:none!important}
+  .mobile-topbar{display:flex!important}
+  body{padding-left:0!important;padding-top:48px}
+  body.nav-open{overflow:hidden}
+  .page-content,.main-content,.content-wrapper{margin-left:0;padding:12px}
+  .stock-card,.expandable{width:100%!important;margin:8px 0!important}
+  .stock-card-header{flex-direction:column;align-items:flex-start;gap:8px}
+  .stock-card-body,.expandable-body{padding:12px!important}
+  .price-action-bar{grid-template-columns:repeat(2,1fr)!important}
+  .fundamentals-grid{grid-template-columns:repeat(2,1fr)!important}
+  .pa-cell,.fund-cell{padding:8px 10px!important}
+  .pa-cell-value{font-size:12px!important}
+  .fund-cell-value{font-size:12px!important}
+  .report-header h1,.banner h1{font-size:20px!important}
+  h2{font-size:17px!important}
+  h3{font-size:15px!important}
+  .verdict-box,.bb-section{padding:12px!important;margin:0 8px 12px!important}
+  .charts-grid{grid-template-columns:1fr!important}
+  .rec-grid{grid-template-columns:1fr!important}
+  .update-strip{padding:8px 16px!important;font-size:12px!important}
+  .final-rec-box{margin:0 8px 20px!important;padding:16px!important}
+  li{font-size:13px}
+  p{font-size:14px}
 }
 
-/* ── MOBILE RESPONSIVE ── */
-@media (max-width: 768px) {
-  .toc-sidebar { display: none; }
-  .page-content { margin-left: 0; }
-  .report-header, .disclaimer, .intro-section, .sector-section { padding-left: 20px; padding-right: 20px; }
-  .key-stat-bar { grid-template-columns: repeat(2, 1fr); }
-  .opinion-row { grid-template-columns: 1fr; }
-  .analyst-call { padding: 14px 16px; }
-  .skip-grid { grid-template-columns: 1fr; }
-  .page-footer { padding: 20px; }
-  .charts-section { padding: 24px 20px; }
-  .charts-grid { grid-template-columns: 1fr; }
-  .guide-grid { grid-template-columns: 1fr; }
+/* ── Small mobile: ≤412px (Galaxy S21) ── */
+@media(max-width:412px){
+  .pa-cell-value{font-size:11px!important}
+  .fund-cell-value{font-size:11px!important}
+  .stock-card-header{font-size:13px!important}
+  .report-header h1,.banner h1{font-size:18px!important}
+  .mt-title{font-size:12px!important}
 }
-
-
-/* ── ANALYST CALL ── */
-.analyst-call { background: #21262d; border: 1px solid #30363d; border-radius: 10px; padding: 18px 22px; margin-top: 20px; }
-.ac-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
-.ac-badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; flex-shrink: 0; }
-.ac-badge.buy { background: rgba(63,185,80,.15); color: #3fb950; }
-.ac-badge.hold { background: rgba(210,153,34,.15); color: #d29922; }
-.ac-badge.watch { background: rgba(248,81,73,.15); color: #f85149; }
-.ac-label { font-size: 13px; font-weight: 600; color: #e6edf3; }
-.analyst-call p { font-size: 13px; color: #8b949e; line-height: 1.6; margin-bottom: 8px; }
-.analyst-call p:last-child { margin-bottom: 0; }
-.analyst-call strong { color: #e6edf3; }
-
-
-.mobile-topbar{display:none;position:fixed;top:0;left:0;right:0;height:48px;background:var(--surface);border-bottom:1px solid var(--border);z-index:300;align-items:center;justify-content:space-between;padding:0 16px}
-.mobile-topbar .mt-title{font-size:13px;font-weight:600;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100vw - 80px)}
-.hamburger-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:6px 8px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:36px}
-.hamburger-btn span{display:block;width:18px;height:2px;background:var(--text-secondary);border-radius:2px}
-.hamburger-btn:hover span{background:var(--accent-blue)}
-#nav-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(13,17,23,.98);z-index:400;flex-direction:column;padding:20px;overflow-y:auto}
-#nav-overlay.open{display:flex}
-#nav-overlay .nav-close-btn{align-self:flex-end;background:none;border:1px solid var(--border);border-radius:6px;padding:8px 14px;color:var(--text-secondary);font-size:14px;cursor:pointer;margin-bottom:24px}
-#nav-overlay .nav-close-btn:hover{border-color:var(--accent-blue);color:var(--accent-blue)}
-#nav-overlay .overlay-brand{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border)}
-#nav-overlay .toc-section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:8px 0}
-#nav-overlay .toc-item{padding:10px 0;font-size:14px;border-left:none;border-bottom:1px solid var(--border);color:var(--text-secondary);display:block;text-decoration:none}
-#nav-overlay .toc-item:hover{color:var(--accent-blue);background:none;border-left:none}
 
 </style>
 </head>
