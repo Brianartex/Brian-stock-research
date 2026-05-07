@@ -166,7 +166,7 @@
   }
   .doc-card .variant-label {
     font-size: 10px;
-    color: #484f58;
+    color: #78808c;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -180,7 +180,7 @@
   }
   .variant-divider span {
     font-size: 11px;
-    color: #484f58;
+    color: #78808c;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -202,7 +202,7 @@
     background: none;
     border: 1px solid #30363d;
     border-radius: 6px;
-    color: #6e7681;
+    color: #78808c;
     font-size: 12px;
     font-family: inherit;
     padding: 6px 14px;
@@ -242,18 +242,26 @@
   }
   .archive-item .arch-date {
     font-size: 11px;
-    color: #484f58;
+    color: #78808c;
   }
 
   .footer {
     margin-top: 32px;
     font-size: 12px;
-    color: #6e7681;
+    color: #78808c;
+  }
+  :focus-visible{outline:2px solid #58a6ff;outline-offset:2px}
+  @media(max-width:600px){
+    .container{padding:24px 16px}
+    h1{font-size:22px}
+    .doc-card{padding:16px}
+    .doc-card h2{font-size:15px}
   }
 </style>
 </head>
 <body>
-<div class="container">
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px">Skip to main content</a>
+<div class="container" id="main-content">
   <h1>Brian's Stock Research</h1>
   <p class="subtitle">May 2026 Research Reports</p>
 

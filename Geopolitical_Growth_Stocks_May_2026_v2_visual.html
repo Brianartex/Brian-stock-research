@@ -13,7 +13,7 @@
   --border: #30363d;
   --text-primary: #e6edf3;
   --text-secondary: #8b949e;
-  --text-muted: #6e7681;
+  --text-muted: #78808c;
   --accent-green: #3fb950;
   --accent-red: #f85149;
   --accent-yellow: #d29922;
@@ -230,7 +230,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 .expandable-body { background: var(--surface); padding: 20px 22px; }
 .expandable-body .back-to-top { display: inline-block; font-size: 11px; color: var(--accent-orange); text-decoration: none; margin-bottom: 12px; font-weight: 500; }
 .expandable-body .back-to-top:hover { text-decoration: underline; }
-.expandable-body h4 { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin: 18px 0 8px; color: var(--accent-blue); }
+.expandable-body h3 { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin: 18px 0 8px; color: var(--accent-blue); }
 .expandable-body h4:first-child { margin-top: 0; }
 .expandable-body p { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.6; }
 .expandable-body ul { font-size: 13px; color: var(--text-secondary); margin: 0 0 12px 20px; line-height: 1.7; }
@@ -260,15 +260,15 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 /* ── EXPERT COUNCIL ── */
 .expert-council { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 16px 0; }
 .expert-council-header { background: var(--surface); padding: 12px 18px; border-bottom: 1px solid var(--border); }
-.expert-council-header h4 { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
+.expert-council-header h3 { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
 .expert-council-header p { font-size: 11px; color: var(--text-muted); }
 .opinion-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
 .opinion-col { background: var(--surface); padding: 14px 18px; }
 .opinion-col.bull-col { border-top: 3px solid var(--accent-green); }
 .opinion-col.bear-col { border-top: 3px solid var(--accent-red); }
-.opinion-col h5 { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
-.opinion-col.bull-col h5 { color: var(--accent-green); }
-.opinion-col.bear-col h5 { color: var(--accent-red); }
+.opinion-col h4 { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+.opinion-col.bull-col h4 { color: var(--accent-green); }
+.opinion-col.bear-col h4 { color: var(--accent-red); }
 .opinion-item { background: var(--surface2); border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; }
 .opinion-item:last-child { margin-bottom: 0; }
 .opinion-item .expert-src { font-size: 10px; font-weight: 700; color: var(--accent-blue); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
@@ -276,7 +276,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
 /* ── DEEP DIVE BOX ── */
 .deep-dive { background: var(--surface2); border-radius: 8px; padding: 16px 18px; margin: 12px 0; }
-.deep-dive h4 { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 12px; }
+.deep-dive h3 { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 12px; }
 .deep-dive ul { font-size: 12px; color: var(--text-secondary); margin-left: 18px; line-height: 1.7; }
 .deep-dive ul li strong { color: var(--text-primary); }
 
@@ -436,7 +436,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
   <!-- CHARTS SECTION -->
   <section class="charts-section" aria-label="Data visualizations">
     <h2 style="font-size:17px;font-weight:700;color:#e6edf3;margin-bottom:4px;">Research Visualizations</h2>
-    <p style="font-size:13px;color:#6e7681;margin-bottom:0;">Sector opportunity overview at a glance.</p>
+    <p style="font-size:13px;color:#78808c;margin-bottom:0;">Sector opportunity overview at a glance.</p>
     <div class="charts-grid">
       <div class="chart-card">
         <h3>Sector Conviction Scores</h3>
@@ -491,11 +491,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val dn">-1.8%</div><div class="ks-label">Global oil demand contraction est.</div></div>
         </div>
 
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>The Iran war has removed approximately 27-30% of global seaborne oil trade from the market. Iran was producing approximately 3.5-4 million barrels per day before the war. While some of this production may continue domestically, zero barrels are currently flowing through Hormuz to global markets. Additionally, the war has created significant insurance and tanker company reluctance to route any tankers through the Persian Gulf — even those from Saudi Arabia, UAE, and Kuwait — due to war risk insurance premiums that make such voyages economically unviable. This means the actual supply removal is larger than Iran's production alone: it is affecting all Gulf state exports.</p>
 
         <div class="deep-dive">
-          <h4>⛽ Deep Dive: The Supply-Demand Balance</h4>
+          <h3>⛽ Deep Dive: The Supply-Demand Balance</h3>
           <ul>
             <li><strong>Saudi Arabia (10M bbl/day):</strong> Still producing but can't ship via Hormuz without war risk insurance. Alternative routing via Red Sea is also threatened by Yemen Houthi activity. Net export capability significantly reduced.</li>
             <li><strong>UAE (4M bbl/day):</strong> Dubai and Abu Dhabi have some overland pipeline alternative (Tapline to Red Sea) but capacity is limited. Fujairah terminal still operational but tanker access is constrained.</li>
@@ -506,7 +506,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🔋 Deep Dive: The Demand Destruction Threshold</h4>
+          <h3>🔋 Deep Dive: The Demand Destruction Threshold</h3>
           <ul>
             <li><strong>$100/bbl:</strong> Airlines begin fuel surcharges. Long-haul routes become marginally unprofitable. Consumer discretionary spending on travel begins to slow.</li>
             <li><strong>$130/bbl:</strong> Significant demand destruction begins. Shipping companies slow speeds to save fuel. Trucking companies begin passing costs to consumers. Inflationary pressure on all goods.</li>
@@ -527,18 +527,18 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Oil &amp; Energy</h4>
+            <h3>Council of Expert Opinions — Oil &amp; Energy</h3>
             <p>IEA | OPEC+ Joint Ministeria | Goldman Sachs Commodities | Morgan Stanley | EIA | Citi Research | Reuters Breakingviews | FT Energy Voice</p>
           </div>
           <div class="opinion-row">
             <div class="opinion-col bull-col">
-              <h5>🐂 Bull Case</h5>
+              <h4>🐂 Bull Case</h4>
               <div class="opinion-item"><div class="expert-src">Goldman Sachs Commodities</div><p>"The market is dramatically underpricing the duration of this supply shock. Even in a best case where Hormuz reopens in 90 days, the tanker routing and insurance normalization takes 6-9 months. We see $150-180/bbl Brent through Q2 2027. Energy equities are pricing $80 oil — there is a massive re-rating opportunity in energy stocks if our base case materializes."</p></div>
               <div class="opinion-item"><div class="expert-src">OPEC+ Joint Ministerial (leaked statement)</div><p>"The kingdom has capacity to increase production but will not sacrifice market share to compensate for a war-related supply disruption caused by a non-OPEC country. This is a principled position that protects the long-term value of our resource."</p></div>
               <div class="opinion-item"><div class="expert-src">Citi Research — Commodities</div><p>"US shale can add 500-800K bbl/day in the next 6 months. At $150+ oil, every shale basin in the Permian, Eagle Ford, and DJ Basin becomes highly profitable. The US is effectively the global swing producer now — not Saudi Arabia."</p></div>
             </div>
             <div class="opinion-col bear-col">
-              <h5>🐻 Bear Case</h5>
+              <h4>🐻 Bear Case</h4>
               <div class="opinion-item"><div class="expert-src">IEA — International Energy Agency</div><p>"We estimate 1.2M bbl/day of Iranian production is offline, but global demand is also contracting at 1.8M bbl/day due to the price shock. These roughly offset. The market was already oversupplied entering 2026 due to surging US production and soft Chinese demand. The net balance is not as tight as the headline price spike suggests."</p></div>
               <div class="opinion-item"><div class="expert-src">Morgan Stanley — Oil Team</div><p>"At $150/bbl sustained, global GDP contracts by 0.8%. At $180/bbl, we model a 1.4% GDP contraction. The demand destruction from these price levels will cut oil consumption more than the supply shock removes. By Q4 2026, we expect Brent to回归 $100-110 as demand destruction exceeds supply loss."</p></div>
               <div class="opinion-item"><div class="expert-src">FT Energy Voice</div><p>"Saudi Arabia's refusal to open the taps is a catastrophic miscalculation. They are risking their own long-term market share — if oil demand contracts structurally due to $150+ prices, EVs and renewables capture that demand permanently. The kingdom should be flooding the market now to kill the nascent EV adoption curve, not allowing $150 oil to accelerate it."</p></div>
@@ -571,11 +571,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val">$650/T</div><div class="ks-label">New urea price/ton</div></div>
           <div class="ks-cell"><div class="ks-val up">+22%</div><div class="ks-label">NTR stock YTD 2026</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>The Strait of Hormuz closure has cut off approximately 30% of global seaborne urea trade at the precise moment Northern Hemisphere farmers are entering their primary planting season. Urea — the world's most-used nitrogen fertilizer — is now $650/ton, up $80/ton in weeks. The UN World Food Program estimates that if oil prices remain above $100/bbl through mid-2026, the number of people experiencing acute food insecurity globally rises by 80-120 million. North American farmers who locked in fertilizer contracts pre-war have a significant cost advantage over European and Asian farmers paying spot prices.</p>
 
         <div class="deep-dive">
-          <h4>🌾 Deep Dive: The Three Nutrients That Matter</h4>
+          <h3>🌾 Deep Dive: The Three Nutrients That Matter</h3>
           <ul>
             <li><strong>Nitrogen (N) — Urea:</strong> Most-used fertilizer globally. Produced from natural gas via Haber-Bosch. Gulf states (Saudi Arabia, Oman, Qatar, UAE) are major exporters via Hormuz. <em>Disruption: Direct — Hormuz closure cuts 30% of global urea trade.</em></li>
             <li><strong>Phosphate (P):</strong> Mined primarily in Morocco/Western Sahara (80% of reserves), US, and Jordan. <em>Disruption: Indirect — energy inflation raises production costs.</em></li>
@@ -584,7 +584,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🇧🇷 Deep Dive: Brazil — The Swing Factor</h4>
+          <h3>🇧🇷 Deep Dive: Brazil — The Swing Factor</h3>
           <ul>
             <li>Brazil's fertilizer import dependency: nitrogen (83%), phosphate (50%), potash (95%) — nearly all imported</li>
             <li>Brazil is the world's largest exporter of soybeans, corn, and beef. It is the most agriculture-dependent major economy on this list.</li>
@@ -595,7 +595,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🇺🇸 Deep Dive: US Farmers — The Lucky Ones</h4>
+          <h3>🇺🇸 Deep Dive: US Farmers — The Lucky Ones</h3>
           <ul>
             <li>US fertilizer self-sufficiency is high — domestic production covers approximately 85% of nitrogen fertilizer demand via natural gas-based Haber-Bosch.</li>
             <li>US corn Belt farmers largely locked in urea contracts in Q4 2025 at $450-470/ton. They are now applying fertilizer at roughly $300-350/acre vs. $500-600/acre for European competitors.</li>
@@ -616,18 +616,18 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Fertilizer &amp; Agriculture</h4>
+            <h3>Council of Expert Opinions — Fertilizer &amp; Agriculture</h3>
             <p>UN World Food Programme | FAO Rome | Bloomberg Commodities | Rabobank Ag Research | USDA | DTN Fertilizer | PotashCorp Annual Report | Goldman Sachs Agriculture</p>
           </div>
           <div class="opinion-row">
             <div class="opinion-col bull-col">
-              <h5>🐂 Bull Case</h5>
+              <h4>🐂 Bull Case</h4>
               <div class="opinion-item"><div class="expert-src">UN World Food Programme</div><p>"If oil prices remain above $100/bbl through mid-2026, we project 80-120 million additional people will experience acute food insecurity. The countries most at risk are Egypt, Pakistan, Turkey, and much of Sub-Saharan Africa — all major wheat and fertilizer importers. Food inflation at the retail level in these countries will be severe."</p></div>
               <div class="opinion-item"><div class="expert-src">Rabobank Ag Research</div><p>"Brazil's 2026-27 agricultural season will see fertilizer application rates down 12-18% in the worst-affected regions. This translates directly into lower crop yields — Brazilian soybean exports could fall by 8-15%, which would tighten global agricultural markets significantly and sustain elevated grain prices."</p></div>
               <div class="opinion-item"><div class="expert-src">Goldman Sachs Agriculture</div><p>"Nutrien and CF Industries are pricing in $400/ton urea. If urea stays at $650/ton, the earnings power of these companies is 40-60% above current consensus. This is not a blip — it's a multi-year margin expansion driven by structural supply disruption."</p></div>
             </div>
             <div class="opinion-col bear-col">
-              <h5>🐻 Bear Case</h5>
+              <h4>🐻 Bear Case</h4>
               <div class="opinion-item"><div class="expert-src">USDA — World Agriculture Outlook</div><p>"US farmers who pre-purchased fertilizer are in a strong competitive position, but global demand destruction at these price levels is also significant. High fertilizer prices lead to lower application rates globally, which means crops are under-fertilized, yields drop, and the following year's supply is also constrained — creating a multi-year problem."</p></div>
               <div class="opinion-item"><div class="expert-src">Bloomberg Commodities</div><p>"Potash is the more stable trade. But nitrogen (urea) is also produced from natural gas — and if the Iran war causes a European energy crisis (due to gas supply disruption), European nitrogen producers (Yara, BASF) will cut production, which could paradoxically tighten the urea market further — or cause European farmers to switch to lower-nitrogen crops, reducing demand."</p></div>
               <div class="opinion-item"><div class="expert-src">DTN Fertilizer</div><p>"The urea market was already tight entering 2026. Global grain stocks-to-use ratios are at 10-year lows. The Iran war has made a bad situation critical. But fertilizer price spikes of this magnitude historically resolve within 18-24 months as demand destruction and substitution take hold. This is not a 5-year bull market — it's a 2-3 year cycle."</p></div>
@@ -659,11 +659,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val up">+40%</div><div class="ks-label">CCJ stock 2026 YTD</div></div>
           <div class="ks-cell"><div class="ks-val">8–10</div><div class="ks-label">AI nuclear PPAs signed 2025–26</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>AI data centers are the largest new source of electricity demand in a generation — and they need power that is <em>continuous</em>, <em>reliable</em>, and <em>zero-carbon</em> to meet corporate sustainability commitments. Solar and wind cannot deliver baseload power at the density AI campuses require. Nuclear is the only proven, dispatchable zero-carbon source that can power a 100MW+ AI campus 24/7. Google, Microsoft, Amazon, and Meta have collectively signed 8-10 nuclear power purchase agreements since 2025. The Iran war accelerates this thesis: oil and gas price spikes make the fixed, predictable cost of nuclear power more economically attractive relative to gas peaker plants.</p>
 
         <div class="deep-dive">
-          <h4>🔬 Deep Dive: Why SMRs Are Different This Time</h4>
+          <h3>🔬 Deep Dive: Why SMRs Are Different This Time</h3>
           <ul>
             <li><strong>First NRC-Approved Design:</strong> NuScale Power is the only SMR developer with an NRC-approved design. Its Carbon Free Power Project (Idaho) was cancelled in 2023 after costs tripled — but lessons are being applied to subsequent projects.</li>
             <li><strong>Factory Manufacturing:</strong> Traditional reactors are bespoke construction projects. SMRs are designed for factory fabrication and modular assembly on-site — the same way Boeing builds airplanes. This should reduce cost overruns and construction timelines.</li>
@@ -673,7 +673,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>💰 Deep Dive: The Uranium Supply-Demand Balance</h4>
+          <h3>💰 Deep Dive: The Uranium Supply-Demand Balance</h3>
           <ul>
             <li><strong>Kazatomprom (Kazakhstan):</strong> Produces ~40% of Western uranium. 2022 guidance cuts reduced supply by 15%. Even with $100+/lb uranium, bringing new mines online takes 7-10 years.</li>
             <li><strong>Uranium Spot vs. Contract:</strong> Spot price at $106/lb vs. long-term contract prices at ~$80/lb — the gap signals a tighter physical market than contracts reflect.</li>
@@ -695,19 +695,19 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Nuclear Energy</h4>
+            <h3>Council of Expert Opinions — Nuclear Energy</h3>
             <p>Bank of America Commodities | Goldman Sachs Energy | Morgan Stanley Nuclear | World Nuclear Association | Fitch Ratings | Seeking Alpha | EIA</p>
           </div>
           <div class="opinion-row">
             <div class="opinion-col bull-col">
-              <h5>🐂 Bull Case</h5>
+              <h4>🐂 Bull Case</h4>
               <div class="opinion-item"><div class="expert-src">Bank of America Commodities</div><p>"AI data centers will consume more electricity in the next 3 years than the entire US consumed in 2010. Nuclear is the only zero-carbon source that can provide 24/7 baseload power AI requires. SMRs solve the 'where do we put a reactor' problem — they can be sited near data centers."</p></div>
               <div class="opinion-item"><div class="expert-src">World Nuclear Association</div><p>"The nuclear renaissance is not hype — it is math. Microsoft, Amazon, and Google have all signed nuclear PPAs in 2025-2026. This locks in long-term contracts for utilities at premium prices, funding new reactor construction."</p></div>
               <div class="opinion-item"><div class="expert-src">Morgan Stanley Nuclear Team</div><p>"GE Vernova's nuclear services backlog grew 30%+ in 2025. Every existing reactor in the US is being considered for license renewal and uprate. The incremental power output from existing fleet uprates is the cheapest zero-carbon electrons you can add to the grid."</p></div>
               <div class="opinion-item"><div class="expert-src">Goldman Sachs Energy</div><p>"Uranium spot prices are in a structural bull market. Spot $106/lb vs. long-term contract $80/lb. Miners like Cameco are selling spot at premiums that lift margins. The uranium market is tighter than any time since the 2007-2011 supercycle."</p></div>
             </div>
             <div class="opinion-col bear-col">
-              <h5>🐻 Bear Case</h5>
+              <h4>🐻 Bear Case</h4>
               <div class="opinion-item"><div class="expert-src">Fitch Ratings</div><p>"Nuclear construction is chronically over-budget and behind schedule. NuScale's Carbon Free Power Project was cancelled after costs tripled. The track record for SMR commercialization at scale does not support the valuation multiples the market is assigning to pure-play SMR stocks."</p></div>
               <div class="opinion-item"><div class="expert-src">Seeking Alpha — Bearish</div><p>"Oklo and NNE are pre-revenue companies. The NRC approval process takes years, cost overruns are endemic, and $100+/lb uranium prices make existing plant economics better but do not fix new-build economics. Buying these stocks is venture capital dressed as public market investing."</p></div>
               <div class="opinion-item"><div class="expert-src">Energy Information Administration (EIA)</div><p>"Natural gas combined-cycle plants can be built in 2-3 years for $700-900/kW. Advanced nuclear plants cost $6,000-9,000/kW. The levelized cost of energy gap between gas and nuclear is not closing without sustained uranium prices above $100/lb for a decade."</p></div>
@@ -740,11 +740,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val dn">$1,400/T</div><div class="ks-label">New ethylene price/ton</div></div>
           <div class="ks-cell"><div class="ks-val up">+15%</div><div class="ks-label">US natgas-based ethane advantage</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>Ethylene, propylene, methanol, and hundreds of other petrochemical precursors are all derived from natural gas and oil. When oil prices spike and Gulf state exports are disrupted, the petrochemical supply chain is severely impacted. The Middle East (Saudi Arabia, UAE, Qatar, Iran, Kuwait) is the world's largest exporter of plastics precursors — polyethylene, polypropylene, PVC, and methanol. Hormuz closure means these exports stop. The result is a global shortage of the building blocks for virtually all manufactured goods: packaging, automotive parts, electronics, construction materials, medical devices, and consumer goods.</p>
 
         <div class="deep-dive">
-          <h4>🧪 Deep Dive: The Petrochemical Chain</h4>
+          <h3>🧪 Deep Dive: The Petrochemical Chain</h3>
           <ul>
             <li><strong>Ethylene → Polyethylene (PE):</strong> The world's most produced plastic. Used in packaging (films, bags, wrap), containers, pipes. Gulf states are the largest PE exporters. Saudi SABIC and UAE Borouge are the key players.</li>
             <li><strong>Propylene → Polypropylene (PP):</strong> Second most produced plastic. Used in automotive parts, appliances, packaging, textiles. Price has spiked 40-60% since Hormuz closure.</li>
@@ -754,7 +754,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🌿 Deep Dive: The Alternative Plastics Opportunity</h4>
+          <h3>🌿 Deep Dive: The Alternative Plastics Opportunity</h3>
           <ul>
             <li><strong>Bioplastics (PLA, PHA):</strong> Made from fermented plant starch (corn, sugarcane). Not dependent on oil. As oil-derived plastics become scarce and expensive, bioplastics become economically viable for single-use applications (packaging, cutlery, agricultural film).</li>
             <li><strong>Recycled PET (rPET):</strong> Bottle-to-bottle recycling becomes more valuable when virgin PET is scarce. Companies with recycled plastic supply chains benefit from the spread between virgin and recycled resin narrowing.</li>
@@ -776,18 +776,18 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Plastics &amp; Petrochemicals</h4>
+            <h3>Council of Expert Opinions — Plastics &amp; Petrochemicals</h3>
             <p>S&P Global Commodity Insights | ICIS Chemical Market Analytics | BASF Annual Report | Goldman Sachs Chemicals | Bloomberg Petrochemicals | American Chemistry Council | Reuters Commodities</p>
           </div>
           <div class="opinion-row">
             <div class="opinion-col bull-col">
-              <h5>🐂 Bull Case</h5>
+              <h4>🐂 Bull Case</h4>
               <div class="opinion-item"><div class="expert-src">S&P Global Commodity Insights</div><p>"Global polyethylene markets are experiencing a structural supply shock unlike anything seen since the 2008-2011 period. Gulf state export volumes have collapsed by 40%. North American producers with ethane feedstock advantage are capturing market share and margins simultaneously. This is a two-year cycle minimum."</p></div>
               <div class="opinion-item"><div class="expert-src">American Chemistry Council</div><p>"The US chemical industry is the most competitive it has ever been, thanks to shale gas. Ethane-based ethylene production costs in the US are roughly half that of naphtha-based production in Europe and Asia. This cost advantage has widened to $400-600/ton — historically extraordinary."</p></div>
               <div class="opinion-item"><div class="expert-src">Goldman Sachs Chemicals</div><p>"PKG and other paper packaging companies are a structural beneficiary of plastic resin inflation. As PE and PP prices rise, the cost gap between paper and plastic narrows, and paper becomes competitive in applications where it was previously too expensive."</p></div>
             </div>
             <div class="opinion-col bear-col">
-              <h5>🐻 Bear Case</h5>
+              <h4>🐻 Bear Case</h4>
               <div class="opinion-item"><div class="expert-src">ICIS Chemical Market Analytics</div><p>"Petrochemical demand destruction is already underway. At $1,400/ton ethylene, many plastic converters are reducing operating rates — they cannot pass through these costs to brand owners who have contractual price caps. The high prices are destroying their own demand."</p></div>
               <div class="opinion-item"><div class="expert-src">Bloomberg Petrochemicals</div><p>"Bioplastics are a niche solution. PLA and PHA together represent less than 1% of global plastics production. Even at $1,400/ton ethylene, the existing installed base of PE/PP production is so large that bioplastics cannot meaningfully substitute in the near term. The 5-year lead time for bioplastics capacity expansion means they don't help in this crisis."</p></div>
               <div class="opinion-item"><div class="expert-src">Reuters Commodities</div><p>"EMN and CE are specialty chemical companies in name but are still heavily exposed to commodity petrochemical cycles. Eastman is integrated into acetyl chain but the acetyls chain is cyclical and the specialty segments are small enough that they don't provide meaningful diversification."</p></div>
@@ -819,11 +819,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val">~6 months</div><div class="ks-label">Global helium stockpile depletion</div></div>
           <div class="ks-cell"><div class="ks-val">2-4 yrs</div><div class="ks-label">New source lead time</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>Helium is not just for balloons. It is a critical industrial gas used in: <strong>(1) semiconductor manufacturing</strong> (wafer fabrication, particularly the critical ASML EUV lithography machines), <strong>(2) MRI magnets</strong> (hospital diagnostic equipment), <strong>(3) rocketry</strong> (liquid hydrogen fuel pressurization), <strong>(4) fiber optic cable manufacturing</strong> (draw towers require inert atmosphere), and <strong>(5) nuclear reactors</strong> (primary coolant for some advanced reactor designs). The Iran war has removed Qatar's Ras Laffan helium plant — one of the world's three largest — from the market. Combined with Russia's helium export restrictions, this leaves global semiconductor manufacturers with a critical shortage of a non-substitutable resource.</p>
 
         <div class="deep-dive">
-          <h4>💎 Deep Dive: Why Helium Is Non-Substitutable in Semiconductors</h4>
+          <h3>💎 Deep Dive: Why Helium Is Non-Substitutable in Semiconductors</h3>
           <ul>
             <li><strong>ASML EUV Machines:</strong> ASML's Extreme Ultraviolet lithography machines — the machines that make the most advanced AI chips — require liquid helium to cool the mirrors to near absolute zero. There is no substitute. If a semiconductor fab runs out of helium, its EUV machines stop working.</li>
             <li><strong>Wafer Fab Cooling:</strong> Helium's thermal conductivity is 6x that of nitrogen — it is uniquely effective at removing heat from wafer fabrication processes. At the precision required for 3nm and 2nm chip manufacturing, nitrogen cooling is inadequate.</li>
@@ -833,7 +833,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🏭 Deep Dive: The Supply Landscape</h4>
+          <h3>🏭 Deep Dive: The Supply Landscape</h3>
           <ul>
             <li><strong>Qatar (Ras Laffan):</strong> The world's largest helium plant, operated by RasGas/QatarEnergy. Supplies roughly 25-30% of global helium. Currently offline due to Hormuz closure — tankers cannot load at Ras Laffan's port without passing through Hormuz.</li>
             <li><strong>Russia (Amur Region, Orenburg):</strong> Russia's new Amur helium plant was supposed to come online 2025-2026, adding significant new supply. But Western sanctions, war risk, and logistics challenges have slowed commissioning. Russia is also restricting helium exports to "friendly" nations only.</li>
@@ -853,18 +853,18 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Helium</h4>
+            <h3>Council of Expert Opinions — Helium</h3>
             <p>ASML Holdings | SEMI Industry Association | USGS Helium Survey | Goldman Sachs Commodities | Bloomberg Commodities | Nature Magazine | Intel Fab Engineering | semiconductor industry analyst</p>
           </div>
           <div class="opinion-row">
             <div class="opinion-col bull-col">
-              <h5>🐂 Bull Case</h5>
+              <h4>🐂 Bull Case</h4>
               <div class="opinion-item"><div class="expert-src">SEMI Industry Association</div><p>"Helium is the single most critical industrial gas for advanced semiconductor manufacturing that most people have never heard of. The Qatar shutdown couldn't have come at a worse time — we are simultaneously trying to scale EUV lithography for AI chip demand while losing 30% of global helium supply. This will constrain advanced chip output in 2026."</p></div>
               <div class="opinion-item"><div class="expert-src">Goldman Sachs Commodities</div><p>"Helium is a byproduct of natural gas — but Qatar's helium is not economically viable without Gulf state gas production. Even if oil flows resume, restoring helium production takes months of restart procedures. We see helium prices remaining elevated for 2-3 years minimum."</p></div>
               <div class="opinion-item"><div class="expert-src">USGS Helium Survey</div><p>"The US National Helium Reserve is effectively a strategic asset now. The Amarillo reserve was being wound down — but its retention as a strategic buffer against exactly this scenario shows that federal policymakers understood the risk. Semiconductor fabs with long-term supply contracts will be prioritized."</p></div>
             </div>
             <div class="opinion-col bear-col">
-              <h5>🐻 Bear Case</h5>
+              <h4>🐻 Bear Case</h4>
               <div class="opinion-item"><div class="expert-src">Nature Magazine — Helium Conservation</div><p>"Helium is a non-renewable resource that is squandered in party balloons and advertising blimps. The real crisis is that we are running out of helium for scientific and industrial uses because we've treated it as a cheap byproduct. But this crisis will accelerate recycling and conservation — and the price signal will bring new sources online faster than the market expects."</p></div>
               <div class="opinion-item"><div class="expert-src">Bloomberg Commodities</div><p>"The semiconductor industry is already reducing helium consumption per wafer through recycling technology. Linde and Air Products have developed closed-loop helium recycling systems that reduce consumption by 40-60% per fab. This significantly extends the effective supply."</p></div>
               <div class="opinion-item"><div class="expert-src">Intel Fab Engineering</div><p>"Every semiconductor fab has contingency plans for helium shortage. The most advanced fabs have redundant supply contracts and helium recycling. The shortage will cause delivery delays and spot price spikes, but a complete fab shutdown due to helium is extremely unlikely for Tier 1 customers."</p></div>
@@ -896,11 +896,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val">$200B</div><div class="ks-label">Water treatment market by 2030</div></div>
           <div class="ks-cell"><div class="ks-val">$150B</div><div class="ks-label">US water infrastructure gap</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>A single large AI datacenter (100-200MW) consumes 1-5 million gallons of water per day for cooling. Microsoft, Google, Meta, and Amazon are collectively building dozens of new AI campuses. The water consumption of these AI campuses is quietly becoming a major constraint — especially in the American Southwest (Arizona, Nevada, Texas), where datacenters are being built in water-stressed regions. The Iran war worsens this: oil price spikes drive up fertilizer and food prices, making agricultural water use more expensive, creating political pressure to restrict datacenter water consumption in favor of farming.</p>
 
         <div class="deep-dive">
-          <h4>💧 Deep Dive: The Water-Energy-Food Nexus</h4>
+          <h3>💧 Deep Dive: The Water-Energy-Food Nexus</h3>
           <ul>
             <li><strong>AI Datacenter Water Consumption:</strong> Cooling a 100MW datacenter requires 1-3 million gallons/day. Microsoft's West Valley campus (Utah) and Google's Mesa, Arizona campus have both faced local opposition over water consumption. Nevada's Switch datacenters in Reno consumed so much water that they became a political issue.</li>
             <li><strong>The Southwest Water Crisis:</strong> Lake Mead (Colorado River) is at historic low levels. Arizona, Nevada, and Southern California share this water supply. Any additional large water user in this region faces regulatory and political risk.</li>
@@ -921,18 +921,18 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Water Infrastructure</h4>
+            <h3>Council of Expert Opinions — Water Infrastructure</h3>
             <p>Xylem Annual Report | EPA Water Infrastructure | Goldman Sachs Global Infrastructure | Morgan Stanley Water | Circle of Blue | NASA GRACE | FAO Water | MIT Water Group</p>
           </div>
           <div class="opinion-row">
             <div class="opinion-col bull-col">
-              <h5>🐂 Bull Case</h5>
+              <h4>🐂 Bull Case</h4>
               <div class="opinion-item"><div class="expert-src">Morgan Stanley — Global Water Team</div><p>"The US has a $150B water infrastructure gap according to EPA. Every year of underinvestment makes this worse. The combination of aging pipes, new AI datacenter demand, and climate-driven supply stress creates a multi-decade capex cycle in water infrastructure. Xylem is the clearest public market beneficiary."</p></div>
               <div class="opinion-item"><div class="expert-src">NASA GRACE Satellite Data</div><p>"Groundwater depletion in the American Southwest is the most underappreciated infrastructure crisis in the US. The Ogallala Aquifer — which irrigates the Great Plains — is being depleted at rates 10x faster than natural recharge. This is not a future problem — it is a present emergency affecting agricultural output today."</p></div>
               <div class="opinion-item"><div class="expert-src">Goldman Sachs Global Infrastructure</div><p>"Desalination is the most infrastructure-capital-intensive water solution but also the most scalable for coastal cities. The global desalination market is $40B today and growing at 9% annually. Saudi Arabia alone has $40B in planned desal projects. This is a structural multi-decade capex theme."</p></div>
             </div>
             <div class="opinion-col bear-col">
-              <h5>🐻 Bear Case</h5>
+              <h4>🐻 Bear Case</h4>
               <div class="opinion-item"><div class="expert-src">MIT Water Group</div><p>"Water is a local, not global, commodity. There is no global water market. Xylem and American Water Works are exposed to US and European municipal budgets — which are chronically underfunded. Even with AI datacenter demand, the pace of municipal infrastructure spending is slow. These stocks are infrastructure bonds, not growth stocks."</p></div>
               <div class="opinion-item"><div class="expert-src">Circle of Blue</div><p>"Desalination is energy-intensive and produces toxic brine as a byproduct. The math of desalination only works when freshwater scarcity is extreme. Saudi Arabia can afford desal because energy is cheap. In the US, the energy cost of large-scale desal is prohibitive for most municipalities without significant subsidy."</p></div>
               <div class="opinion-item"><div class="expert-src">EPA Water Infrastructure</div><p>"Lead pipe replacement (the 'Get the Lead Out' program) is the most immediate water infrastructure priority in the US — driven by the Flint, Michigan crisis and similar legacy infrastructure failures. This is a public health mandate, not a growth investment. The capital returns on lead pipe replacement are not attractive for private water utilities."</p></div>
@@ -964,11 +964,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val">12-18 mo</div><div class="ks-label">Transformer lead times</div></div>
           <div class="ks-cell"><div class="ks-val up">3.25x</div><div class="ks-label">Grid equipment market growth</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>The US electrical grid was designed for a 20th century economy. It was not designed to handle the sudden, massive electricity demand of AI datacenters. More than 50% of planned US datacenter projects are being delayed because there is no available grid capacity to connect them. This is not a GPU supply problem — it is a power grid problem. The solution is a multi-decade, multi-hundred-billion dollar buildout of electrical transmission infrastructure, transformer capacity, switchgear, and grid management software. This is the most underappreciated AI infrastructure theme of 2026.</p>
 
         <div class="deep-dive">
-          <h4>⚡ Deep Dive: Why The Grid Is The Bottleneck</h4>
+          <h3>⚡ Deep Dive: Why The Grid Is The Bottleneck</h3>
           <ul>
             <li><strong>Datacenter Power Demand:</strong> A 100MW AI datacenter draws the equivalent power of 75,000 homes. The interconnection queue — the process of getting a new large load connected to the grid — averages 18-24 months in PJM (the largest US grid operator) and 30-36 months in ERCOT (Texas).</li>
             <li><strong>Transformer Shortage:</strong> Medium voltage transformers (the equipment that connects large loads to the grid) have lead times of 12-18 months, up from 4-6 weeks pre-COVID. This is the physical bottleneck. No amount of GPU supply can fix a missing transformer.</li>
@@ -978,7 +978,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🔌 Deep Dive: The Equipment That Matters</h4>
+          <h3>🔌 Deep Dive: The Equipment That Matters</h3>
           <ul>
             <li><strong>Medium Voltage Transformers:</strong> The key bottleneck equipment. Connects large industrial loads (datacenters, factories) to the grid. Global MV transformer market is dominated by ABB, Siemens, and Eaton. Domestic US production is limited — most MV transformers are imported from Korea (Hyundai), Japan (Hitachi), and Europe.</li>
             <li><strong>Switchgear:</strong> The protective devices that control and isolate electrical equipment. Required at every grid connection point. Eaton (ETN) and Siemens are the primary US suppliers.</li>
@@ -1000,19 +1000,19 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Grid &amp; Power Infrastructure</h4>
+            <h3>Council of Expert Opinions — Grid &amp; Power Infrastructure</h3>
             <p>Goldman Sachs Infrastructure | Morgan Stanley Utilities | FERC | ABB Annual Report | Eaton Investor Presentation | EIA Electricity | Goldman Sachs Energy | Bernstein Research</p>
           </div>
           <div class="opinion-row">
             <div class="opinion-col bull-col">
-              <h5>🐂 Bull Case</h5>
+              <h4>🐂 Bull Case</h4>
               <div class="opinion-item"><div class="expert-src">Goldman Sachs Infrastructure</div><p>"The US electrical equipment market is growing from $20B to $65B annually by 2030 — a 3.25x growth cycle. This is not a normal infrastructure cycle. This is the electrification of the global economy, led by AI datacenters and EV charging. The companies that can produce transformers, switchgear, and grid management systems will have decade-long order books."</p></div>
               <div class="opinion-item"><div class="expert-src">FERC — Federal Energy Regulatory Commission</div><p>"We approved 37 major transmission projects in 2025, up from an average of 8 per year in 2015-2020. The permitting process has been accelerated for grid infrastructure deemed critical to national economic and security interests. AI datacenters now qualify. The regulatory tailwind for grid buildout is the strongest in 50 years."</p></div>
               <div class="opinion-item"><div class="expert-src">Eaton Investor Presentation (Q1 2026)</div><p>"Medium voltage switchgear lead times have extended to 52-78 weeks. Our order book is full through 2027. We are investing $30M specifically in new medium voltage switchgear capacity for AI datacenter customers. This is the most attractive market we have seen in 15 years."</p></div>
               <div class="opinion-item"><div class="expert-src">Bernstein Research</div><p>"Eaton is our top pick in electrical infrastructure. The grid is the new transformers — and Eaton is the company that makes the transformers. The current valuations do not reflect the structural multi-year capex cycle that grid buildout represents."</p></div>
             </div>
             <div class="opinion-col bear-col">
-              <h5>🐻 Bear Case</h5>
+              <h4>🐻 Bear Case</h4>
               <div class="opinion-item"><div class="expert-src">Morgan Stanley Utilities</div><p>"Grid buildout is real but slow. A 345kV transmission line takes 7-10 years to permit and build. The datacenter demand wave is happening now. The mismatch between near-term demand and long lead time supply means Eaton and other grid equipment companies will see orders accelerate but revenue recognition will lag by years."</p></div>
               <div class="opinion-item"><div class="expert-src">ABB Annual Report</div><p>"The transformer shortage is partly self-inflicted. After years of underinvestment following the 2008 financial crisis, transformer manufacturers ran lean and didn't invest in capacity. Now that demand is surging, ramping capacity takes 2-3 years. The industry didn't see the AI datacenter demand wave coming, and they're now scrambling to catch up."</p></div>
               <div class="opinion-item"><div class="expert-src">EIA Electricity Monthly</div><p>"US electricity demand grew at essentially 0% per year from 2010-2023 due to energy efficiency gains offsetting economic growth. The sudden surge in AI datacenter demand is hitting a grid that hasn't seen this kind of load growth in 30 years. The utilities and grid operators are simply not organized to respond quickly."</p></div>
@@ -1045,11 +1045,11 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
           <div class="ks-cell"><div class="ks-val up">$200B+</div><div class="ks-label">Missile defense spending est.</div></div>
           <div class="ks-cell"><div class="ks-val">3x</div><div class="ks-label">State-sponsored cyberattacks surge</div></div>
         </div>
-        <h4>The Core Thesis</h4>
+        <h3>The Core Thesis</h3>
         <p>The Iran war has created a new defense spending dynamic in the Middle East and globally. The US is providing significant military support to regional allies while simultaneously rebuilding its own stockpiles of precision-guided munitions (PGMs) that have been depleted in Ukraine and Israel. US allies in the Gulf (Saudi Arabia, UAE, Bahrain, Qatar) are dramatically increasing defense spending on air defense, missile defense, and cybersecurity. NATO members in Europe are accelerating defense spending in response to Russian escalation alongside the Iran conflict. This is a multi-year defense spending cycle — not a one-quarter event.</p>
 
         <div class="deep-dive">
-          <h4>🎯 Deep Dive: What the Iran War Means for Defense Budgets</h4>
+          <h3>🎯 Deep Dive: What the Iran War Means for Defense Budgets</h3>
           <ul>
             <li><strong>US Supplemental Defense Spending:</strong> Congress has passed multiple supplemental defense funding bills for US operations in the Middle East. These add $50-80B to the base defense budget for 2026-2027. This is incremental spending above the $886B base.</li>
             <li><strong>Precision-Guided Munitions (PGMs):</strong> The war has accelerated the use of Tomahawk missiles, JDAM kits, and other PGMs. US stockpiles have been drawn down and must be replenished — this creates a multi-year procurement cycle for Lockheed Martin (Tomahawk), Boeing (JDAM kits), and Raytheon (air-to-ground munitions).</li>
@@ -1059,7 +1059,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
         </div>
 
         <div class="deep-dive">
-          <h4>🔐 Deep Dive: Cybersecurity — The Unseen Front</h4>
+          <h3>🔐 Deep Dive: Cybersecurity — The Unseen Front</h3>
           <ul>
             <li><strong>State-Sponsored Cyberattacks Surge:</strong> Microsoft reports a 3x increase in state-sponsored cyberattacks from Iranian-affiliated actors since the war began. Targets include: US financial infrastructure, defense contractors, energy grid operators, water utilities, and telecommunications companies.</li>
             <li><strong>CISA (Cybersecurity and Infrastructure Security Agency) Alert:</strong> CISA issued a rare "SHIELDS UP" equivalent alert for US critical infrastructure in March 2026. All critical infrastructure operators are required to report cyber incidents within 24 hours.</li>
@@ -1080,19 +1080,19 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
         <div class="expert-council">
           <div class="expert-council-header">
-            <h4>Council of Expert Opinions — Defense &amp; Cybersecurity</h4>
+            <h3>Council of Expert Opinions — Defense &amp; Cybersecurity</h3>
             <p>Goldman Sachs Defense | Morgan Stanley Aerospace-Defense | Bloomberg Defense | CSIS | RAND Corporation | CrowdStrike Q1 2026 Earnings | Lockheed Martin Investor Day | CSIS Cybersecurity</p>
           </div>
           <div class="opinion-row">
             <div class="opinion-col bull-col">
-              <h5>🐂 Bull Case</h5>
+              <h4>🐂 Bull Case</h4>
               <div class="opinion-item"><div class="expert-src">Goldman Sachs Defense</div><p>"The Iran war defense spending cycle is not priced into defense stocks. LMT and RTX are trading at 15-17x forward earnings — these are wartime multiples in a peacetime market. We expect defense multiples to expand to 20-22x as the market recognizes this is a multi-year spending cycle, not a one-quarter supplemental."</p></div>
               <div class="opinion-item"><div class="expert-src">CSIS — Center for Strategic and International Studies</div><p>"The lessons of Ukraine and now Iran are: precision-guided munitions are expended at rates that exhaust peacetime stockpiles in weeks. Modern warfare consumes munitions at 10-50x the rate of Cold War planning assumptions. This means the US and its allies will need to rebuild stockpiles for years, regardless of how the Iran war ends."</p></div>
               <div class="opinion-item"><div class="expert-src">CrowdStrike Q1 2026 Earnings Call</div><p>"We are seeing a measurable acceleration in government and critical infrastructure deal velocity in Q1 2026. Iranian state-sponsored cyber activity has increased 3x since the conflict began. Our federal government business grew 60%+ year-over-year — driven by CMMC compliance requirements and the CISA Shields Up directive."</p></div>
               <div class="opinion-item"><div class="expert-src">RAND Corporation</div><p>"Cyber defense spending is the most cost-effective form of national defense in the 21st century. A $1B investment in cyber defense prevents more strategic damage than a $10B aircraft carrier for the scenarios we're now facing."</p></div>
             </div>
             <div class="opinion-col bear-col">
-              <h5>🐻 Bear Case</h5>
+              <h4>🐻 Bear Case</h4>
               <div class="opinion-item"><div class="expert-src">Bloomberg Defense</div><p>"Defense stocks have already run significantly in 2025-2026. LMT and RTX are up 30-40% over 18 months. The easy re-rating from 'peacetime' to 'wartime' multiples is behind them. What remains is the steady earnings growth from existing contracts — not a re-rating multiple expansion."</p></div>
               <div class="opinion-item"><div class="expert-src">Morgan Stanley Aerospace-Defense</div><p>"The defense prime contractors have a structural problem: they're delivering into a supply chain that can't scale fast enough. Labor constraints, component shortages, and program management cost overruns mean that higher defense budgets don't translate linearly into higher earnings. The supply chain is the bottleneck, not the budget."</p></div>
               <div class="opinion-item"><div class="expert-src">Lockheed Martin Investor Day</div><p>"Our actual earnings growth guidance for 2026-2027 is 5-8%. The defense budget is growing but our program portfolio is aging — F-35 is in sustainment phase (lower margins), the next big new start program (NGAD) is still in development. We are a cash cow, not a growth company."</p></div>
