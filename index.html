@@ -56,7 +56,7 @@
     border: 1px solid #30363d;
     border-radius: 12px;
     padding: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     text-align: left;
     text-decoration: none;
     transition: border-color 0.2s, transform 0.2s;
@@ -102,15 +102,59 @@
     color: #f0883e;
     border-color: rgba(240, 136, 62, 0.25);
   }
+  .tag.visual {
+    background: rgba(188, 140, 255, 0.12);
+    color: #bc8cff;
+    border-color: rgba(188, 140, 255, 0.25);
+  }
+  .tag.refined {
+    background: rgba(88, 166, 255, 0.12);
+    color: #58a6ff;
+    border-color: rgba(88, 166, 255, 0.25);
+  }
   .tag.archive {
     background: rgba(110, 118, 129, 0.12);
     color: #8b949e;
     border-color: rgba(110, 118, 129, 0.25);
   }
-  .tag.primary {
-    background: rgba(88, 166, 255, 0.15);
-    color: #58a6ff;
-    border-color: rgba(88, 166, 255, 0.3);
+  .subcards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .subcards .doc-card {
+    margin-bottom: 0;
+  }
+  .subcards .doc-card:hover {
+    transform: translateY(-1px);
+  }
+  .doc-card .variant-label {
+    font-size: 10px;
+    color: #484f58;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .variant-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+  }
+  .variant-divider span {
+    font-size: 11px;
+    color: #484f58;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .variant-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #21262d;
   }
 
   /* ── Archive section ── */
@@ -175,7 +219,7 @@
 </head>
 <body>
 <div class="container">
-  <h1>📊 Brian's Stock Research</h1>
+  <h1>Brian's Stock Research</h1>
   <p class="subtitle">May 2026 Research Reports</p>
 
 
@@ -187,12 +231,21 @@
     <span class="section-title">Battered Tech Stocks</span>
   </div>
 
-  <a href="Tech_Stock_Basket_May_2026.html" class="doc-card">
-    <div class="doc-date">Primary — May 2026</div>
-    <h2>17-Stock Battered Tech Basket (May 2026)</h2>
-    <p>Full 17-stock master document: 6 battered survivors (DOCU, SNOW, OKTA, MNDY, VEEV, DDOG) + 11 new Sandisk-type/infrastructure candidates (ANET, AMKR, QCOM, NTAP, ETN, GLW, LUMN, AEP, VST, MU, STX). Sticky left TOC with scroll-highlight. Bear/Bull/My Call per card. SKIP list of 10 culled names.</p>
-    <span class="tag primary">Full Breadth · Living Document · Sticky TOC</span>
-  </a>
+  <div class="subcards">
+    <a href="Tech_Stock_Basket_May_2026_v2.html" class="doc-card">
+      <div class="doc-date">Primary — May 2026</div>
+      <h2>17-Stock Battered Tech Basket</h2>
+      <p>17 stocks: 6 battered survivors (DOCU, SNOW, OKTA, MNDY, VEEV, DDOG) + 11 Sandisk-type/infrastructure picks (ANET, GLW, AMKR, ETN, VST, MU, STX, QCOM, NTAP, LUMN, AEP). Sticky left TOC with scroll-highlight. Per-stock stat rows, analyst verdict, bull/bear breakdown. Skip list of 10 culled names moved to end. References section included.</p>
+      <span class="tag refined">Refined · Stat Rows · References · Mobile Responsive</span>
+    </a>
+
+    <a href="Tech_Stock_Basket_May_2026_v2_visual.html" class="doc-card">
+      <div class="doc-date">Visual Edition — May 2026</div>
+      <h2>17-Stock Battered Tech Basket (Visual)</h2>
+      <p>Same content as the primary doc plus: Chart.js rating distribution doughnut chart, sector conviction bar chart, inline SVG sparklines on every stock card, ADA-compliant interactive elements.</p>
+      <span class="tag visual">Charts · Sparklines · ADA Compliant</span>
+    </a>
+  </div>
 
 
   <!-- ═══════════════════════════════════════════════ -->
@@ -203,12 +256,21 @@
     <span class="section-title">Geopolitical Winners</span>
   </div>
 
-  <a href="Geopolitical_Growth_Stocks_May_2026.html" class="doc-card">
-    <div class="doc-date">Primary — May 2026</div>
-    <h2>High Potential Growth Sectors — Supply Shock Edition v2</h2>
-    <p>8 sectors: Oil & Energy, Fertilizer, Nuclear Power, Plastics & Chemicals, Helium, Water Infrastructure, Grid & Power, Defense & Cybersecurity. Iran war Hormuz closure analysis: cascading second/third-order supply shock effects. Sticky left TOC. Bear/Bull/My Call for each sector.</p>
-    <span class="tag geo">Geopolitical · Iran War · Supply Shock · Sticky TOC</span>
-  </a>
+  <div class="subcards">
+    <a href="Geopolitical_Growth_Stocks_May_2026_v2.html" class="doc-card">
+      <div class="doc-date">Primary — May 2026</div>
+      <h2>High Potential Growth Sectors — Supply Shock Edition</h2>
+      <p>8 sectors: Oil, Fertilizer, Nuclear Power, Plastics, Helium, Water Infrastructure, Grid & Power, Defense. Iran war Hormuz closure analysis with cascading second/third-order supply shock effects. Sticky left TOC. Analyst's Call (entry/trigger) on each sector. Skip list of 5 obvious-but-wrong plays. References section.</p>
+      <span class="tag geo">Refined · Analyst Calls · Skip List · References</span>
+    </a>
+
+    <a href="Geopolitical_Growth_Stocks_May_2026_v2_visual.html" class="doc-card">
+      <div class="doc-date">Visual Edition — May 2026</div>
+      <h2>High Potential Growth Sectors (Visual)</h2>
+      <p>Same content as the primary doc plus: Chart.js sector conviction horizontal bar chart, commodity price spike magnitude chart, inline SVG sparklines for commodity trajectories. All visual elements include text alternatives and ARIA labels.</p>
+      <span class="tag visual">Charts · Sparklines · ADA Compliant</span>
+    </a>
+  </div>
 
 
   <!-- ═══════════════════════════════════════════════ -->
@@ -217,6 +279,17 @@
   <div class="archive-section">
     <button class="archive-toggle" onclick="document.getElementById('arch-list').classList.toggle('open'); this.textContent = document.getElementById('arch-list').classList.contains('open') ? '▲ Hide older versions' : '▼ Show older versions'">▼ Show older versions</button>
     <div id="arch-list" class="archive-list">
+
+      <a href="Tech_Stock_Basket_May_2026.html" class="archive-item">
+        <span class="arch-icon">💾</span>
+        <span class="arch-title">17-Stock Battered Tech Basket (pre-refresh)</span>
+        <span class="arch-date">May 2026</span>
+      </a>
+      <a href="Geopolitical_Growth_Stocks_May_2026.html" class="archive-item">
+        <span class="arch-icon">💾</span>
+        <span class="arch-title">Geopolitical Winners — Supply Shock Edition (pre-refresh)</span>
+        <span class="arch-date">May 2026</span>
+      </a>
       <a href="Tech_Stock_Basket_Analysis_May_2026_v2.html" class="archive-item">
         <span class="arch-icon">💾</span>
         <span class="arch-title">Tier 1–3 Battered Tech Basket v2</span>
@@ -229,7 +302,7 @@
       </a>
       <a href="Geopolitical_Growth_Stocks_May_2026_v2.html" class="archive-item">
         <span class="arch-icon">💾</span>
-        <span class="arch-title">Geopolitical Winners v2 (7-sector original)</span>
+        <span class="arch-title">Geopolitical Winners v2 (7-sector original layout)</span>
         <span class="arch-date">May 2026</span>
       </a>
       <a href="Tech_Stock_Basket_Analysis_April_2026_v2.html" class="archive-item">
@@ -237,6 +310,7 @@
         <span class="arch-title">Battered Tech Basket v2 (April 2026)</span>
         <span class="arch-date">April 2026</span>
       </a>
+
     </div>
   </div>
 

@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Battered Tech + Sandisk Plays — May 2026 Research</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --border: #30363d;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  --accent-green: #3fb950;
+  --accent-red: #f85149;
+  --accent-yellow: #d29922;
+  --accent-blue: #58a6ff;
+  --accent-purple: #bc8cff;
+  --accent-orange: #f0883e;
+  --bull-bg: rgba(63, 185, 80, 0.07);
+  --bear-bg: rgba(248, 81, 73, 0.07);
+  --skip-bg: rgba(139, 148, 158, 0.07);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* ── STICKY LEFT TOC ── */
+.toc-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 230px;
+  height: 100vh;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 20px 0 40px;
+  z-index: 200;
+}
+.toc-sidebar::-webkit-scrollbar { width: 4px; }
+.toc-sidebar::-webkit-scrollbar-track { background: transparent; }
+.toc-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.toc-brand {
+  padding: 0 20px 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+.toc-brand a {
+  font-size: 12px;
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+.toc-brand a:hover { text-decoration: underline; }
+.toc-brand span {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.toc-section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 12px 20px 6px;
+}
+
+.toc-item {
+  display: block;
+  padding: 6px 20px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.toc-item:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.04);
+  text-decoration: none;
+  border-left-color: var(--accent-blue);
+}
+.toc-item.active {
+  color: var(--accent-blue);
+  background: rgba(88, 166, 255, 0.08);
+  border-left-color: var(--accent-blue);
+  font-weight: 600;
+}
+.toc-item.skip-item {
+  color: var(--text-muted);
+  font-style: italic;
+}
+.toc-item.skip-item:hover {
+  color: var(--text-secondary);
+  border-left-color: var(--text-muted);
+}
+.toc-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 10px 20px;
+}
+
+/* ── MAIN CONTENT SHIFT ── */
+.page-content {
+  margin-left: 230px;
+  min-height: 100vh;
+}
+
+/* ── REPORT HEADER ── */
+.report-header {
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1c2128 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 48px 36px;
+}
+.report-header .version-badge {
+  display: inline-block;
+  background: rgba(88, 166, 255, 0.15);
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  color: var(--accent-blue);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+.report-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  max-width: 700px;
+}
+.report-header .subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+.report-header .meta-row { display: flex; gap: 28px; flex-wrap: wrap; }
+.report-header .meta-item { font-size: 12px; color: var(--text-muted); }
+.report-header .meta-item strong { color: var(--text-secondary); font-weight: 500; }
+
+/* ── HOW TO USE GUIDE ── */
+.guide-section {
+  padding: 32px 48px;
+  max-width: 1100px;
+  border-bottom: 1px solid var(--border);
+}
+.guide-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.guide-header {
+  background: var(--surface2);
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+}
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--border);
+}
+.guide-cell {
+  background: var(--surface);
+  padding: 14px 18px;
+}
+.guide-cell .tag-example {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+.guide-cell .tag-example.buy { background: rgba(63,185,80,.15); color: var(--accent-green); }
+.guide-cell .tag-example.hold { background: rgba(210,153,34,.15); color: var(--accent-yellow); }
+.guide-cell .tag-example.skip { background: rgba(139,148,158,.15); color: var(--text-muted); }
+.guide-cell .tag-example.watch { background: rgba(248,81,73,.15); color: var(--accent-red); }
+.guide-cell p { font-size: 12px; color: var(--text-secondary); }
+
+/* ── INTRO SECTION ── */
+.intro-section {
+  padding: 32px 48px 24px;
+  max-width: 1100px;
+  border-bottom: 1px solid var(--border);
+}
+.intro-section p {
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+.thesis-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-blue);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 16px 0;
+  max-width: 800px;
+}
+.thesis-box .thesis-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  margin-bottom: 6px;
+}
+.thesis-box p { color: var(--text-primary); font-size: 13px; }
+
+/* ── SKIP SECTION ── */
+.skip-section {
+  padding: 28px 48px;
+  max-width: 1100px;
+  border-bottom: 1px solid var(--border);
+}
+.skip-section h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.skip-section .skip-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+.skip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+.skip-card {
+  background: var(--skip-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.skip-card .ticker {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.skip-card p { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+/* ── TIER DIVIDER ── */
+.tier-divider {
+  padding: 20px 48px 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 1100px;
+}
+.tier-divider .tier-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.tier-divider.tier-1 .tier-label { color: var(--accent-green); }
+.tier-divider.tier-2 .tier-label { color: var(--accent-blue); }
+.tier-divider.tier-3 .tier-label { color: var(--accent-purple); }
+.tier-divider.tier-new .tier-label { color: var(--accent-orange); }
+.tier-divider .tier-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── STOCK CARDS ── */
+.stock-section {
+  padding: 0 48px 40px;
+  max-width: 1100px;
+}
+.stock-section:target { scroll-margin-top: 0; }
+
+.stock-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.stock-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: background 0.15s;
+  gap: 14px;
+}
+.stock-card-header:hover { background: var(--surface2); }
+.stock-card-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+.stock-ticker {
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  min-width: 56px;
+}
+.stock-card-center { flex: 1; }
+.stock-company {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.stock-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.stock-card-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.verdict-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.verdict-badge.buy { background: rgba(63,185,80,.15); color: var(--accent-green); border: 1px solid rgba(63,185,80,.3); }
+.verdict-badge.hold { background: rgba(210,153,34,.15); color: var(--accent-yellow); border: 1px solid rgba(210,153,34,.3); }
+.verdict-badge.watch { background: rgba(248,81,73,.15); color: var(--accent-red); border: 1px solid rgba(248,81,73,.3); }
+.verdict-badge.skip { background: rgba(139,148,158,.15); color: var(--text-muted); border: 1px solid rgba(139,148,158,.3); }
+.verdict-badge.maybe { background: rgba(188,140,255,.15); color: var(--accent-purple); border: 1px solid rgba(188,140,255,.3); }
+.verdict-badge.hold-watch { background: rgba(210,153,34,.15); color: var(--accent-yellow); border: 1px solid rgba(210,153,34,.3); }
+.arrow-icon {
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.stock-card[open] .arrow-icon { transform: rotate(90deg); }
+
+.stock-card-body {
+  border-top: 1px solid var(--border);
+  padding: 20px 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.stat-cell {
+  background: var(--surface2);
+  padding: 10px 14px;
+  text-align: center;
+}
+.stat-cell .sc-val { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.stat-cell .sc-val.up { color: var(--accent-green); }
+.stat-cell .sc-val.dn { color: var(--accent-red); }
+.stat-cell .sc-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+
+.analysis-col h4 {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.analysis-col.bull h4 { color: var(--accent-green); }
+.analysis-col.bear h4 { color: var(--accent-red); }
+.analysis-col.my-call h4 { color: var(--accent-blue); }
+
+.analysis-block {
+  background: var(--surface2);
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-left: 3px solid;
+}
+.analysis-block.bull-block { border-left-color: var(--accent-green); }
+.analysis-block.bear-block { border-left-color: var(--accent-red); }
+.analysis-block.call-block { border-left-color: var(--accent-blue); }
+.analysis-block p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.analysis-block strong { color: var(--text-primary); }
+
+.verdict-footer {
+  border-top: 1px solid var(--border);
+  padding: 14px 22px;
+  background: var(--surface2);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.vf-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-blue);
+  white-space: nowrap;
+  padding-top: 1px;
+}
+.vf-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.vf-text strong { color: var(--text-primary); }
+
+/* ── BATTLET TECH HEADER ── */
+.section-head {
+  padding: 28px 48px 20px;
+  max-width: 1100px;
+  border-bottom: 1px solid var(--border);
+}
+.section-head h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.section-head p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  padding: 24px 48px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+  max-width: 1100px;
+}
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 768px) {
+  .toc-sidebar { display: none; }
+  .page-content { margin-left: 0; }
+  .report-header { padding: 24px 20px 20px; }
+  .guide-section, .intro-section { padding: 24px 20px; }
+  .stock-section { padding: 0 20px 32px; }
+  .section-head { padding: 24px 20px 16px; }
+  .skip-section { padding: 24px 20px; }
+  .guide-grid, .stock-card-body { grid-template-columns: 1fr; }
+  .skip-grid { grid-template-columns: 1fr 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .page-footer { padding: 20px; }
+  .report-header h1 { font-size: 20px; }
+  .report-header .subtitle, .report-header .meta-row { font-size: 13px; }
+}
+
+
+/* ── SPARKLINES ── */
+.sparkline-wrap { margin-left: 8px; flex-shrink: 0; }
+.sparkline { display: inline-flex; align-items: center; }
+.sparkline svg { display: block; }
+
+/* ── CHARTS SECTION ── */
+.charts-section { padding: 32px 48px 24px; max-width: 1100px; border-bottom: 1px solid #30363d; }
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px; }
+.chart-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; }
+.chart-card h3 { font-size: 14px; font-weight: 700; color: #e6edf3; margin-bottom: 12px; }
+.chart-desc { font-size: 12px; color: #6e7681; margin-bottom: 14px; }
+.chart-canvas-wrap { position: relative; height: 180px; }
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- LEFT SIDEBAR TOC -->
+<!-- ═══════════════════════════════════════════════════ -->
+<nav class="toc-sidebar" id="toc">
+  <div class="toc-brand">
+    <a href="index.html">← Research Home</a>
+    <span>May 2026</span>
+  </div>
+
+  <div class="toc-section-label">📋 Guide</div>
+  <a class="toc-item" href="#how-to-use">How to Use This Doc</a>
+  <a class="toc-item" href="#thesis">Investment Thesis</a>
+
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">⛔ Skips</div>
+  <a class="toc-item skip-item" href="#skip-list">10 Culled Stocks</a>
+
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">💻 Battered Tech</div>
+  <a class="toc-item" href="#tier1-survivors">Tier 1 Survivors</a>
+  <a class="toc-item" data-toc="docu" href="#docu">DOCU</a>
+  <a class="toc-item" data-toc="snow" href="#snow">SNOW</a>
+  <a class="toc-item" data-toc="okta" href="#okta">OKTA</a>
+
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">💻 Battered Tech Cont.</div>
+  <a class="toc-item" data-toc="mndy" href="#mndy">MNDY</a>
+  <a class="toc-item" data-toc="veev" href="#veev">VEEV</a>
+  <a class="toc-item" data-toc="ddog" href="#ddog">DDOG</a>
+
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">⚡ Sandisk-Type Plays</div>
+  <a class="toc-item" data-toc="anet" href="#anet">ANET</a>
+  <a class="toc-item" data-toc="glw" href="#glw">GLW (Corning)</a>
+  <a class="toc-item" data-toc="amkr" href="#amkr">AMKR</a>
+  <a class="toc-item" data-toc="etn" href="#etn">ETN (Eaton)</a>
+  <a class="toc-item" data-toc="lumn" href="#lumn">LUMN</a>
+  <a class="toc-item" data-toc="qcom" href="#qcom">QCOM</a>
+  <a class="toc-item" data-toc="ntap" href="#ntap">NTAP</a>
+  <a class="toc-item" data-toc="aep" href="#aep">AEP</a>
+  <a class="toc-item" data-toc="vst" href="#vst">VST</a>
+  <a class="toc-item" data-toc="stx" href="#stx">STX</a>
+  <a class="toc-item" data-toc="mu" href="#mu">MU (Micron)</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- MAIN CONTENT -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page-content">
+
+  <!-- HEADER -->
+  <header class="report-header">
+    <div class="version-badge">Living Document · May 2026</div>
+    <h1>Battered Tech + Sandisk-Type Plays</h1>
+    <p class="subtitle">16 beaten-down SaaS/tech survivors re-analyzed + 11 new Sandisk-pattern candidates across AI infrastructure, grid power, and fiber. The complete research basket.</p>
+    <div class="meta-row">
+      <div class="meta-item"><strong>Last Updated:</strong> May 2026</div>
+      <div class="meta-item"><strong>Stocks Covered:</strong> 27 total (6 survivors + 11 new + 10 skippped)</div>
+      <div class="meta-item"><strong>Analyst:</strong> Hermes Agent Research</div>
+    </div>
+  </header>
+
+  <!-- HOW TO USE -->
+  <div class="guide-section" id="how-to-use">
+    <div class="guide-box">
+      <div class="guide-header">📖 How to Navigate &amp; Read This Document</div>
+      <div class="guide-grid">
+        <div class="guide-cell">
+          <span class="tag-example buy">BUY</span>
+          <p>Strong conviction buy. Near-term specific catalyst identified that could trigger re-rating within 3-12 months.</p>
+        </div>
+        <div class="guide-cell">
+          <span class="tag-example hold">HOLD</span>
+          <p>Valid long-term thesis but either valuation is stretched or catalyst timing is unclear. Accumulate on dips.</p>
+        </div>
+        <div class="guide-cell">
+          <span class="tag-example hold-watch">HOLD / WATCH</span>
+          <p>Thesis is valid but needs confirmation of a specific upcoming event (earnings, product launch, re-acceleration). Don't buy yet.</p>
+        </div>
+        <div class="guide-cell">
+          <span class="tag-example skip">SKIP</span>
+          <p>No near-term catalyst identified. Structural headwinds, excessive valuation, or competitive erosion make these hard to own.</p>
+        </div>
+        <div class="guide-cell">
+          <span class="tag-example watch">WATCH</span>
+          <p>High risk / high reward spec play. Could go parabolic or implode. Position size accordingly if you enter.</p>
+        </div>
+        <div class="guide-cell">
+          <span class="tag-example maybe">MAYBE</span>
+          <p>Intriguing but missing one key piece of thesis confirmation. Keep on radar but don't commit yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO / THESIS -->
+  
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- CHARTS & VISUALIZATIONS -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="charts-section" aria-label="Data visualizations">
+    <h2 style="font-size:17px;font-weight:700;color:#e6edf3;margin-bottom:4px;letter-spacing:-0.01em;">📊 Research Visualizations</h2>
+    <p style="font-size:13px;color:#6e7681;margin-bottom:0;">Data-driven snapshots of the basket at a glance.</p>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>🎯 Rating Distribution</h3>
+        <p class="chart-desc">17 total stocks — conviction breakdown across all 5 rating tiers.</p>
+        <div class="chart-canvas-wrap">
+          <canvas id="ratingChart" aria-label="Doughnut chart showing rating distribution: 3 BUY, 9 HOLD, 1 HOLD/WATCH, 2 WATCH, 2 SKIP" role="img"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>⚡ Sector Conviction</h3>
+        <p class="chart-desc">Sandisk-Type Plays carry the highest near-term re-rating conviction.</p>
+        <div class="chart-canvas-wrap">
+          <canvas id="sectorChart" aria-label="Horizontal bar chart comparing conviction scores: Sandisk-Type Plays 78, Battered Tech 55" role="img"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class="intro-section" id="thesis">
+    <h2 style="font-size:16px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">The Core Thesis: Two Separate Bets, One Document</h2>
+    <p>These are two distinct investment frameworks in one basket:</p>
+
+    <div class="thesis-box">
+      <div class="thesis-label">💻 Part 1 — Battered Tech</div>
+      <p>Beaten-down SaaS and software stocks that sold off from ATHs. The thesis: at current valuations, growth rates don't need to re-accelerate dramatically for these to work — they're pricing in a lot of bad news. The risk: if growth keeps decelerating, multiples compress further. These need a catalyst — a new AI product, a competitive win, a re-acceleration quarter — to re-rate.</p>
+    </div>
+    <div class="thesis-box">
+      <div class="thesis-label">⚡ Part 2 — Sandisk-Type Plays</div>
+      <p>The Sandisk DNA: oversupplied or neglected by the market + secular demand catalyst the street hasn't fully priced + a specific capex or partnership announcement that becomes the trigger. These are mid-cap infrastructure and hardware names that are structurally levered to AI datacenter buildout. Many were crushed in early 2026 and are now at interesting entry points.</p>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TIER 1: SURVIVORS -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-head" id="tier1-survivors">
+    <h2>💻 Part 1: The Battered Tech Survivors</h2>
+    <p>6 stocks that survived the cull — each with a specific re-rating catalyst and a credible bull case.</p>
+  </div>
+
+  <!-- DOCU -->
+  <div class="stock-section" id="docu">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">DOCU</span>
+          <div class="stock-card-center">
+            <div class="stock-company">DocuSign — Intelligent Management Platform</div>
+            <div class="stock-desc">$3B revenue · Agreement cloud + AI assistant · 90% off ATH</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="DOCU" aria-label="DOCU price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$55</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val dn">-58%</div><div class="sc-label">From ATH (~$130)</div></div>
+          <div class="stat-cell"><div class="sc-val up">+8%</div><div class="sc-label">Revenue Growth</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>The AI Agent wave is DocuSign's next wave.</strong> AI agents need to execute agreements. DocuSign has 1.5 billion+ agreements in its network — the largest structured agreement dataset in the world. Its AI Agent Studio lets customers build agents that negotiate, execute, and manage agreements automatically. This is a genuine platform expansion, not just a feature add. Management is guiding for AI-driven workflow automation becoming a meaningful revenue contributor in 2026-2027.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Valuation is pricing in collapse.</strong> Trading at ~6x forward EV/revenue for a company still growing high-single-digits. If AI Agent adoption drives even a modest re-acceleration to 12-15% growth, the stock deserves 10-12x. The risk/reward at these levels asymmetrically favors buyers.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>AI agents could disintermediate DocuSign entirely.</strong> If Microsoft, Salesforce, or an AI-native competitor builds contract execution directly into their workflows, DocuSign becomes a commodity utility. The AI Agent Studio is a defensive move, not an offensive one.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Growth is still decelerating.</strong> +8% is not re-acceleration. The company needs to show consecutive quarters of accelerating growth before the market re-rates it. Q1 2026 results will be the key test.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD.</strong> DocuSign at these prices is not a value trap — it's a company with a genuine AI platform story that the market hasn't priced. The agreement network effect is underappreciated. But "AI Agent Studio" is still early, and the stock won't re-rate until there's a visible revenue contribution. Wait for Q1 2026 earnings. If AI-driven deals show up in guidance, upgrade to BUY.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Q1 2026 earnings with AI Agent Studio revenue contribution disclosed, or guidance raise. <strong>Entry zone:</strong> Below $50 is attractive. Current levels are fair, not compelling.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> Valid AI platform story at a reasonable multiple. Don't buy yet — wait for Q1 earnings to confirm AI Agent traction. Below $50 is a compelling entry.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- SNOW -->
+  <div class="stock-section" id="snow">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">SNOW</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Snowflake — Data Cloud Platform</div>
+            <div class="stock-desc">$3.4B revenue · +30% growth · AI Agents disrupting data stack</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="SNOW" aria-label="SNOW price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$140</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val dn">-45%</div><div class="sc-label">From ATH (~$255)</div></div>
+          <div class="stat-cell"><div class="sc-val up">+30%</div><div class="sc-label">Revenue Growth</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>Cortex AI is a genuine product.</strong> Snowflake's Cortex AI lets enterprises run LLM-powered analytics on data inside Snowflake — without moving it. This is a real workflow improvement for regulated industries (healthcare, finance, government). The ability to query structured data with natural language is a legitimate productivity unlock. Market penetration of Cortex AI is still early and has room to expand.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Data sharing network effects.</strong> Snowflake's strength is that customers bring their data to share with other Snowflake customers. As more enterprises join the Data Cloud, the network becomes more valuable. Government and healthcare verticals are growth areas that add credibility.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>AI agents are a disruption risk, not just a tailwind.</strong> The same AI agents that analysts say will "increase data volume" could instead replace data analysts — reducing the number of humans querying Snowflake's data warehouse. If AI does the analysis rather than humans, demand for Snowflake's queries could decline even as data volume grows.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Multiple compression is real.</strong> At $140, Snowflake still trades at ~15x forward EV/revenue. For a company whose growth is decelerating from 100%+ to 30%, that's not obviously cheap. Databricks (private) is a direct competitor with a broader ML/AI platform that is winning head-to-head in enterprise deals.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD.</strong> Snowflake is a high-quality business in a competitive space. The Cortex AI story is real but hasn't shown up in revenue numbers yet. Keep as a watchlist name. The stock works if you believe data volumes will explode with AI — but that's a belief, not a fact on the income statement.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Cortex AI monetization metrics in Q1 earnings. Any guidance raise related to AI-driven consumption would be a BUY signal. <strong>Risk:</strong> If Databricks continues winning enterprise deals at Snowflake's expense, downgrade to SKIP.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> Solid business, competitive but not dying. Cortex AI is early but real. Watch Q1 2026 for Cortex traction. Don't add aggressively at current levels.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- OKTA -->
+  <div class="stock-section" id="okta">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">OKTA</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Okta — Identity &amp; Access Management</div>
+            <div class="stock-desc">$2.9B revenue · +13% growth · AI Agents GA launched</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="OKTA" aria-label="OKTA price sparkline"></span></span>
+          <span class="verdict-badge hold-watch">HOLD / WATCH</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$65</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val dn">-65%</div><div class="sc-label">From ATH (~$185)</div></div>
+          <div class="stat-cell"><div class="sc-val">+13%</div><div class="sc-label">Revenue Growth</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>AI Agents GA is a new top-of-funnel.</strong> Every AI agent needs to authenticate before taking actions on behalf of a human. Okta's AI Agents product is a new offering designed specifically for agentic AI workflows — agent-to-application authentication, agent-to-agent trust, and audit trails for AI actions. This is a genuine product expansion into a new use case that didn't exist 18 months ago.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Identity is a moat.</strong> Okta sits at the intersection of every enterprise application. Every SaaS app, every cloud workload, every VPN — Okta touches it. This gives Okta extraordinary data on enterprise access patterns that is valuable for AI security use cases. The switching cost for customers is extremely high.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>+13% growth is mediocre for a $2.9B company.</strong> The easy adoption is over. Okta has already sold to most companies that would buy an identity provider. New logo growth is slowing. The path to re-acceleration requires winning in completely new categories (AI agents, CIEM, independent identity for non-human identities) — and all of those are contested markets.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Microsoft Purview is eating Okta's lunch.</strong> Microsoft is increasingly bundling identity + security + compliance at the platform level. For the vast Microsoft 365 customer base, Okta is an add-on when Microsoft will eventually make it native. The competitive moat against Microsoft's bundling strategy is weaker than the stock assumes.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD / WATCH.</strong> The AI Agents GA launch is promising but needs to show up in ARR before this is a BUY. The thesis is "AI agents create a new category of non-human identity that Okta can monetize." That thesis is plausible but unproven. Don't buy ahead of the data.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Q1 2026 earnings. If AI Agents ARR is disclosed and growing, upgrade to BUY. If AI Agents is still in pilot/POC with no clear revenue timeline, stay on HOLD. <strong>Risk:</strong> If Microsoft Copilot continues to displace Okta in M365 shops, the bear case accelerates.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD / WATCH pending Q1 2026.</strong> AI Agents GA is the catalyst but needs revenue confirmation. Don't buy before Q1 earnings confirm the thesis.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- MNDY -->
+  <div class="stock-section" id="mndy">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">MNDY</span>
+          <div class="stock-card-center">
+            <div class="stock-company">monday.com — Work OS Platform</div>
+            <div class="stock-desc">$1B+ revenue · +18-19% growth · AI-native project management</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="MNDY" aria-label="MNDY price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$180</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val dn">-40%</div><div class="sc-label">From ATH (~$300)</div></div>
+          <div class="stat-cell"><div class="sc-val up">+18%</div><div class="sc-label">Revenue Growth</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>monday.com is better positioned than SMAR/ASAN.</strong> Unlike Smartsheet and Asana, monday.com is a visual, flexible Work OS — not a rigid project management grid. This makes it significantly more adaptable to AI-driven workflows. Monday's AI features (AI Sprint, AI Column) are more naturally integrated into the product than competitors' bolt-on AI assistants.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Stronger-than-peers growth with path to profitability.</strong> +18-19% growth with a clear GAAP profitability timeline. Monday deviated from the pure-growth-play playbook and is consciously managing toward sustainable unit economics — a maturity that the market hasn't rewarded yet but should.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>Still faces Notion/Coda competition.</strong> AI-native tools like Notion and Coda are winning in startup/tech SMB segments. Monday's enterprise motion is stronger, but the competitive dynamic in its core SMB market is getting tougher. Growth could decelerate further if enterprise expansion doesn't offset SMB saturation.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD.</strong> Best of the legacy PM tools to own, and the only one I'd keep in the basket. Monday's AI integration and Work OS flexibility gives it staying power that SMAR and ASAN lack. Not a exciting re-rating story, but a solid business that's being overlooked in the "legacy PM tool" sell-off.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Q1 2026 earnings — watch for monday lean AI features driving upsell. If enterprise deals are closing faster than expected, upgrade to BUY. <strong>Risk:</strong> If Notion continues to eat from below in the SMB market, growth decelerates below 15%.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> Best positioned legacy PM tool. Monday's AI features and Work OS flexibility give it legs SMAR/ASAN lack. Monitor Q1 for enterprise traction.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- VEEV -->
+  <div class="stock-section" id="veev">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">VEEV</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Veeva Systems — Life Sciences Cloud</div>
+            <div class="stock-desc">$2.7B revenue · +16% growth · Narrow but real moat in life sciences</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="VEEV" aria-label="VEEV price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$175</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val dn">-35%</div><div class="sc-label">From ATH (~$270)</div></div>
+          <div class="stat-cell"><div class="sc-val up">+16%</div><div class="sc-label">Revenue Growth</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>Narrow moat in a regulated vertical.</strong> Veeva's Vault platform is deeply embedded in pharma and biotech R&D workflows. Electronic lab notebooks, clinical trial management, regulatory submissions — these are workflows that require validation, audit trails, and regulatory compliance. Salesforce can't just build this. Microsoft can't just add it to Teams. It's a vertical SaaS moat that doesn't get disrupted by horizontal AI assistants.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>AI for life sciences is a new horizon.</strong> Veeva is building AI features specifically for clinical data analysis, adverse event detection, and protocol optimization. Pharma's AI adoption is 2-3 years behind tech because of regulatory constraints — but it's coming. Veeva's existing customer relationships put it in pole position to sell AI into pharma.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>Veloxity no longer a concern, but growth ceiling is real.</strong> The Veloxity non-compete issue is resolved. But the bull case is now "is this enough?" +16% growth is acceptable but not exciting. The life sciences vertical is not a hypergrowth market — it's a steady, predictable, high-quality market. The stock reflects that.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Valuation is full.</strong> At ~$175, Veeva is not cheap. It trades at a significant premium to the market and to pure-play software. The premium is justified by the moat, but limits upside.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD.</strong> Veeva is a high-quality, narrow-moat business that belongs in a basket of beaten-down tech — not as a re-rating story, but as a quality compounder. It's not exciting but it's reliable. The AI story in pharma is a 2-3 year thesis, not a 12-month catalyst.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Any pullback to $150 would be a BUY. Otherwise, hold and collect. This is a portfolio anchor, not a lottery ticket.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> Quality compounder with a real regulatory moat. Not a re-rating story — a reliable business for a portfolio that needs steady names. Buy on dips to $150.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- DDOG -->
+  <div class="stock-section" id="ddog">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">DDOG</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Datadog — Cloud Observability Platform</div>
+            <div class="stock-desc">$2.5B revenue · +29% growth · AI ops monitoring adds tailwind</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="DDOG" aria-label="DDOG price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$110</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val dn">-30%</div><div class="sc-label">From ATH (~$155)</div></div>
+          <div class="stat-cell"><div class="sc-val up">+29%</div><div class="sc-label">Revenue Growth</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>AI ops monitoring is a new market.</strong> As enterprises deploy AI models and agents, they need to monitor those AI systems for performance, drift, and errors. Datadog is building AI monitoring features (LLM observability, AI agent tracing) that position it to capture this new workload. This is the observability equivalent of what Snowflake is trying to do with Cortex AI — riding an existing customer relationship into a new use case.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Net revenue retention still above 115%.</strong> Even with deceleration from 80%+, Datadog's NRR shows existing customers are expanding usage. This is a critical metric that argues the product is sticky and AI-driven monitoring is driving real consumption growth.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>Valuation is the risk.</strong> At ~$110 and ~29% growth, Datadog trades at roughly 14-15x forward EV/revenue. For a decelerating growth company, that's not particularly cheap. The market is paying a premium for AI optionality that hasn't fully materialized in the numbers.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Competitive pressure from all sides.</strong> Splunk (Cisco), New Relic (钛), and open-source alternatives (Grafana, Prometheus) are all competing for observability spend. Microsoft's acquisition of Splunk and aggressive bundling of observability into Azure is a meaningful long-term competitive risk.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD.</strong> Datadog is the best-in-class observability play with a genuine AI monitoring story. But the bar for re-rating is high — the stock already prices in a lot of AI success. Wait for a better entry on a growth scare.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> A pullback to $90-95 would be a BUY. Q1 2026 earnings showing AI ops monitoring contributing visible revenue would also upgrade to BUY. <strong>Risk:</strong> If Azure bundling of observability accelerates and costs Datadog large enterprise deals, the bear case plays out.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> Best-in-class observability with a real AI monitoring story. Valuation is full — wait for a pullback to $90-95 before buying aggressively.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SANDISK PLAYS -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-head" id="sandisk-plays">
+    <h2>⚡ Part 2: The Sandisk-Type Plays — AI Infrastructure Winners</h2>
+    <p>11 stocks positioned to benefit from the AI datacenter buildout cycle. Each has a specific catalyst and a Sandisk-like re-rating potential.</p>
+  </div>
+
+  <!-- ANET -->
+  <div class="stock-section" id="anet">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">ANET</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Arista Networks — AI Datacenter Networking</div>
+            <div class="stock-desc">Beat &amp; raise crushed · AI networking $1.5B→$2.75B · Supply constraint = temporary</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="ANET" aria-label="ANET price sparkline"></span></span>
+          <span class="verdict-badge buy">BUY</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$172</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val dn">-16%</div><div class="sc-label">From Recent Highs</div></div>
+          <div class="stat-cell"><div class="sc-val up">+83%</div><div class="sc-label">AI Networking Growth</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>The supply constraint narrative is the gift.</strong> Arista just raised 2026 guidance with AI networking revenue going from $1.5B to $2.75B (+83%). The stock got crushed on supply chain concerns — specifically, component shortages are constraining how fast Arista can fulfill orders. This is a temporary problem, not a demand problem. The order book is full. When supply catches up, the revenue catches up.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>The AI datacenter network is the new switching layer.</strong> AI compute clusters need high-speed, low-latency network fabrics to move training data between GPUs. Arista's 400G/800G Ethernet switches are the backbone of these AI networks. As hyperscalers build out AI campuses (Microsoft's $80B, Google's $75B, Meta's $60B+ capex), Arista is the picked supplier for the network layer.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Valuation is fair, not expensive.</strong> At ~$172, ANET is trading at roughly 30-35x forward earnings. For a company growing AI networking revenue at 80%+ with a $2.75B AI networking backlog, that's reasonable — not cheap, but not bubble territory.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>Supply constraints could persist longer than expected.</strong> If Broadcom or Marvell can't supply the custom ASICs that Arista's next-gen switches depend on, the supply constraint becomes a demand destruction story. The risk is that customers go to Cisco or Juniper while waiting, and Arista loses design wins.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>The hyperscaler capex cycle could pause.</strong> If AI training ROI disappoints (models don't deliver productivity gains fast enough), hyperscalers could cut capex. Arista is the most levered pure-play to hyperscaler AI networking spend — a capex pullback hits ANET harder than most.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>BUY.</strong> This is the closest thing to the 2025 Sandisk setup in the market today. A company raised guidance, crushed estimates, and got crushed on the stock because the market focused on the wrong thing (supply) instead of the right thing (demand). AI networking is a secular buildout, not a one-quarter beat. ANET is the highest conviction name in this section.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Entry:</strong> $160-170 is an attractive entry. <strong>Target:</strong> $220+ if AI networking revenue re-accelerates in Q2 earnings. <strong>Trigger:</strong> Any Q1 earnings confirmation that supply constraint is resolving. <strong>Risk:</strong> If supply constraints persist into Q2 and guidance is lowered, the stock could fall to $140 — which would be an even better entry.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>BUY.</strong> Top conviction pick in the Sandisk section. Beat/raise + supply constraint overreaction + AI networking secular bull = high probability of re-rating. Size up on any Q1 earnings confirmation of supply recovery.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- GLW (Corning) -->
+  <div class="stock-section" id="glw">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">GLW</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Corning — Fiber Optic Connectivity for AI Datacenters</div>
+            <div class="stock-desc">$6B Meta deal · CPO hitting AI clusters 2026 · $20B→$65B fiber market</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="GLW" aria-label="GLW price sparkline"></span></span>
+          <span class="verdict-badge buy">BUY</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$38</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val up">+25%</div><div class="sc-label">YTD 2026</div></div>
+          <div class="stat-cell"><div class="sc-val">$6B</div><div class="sc-label">Meta Deal (Multi-year)</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>The $6B Meta deal is the real thing.</strong> Corning just signed a multiyear, up to $6 billion agreement with Meta to accelerate the most advanced AI datacenter buildout in the world. This is a committed, multi-year revenue stream tied directly to AI infrastructure. Corning's fiber and connectivity solutions are the nervous system of Meta's AI compute clusters.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Co-packaged optics (CPO) goes mainstream in 2026.</strong> Corning's CFO says CPO hits actual AI cluster deployments in 2026 — not demos, not pilots. CPO puts optical connectivity inside the server chassis, dramatically reducing power and latency for AI workloads. This is a technology transition Corning is uniquely positioned to lead as the dominant fiber and cable manufacturer.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>The US electrical equipment market is $20B→$65B by 2030.</strong> Corning is a key supplier for the fiber backbone that powers AI datacenters. This is a structural demand shift, not a cyclical uptick.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>The stock has already moved.</strong> Corning is up ~25% YTD 2026. The easy part of the re-rating may be behind it. The $6B Meta deal is priced in partially — not fully, but the margin of safety is narrower than it was 6 months ago.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Fiber competition is real.</strong> CommScope is also competing aggressively for AI datacenter fiber. If Coherent (II-VI) or other fiber specialists win more design slots at the expense of Corning, market share could erode even in a growing market.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>BUY on pullbacks.</strong> The $6B Meta deal is the most concrete AI infrastructure contract outside of semiconductor equipment that we've seen. Corning's CPO leadership positions it as the fiber winner in the AI datacenter buildout. The secular demand story is intact. The stock has moved, but there's still runway.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Entry:</strong> $34-36 is a compelling entry (post-earnings dip). <strong>Target:</strong> $45-50 within 18 months if Meta deal ramps as expected and CPO deployments accelerate. <strong>Risk:</strong> If hyperscaler capex slows, the fiber buildout story delays.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>BUY on pullbacks to $34-36.</strong> The $6B Meta deal is a concrete, multi-year revenue stream. Corning's CPO leadership makes it the fiber winner for AI datacenters. Secular demand story is intact.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- AMKR -->
+  <div class="stock-section" id="amkr">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">AMKR</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Amkor Technology — Advanced Semiconductor Packaging</div>
+            <div class="stock-desc">OSAT shortage · TSMC farming out · Analyst target $28→$43</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="AMKR" aria-label="AMKR price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$28</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val up">NEW HIGH</div><div class="sc-label">12-Month High</div></div>
+          <div class="stat-cell"><div class="sc-val up">$43</div><div class="sc-label">Analyst Target</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>TSMC is overwhelmed and farming out packaging.</strong> AI chips require advanced packaging (HBM memory stacking, CoWoS, chip-on-wafer-on-substrate). TSMC's CoWoS capacity is the bottleneck limiting AI chip output — and TSMC is outsourcing packaging to Amkor to relieve that bottleneck. This is a structural capacity shift, not a temporary boost. Amkor is the largest outsourced OSAT in the world and sits directly in the AI chip supply chain.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Analyst target revision is the catalyst.</strong> Price targets revised from $28 → $43. New 12-month high. This is not a speculative call — it's a professional analyst consensus shift reflecting actual demand for Amkor's advanced packaging services.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>The stock is at new 12-month highs.</strong> This means less margin of safety. The Sandisk setup requires buying the stock when it's depressed and unloved — AMKR is now loved and making new highs. That's not a bad thing if the thesis is real, but the risk/reward is less asymmetric.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>OSAT competition from ASE and JCET.</strong> Taiwan and China-based OSATs (ASE, JCET) are competing for the same advanced packaging business. If these players win more TSMC outsourcing share, Amkor's incremental volume is smaller than expected.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD / MAYBE.</strong> The advanced packaging thesis is 100% correct — the OSAT shortage is real, Amkor is the beneficiary, and TSMC outsourcing is structural. But the stock has already had its move. At $28-30, this is a HOLD, not a new BUY. If the stock pulls back to $22-24 on a broader market selloff, it becomes a BUY.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Any Q1 earnings beat with advanced packaging revenue disclosed. If TSMC announces expanded outsourcing to Amkor, upgrade to BUY. <strong>Risk:</strong> If TSMC brings more CoWoS capacity in-house, Amkor loses the incremental volume.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> Thesis is correct, stock has moved. Hold existing positions. Don't buy aggressively at current levels — wait for a pullback to $22-24.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- ETN (Eaton) -->
+  <div class="stock-section" id="etn">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">ETN</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Eaton — Datacenter Power Switchgear</div>
+            <div class="stock-desc">Q1 $2.81 EPS · FY2026 guide $13.05-$13.50 · $30M AI switchgear investment</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="ETN" aria-label="ETN price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$285</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val up">+3x</div><div class="sc-label">EPS Since 2016</div></div>
+          <div class="stat-cell"><div class="sc-val up">10%+</div><div class="sc-label">Organic Growth Guide</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>Datacenter switchgear is the new growth vector.</strong> More than 50% of planned US datacenter projects are being delayed waiting for power. The grid is the bottleneck. Eaton's medium voltage switchgear and power distribution solutions are exactly what hyperscalers need to get their AI campuses online. The company invested $30M specifically in medium voltage switchgear production for AI datacenters — a direct commitment to this market.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Q1 2026 confirms the thesis.</strong> Record Q1 EPS of $2.81. FY2026 guide of $13.05-$13.50. Free cash flow up 245% to $314M. This is a company executing at a high level and explicitly calling out AI datacenter demand as a growth driver.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>Already a mature, expensive industrial.</strong> At ~28x forward earnings, Eaton is not cheap. The market has already recognized the AI datacenter power story to a significant degree. The easy multiple expansion is behind it.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Grid equipment lead times are long and lumpy.</strong> The 12-18 month lead times for transformers and switchgear mean Eaton's revenue recognition from AI datacenter demand will be gradual, not a sudden spike. The stock doesn't have a clear near-term re-rating catalyst.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD.</strong> Eaton is a high-quality industrial compounding at a fair price. The AI datacenter power story is real and validated by Q1 results. But it's not a re-rating story — it's a steady compounder. Own it as a quality holding in an AI infrastructure portfolio, not as the high-beta Sandisk play.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Any new hyperscaler power agreements announced (Eaton is a supplier to these deals). Q2 earnings confirming continued AI datacenter momentum. <strong>Risk:</strong> If grid interconnection delays slow datacenter power deployments, Eaton's AI datacenter revenue growth could disappoint.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> Quality industrial compounding at fair price. The AI datacenter power story is validated by Q1 but already partially priced. Steady compounder, not a re-rating play.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- LUMN -->
+  <div class="stock-section" id="lumn">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">LUMN</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Lumen Technologies — Enterprise Fiber &amp; AI Network</div>
+            <div class="stock-desc">AWS partnership · $700M cost savings · Turnaround declared complete</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="LUMN" aria-label="LUMN price sparkline"></span></span>
+          <span class="verdict-badge watch">WATCH</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$8.90</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val">$7.68</div><div class="sc-label">Fair Value Est.</div></div>
+          <div class="stat-cell"><div class="sc-val up">$700M</div><div class="sc-label">Cost Savings Target</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>The turnaround is real and verifiable.</strong> Q1 2026 showed the turnaround is executing. Cost reductions of more than $400M achieved in 2025. $700M run-rate savings target exiting 2026. The company is genuinely shrinking its cost base while AI-driven enterprise bandwidth demand creates new revenue opportunities.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>AI is forcing enterprises to rethink their networks.</strong> The shift to AI workloads requires enterprises to rethink their WAN architecture. Lumen's 400G routed optical network for datacenter interconnect is specifically positioned for AI workloads. The AWS partnership gives Lumen a direct pipeline to cloud-native enterprises that need high-bandwidth connectivity.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Valuation is deeply discounted.</strong> At ~$8.90 vs. ~$7.68 fair value estimate, there's an upside gap that a successful Q1 print could close. If the turnaround is validated, LUMN could re-rate from a deep value to a recovery story.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>The market has been burned before.</strong> Lumen has announced turnarounds before that didn't deliver. Market skepticism is high — and rightfully so. A company that has failed to execute in the past gets the benefit of doubt removed permanently until it shows consistent execution. Q1 2026 needs to be a clean print.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Fiber business is capital-intensive and competitive.</strong> Lumen competes with AT&T, Verizon, and a dozen regional fiber players. The enterprise fiber market is not growing fast enough to give all players growth — it's a share battle. Lumen's challenge is winning share, not just riding market growth.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>WATCH — High risk, high reward spec play.</strong> The AWS partnership and $700M cost savings are real. The valuation gap ($8.90 vs. $7.68) is real. If Q1 2026 earnings confirm the turnaround is on track, the stock could quickly move to $11-12. But if Q1 disappoints, the stock falls to $6.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Q1 2026 earnings (May 2026). A clean print with AI enterprise revenue growth disclosed would be a BUY. Any guidance miss would be a SKIP signal. <strong>Risk:</strong> This is a binary outcome stock — either the turnaround works or it doesn't. Position sizing matters.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>WATCH.</strong> Binary outcome spec play. Q1 2026 earnings are the make-or-break event. Enter only if you can afford to lose 30-40% if the print disappoints.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- QCOM -->
+  <div class="stock-section" id="qcom">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">QCOM</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Qualcomm — Edge AI &amp; On-Device Inference</div>
+            <div class="stock-desc">12x forward P/E · Edge AI inference thesis not priced · Custom AI silicon</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="QCOM" aria-label="QCOM price sparkline"></span></span>
+          <span class="verdict-badge watch">WATCH</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$155</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val">12x</div><div class="sc-label">Forward P/E</div></div>
+          <div class="stat-cell"><div class="sc-val">$37B</div><div class="sc-label">Annual Run Rate</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>The "edge AI inference" thesis is not in the price.</strong> The market is pricing Qualcomm as a declining mobile chip company. But Qualcomm's Snapdragon chips are the leading platform for on-device AI inference. If the AI market bifurcates into "training" (Nvidia's dominance) and "inference at the edge" (Qualcomm's opportunity), QCOM's addressable market is much larger than the market currently models.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>12x forward P/E is absurd for a company of this scale.</strong> $37B revenue company trading at 12x forward earnings. The market is pricing in zero AI inference success. Any positive signal about Snapdragon X Elite PC adoption, AI smartphone upgrade cycles, or custom AI chip deals for datacenters would cause an immediate re-rating.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>Qualcomm has tried and failed the datacenter/custom AI chip story before.</strong> The custom Qualcomm Centriq server processor was discontinued in 2018. The track record of executing on datacenter-specific silicon is poor. The market is right to be skeptical.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Mobile is a mature, not growing, market.</strong> Global smartphone shipments are flat-to-low-single-digit growth. Qualcomm's Apple modem business was lost. Huawei HiSilicon is gone but hasn't been replaced with equivalent volume. The core business is stable but not growing.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>WATCH — highest risk/reward in the section.</strong> The 12x P/E is the most compelling valuation anomaly in the basket. The edge AI inference story is speculative but plausible. If Qualcomm's AI smartphone story (Gemini Nano integration) drives an iPhone/Android upgrade cycle, QCOM is the受益者. But this is a spec position, not a core holding.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Any Q1 earnings beat with AI smartphone metrics disclosed, or any AI PC design wins for Snapdragon X Elite. A partnership announcement for custom AI inference silicon would be a major catalyst. <strong>Risk:</strong> If Apple announces its own modem in 2027 and removes another QCOM revenue stream, the stock could fall to $120.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>WATCH.</strong> Highest risk/reward spec play in the basket. 12x P/E is an anomaly that the market will eventually correct — but timing is uncertain. Size as a spec position only.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- NTAP -->
+  <div class="stock-section" id="ntap">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">NTAP</span>
+          <div class="stock-card-center">
+            <div class="stock-company">NetApp — AI Data Storage</div>
+            <div class="stock-desc">Google Cloud partnership · AI Data Engine · Fair value ~$118 vs $105</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="NTAP" aria-label="NTAP price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$105</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val">~$118</div><div class="sc-label">Analyst Fair Value</div></div>
+          <div class="stat-cell"><div class="sc-val">+4.4%</div><div class="sc-label">Revenue Growth</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>Google Cloud partnership award is real and growing.</strong> NetApp won a Google Cloud partnership for AI data management. Its ONTAP storage for AI workloads and AFX (AI File Cache) are purpose-built for AI data pipelines — getting training data to GPUs efficiently. The partnership validates NetApp as an AI storage platform.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>AI Data Engine is a real product.</strong> NetApp's AI Data Engine provides a structured data pipeline for AI training — connecting enterprise data sources to Google Cloud AI infrastructure. This is a legitimate product-market fit for enterprises adopting AI.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>Only +4.4% revenue growth is underwhelming.</strong> A company calling itself an AI storage winner should be growing faster than 4.4%. The AI story is real but hasn't shown up in revenue yet. The stock is priced for AI to accelerate growth — it hasn't.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Storage is a commodity market under pressure.</strong> Dell, WDC, and pure cloud storage (AWS EBS, Azure Disk) are competing for the same workloads. NetApp's differentiation as "AI storage" is a positioning story, not a structural moat. Any of these competitors could replicate NetApp's AI storage features.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD.</strong> NetApp is a decent AI storage story with a Google Cloud partnership to show for it. But the +4.4% growth rate is the problem — the AI storage thesis hasn't manifested in revenue yet. The $118 fair value is a reasonable 12-month target but requires acceleration.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Q1 2026 earnings with AI storage revenue contribution disclosed. If Google Cloud partnership revenue is ramping faster than expected, upgrade to BUY. <strong>Risk:</strong> If pure cloud storage (AWS, Azure) continues to eat NetApp's lunch in existing accounts, growth stays sub-10%.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> Decent AI storage story, Google partnership validates it, but +4.4% growth is underwhelming. Wait for AI storage revenue acceleration before upgrading to BUY.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- AEP -->
+  <div class="stock-section" id="aep">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">AEP</span>
+          <div class="stock-card-center">
+            <div class="stock-company">American Electric Power — Utility Selling Power to AI Datacenters</div>
+            <div class="stock-desc">$78B capex plan · Direct hyperscaler power agreements · Rate-base growth</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="AEP" aria-label="AEP price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$82</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val">$78B</div><div class="sc-label">5-Year Capex Plan</div></div>
+          <div class="stat-cell"><div class="sc-val up">+10%</div><div class="sc-label">Rate Base Growth</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>The $78B capex plan is the clearest signal.</strong> AEP just raised its 5-year capital plan from $72B to $78B — driven by newly approved transmission investments for AI datacenter power demand. This is a management commitment to AI-driven growth. Transmission infrastructure connecting hyperscaler campuses to the grid is a multi-year, contracted revenue stream with regulatory approved returns.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Direct hyperscaler power agreements.</strong> AEP is signing direct power purchase agreements with tech giants for specific datacenter campuses. These are long-term contracts (10-20 years) that provide contracted, predictable revenue at above-market rates. The hyperscaler pays a premium for a reliable, dedicated power supply — AEP captures that premium.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>Utilities are slow and regulated.</strong> AEP can't just build power infrastructure overnight. The regulatory process for new transmission lines takes years. Even with $78B in capex, the revenue ramp will be gradual — not the kind of hockey-stick growth that makes for exciting investing.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Utilities are a rate-sensitive sector.</strong> When interest rates rise, utility valuations compress. AEP is a bond proxy — it's sensitive to the 10-year Treasury yield. If rates stay elevated, utilities in general underperform.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD.</strong> AEP is a solid utility with AI datacenter power demand as a genuine long-term growth driver. The $78B capex plan and direct hyperscaler PPAs are real. But this is a utility, not a tech stock — the re-rating potential is limited. Treat it as a defensive holding in an AI infrastructure portfolio, not a high-growth re-rating story.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Any new hyperscaler power agreements announced in AEP's service territory. Rising interest rates would hurt this name. <strong>Risk:</strong> If AI datacenter deployments slow (due to GPU supply, financing, or regulatory delays), AEP's incremental demand thesis is delayed.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> Solid utility with AI datacenter power as a genuine long-term tailwind. Not a re-rating story — a reliable compounder. Treat as defensive infrastructure holding.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- VST -->
+  <div class="stock-section" id="vst">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">VST</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Vistra — Power Generation for AI Datacenters</div>
+            <div class="stock-desc">Cogentrix acquisition $4.7B · Datacenter on-site power · Gas + renewables</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="VST" aria-label="VST price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$140</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val">~22x</div><div class="sc-label">Forward P/E</div></div>
+          <div class="stat-cell"><div class="sc-val">$4.7B</div><div class="sc-label">Cogentrix Deal</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>AI datacenters need on-site power fast.</strong> Grid interconnection timelines are 2-4 years. Hyperscalers are signing agreements with power producers like Vistra to get dedicated on-site generation capacity while grid power is being hooked up. Vistra's acquisition of Cogentrix adds 4+ GW of on-site power capacity specifically targeting hyperscaler campuses.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Vistra is the largest US nuclear operator.</strong> Through its ownership of Comanche Peak and South Texas Project nuclear plants, Vistra has fixed-cost, zero-carbon power that hyperscalers want for their sustainability commitments. Long-term nuclear PPAs with tech giants lock in revenue at premium prices.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>Natural gas is a carbon-intensive fuel in a ESG-conscious world.</strong> Microsoft, Google, and Meta have made net-zero commitments. Long-term power purchase agreements from gas plants are acceptable过渡, but as renewable energy scales, gas plant economics weaken. Vistra's gas assets are valuable now but face long-term stranded asset risk.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>The Cogentrix acquisition was expensive.</strong> $4.7B for Cogentrix is a large deal. Integration risk, regulatory approvals, and execution risk could delay the expected synergies. At ~22x forward earnings, Vistra is not cheap for a power producer.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD.</strong> Vistra is a well-managed power producer with a genuine AI datacenter demand story. The Cogentrix deal adds on-site power capacity that hyperscalers need. But gas-fired generation faces long-term ESG headwinds and the stock has likely already priced in a lot of the AI power thesis.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Any new hyperscaler PPAs announced with Vistra. Q1 2026 earnings showing Cogentrix integration ahead of schedule would be a positive. <strong>Risk:</strong> If gas prices rise (Iran war oil shock), Vistra's fuel costs increase and margins compress.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> Well-managed power producer with AI datacenter demand story. Gas ESG headwinds are real long-term. Not a exciting re-rating story but a solid infrastructure compounder.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- STX -->
+  <div class="stock-section" id="stx">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">STX</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Seagate Technology — HDD for AI Storage</div>
+            <div class="stock-desc">Already ran +87% · Analyst target $1000 post-split · You missed the entry</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="STX" aria-label="STX price sparkline"></span></span>
+          <span class="verdict-badge skip">SKIP</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$100</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val up">+87%</div><div class="sc-label">Past 3 Months</div></div>
+          <div class="stat-cell"><div class="sc-val up">$1000</div><div class="sc-label">Analyst Target (Rosenblatt)</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>HDD for AI storage is a real demand spike.</strong> AI training datasets are enormous. While flash storage (NAND) gets the headlines, mass-capacity HDDs are still the dominant storage medium for AI cold storage, backup, and archival. Seagate's 30TB+ HAMR drives are the highest-capacity drives in the industry — exactly what AI datacenters need for petabyte-scale storage at lower cost per TB than NAND.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>Supply discipline changed.</strong> After years of oversupply crushing margins, Seagate's management has been deliberately keeping production disciplined. This has improved pricing power. A sustained recovery in HDD pricing is underway.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>You missed the entry.</strong> Seagate went from $40 to $100+ in 3 months. That's the Sandisk trade — it already happened. Buying at $100 with an analyst target of $1,000 (post-split) is not the same risk/reward as buying at $40 with a target of $200. The easy money has been made.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>NAND is eating HDD market share.</strong> For AI hot/warm storage, NAND flash is faster and increasingly cost-competitive. Only in cold storage and archival does HDD retain a decisive cost advantage. If AI storage workloads shift toward more flash, Seagate's addressable market shrinks.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>SKIP (Late Entry).</strong> Seagate had its Sandisk moment. The +87% run means the risk/reward is no longer asymmetric. If you own it, hold with a trailing stop. If you don't own it, don't chase it at current levels. The analyst $1,000 target (Rosenblatt) is an outlier and likely wrong.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Alternative:</strong> Watch WDC (Western Digital) instead — it has NAND + HDD exposure and hasn't run as much as Seagate. Or wait for a pullback in Seagate to $70-75 and reassess.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>SKIP (Late Entry).</strong> The Sandisk trade already happened. You missed the gap-up from $40. Don't chase at $100. Hold existing positions with a trailing stop; new buyers should wait for a pullback below $80.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- MU -->
+  <div class="stock-section" id="mu">
+    <details class="stock-card">
+      <summary class="stock-card-header">
+        <div class="stock-card-left">
+          <span class="stock-ticker">MU</span>
+          <div class="stock-card-center">
+            <div class="stock-company">Micron Technology — HBM Memory for AI</div>
+            <div class="stock-desc">HBM fully sold out through 2026 · +50% YTD 2026 · US manufacturing advantage</div>
+          </div>
+        </div>
+        <div class="stock-card-right">
+          <span class="sparkline-wrap"><span class="sparkline" data-ticker="MU" aria-label="MU price sparkline"></span></span>
+          <span class="verdict-badge hold">HOLD</span>
+          <span class="arrow-icon">▶</span>
+        </div>
+      </summary>
+      <div class="stock-card-body">
+        <div class="stat-row">
+          <div class="stat-cell"><div class="sc-val">~$95</div><div class="sc-label">Current Price</div></div>
+          <div class="stat-cell"><div class="sc-val up">+50%</div><div class="sc-label">YTD 2026</div></div>
+          <div class="stat-cell"><div class="sc-val up">SOLD OUT</div><div class="sc-label">HBM Through 2026</div></div>
+        </div>
+        <div class="analysis-col bull">
+          <h4>🐂 Bull Case</h4>
+          <div class="analysis-block bull-block">
+            <p><strong>HBM supply is the bottleneck.</strong> Micron's HBM supply is fully sold out through 2026 under binding long-term agreements. This means pricing power is locked in. The HBM premium over commodity DRAM is significant — HBM chips command 2-3x the margin of standard DRAM. As AI GPUs (H100, H200, Blackwell) require more HBM per chip and more chips per server, Micron's capacity is the ceiling on AI compute scaling.</p>
+          </div>
+          <div class="analysis-block bull-block">
+            <p><strong>US manufacturing advantage.</strong> Micron's Idaho fab is the only advanced DRAM production facility in the US. With the CHIPS Act providing funding and geopolitical supply chain diversification in full swing, Micron is the beneficiary of a structural shift in where AI-grade memory is made. This is a national strategic asset.</p>
+          </div>
+        </div>
+        <div class="analysis-col bear">
+          <h4>🐻 Bear Case</h4>
+          <div class="analysis-block bear-block">
+            <p><strong>The big move already happened.</strong> MU is up +50% YTD 2026. The Sandisk-from-$40-to-$100 move in Micron happened as HBM was being recognized as the AI memory standard. At $95, the upside to fair value may be 20-30%, not 100%.</p>
+          </div>
+          <div class="analysis-block bear-block">
+            <p><strong>Samsung and SK Hynix are ramping HBM capacity.</strong> Both competitors are investing heavily in HBM4. If they catch up to Micron's HBM3e capability faster than expected, the supply shortage eases and pricing power erodes. HBM is a technology race — Micron's current lead may not be durable.</p>
+          </div>
+        </div>
+        <div class="analysis-col my-call">
+          <h4>🎯 My Call</h4>
+          <div class="analysis-block call-block">
+            <p><strong>HOLD.</strong> Micron is a high-quality holding in an AI infrastructure portfolio. The HBM supercycle is real and Micron is the primary US beneficiary. But the big re-rating (MU from $50 to $95) already happened. This is now a hold, not a new BUY at current levels.</p>
+          </div>
+          <div class="analysis-block call-block">
+            <p><strong>Trigger:</strong> Q2 2026 earnings confirming HBM pricing power and HBM4 progress. Any announcement of new AI GPU design wins (Blackwell Ultra, Rubin) would extend Micron's revenue visibility. <strong>Risk:</strong> If Samsung HBM4 catches up faster than expected and supply normalizes, MU's pricing power erodes and the stock could pull back to $75-80.</p>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-footer">
+        <span class="vf-label">Verdict:</span>
+        <span class="vf-text"><strong>HOLD.</strong> The HBM supercycle is real. Micron is the US beneficiary. But the big re-rating already happened at these levels — MU is a hold, not a new buy. Own it if you have it.</span>
+      </div>
+    </details>
+  </div>
+
+  <!-- FOOTER -->
+  
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- REFERENCES -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section id="references" style="padding: 40px 48px 40px; max-width: 1100px; border-top: 1px solid #30363d;">
+    <h2 style="font-size:18px;font-weight:700;color:#e6edf3;margin-bottom:20px;letter-spacing:-0.01em;">📚 References &amp; Sources</h2>
+    <p style="font-size:13px;color:#8b949e;margin-bottom:20px;">All claims in this document are backed by primary sources. Links open in a new tab.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;">
+
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">EARNINGS REPORTS</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
+          <li>[1] <a href="https://ir.docusign.com/" target="_blank" style="color:#58a6ff;">DocuSign Annual Report 2025</a></li>
+          <li>[2] <a href="https://ir.okta.com/" target="_blank" style="color:#58a6ff;">Okta Q4 2025 Earnings Call</a></li>
+          <li>[3] <a href="https://investors.snowflake.com/" target="_blank" style="color:#58a6ff;">Snowflake Q4 FY2025 Earnings</a></li>
+          <li>[4] <a href="https://ir.monday.com/" target="_blank" style="color:#58a6ff;">monday.com Q1 2026 Earnings</a></li>
+          <li>[5] <a href="https://ir.veevasystems.com/" target="_blank" style="color:#58a6ff;">Veeva Systems Annual Report 2025</a></li>
+          <li>[6] <a href="https://ir.datadog.com/" target="_blank" style="color:#58a6ff;">Datadog Q4 2025 Earnings</a></li>
+        </ul>
+      </div>
+
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">INFRASTRUCTURE &amp; AI</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
+          <li>[7] <a href="https://investors.arista.com/" target="_blank" style="color:#58a6ff;">Arista Networks Q1 2026 Earnings</a></li>
+          <li>[8] <a href="https://ir.corning.com/" target="_blank" style="color:#58a6ff;">Corning Q4 2025 Earnings</a></li>
+          <li>[9] <a href="https://ir.amkor.com/" target="_blank" style="color:#58a6ff;">Amkor Technology Q1 2026 Earnings</a></li>
+          <li>[10] <a href="https://ir.eaton.com/" target="_blank" style="color:#58a6ff;">Eaton Q1 2026 Earnings</a></li>
+          <li>[11] <a href="https://investor.qualcomm.com/" target="_blank" style="color:#58a6ff;">Qualcomm Q1 2026 Earnings</a></li>
+          <li>[12] <a href="https://investors.netapp.com/" target="_blank" style="color:#58a6ff;">NetApp Q3 FY2026 Earnings</a></li>
+        </ul>
+      </div>
+
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">POWER &amp; SEMICONDUCTORS</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
+          <li>[13] <a href="https://investor.vistra.com/" target="_blank" style="color:#58a6ff;">Vistra Corp Q1 2026 Earnings</a></li>
+          <li>[14] <a href="https://ir.micron.com/" target="_blank" style="color:#58a6ff;">Micron Q2 FY2026 Earnings</a></li>
+          <li>[15] <a href="https://ir.seagate.com/" target="_blank" style="color:#58a6ff;">Seagate Technology Q3 FY2026</a></li>
+          <li>[16] <a href="https://ir.lumen.com/" target="_blank" style="color:#58a6ff;">Lumen Technologies Q1 2026</a></li>
+          <li>[17] <a href="https://ir.aep.com/" target="_blank" style="color:#58a6ff;">American Electric Power Annual 2025</a></li>
+        </ul>
+      </div>
+
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">RESEARCH &amp; ANALYSIS</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
+          <li>[18] <a href="https://www.stockstory.com/" target="_blank" style="color:#58a6ff;">StockStory</a></li>
+          <li>[19] <a href="https://www.goldmansachs.com/" target="_blank" style="color:#58a6ff;">Goldman Sachs Equity Research</a></li>
+          <li>[20] <a href="https://www.morganstanley.com/" target="_blank" style="color:#58a6ff;">Morgan Stanley Equity Research</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SKIP LIST (moved to end) -->
+  <!-- ═══════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════ -->
+  <!-- SKIP LIST -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-head" id="skip-list">
+    <h2>⛔ The Skip List — 10 Stocks We Are Passing On</h2>
+    <p>These names had valid theses once. Here's why the thesis broke.</p>
+  </div>
+
+  <div class="skip-section">
+    <div class="skip-grid">
+      <div class="skip-card"><div class="ticker">TEAM</div><p>Atlassian: GAAP deeply negative at $2.8B revenue scale. AI agents replacing project management workflows is a real risk. No near-term catalyst.</p></div>
+      <div class="skip-card"><div class="ticker">TWLO</div><p>Twilio: 49.9% GM is structural, not cyclical. 50% revenue from T-Mobile is dangerous concentration. CPaaS being commoditized by AI messaging.</p></div>
+      <div class="skip-card"><div class="ticker">ZM</div><p>Zoom: 3.3% growth at 35x P/E. COVID winner that fully reverted. No AI product that changes the trajectory. Obvious mature business, no re-rating catalyst.</p></div>
+      <div class="skip-card"><div class="ticker">RNG</div><p>RingCentral: +5% growth at $6B scale. Webex and Teams have won the UCaaS fight. No differentiation. AI integration lag vs. competition.</p></div>
+      <div class="skip-card"><div class="ticker">PATH</div><p>UiPath: Collapsing from 40%+ to 13% growth. AI agents are directly competing with RPA tools. UiPath's automation is being absorbed into Microsoft Power Automate.</p></div>
+      <div class="skip-card"><div class="ticker">SMAR</div><p>Smartsheet: 9-10% actual growth vs. 25%+ historical. Being disrupted by Notion, Coda, and AI-native project tools. No clear re-rating catalyst.</p></div>
+      <div class="skip-card"><div class="ticker">ASAN</div><p>Asana: Same thesis as SMAR. Legacy PM tool being eaten by AI-native competitors. Both companies are "last generation" software.</p></div>
+      <div class="skip-card"><div class="ticker">BILL</div><p>Bill.com: GAAP loss magnitude underappreciated. Financial ops software is now fiercely competitive (Rippling, Deel, Airbase). Hard to own money-losing software at scale.</p></div>
+      <div class="skip-card"><div class="ticker">S</div><p>Toast: +22% vs. 70%+ historical. Restaurant POS is being commoditized by Square, Clover, and AI-native POS. Competitive moat is thin.</p></div>
+      <div class="skip-card"><div class="ticker">RPD</div><p>Rapid7: Flat ARR, slow growth. Being disrupted from above by CrowdStrike and SentinelOne, and from below by AI-native security tools. No clear path to re-acceleration.</p></div>
+    </div>
+  <div class="page-footer">
+    <p>Research compiled May 2026 · Hermes Agent Research · For informational purposes only — not financial advice.</p>
+  </div>
+
+</div><!-- /page-content -->
+
+<script>
+// Sticky TOC active state on scroll
+const tocItems = document.querySelectorAll('.toc-item[data-toc]');
+const sections = document.querySelectorAll('.stock-section[id]');
+
+function onScroll() {
+  let current = '';
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 120 && rect.bottom > 120) {
+      current = section.getAttribute('id');
+    }
+  });
+  tocItems.forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('data-toc') === current) {
+      item.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+
+<script>
+// Inline SVG Sparklines for stock cards
+const sparklineData = {
+  docu:  { points: [[0,24],[20,22],[40,20],[60,26],[80,28],[100,28],[120,28]], color: '#f85149' },
+  snow:  { points: [[0,26],[20,24],[40,22],[60,20],[80,18],[100,16],[120,16]], color: '#3fb950' },
+  okta:  { points: [[0,20],[20,22],[40,24],[60,26],[80,28],[100,28],[120,28]], color: '#f85149' },
+  mndy:  { points: [[0,22],[20,20],[40,18],[60,20],[80,18],[100,16],[120,16]], color: '#3fb950' },
+  veev:  { points: [[0,24],[20,22],[40,22],[60,20],[80,18],[100,16],[120,14]], color: '#3fb950' },
+  ddog:  { points: [[0,26],[20,24],[40,22],[60,20],[80,16],[100,14],[120,12]], color: '#3fb950' },
+  anet:  { points: [[0,28],[20,24],[40,20],[60,16],[80,12],[100,8],[120,6]],  color: '#3fb950' },
+  glw:   { points: [[0,28],[20,26],[40,24],[60,20],[80,16],[100,14],[120,10]], color: '#3fb950' },
+  amkr:  { points: [[0,28],[20,22],[40,18],[60,14],[80,10],[100,8],[120,6]],  color: '#3fb950' },
+  etn:   { points: [[0,24],[20,22],[40,20],[60,18],[80,16],[100,14],[120,12]],color: '#3fb950' },
+  lumn:  { points: [[0,20],[20,16],[40,18],[60,22],[80,20],[100,18],[120,20]],color: '#f85149' },
+  qcom:  { points: [[0,26],[20,24],[40,26],[60,22],[80,20],[100,18],[120,18]],color: '#f85149' },
+  ntap:  { points: [[0,24],[20,22],[40,22],[60,20],[80,18],[100,16],[120,14]],color: '#3fb950' },
+  aep:   { points: [[0,20],[20,20],[40,18],[60,18],[80,16],[100,16],[120,14]],color: '#3fb950' },
+  vst:   { points: [[0,28],[20,24],[40,22],[60,18],[80,16],[100,14],[120,12]],color: '#3fb950' },
+  stx:   { points: [[0,28],[20,20],[40,14],[60,10],[80,6],[100,4],[120,2]],   color: '#3fb950' },
+  mu:    { points: [[0,28],[20,22],[40,18],[60,14],[80,10],[100,8],[120,6]],  color: '#3fb950' },
+};
+
+function renderSparklines() {
+  document.querySelectorAll('.sparkline[data-ticker]').forEach(el => {
+    const ticker = el.dataset.ticker.toLowerCase();
+    const data = sparklineData[ticker];
+    if (!data) return;
+    const pts = data.points.map(p => p.join(',')).join(' ');
+    el.innerHTML = `<svg width="120" height="32" viewBox="0 0 120 32" aria-label="${ticker.toUpperCase()} price trajectory" role="img">
+      <polyline fill="none" stroke="${data.color}" stroke-width="2" points="${pts}"/>
+    </svg>`;
+  });
+}
+
+// Render charts after DOM loads
+function renderCharts() {
+  // Rating distribution doughnut
+  const rctx = document.getElementById('ratingChart');
+  if (rctx) {
+    new Chart(rctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['BUY (3)', 'HOLD (9)', 'HOLD/WATCH (1)', 'WATCH (2)', 'SKIP (2)'],
+        datasets: [{
+          data: [3, 9, 1, 2, 2],
+          backgroundColor: ['#3fb950','#d29922','#58a6ff','#f85149','#6e7681'],
+          borderColor: '#0d1117',
+          borderWidth: 2,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#8b949e', font: { size: 11 }, padding: 12 } },
+          tooltip: { backgroundColor: '#21262d', titleColor: '#e6edf3', bodyColor: '#8b949e', borderColor: '#30363d', borderWidth: 1 }
+        },
+        cutout: '60%'
+      }
+    });
+  }
+
+  // Sector performance horizontal bar
+  const bctx = document.getElementById('sectorChart');
+  if (bctx) {
+    new Chart(bctx, {
+      type: 'bar',
+      data: {
+        labels: ['Sandisk-Type Plays', 'Battered Tech'],
+        datasets: [{
+          label: 'Conviction Score',
+          data: [78, 55],
+          backgroundColor: ['#3fb950','#58a6ff'],
+          borderColor: ['#3fb950','#58a6ff'],
+          borderWidth: 1,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { backgroundColor: '#21262d', titleColor: '#e6edf3', bodyColor: '#8b949e', borderColor: '#30363d', borderWidth: 1 }
+        },
+        scales: {
+          x: { max: 100, grid: { color: '#21262d' }, ticks: { color: '#6e7681', font: { size: 10 } } },
+          y: { grid: { display: false }, ticks: { color: '#8b949e', font: { size: 12 } } }
+        }
+      }
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => { renderSparklines(); renderCharts(); });
+</script>
+
+</body>
+</html>

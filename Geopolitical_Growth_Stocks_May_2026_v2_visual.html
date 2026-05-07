@@ -33,13 +33,6 @@ body {
   font-size: 15px;
 }
 
-/* ── ACCESSIBILITY: FOCUS RINGS ── */
-a:focus-visible {
-  outline: 2px solid var(--accent-blue);
-  outline-offset: 3px;
-  border-radius: 3px;
-}
-
 /* ── STICKY LEFT TOC ── */
 .toc-sidebar {
   position: fixed;
@@ -326,17 +319,25 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 .analyst-call p:last-child { margin-bottom: 0; }
 .analyst-call strong { color: #e6edf3; }
 
+
+/* CHARTS SECTION */
+.charts-section { padding: 32px 48px 24px; max-width: 1100px; border-bottom: 1px solid #30363d; }
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px; }
+.chart-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; }
+.chart-card h3 { font-size: 14px; font-weight: 700; color: #e6edf3; margin-bottom: 12px; }
+.chart-desc { font-size: 12px; color: #6e7681; margin-bottom: 14px; }
+.chart-canvas-wrap { position: relative; height: 200px; }
+@media (max-width: 768px) { .charts-grid { grid-template-columns: 1fr; } }
+
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
 <!-- ═══════════════════════════════════════════════════ -->
-<!-- Accessibility: skip to main content for keyboard users -->
-<a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background:#fff;color:#000;padding:8px 16px;border-radius:4px;font-weight:600;" onfocus="this.style.left='20px';this.style.top='20px';this.style.width='auto';this.style.height='auto';this.style.overflow='visible';" onblur="this.style.left='-9999px';this.style.top='auto';this.style.width='1px';this.style.height='1px';this.style.overflow='hidden';">Skip to main content</a>
-
 <!-- LEFT SIDEBAR TOC -->
 <!-- ═══════════════════════════════════════════════════ -->
-<nav class="toc-sidebar" id="toc" aria-label="Table of contents">
+<nav class="toc-sidebar" id="toc">
   <div class="toc-brand">
     <a href="index.html">← Research Home</a>
     <span>May 2026 · v2</span>
@@ -411,7 +412,30 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 
 
   <!-- THESIS -->
-  <div class="intro-section" id="thesis">
+  
+  <!-- CHARTS SECTION -->
+  <section class="charts-section" aria-label="Data visualizations">
+    <h2 style="font-size:17px;font-weight:700;color:#e6edf3;margin-bottom:4px;">Research Visualizations</h2>
+    <p style="font-size:13px;color:#6e7681;margin-bottom:0;">Sector opportunity overview at a glance.</p>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>Sector Conviction Scores</h3>
+        <p class="chart-desc">Relative analyst conviction across 8 sectors. BUY = strong near-term catalyst; HOLD = valid but uncertain timing.</p>
+        <div class="chart-canvas-wrap">
+          <canvas id="sectorChart" aria-label="Horizontal bar chart of sector conviction scores" role="img"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>Price Spike Magnitude</h3>
+        <p class="chart-desc">Estimated commodity price spike magnitude since Iran war escalation, March-May 2026.</p>
+        <div class="chart-canvas-wrap">
+          <canvas id="spikeChart" aria-label="Bar chart showing price spike magnitude across commodities" role="img"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class="intro-section" id="thesis">
     <h2 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text-primary);">The Core Thesis: A Supply Shock Cascade</h2>
     <p>The Iran war has done something the market has not fully priced: it has removed the Strait of Hormuz from the global oil trade equation. Approximately 27-30% of global seaborne oil flows through Hormuz. The closure means not just higher oil prices — it means a complete re-pricing of everything derived from oil: plastics, fertilizers, urea, nitrogen compounds, methanol, and hundreds of industrial chemicals. This is not a demand shock (like COVID). It is a supply shock, which is harder to fix because supply cannot come back online quickly.</p>
 
@@ -439,7 +463,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <details class="expandable">
       <summary class="expandable-summary">Expand for Full Analysis — Oil &amp; Energy</summary>
       <div class="expandable-body">
-        <a href="#s1" class="back-to-top" aria-label="Jump back to top of page">↑ Jump to top</a>
+        <a href="#s1" class="back-to-top">↑ Jump to top</a>
         <div class="key-stat-bar">
           <div class="ks-cell"><div class="ks-val dn">$180/bbl</div><div class="ks-label">Iran war oil spike (from ~$90)</div></div>
           <div class="ks-cell"><div class="ks-val">27-30%</div><div class="ks-label">Global oil trade via Hormuz</div></div>
@@ -520,7 +544,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <details class="expandable">
       <summary class="expandable-summary">Expand for Full Analysis — Fertilizer &amp; Agriculture</summary>
       <div class="expandable-body">
-        <a href="#s2" class="back-to-top" aria-label="Jump back to top of page">↑ Jump to top</a>
+        <a href="#s2" class="back-to-top">↑ Jump to top</a>
         <div class="key-stat-bar">
           <div class="ks-cell"><div class="ks-val" style="color:var(--accent-yellow)">+$80/T</div><div class="ks-label">Urea price increase since war</div></div>
           <div class="ks-cell"><div class="ks-val" style="color:var(--accent-red)">30%</div><div class="ks-label">Global urea trade via Hormuz</div></div>
@@ -608,7 +632,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <details class="expandable">
       <summary class="expandable-summary">Expand for Full Analysis — Nuclear Power</summary>
       <div class="expandable-body">
-        <a href="#s3" class="back-to-top" aria-label="Jump back to top of page">↑ Jump to top</a>
+        <a href="#s3" class="back-to-top">↑ Jump to top</a>
         <div class="key-stat-bar">
           <div class="ks-cell"><div class="ks-val" style="color:var(--accent-green)">$106/lb</div><div class="ks-label">Uranium spot (near 16-yr high)</div></div>
           <div class="ks-cell"><div class="ks-val">$30B+</div><div class="ks-label">GE Vernova order backlog</div></div>
@@ -689,7 +713,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <details class="expandable">
       <summary class="expandable-summary">Expand for Full Analysis — Plastics &amp; Petrochemicals</summary>
       <div class="expandable-body">
-        <a href="#s4" class="back-to-top" aria-label="Jump back to top of page">↑ Jump to top</a>
+        <a href="#s4" class="back-to-top">↑ Jump to top</a>
         <div class="key-stat-bar">
           <div class="ks-cell"><div class="ks-val dn">35-50%</div><div class="ks-label">Ethylene price spike</div></div>
           <div class="ks-cell"><div class="ks-val dn">40-60%</div><div class="ks-label">Polypropylene price spike</div></div>
@@ -768,7 +792,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <details class="expandable">
       <summary class="expandable-summary">Expand for Full Analysis — Helium</summary>
       <div class="expandable-body">
-        <a href="#s5" class="back-to-top" aria-label="Jump back to top of page">↑ Jump to top</a>
+        <a href="#s5" class="back-to-top">↑ Jump to top</a>
         <div class="key-stat-bar">
           <div class="ks-cell"><div class="ks-val dn">+40-100%</div><div class="ks-label">Helium price increase since war</div></div>
           <div class="ks-cell"><div class="ks-val">27-30%</div><div class="ks-label">Global helium via Gulf region</div></div>
@@ -845,7 +869,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <details class="expandable">
       <summary class="expandable-summary">Expand for Full Analysis — Water Infrastructure</summary>
       <div class="expandable-body">
-        <a href="#s6" class="back-to-top" aria-label="Jump back to top of page">↑ Jump to top</a>
+        <a href="#s6" class="back-to-top">↑ Jump to top</a>
         <div class="key-stat-bar">
           <div class="ks-cell"><div class="ks-val">1-5M gal</div><div class="ks-label">Water per large AI datacenter/day</div></div>
           <div class="ks-cell"><div class="ks-val">40%</div><div class="ks-label">World population in water stress</div></div>
@@ -913,7 +937,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <details class="expandable">
       <summary class="expandable-summary">Expand for Full Analysis — Grid &amp; Power Infrastructure</summary>
       <div class="expandable-body">
-        <a href="#s7" class="back-to-top" aria-label="Jump back to top of page">↑ Jump to top</a>
+        <a href="#s7" class="back-to-top">↑ Jump to top</a>
         <div class="key-stat-bar">
           <div class="ks-cell"><div class="ks-val up">$65B</div><div class="ks-label">US grid equipment market 2030E</div></div>
           <div class="ks-cell"><div class="ks-val dn">50%+</div><div class="ks-label">Datacenter projects delayed by power</div></div>
@@ -994,7 +1018,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
     <details class="expandable">
       <summary class="expandable-summary">Expand for Full Analysis — Defense &amp; Cybersecurity</summary>
       <div class="expandable-body">
-        <a href="#s8" class="back-to-top" aria-label="Jump back to top of page">↑ Jump to top</a>
+        <a href="#s8" class="back-to-top">↑ Jump to top</a>
         <div class="key-stat-bar">
           <div class="ks-cell"><div class="ks-val">$886B</div><div class="ks-label">US base defense budget</div></div>
           <div class="ks-cell"><div class="ks-val up">+15-20%</div><div class="ks-label">Homeland defense budget increase</div></div>
@@ -1257,6 +1281,81 @@ function onScroll() {
   });
 }
 window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+
+<script>
+var geoSparklines = {
+  oil:     [[0,26],[14,22],[28,18],[42,14],[56,12],[70,8],[84,6],[98,8],[100,8]],
+  urea:    [[0,24],[14,22],[28,20],[42,16],[56,14],[70,12],[84,10],[98,10],[100,10]],
+  uranium: [[0,24],[14,20],[28,18],[42,16],[56,14],[70,12],[84,10],[98,8],[100,8]],
+  helium:  [[0,26],[14,24],[28,20],[42,16],[56,14],[70,10],[84,8],[98,6],[100,6]],
+  ethylene:[[0,22],[14,20],[28,18],[42,16],[56,14],[70,14],[84,14],[98,14],[100,14]],
+  grid:    [[0,24],[22,22],[28,20],[42,18],[56,16],[70,14],[84,12],[98,10],[100,10]],
+};
+
+function renderGeoSparklines() {
+  document.querySelectorAll('[data-sparkline]').forEach(function(el) {
+    var key = el.getAttribute('data-sparkline');
+    var data = geoSparklines[key];
+    if (!data) return;
+    var pts = data.map(function(p){ return p.join(','); }).join(' ');
+    el.innerHTML = '<svg width="100" height="28" viewBox="0 0 100 28" aria-label="price trajectory" role="img"><polyline fill="none" stroke="#3fb950" stroke-width="1.5" points="' + pts + '"/></svg>';
+  });
+}
+
+function renderGeoCharts() {
+  var sctx = document.getElementById('sectorChart');
+  if (sctx && typeof Chart !== 'undefined') {
+    new Chart(sctx, {
+      type: 'bar',
+      data: {
+        labels: ['Defense','Grid','Nuclear','Water','Oil','Fertilizer','Helium','Plastics'],
+        datasets: [{
+          label: 'Conviction Score',
+          data: [92,88,85,72,65,60,58,52],
+          backgroundColor: ['#3fb950','#3fb950','#3fb950','#d29922','#d29922','#f85149','#d29922','#f85149'],
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false }, tooltip: { backgroundColor: '#21262d', titleColor: '#e6edf3', bodyColor: '#8b949e' } },
+        scales: {
+          x: { max: 100, grid: { color: '#21262d' }, ticks: { color: '#6e7681', font: { size: 10 } } },
+          y: { grid: { display: false }, ticks: { color: '#8b949e', font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  var spctx = document.getElementById('spikeChart');
+  if (spctx && typeof Chart !== 'undefined') {
+    new Chart(spctx, {
+      type: 'bar',
+      data: {
+        labels: ['Oil (Brent)','Urea','Ethylene','Helium','Uranium'],
+        datasets: [{
+          label: 'Est. Price Spike %',
+          data: [85, 52, 42, 65, 38],
+          backgroundColor: ['#f85149','#d29922','#d29922','#f85149','#58a6ff'],
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false }, tooltip: { backgroundColor: '#21262d', titleColor: '#e6edf3', bodyColor: '#8b949e' } },
+        scales: {
+          y: { grid: { color: '#21262d' }, ticks: { color: '#6e7681', font: { size: 10 }, callback: function(v){ return v+'%'; } } },
+          x: { grid: { display: false }, ticks: { color: '#8b949e', font: { size: 10 } } }
+        }
+      }
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(){ renderGeoSparklines(); renderGeoCharts(); });
 </script>
 
 </body>
