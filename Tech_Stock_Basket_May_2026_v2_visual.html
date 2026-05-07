@@ -503,6 +503,24 @@ body {
 .chart-desc { font-size: 12px; color: #6e7681; margin-bottom: 14px; }
 .chart-canvas-wrap { position: relative; height: 180px; }
 
+.price-action-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.pa-cell{background:var(--surface2);padding:10px 12px;text-align:center}
+.pa-cell-label{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px}
+.pa-cell-value{font-size:13px;font-weight:600}
+.pa-cell-value.up{color:var(--accent-green)}
+.pa-cell-value.down{color:var(--accent-red)}
+.pa-cell-sub{font-size:9px;color:var(--text-muted);margin-top:1px}
+.reversal-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.04em;padding:2px 6px;border-radius:3px;margin-top:4px}
+.reversal-badge.up{background:rgba(63,185,80,.15);color:var(--accent-green);border:1px solid rgba(63,185,80,.3)}
+.reversal-badge.down{background:rgba(248,81,73,.15);color:var(--accent-red);border:1px solid rgba(248,81,73,.3)}
+.reversal-badge.partial{background:rgba(210,153,34,.15);color:var(--accent-yellow);border:1px solid rgba(210,153,34,.3)}
+.fundamentals-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.fund-cell{background:var(--surface);padding:10px 12px}
+.fund-cell-label{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px}
+.fund-cell-value{font-size:13px;font-weight:600;color:var(--text-primary)}
+.fund-cell-sub{font-size:9px;color:var(--text-muted);margin-top:1px}
+@media(max-width:768px){.price-action-bar{grid-template-columns:repeat(2,1fr)}.fundamentals-grid{grid-template-columns:repeat(2,1fr)}}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
@@ -671,6 +689,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value down">-31.2%</div>
+      <div class="pa-cell-sub">$47.98</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+1.8%</div>
+      <div class="pa-cell-sub">$47.98</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+5.3%</div>
+      <div class="pa-cell-sub">$47.98</div>
+      <div class="reversal-badge up">↑ Reversal</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value down">-31.2%</div>
+      <div class="pa-cell-sub">$47.98</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$3.22B</div>
+      <div class="fund-cell-sub">+7.8% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$1.20B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">79.6%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">$681M</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">10.5%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$55</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val dn">-58%</div><div class="sc-label">From ATH (~$130)</div></div>
@@ -729,6 +800,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value down">-42.1%</div>
+      <div class="pa-cell-sub">$152.26</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value down">-9.6%</div>
+      <div class="pa-cell-sub">$152.26</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+15.1%</div>
+      <div class="pa-cell-sub">$152.26</div>
+      <div class="reversal-badge partial">Basing</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value down">-42.1%</div>
+      <div class="pa-cell-sub">$152.26</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$4.68B</div>
+      <div class="fund-cell-sub">+30.1% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$1.59B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">67.2%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">$1.29B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">-33.2%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$140</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val dn">-45%</div><div class="sc-label">From ATH (~$255)</div></div>
@@ -787,6 +911,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value down">-5.4%</div>
+      <div class="pa-cell-sub">$80.63</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value down">-7.0%</div>
+      <div class="pa-cell-sub">$80.63</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+19.0%</div>
+      <div class="pa-cell-sub">$80.63</div>
+      <div class="reversal-badge partial">Basing</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value down">-5.4%</div>
+      <div class="pa-cell-sub">$80.63</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$2.92B</div>
+      <div class="fund-cell-sub">+11.6% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$836M</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">77.4%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">$2.10B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">6.6%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$65</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val dn">-65%</div><div class="sc-label">From ATH (~$185)</div></div>
@@ -845,6 +1022,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value down">-59.7%</div>
+      <div class="pa-cell-sub">$76.38</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value down">-22.1%</div>
+      <div class="pa-cell-sub">$76.38</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+22.4%</div>
+      <div class="pa-cell-sub">$76.38</div>
+      <div class="reversal-badge partial">Basing</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value down">-59.7%</div>
+      <div class="pa-cell-sub">$76.38</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$1.23B</div>
+      <div class="fund-cell-sub">+24.6% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$255M</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">89.2%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">$1.50B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">0.7%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$180</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val dn">-40%</div><div class="sc-label">From ATH (~$300)</div></div>
@@ -900,6 +1130,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value down">-43.1%</div>
+      <div class="pa-cell-sub">$167.85</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value down">-8.6%</div>
+      <div class="pa-cell-sub">$167.85</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+6.9%</div>
+      <div class="pa-cell-sub">$167.85</div>
+      <div class="reversal-badge partial">Basing</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value down">-43.1%</div>
+      <div class="pa-cell-sub">$167.85</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$3.20B</div>
+      <div class="fund-cell-sub">+16.0% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$1.05B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">75.5%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">$6.46B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">29.4%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$175</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val dn">-35%</div><div class="sc-label">From ATH (~$270)</div></div>
@@ -958,6 +1241,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value down">-2.5%</div>
+      <div class="pa-cell-sub">$186.54</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+67.0%</div>
+      <div class="pa-cell-sub">$186.54</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+71.2%</div>
+      <div class="pa-cell-sub">$186.54</div>
+      <div class="reversal-badge up">↑ Reversal</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value down">-2.5%</div>
+      <div class="pa-cell-sub">$186.54</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$3.43B</div>
+      <div class="fund-cell-sub">+29.2% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$880M</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">80.0%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">$3.20B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">1.0%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$110</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val dn">-30%</div><div class="sc-label">From ATH (~$155)</div></div>
@@ -1024,6 +1360,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value up">+5.0%</div>
+      <div class="pa-cell-sub">$141.44</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+2.9%</div>
+      <div class="pa-cell-sub">$141.44</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value down">-3.2%</div>
+      <div class="pa-cell-sub">$141.44</div>
+      <div class="reversal-badge down">↓ Downtrend</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value up">+5.0%</div>
+      <div class="pa-cell-sub">$141.44</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$9.71B</div>
+      <div class="fund-cell-sub">+35.1% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$4.36B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">63.5%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">$12.4B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">42.7%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$172</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val dn">-16%</div><div class="sc-label">From Recent Highs</div></div>
@@ -1085,6 +1474,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value up">+114.1%</div>
+      <div class="pa-cell-sub">$182.04</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+49.3%</div>
+      <div class="pa-cell-sub">$182.04</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+7.2%</div>
+      <div class="pa-cell-sub">$182.04</div>
+      <div class="reversal-badge up">↑ Reversal</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value up">+114.1%</div>
+      <div class="pa-cell-sub">$182.04</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$16.3B</div>
+      <div class="fund-cell-sub">+20.0% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$612M</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">36.4%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">-$8.17B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">15.7%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$38</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val up">+25%</div><div class="sc-label">YTD 2026</div></div>
@@ -1146,6 +1588,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value up">+111.1%</div>
+      <div class="pa-cell-sub">$73.12</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+48.4%</div>
+      <div class="pa-cell-sub">$73.12</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+32.6%</div>
+      <div class="pa-cell-sub">$73.12</div>
+      <div class="reversal-badge up">↑ Reversal</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value up">+111.1%</div>
+      <div class="pa-cell-sub">$73.12</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$7.07B</div>
+      <div class="fund-cell-sub">+27.5% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">-$47M</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">14.4%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">$231M</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">6.0%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$28</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val up">NEW HIGH</div><div class="sc-label">12-Month High</div></div>
@@ -1204,6 +1699,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value up">+7.1%</div>
+      <div class="pa-cell-sub">$399.21</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+7.1%</div>
+      <div class="pa-cell-sub">$399.21</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value down">-0.3%</div>
+      <div class="pa-cell-sub">$399.21</div>
+      <div class="reversal-badge down">↓ Downtrend</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value up">+7.1%</div>
+      <div class="pa-cell-sub">$399.21</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$28.5B</div>
+      <div class="fund-cell-sub">+16.8% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$2.65B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">37.1%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">-$21.1B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">16.1%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$285</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val up">+3x</div><div class="sc-label">EPS Since 2016</div></div>
@@ -1262,6 +1810,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value down">-19.8%</div>
+      <div class="pa-cell-sub">$8.44</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+4.7%</div>
+      <div class="pa-cell-sub">$8.44</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+12.8%</div>
+      <div class="pa-cell-sub">$8.44</div>
+      <div class="reversal-badge up">↑ Reversal</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value down">-19.8%</div>
+      <div class="pa-cell-sub">$8.44</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$12.1B</div>
+      <div class="fund-cell-sub">-8.9% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">-$1.97B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">47.3%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">-$11.6B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">0.2%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$8.90</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val">$7.68</div><div class="sc-label">Fair Value Est.</div></div>
@@ -1323,6 +1924,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value up">+20.3%</div>
+      <div class="pa-cell-sub">$203.18</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+48.9%</div>
+      <div class="pa-cell-sub">$203.18</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+59.0%</div>
+      <div class="pa-cell-sub">$203.18</div>
+      <div class="reversal-badge up">↑ Reversal</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value up">+20.3%</div>
+      <div class="pa-cell-sub">$203.18</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$44.5B</div>
+      <div class="fund-cell-sub">-3.5% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$9.59B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">54.8%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">-$5.47B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">22.1%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$155</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val">12x</div><div class="sc-label">Forward P/E</div></div>
@@ -1381,6 +2035,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value up">+0.8%</div>
+      <div class="pa-cell-sub">$112.69</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+9.6%</div>
+      <div class="pa-cell-sub">$112.69</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+17.8%</div>
+      <div class="pa-cell-sub">$112.69</div>
+      <div class="reversal-badge up">↑ Reversal</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value up">+0.8%</div>
+      <div class="pa-cell-sub">$112.69</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$6.71B</div>
+      <div class="fund-cell-sub">+4.4% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$1.12B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">70.5%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">$281M</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">25.2%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$105</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val">~$118</div><div class="sc-label">Analyst Fair Value</div></div>
@@ -1439,6 +2146,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value up">+10.4%</div>
+      <div class="pa-cell-sub">$132.00</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+10.1%</div>
+      <div class="pa-cell-sub">$132.00</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value down">-3.8%</div>
+      <div class="pa-cell-sub">$132.00</div>
+      <div class="reversal-badge down">↓ Downtrend</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value up">+10.4%</div>
+      <div class="pa-cell-sub">$132.00</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$22.4B</div>
+      <div class="fund-cell-sub">+10.2% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">-$6.95B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">47.2%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">-$51.3B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">23.7%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$82</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val">$78B</div><div class="sc-label">5-Year Capex Plan</div></div>
@@ -1497,6 +2257,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value down">-18.2%</div>
+      <div class="pa-cell-sub">$155.84</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+4.3%</div>
+      <div class="pa-cell-sub">$155.84</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+2.0%</div>
+      <div class="pa-cell-sub">$155.84</div>
+      <div class="reversal-badge up">↑ Reversal</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value down">-18.2%</div>
+      <div class="pa-cell-sub">$155.84</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$17.7B</div>
+      <div class="fund-cell-sub">+13.6% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">-$459M</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">33.2%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">-$19.6B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">13.2%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$140</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val">~22x</div><div class="sc-label">Forward P/E</div></div>
@@ -1555,6 +2368,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value up">+173.2%</div>
+      <div class="pa-cell-sub">$759.76</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+77.3%</div>
+      <div class="pa-cell-sub">$759.76</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+51.7%</div>
+      <div class="pa-cell-sub">$759.76</div>
+      <div class="reversal-badge up">↑ Reversal</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value up">+173.2%</div>
+      <div class="pa-cell-sub">$759.76</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$11.0B</div>
+      <div class="fund-cell-sub">+44.1% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$1.61B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">41.6%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">-$3.03B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">35.7%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$100</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val up">+87%</div><div class="sc-label">Past 3 Months</div></div>
@@ -1613,6 +2479,59 @@ body {
         </div>
       </summary>
       <div class="stock-card-body">
+<div class="price-action-bar">
+    <div class="pa-cell">
+      <div class="pa-cell-label">6M</div>
+      <div class="pa-cell-value up">+172.1%</div>
+      <div class="pa-cell-sub">$646.95</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">90-Day</div>
+      <div class="pa-cell-value up">+64.0%</div>
+      <div class="pa-cell-sub">$646.95</div>
+      
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">30-Day</div>
+      <div class="pa-cell-value up">+53.5%</div>
+      <div class="pa-cell-sub">$646.95</div>
+      <div class="reversal-badge up">↑ Reversal</div>
+    </div>
+    <div class="pa-cell">
+      <div class="pa-cell-label">YTD</div>
+      <div class="pa-cell-value up">+172.1%</div>
+      <div class="pa-cell-sub">$646.95</div>
+      
+    </div>
+  </div>
+<div class="fundamentals-grid">
+    <div class="fund-cell">
+      <div class="fund-cell-label">Revenue / FY25</div>
+      <div class="fund-cell-value">$58.1B</div>
+      <div class="fund-cell-sub">+196.3% YoY</div>
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">FCF / FY25</div>
+      <div class="fund-cell-value">$2.89B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Gross Margin</div>
+      <div class="fund-cell-value">58.4%</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">Net Cash</div>
+      <div class="fund-cell-value">$3.79B</div>
+      
+    </div>
+    <div class="fund-cell">
+      <div class="fund-cell-label">GAAP Op Margin</div>
+      <div class="fund-cell-value">67.6%</div>
+      
+    </div>
+  </div>
         <div class="stat-row">
           <div class="stat-cell"><div class="sc-val">~$95</div><div class="sc-label">Current Price</div></div>
           <div class="stat-cell"><div class="sc-val up">+50%</div><div class="sc-label">YTD 2026</div></div>
