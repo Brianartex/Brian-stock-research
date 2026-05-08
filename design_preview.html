@@ -3,241 +3,361 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radical Design Preview — Stock Research v3</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<title>Neubrutal Design Preview — Stock Research v4</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --void: #030308;
-    --space: #080810;
-    --deep: #0c0c18;
-    --surface: rgba(255,255,255,0.03);
-    --surface-hover: rgba(255,255,255,0.05);
-    --border: rgba(255,255,255,0.05);
-    --border-visible: rgba(255,255,255,0.08);
-    --text: #ededf0;
-    --text-dim: #9898a8;
-    --text-quiet: #585868;
-    --accent: #8b7cff;
-    --accent-ghost: rgba(139,124,255,0.12);
-    --accent-glow: rgba(139,124,255,0.20);
-    --green: #44d98a;
-    --green-ghost: rgba(68,217,138,0.10);
-    --red: #ff5c72;
-    --red-ghost: rgba(255,92,114,0.10);
-    --amber: #f0b848;
+    /* Raw material palette — stone, concrete, paper */
+    --bg: #ede8e0;
+    --bg-alt: #e6e0d8;
+    --surface: #f5f2ed;
+    --surface-alt: #faf8f5;
+    --text: #1a1816;
+    --text-dim: #5c5852;
+    --text-quiet: #8c8882;
+    --border: #d8d2c8;
+    --border-strong: #b8b0a4;
+
+    /* Neumorphic shadow system */
+    --shadow-sm-ext: 2px 2px 5px rgba(0,0,0,0.06), -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-md-ext: 4px 4px 10px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.9);
+    --shadow-lg-ext: 8px 8px 20px rgba(0,0,0,0.08), -8px -8px 20px rgba(255,255,255,0.95);
+    --shadow-sm-inset: inset 2px 2px 5px rgba(0,0,0,0.06), inset -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-pressed: inset 3px 3px 7px rgba(0,0,0,0.10), inset -2px -2px 5px rgba(255,255,255,0.6);
+
+    /* Accent — single muted tone */
+    --accent: #5c6b8a;
+    --accent-light: #8a99b8;
+    --accent-bg: rgba(92,107,138,0.08);
+
+    /* Semantic */
+    --green: #4a7c5c;
+    --green-bg: rgba(74,124,92,0.10);
+    --red: #8c4a4a;
+    --red-bg: rgba(140,74,74,0.10);
+    --amber: #8a7040;
+    --amber-bg: rgba(138,112,64,0.10);
+
+    --radius-sm: 8px;
+    --radius: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
   }
 
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--void);
+    background: var(--bg);
     color: var(--text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    transition: background .3s;
   }
 
-  /* ── Atmosphere ── */
-  .atmos {
-    position: fixed; inset: 0; pointer-events: none; z-index: 0;
-    background:
-      radial-gradient(ellipse 70% 60% at 50% 0%, rgba(120,100,240,0.06), transparent 70%),
-      radial-gradient(ellipse 50% 40% at 80% 90%, rgba(100,140,255,0.04), transparent 60%),
-      radial-gradient(ellipse 40% 30% at 20% 50%, rgba(160,120,255,0.03), transparent 50%);
-  }
-  .grain {
-    position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.025;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Subtle texture */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* ── Layout ── */
-  .stage { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 80px 32px 120px; }
+  .stage { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 60px 32px 100px; }
 
-  /* ── Hero ── */
-  .hero { margin-bottom: 100px; }
-  .hero-eyebrow { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-quiet); margin-bottom: 20px; }
-  .hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 200; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 20px; }
-  .hero h1 em { font-style: normal; font-weight: 400; background: linear-gradient(135deg, var(--accent), #b8a0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero p { font-size: 16px; color: var(--text-dim); max-width: 520px; line-height: 1.7; font-weight: 300; }
+  /* ── BRUTALIST HERO ── */
+  .hero { margin-bottom: 80px; }
+  .hero-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--text-quiet); margin-bottom: 24px; padding: 4px 0; border-bottom: 2px solid var(--text); }
+  .hero h1 { font-size: clamp(40px, 7vw, 64px); font-weight: 800; letter-spacing: -0.05em; line-height: 1.05; margin-bottom: 20px; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { font-size: 16px; color: var(--text-dim); max-width: 500px; line-height: 1.7; font-weight: 400; }
 
-  /* ── Section Headers ── */
-  .section-rule { height: 1px; background: linear-gradient(90deg, transparent, var(--border-visible) 20%, var(--border-visible) 80%, transparent); margin: 80px 0 40px; }
-  .section-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-quiet); margin-bottom: 28px; }
+  /* ── SECTION RULE ── */
+  .rule { height: 2px; background: var(--text); opacity: 0.15; margin: 64px 0 36px; }
 
-  /* ── Stock Panel ── */
-  .stock-panel { margin-bottom: 48px; }
-  .stock-panel-header {
-    display: flex; align-items: baseline; gap: 16px;
-    padding: 0 0 16px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 20px;
+  /* ── SECTION HEADER ── */
+  .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-quiet); margin-bottom: 24px; text-transform: uppercase; }
+
+  /* ── NEUMORPHIC CARD ── */
+  .neo-card {
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext);
+    padding: 28px;
+    margin-bottom: 24px;
+    transition: all .25s ease;
+    cursor: pointer;
+    border: none;
   }
-  .stock-panel-ticker { font-size: 28px; font-weight: 200; letter-spacing: -0.03em; }
-  .stock-panel-name { font-size: 14px; color: var(--text-dim); font-weight: 400; }
-  .stock-panel-verdict { margin-left: auto; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; }
-  .stock-panel-verdict.buy { background: var(--green-ghost); color: var(--green); border: 1px solid rgba(68,217,138,0.2); }
-  .stock-panel-verdict.hold { background: rgba(240,184,72,0.10); color: var(--amber); border: 1px solid rgba(240,184,72,0.2); }
+  .neo-card:hover {
+    box-shadow: var(--shadow-lg-ext);
+    transform: translateY(-2px);
+  }
+  .neo-card:active {
+    box-shadow: var(--shadow-pressed);
+    transform: translateY(0);
+  }
+  .neo-card-inset {
+    background: var(--bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
 
-  /* ── Metrics Row ── */
-  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px; }
-  .metric { text-align: center; }
-  .metric-value { font-size: 28px; font-weight: 200; letter-spacing: -0.03em; margin-bottom: 4px; }
-  .metric-value.up { color: var(--green); }
-  .metric-value.down { color: var(--red); }
-  .metric-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-quiet); margin-bottom: 3px; }
-  .metric-context { font-size: 11px; color: var(--text-dim); }
+  /* ── TICKER HEADER ── */
+  .ticker-row {
+    display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--border);
+  }
+  .ticker { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; }
+  .ticker-name { font-size: 14px; color: var(--text-dim); font-weight: 500; }
+  .ticker-badge { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; padding: 6px 16px; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase;
+    background: var(--bg);
+    box-shadow: var(--shadow-sm-ext);
+    transition: all .15s;
+  }
+  .ticker-badge:hover { box-shadow: var(--shadow-pressed); }
+  .ticker-badge.buy { color: var(--green); }
+  .ticker-badge.hold { color: var(--amber); }
 
-  /* ── Sparkline ── */
-  .spark-row { margin-bottom: 32px; padding: 10px 0; }
-  .spark-row svg { display: block; width: 100%; height: 48px; }
+  /* ── METRICS ── */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+  .metric {
+    text-align: center;
+    background: var(--bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset);
+    padding: 20px 12px;
+    transition: box-shadow .2s;
+  }
+  .metric:hover { box-shadow: var(--shadow-md-ext); }
+  .metric-val { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .metric-val.up { color: var(--green); }
+  .metric-val.down { color: var(--red); }
+  .metric-lbl { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-quiet); margin-bottom: 4px; }
+  .metric-sub { font-size: 11px; color: var(--text-dim); }
 
-  /* ── Fundamentals Strip ── */
-  .fund-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; background: var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 40px; }
-  .fund-item { background: var(--surface); padding: 18px 14px; text-align: center; }
-  .fund-item .val { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-  .fund-item .lbl { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-quiet); }
-  .fund-item .sub { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+  /* ── SPARKLINE ── */
+  .spark-wrap { margin-bottom: 28px; padding: 8px 0; }
+  .spark-wrap svg { width: 100%; height: 52px; display: block; }
 
-  /* ── Thesis Blocks ── */
-  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
-  .thesis-block { padding: 20px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); }
-  .thesis-block h4 { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.10em; margin-bottom: 14px; }
+  /* ── FUNDAMENTALS ── */
+  .fund-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 36px; }
+  .fund-item {
+    text-align: center;
+    background: var(--bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset);
+    padding: 16px 10px;
+    transition: all .2s;
+  }
+  .fund-item:hover { box-shadow: var(--shadow-md-ext); }
+  .fund-item .val { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .fund-item .lbl { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.10em; color: var(--text-quiet); }
+  .fund-item .sub { font-size: 10px; color: var(--text-dim); margin-top: 3px; }
+
+  /* ── THESIS ── */
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .thesis-block {
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext);
+    padding: 24px;
+    transition: all .2s;
+  }
+  .thesis-block:hover { box-shadow: var(--shadow-lg-ext); }
+  .thesis-block h4 { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 16px; text-transform: uppercase; }
   .thesis-block.bull h4 { color: var(--green); }
   .thesis-block.bear h4 { color: var(--red); }
   .thesis-block p { font-size: 12px; color: var(--text-dim); line-height: 1.7; margin-bottom: 10px; }
-  .thesis-block p strong { color: var(--text); font-weight: 500; }
+  .thesis-block p strong { color: var(--text); font-weight: 600; }
 
-  /* ── Callout ── */
+  /* ── CALLOUT ── */
   .callout {
-    background: var(--accent-ghost);
-    border: 1px solid rgba(139,124,255,0.15);
-    border-radius: 12px;
-    padding: 20px 24px;
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg-ext);
+    padding: 24px 28px;
   }
-  .callout-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px; }
+  .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 12px; text-transform: uppercase; }
   .callout p { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
 
-  /* ── Palette Swatches ── */
-  .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; margin: 20px 0 40px; }
-  .chip { border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
-  .chip-color { height: 40px; }
-  .chip-label { padding: 6px 8px; font-size: 9px; font-weight: 500; color: var(--text-dim); background: var(--surface); }
-  .chip-label span { display: block; font-size: 8px; color: var(--text-quiet); }
+  /* ── BUTTON ── */
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+  .btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    padding: 12px 24px; border-radius: var(--radius); cursor: pointer; transition: all .2s;
+    background: var(--bg); border: none; color: var(--text); box-shadow: var(--shadow-sm-ext); letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  .btn:hover { box-shadow: var(--shadow-md-ext); }
+  .btn:active { box-shadow: var(--shadow-pressed); }
+  .btn-primary { color: var(--accent); }
+
+  /* ── SWATCHES ── */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin: 16px 0 32px; }
+  .swatch { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm-ext); }
+  .swatch-color { height: 48px; }
+  .swatch-label { padding: 8px 10px; font-size: 9px; font-weight: 600; color: var(--text-dim); background: var(--surface-alt); }
+  .swatch-label span { display: block; font-size: 8px; color: var(--text-quiet); font-weight: 400; }
+
+  /* ── TOGGLE ── */
+  .toggle-wrap { display: flex; gap: 8px; margin-bottom: 32px; }
+  .toggle {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+    padding: 8px 18px; border-radius: 30px; cursor: pointer; border: none; letter-spacing: 0.04em; text-transform: uppercase;
+    background: var(--bg); color: var(--text-dim); box-shadow: var(--shadow-sm-ext); transition: all .2s;
+  }
+  .toggle.active { box-shadow: var(--shadow-pressed); color: var(--text); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
   @media(max-width:700px) {
-    .stage { padding: 40px 18px 80px; }
-    .metrics { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .stage { padding: 36px 18px 80px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
     .fund-strip { grid-template-columns: repeat(2, 1fr); }
     .thesis-grid { grid-template-columns: 1fr; }
-    .metric-value { font-size: 22px; }
+    .two-col { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
-<div class="atmos"></div>
-<div class="grain"></div>
 
 <div class="stage">
 
 <!-- ═══════════ HERO ═══════════ -->
 <div class="hero">
-  <div class="hero-eyebrow">Research · May 2026</div>
-  <h1>Beaten-down tech.<br><em>Asymmetric upside.</em></h1>
-  <p>23 stocks across three structural themes — SaaS survivors, AI infrastructure, and next-gen photonics. Live data, concise analysis, no filler.</p>
+  <div class="hero-tag">Research · May 2026</div>
+  <h1>Beaten-down tech.<br><span>Asymmetric upside.</span></h1>
+  <p>23 stocks across three structural themes. Live data. No decoration. Just the thesis.</p>
 </div>
 
 <!-- ═══════════ PALETTE ═══════════ -->
-<div class="section-rule"></div>
-<div class="section-title">Design System</div>
-<div class="palette">
-  <div class="chip"><div class="chip-color" style="background:#030308"></div><div class="chip-label">Void<span>#030308</span></div></div>
-  <div class="chip"><div class="chip-color" style="background:#0c0c18"></div><div class="chip-label">Deep<span>#0c0c18</span></div></div>
-  <div class="chip"><div class="chip-color" style="background:rgba(255,255,255,0.03)"></div><div class="chip-label">Surface<span>3% white</span></div></div>
-  <div class="chip"><div class="chip-color" style="background:#ededf0"></div><div class="chip-label">Text<span>#ededf0</span></div></div>
-  <div class="chip"><div class="chip-color" style="background:#9898a8"></div><div class="chip-label">Dim<span>#9898a8</span></div></div>
-  <div class="chip"><div class="chip-color" style="background:#585868"></div><div class="chip-label">Quiet<span>#585868</span></div></div>
-  <div class="chip"><div class="chip-color" style="background:#8b7cff"></div><div class="chip-label">Accent<span>#8b7cff</span></div></div>
-  <div class="chip"><div class="chip-color" style="background:#44d98a"></div><div class="chip-label">Green<span>#44d98a</span></div></div>
-  <div class="chip"><div class="chip-color" style="background:#ff5c72"></div><div class="chip-label">Red<span>#ff5c72</span></div></div>
+<div class="sec-label">/ design-system /</div>
+<div class="swatch-grid">
+  <div class="swatch"><div class="swatch-color" style="background:#ede8e0"></div><div class="swatch-label">Background<span>#ede8e0 — Stone</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#f5f2ed"></div><div class="swatch-label">Surface<span>#f5f2ed — Paper</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#faf8f5"></div><div class="swatch-label">Surface Alt<span>#faf8f5 — Linen</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#1a1816"></div><div class="swatch-label">Text<span>#1a1816</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#5c5852"></div><div class="swatch-label">Dim<span>#5c5852</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#5c6b8a"></div><div class="swatch-label">Accent<span>#5c6b8a — Slate</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#4a7c5c"></div><div class="swatch-label">Green<span>#4a7c5c</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#8c4a4a"></div><div class="swatch-label">Red<span>#8c4a4a</span></div></div>
 </div>
 
-<!-- ═══════════ SAMPLE STOCK ═══════════ -->
-<div class="section-rule"></div>
-<div class="section-title">Sample Analysis — DOCU</div>
+<!-- ═══════════ INTERACTIONS ═══════════ -->
+<div class="two-col">
+<div>
+<div class="sec-label">/ micro-interactions /</div>
+<div class="btn-row">
+  <button class="btn btn-primary">Primary Action</button>
+  <button class="btn">Secondary</button>
+</div>
+<p style="font-size:11px;color:var(--text-dim);margin-top:8px;">Buttons use neumorphic extrusion shadows. On press: inset shadow (button depresses into surface). Hover: lift.</p>
 
-<div class="stock-panel">
-
-  <div class="stock-panel-header">
-    <div class="stock-panel-ticker">DOCU</div>
-    <div class="stock-panel-name">DocuSign — Agreement Cloud</div>
-    <div class="stock-panel-verdict hold">Hold</div>
-  </div>
-
-  <div class="metrics">
-    <div class="metric">
-      <div class="metric-label">6-Month</div>
-      <div class="metric-value down">−31.2%</div>
-      <div class="metric-context">from $69.44</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">90-Day</div>
-      <div class="metric-value up">+1.8%</div>
-      <div class="metric-context">basing pattern</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">30-Day</div>
-      <div class="metric-value up">+5.3%</div>
-      <div class="metric-context">reversal forming</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">YTD</div>
-      <div class="metric-value down">−31.2%</div>
-      <div class="metric-context">since January</div>
-    </div>
-  </div>
-
-  <div class="spark-row">
-    <svg viewBox="0 0 800 48" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="spark-docu" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#ff5c72" stop-opacity="0.15"/>
-          <stop offset="100%" stop-color="#ff5c72" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
-      <path d="M0,25 C20,28 40,22 60,30 S100,18 140,22 S180,15 220,28 S260,12 300,24 S340,8 380,20 S420,5 460,18 S500,10 540,22 S580,18 620,14 S660,20 700,16 S740,22 780,10 L800,14" fill="url(#spark-docu)" stroke="#ff5c72" stroke-width="1" fill="none"/>
-    </svg>
-  </div>
-
-  <div class="fund-strip">
-    <div class="fund-item"><div class="lbl">Revenue</div><div class="val">$3.22B</div><div class="sub">+7.8% YoY</div></div>
-    <div class="fund-item"><div class="lbl">Free Cash Flow</div><div class="val">$1.20B</div><div class="sub">37.3% margin</div></div>
-    <div class="fund-item"><div class="lbl">Gross Margin</div><div class="val">79.6%</div></div>
-    <div class="fund-item"><div class="lbl">Net Cash</div><div class="val">$681M</div></div>
-    <div class="fund-item"><div class="lbl">Op Margin</div><div class="val">10.5%</div></div>
-  </div>
-
-  <div class="thesis-grid">
-    <div class="thesis-block bull">
-      <h4>◈ Bull Case</h4>
-      <p><strong>The AI Agent wave is DocuSign's next act.</strong> AI agents need to execute agreements. DocuSign has 1.5 billion+ agreements — the largest structured agreement dataset in the world. AI Agent Studio lets customers build agents that negotiate and execute autonomously.</p>
-      <p><strong>Valuation is pricing in collapse.</strong> ~6x forward EV/revenue for a company still growing. If AI adoption drives re-acceleration to 12–15%, the stock deserves 10–12x. Risk/reward asymmetrically favors buyers at these levels.</p>
-    </div>
-    <div class="thesis-block bear">
-      <h4>◈ Bear Case</h4>
-      <p><strong>AI could disintermediate DocuSign entirely.</strong> If Microsoft, Google, or OpenAI build agreement execution into their platforms, DocuSign's moat shrinks. Growth decelerated from 40%+ to single digits over three years.</p>
-      <p><strong>The turnaround isn't confirmed.</strong> One quarter of stabilization doesn't make a trend. Billings growth remains weak, and the enterprise segment is seeing increased competitive pressure from Adobe and Dropbox.</p>
-    </div>
-  </div>
-
-  <div class="callout">
-    <div class="callout-label">My Call · Hold</div>
-    <p>The AI tailwind is real but not yet priced in. Wait for evidence of re-acceleration before building a full position. Current entry around $48 offers reasonable risk/reward for a starter position. <strong>Catalyst:</strong> Q2 FY2027 showing AI Agent Studio revenue contribution above 5% of total.</p>
-  </div>
-
+<div style="margin-top:24px">
+<div class="sec-label">/ neumorphic depth /</div>
+<div class="neo-card" style="padding:20px;margin-bottom:16px">
+  <div style="font-size:14px;font-weight:600">Extruded Card</div>
+  <div style="font-size:11px;color:var(--text-dim);margin-top:4px">Shadow creates the illusion of rising from the surface. Hover for more lift.</div>
+</div>
+<div class="neo-card-inset">
+  <div style="font-size:14px;font-weight:600">Inset Panel</div>
+  <div style="font-size:11px;color:var(--text-dim);margin-top:4px">Pressed into the surface — good for data displays, inputs, metrics.</div>
+</div>
+</div>
 </div>
 
-<div class="section-rule"></div>
-<p style="font-size:11px;color:var(--text-quiet);text-align:center;letter-spacing:0.02em;">Hermes Agent Research · Radical design exploration · Atmosphere over boxes · Data as art</p>
+<div>
+<div class="sec-label">/ typography /</div>
+<div style="margin-bottom:20px">
+  <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-quiet);margin-bottom:4px">Display · 64px / 800</div>
+  <div style="font-size:48px;font-weight:800;letter-spacing:-0.05em;line-height:1.05">Brutalist</div>
+</div>
+<div style="margin-bottom:16px">
+  <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-quiet);margin-bottom:4px">Heading · 20px / 600</div>
+  <div style="font-size:20px;font-weight:600;letter-spacing:-0.02em">Part 1: The Survivors</div>
+</div>
+<div style="margin-bottom:16px">
+  <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-quiet);margin-bottom:4px">Body · 14px / 400</div>
+  <div style="font-size:14px;color:var(--text-dim);line-height:1.7">Beaten-down SaaS stocks that sold off from ATHs. The thesis: at current valuations, growth doesn't need to re-accelerate.</div>
+</div>
+<div>
+  <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-quiet);margin-bottom:4px">Mono · JetBrains Mono · 10px</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-quiet)">DOCU · $47.98 · HOLD · -31.2% 6M</div>
+</div>
+</div>
+</div>
+
+<div class="rule"></div>
+
+<!-- ═══════════ STOCK PANEL ═══════════ -->
+<div class="sec-label">/ sample-analysis / docu /</div>
+
+<div class="ticker-row">
+  <div class="ticker">DOCU</div>
+  <div class="ticker-name">DocuSign — Agreement Cloud</div>
+  <div class="ticker-badge hold">Hold</div>
+</div>
+
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-lbl">6-Month</div>
+    <div class="metric-val down">−31.2%</div>
+    <div class="metric-sub">from $69.44</div>
+  </div>
+  <div class="metric">
+    <div class="metric-lbl">90-Day</div>
+    <div class="metric-val up">+1.8%</div>
+    <div class="metric-sub">basing</div>
+  </div>
+  <div class="metric">
+    <div class="metric-lbl">30-Day</div>
+    <div class="metric-val up">+5.3%</div>
+    <div class="metric-sub">reversal</div>
+  </div>
+  <div class="metric">
+    <div class="metric-lbl">YTD</div>
+    <div class="metric-val down">−31.2%</div>
+    <div class="metric-sub">since Jan</div>
+  </div>
+</div>
+
+<div class="spark-wrap">
+  <svg viewBox="0 0 800 52" preserveAspectRatio="none">
+    <path d="M0,26 C20,30 40,20 60,32 S100,14 140,24 S180,10 220,30 S260,8 300,26 S340,4 380,22 S420,2 460,18 S500,6 540,24 S580,16 620,10 S660,22 700,12 S740,24 780,8 L800,14" fill="none" stroke="#8c4a4a" stroke-width="1.5" opacity="0.6"/>
+  </svg>
+</div>
+
+<div class="fund-strip">
+  <div class="fund-item"><div class="lbl">Revenue</div><div class="val">$3.22B</div><div class="sub">+7.8% YoY</div></div>
+  <div class="fund-item"><div class="lbl">Free Cash Flow</div><div class="val">$1.20B</div><div class="sub">37.3% margin</div></div>
+  <div class="fund-item"><div class="lbl">Gross Margin</div><div class="val">79.6%</div></div>
+  <div class="fund-item"><div class="lbl">Net Cash</div><div class="val">$681M</div></div>
+  <div class="fund-item"><div class="lbl">Op Margin</div><div class="val">10.5%</div></div>
+</div>
+
+<div class="thesis-grid">
+  <div class="thesis-block bull">
+    <h4>bull_case</h4>
+    <p><strong>The AI Agent wave is DocuSign's next act.</strong> AI agents need to execute agreements. DocuSign has 1.5 billion+ agreements — the largest structured agreement dataset in the world. AI Agent Studio lets customers build agents that negotiate and execute autonomously.</p>
+    <p><strong>Valuation is pricing in collapse.</strong> ~6x forward EV/revenue for a company still growing. If AI adoption drives re-acceleration to 12–15%, the stock deserves 10–12x. Risk/reward asymmetrically favors buyers at these levels.</p>
+  </div>
+  <div class="thesis-block bear">
+    <h4>bear_case</h4>
+    <p><strong>AI could disintermediate DocuSign entirely.</strong> If Microsoft, Google, or OpenAI build agreement execution into their platforms, DocuSign's moat shrinks. Growth decelerated from 40%+ to single digits over three years.</p>
+    <p><strong>The turnaround isn't confirmed.</strong> One quarter of stabilization doesn't make a trend. Billings growth remains weak, and the enterprise segment is seeing increased competitive pressure from Adobe and Dropbox.</p>
+  </div>
+</div>
+
+<div class="callout">
+  <div class="callout-label">my_call · hold</div>
+  <p>The AI tailwind is real but not yet priced in. Wait for evidence of re-acceleration before building a full position. Current entry around $48 offers reasonable risk/reward for a starter position. <strong>Catalyst:</strong> Q2 FY2027 showing AI Agent Studio revenue contribution above 5% of total.</p>
+</div>
+
+<div class="rule"></div>
+<p style="font-size:10px;color:var(--text-quiet);text-align:center;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;">
+  neubrutal · neumorphic depth · raw typography · micro-interactions · sustainable light palette
+</p>
 
 </div>
 </body>
