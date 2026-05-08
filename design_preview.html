@@ -27,18 +27,18 @@
     --shadow-sm-inset: inset 2px 2px 5px rgba(0,0,0,0.06), inset -2px -2px 5px rgba(255,255,255,0.8);
     --shadow-pressed: inset 3px 3px 7px rgba(0,0,0,0.10), inset -2px -2px 5px rgba(255,255,255,0.6);
 
-    /* Accent — single muted tone */
-    --accent: #5c6b8a;
-    --accent-light: #8a99b8;
-    --accent-bg: rgba(92,107,138,0.08);
+    /* Accent — rich ocean blue, stands off the warm stone */
+    --accent: #26609c;
+    --accent-light: #4d8ccc;
+    --accent-bg: rgba(38,96,156,0.08);
 
-    /* Semantic */
-    --green: #4a7c5c;
-    --green-bg: rgba(74,124,92,0.10);
-    --red: #8c4a4a;
-    --red-bg: rgba(140,74,74,0.10);
-    --amber: #8a7040;
-    --amber-bg: rgba(138,112,64,0.10);
+    /* Semantic — punchy enough to read at a glance */
+    --green: #277a3e;
+    --green-bg: rgba(39,122,62,0.10);
+    --red: #a33636;
+    --red-bg: rgba(163,54,54,0.10);
+    --amber: #996e2c;
+    --amber-bg: rgba(153,110,44,0.10);
 
     --radius-sm: 8px;
     --radius: 14px;
@@ -53,6 +53,7 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     transition: background .3s;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Subtle texture */
@@ -188,6 +189,7 @@
     font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
     padding: 12px 24px; border-radius: var(--radius); cursor: pointer; transition: all .2s;
     background: var(--bg); border: none; color: var(--text); box-shadow: var(--shadow-sm-ext); letter-spacing: 0.02em; text-transform: uppercase;
+    touch-action: manipulation; user-select: none; -webkit-user-select: none;
   }
   .btn:hover { box-shadow: var(--shadow-md-ext); }
   .btn:active { box-shadow: var(--shadow-pressed); }
@@ -239,9 +241,9 @@
   <div class="swatch"><div class="swatch-color" style="background:#faf8f5"></div><div class="swatch-label">Surface Alt<span>#faf8f5 — Linen</span></div></div>
   <div class="swatch"><div class="swatch-color" style="background:#1a1816"></div><div class="swatch-label">Text<span>#1a1816</span></div></div>
   <div class="swatch"><div class="swatch-color" style="background:#5c5852"></div><div class="swatch-label">Dim<span>#5c5852</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#5c6b8a"></div><div class="swatch-label">Accent<span>#5c6b8a — Slate</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#4a7c5c"></div><div class="swatch-label">Green<span>#4a7c5c</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#8c4a4a"></div><div class="swatch-label">Red<span>#8c4a4a</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#26609c"></div><div class="swatch-label">Accent<span>#26609c — Ocean</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#277a3e"></div><div class="swatch-label">Green<span>#277a3e</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#a33636"></div><div class="swatch-label">Red<span>#a33636</span></div></div>
 </div>
 
 <!-- ═══════════ INTERACTIONS ═══════════ -->
@@ -324,7 +326,7 @@
 
 <div class="spark-wrap">
   <svg viewBox="0 0 800 52" preserveAspectRatio="none">
-    <path d="M0,26 C20,30 40,20 60,32 S100,14 140,24 S180,10 220,30 S260,8 300,26 S340,4 380,22 S420,2 460,18 S500,6 540,24 S580,16 620,10 S660,22 700,12 S740,24 780,8 L800,14" fill="none" stroke="#8c4a4a" stroke-width="1.5" opacity="0.6"/>
+    <path d="M0,26 C20,30 40,20 60,32 S100,14 140,24 S180,10 220,30 S260,8 300,26 S340,4 380,22 S420,2 460,18 S500,6 540,24 S580,16 620,10 S660,22 700,12 S740,24 780,8 L800,14" fill="none" stroke="#a33636" stroke-width="1.5" opacity="0.6"/>
   </svg>
 </div>
 
