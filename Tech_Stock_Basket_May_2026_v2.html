@@ -617,8 +617,8 @@ body.nav-open{overflow:hidden}
 }
 @media(max-width:768px){.page-content{margin-left:0!important;max-width:100%!important;padding:0 12px!important}}
 .toc-group{border:none;margin:0;padding:0}
-.toc-group summary.toc-group-label{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);padding:8px 20px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:4px}
-.toc-group summary.toc-group-label::before{content:'▼';font-size:8px;transition:transform .15s}
+.toc-group summary.toc-group-label{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-secondary);padding:8px 20px 8px 4px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px}
+.toc-group summary.toc-group-label::before{content:'▼';font-size:8px;transition:transform .15s;color:var(--text-muted);width:16px;text-align:center;flex-shrink:0}
 .toc-group:not([open]) summary.toc-group-label::before{transform:rotate(-90deg)}
 .toc-group summary.toc-group-label:hover{color:var(--text-primary)}
 .toc-group .toc-item{padding-left:28px;font-size:11px}
@@ -626,7 +626,7 @@ body.nav-open{overflow:hidden}
 .skip-section{margin-bottom:40px}
 .skip-section h2{margin-bottom:20px}
 
-.stock-card-body h3{font-size:13px;font-weight:600;color:var(--text-primary);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}</style>
+.stock-card-body h3{font-size:13px;font-weight:600;color:var(--text-primary);margin:16px 0 6px}</style>
 </head>
 <body>
 
