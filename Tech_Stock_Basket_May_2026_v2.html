@@ -125,11 +125,7 @@ a:focus-visible {
 }
 
 /* ── MAIN CONTENT SHIFT ── */
-.page-content {
-  margin-left: 230px;
-  max-width: 1100px;
-  padding: 0 0 40px;
-}
+
 
 /* ── REPORT HEADER ── */
 .report-header {
@@ -175,10 +171,10 @@ a:focus-visible {
   border-bottom: 1px solid var(--border);
 }
 .guide-box {
+  padding: 24px 32px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
+  border-radius: 10px;
 }
 .guide-header {
   background: var(--surface2);
@@ -484,10 +480,7 @@ a:focus-visible {
   .toc-sidebar { display: none !important; }
   .mobile-topbar { display: flex !important; }
   body { padding-left: 0 !important; padding-top: 48px; }
-  .page-content {
-  max-width: 1100px;
-  padding: 0 0 40px;
-}
+  
   .report-header { padding: 24px 20px 20px; }
   .guide-section, .intro-section { padding: 24px 20px; }
   .stock-section { padding: 0 20px 32px; }
@@ -574,10 +567,7 @@ body.nav-open{overflow:hidden}
 .top-pick-card p strong{color:var(--text-primary)}
 
 /* === MOBILE RESPONSIVE === */
-@media(max-width:768px){.page-content{margin-left:0!important;max-width:100%!important;padding:0!important}.page-content {
-  max-width: 1100px;
-  padding: 0 0 40px;
-}
+@media(max-width:768px){
   .toc-sidebar{display:none!important}
   .mobile-topbar{display:flex!important}
   .mobile-close-btn{display:block}
@@ -609,12 +599,23 @@ body.nav-open{overflow:hidden}
   .stock-card-body h3{font-size:11px!important;margin:12px 0 6px!important}
   .verdict-box{padding:12px!important;margin:0 0 12px!important}
   .verdict-box p{font-size:12px!important}
-  .guide-box{padding:16px!important}
+  .guide-box {
+  padding: 24px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
   .guide-cell p{font-size:11px!important}
   .sparkline{height:30px!important}
   #new-research .stock-card-body{padding:12px 14px!important}
 }
-</style>
+
+.page-content {
+  margin-left: 230px;
+  max-width: 1100px;
+  padding: 0 24px;
+}
+@media(max-width:768px){.page-content{margin-left:0!important;max-width:100%!important;padding:0 12px!important}}</style>
 </head>
 <body>
 
@@ -688,13 +689,15 @@ body.nav-open{overflow:hidden}
   <div class="toc-divider"></div>
   <a class="toc-item" href="#references">📚 References & Sources</a>
 
+
+
 <div class="page-content">
 </nav></nav>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- MAIN CONTENT -->
 <!-- ═══════════════════════════════════════════════════ -->
-<div class="page-content">
+
 
   <!-- HEADER -->
   <header class="report-header">
@@ -768,7 +771,7 @@ body.nav-open{overflow:hidden}
     </div>
   </div>
 
-  </div>
+  
 
   <!-- ═══════════════════════════════════════════════════ -->
   <!-- TIER 1: SURVIVORS -->
@@ -3507,11 +3510,13 @@ window.addEventListener('scroll', onScroll, { passive: true });
       sidebar.classList.remove("mobile-open");
       document.body.classList.remove("nav-open");
       btn.classList.remove("active");
-    });
+    
+</div>
+});
   });
 })();
 </script>
 
-</div>
+
 </body>
 </html
