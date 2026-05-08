@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linear Design Preview — Stock Research v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #08090a;
+    --surface: #0f1011;
+    --surface2: #191a1b;
+    --surface3: #28282c;
+    --border: rgba(255,255,255,0.08);
+    --border-subtle: rgba(255,255,255,0.05);
+    --text-primary: #f7f8f8;
+    --text-secondary: #d0d6e0;
+    --text-muted: #8a8f98;
+    --text-quaternary: #62666d;
+    --accent: #5e6ad2;
+    --accent-bright: #7170ff;
+    --accent-hover: #828fff;
+    --green: #27a644;
+    --green-bg: rgba(39,166,68,0.12);
+    --red: #e55c5c;
+    --red-bg: rgba(229,92,92,0.12);
+    --amber: #d29922;
+    --amber-bg: rgba(210,153,34,0.12);
+    --radius-sm: 4px;
+    --radius: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.55;
+    padding: 48px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; }
+  h2 { font-size: 16px; font-weight: 600; margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin: 20px 0 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .subtitle { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
+
+  /* ── Swatches ── */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: 12px; }
+  .swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .swatch-color { height: 64px; }
+  .swatch-label { padding: 8px 12px; font-size: 11px; font-weight: 500; color: var(--text-secondary); background: var(--surface); }
+  .swatch-label span { display: block; font-size: 10px; color: var(--text-muted); margin-top: 2px; font-weight: 400; }
+
+  /* ── Type ── */
+  .type-sample { margin-bottom: 16px; }
+  .type-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 4px; }
+  .type-display { font-size: 32px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
+  .type-heading { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+  .type-body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+  .type-small { font-size: 12px; color: var(--text-muted); }
+  .type-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: var(--text-secondary); }
+
+  /* ── Buttons ── */
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .btn { font-family: inherit; font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: var(--radius); cursor: pointer; transition: all .15s; }
+  .btn-primary { background: var(--accent); color: #fff; border: none; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-ghost { background: rgba(255,255,255,0.02); color: var(--text-secondary); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--text-primary); }
+  .btn-subtle { background: rgba(255,255,255,0.04); color: var(--text-muted); border: none; padding: 4px 10px; font-size: 12px; }
+
+  /* ── Badges ── */
+  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase; }
+  .badge-buy { background: var(--green-bg); color: var(--green); border: 1px solid rgba(39,166,68,0.25); }
+  .badge-hold { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(210,153,34,0.25); }
+  .badge-watch { background: rgba(113,112,255,0.12); color: var(--accent-bright); border: 1px solid rgba(113,112,255,0.25); }
+
+  /* ── Cards ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; }
+  .card-header { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); cursor: pointer; }
+  .card-header:hover { background: var(--surface2); }
+  .card-body { padding: 20px; background: var(--surface); }
+  .card-ticker { font-size: 13px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.02em; }
+  .card-company { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── Price Bar ── */
+  .price-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); }
+  .price-cell { background: var(--surface2); padding: 12px 16px; text-align: center; }
+  .price-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 4px; }
+  .price-value { font-size: 14px; font-weight: 600; }
+  .price-value.up { color: var(--green); }
+  .price-value.down { color: var(--red); }
+  .price-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── Analysis Block ── */
+  .analysis-block { background: var(--surface2); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 8px; border-left: 3px solid; }
+  .analysis-block.bull { border-left-color: var(--green); }
+  .analysis-block.bear { border-left-color: var(--red); }
+  .analysis-block.call { border-left-color: var(--accent-bright); }
+  .analysis-block p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .analysis-block p strong { color: var(--text-primary); }
+
+  /* ── TOC Preview ── */
+  .toc-preview { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; max-width: 240px; }
+  .toc-brand { font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle); }
+  .toc-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin: 12px 0 6px; }
+  .toc-link { display: block; font-size: 12px; color: var(--text-muted); padding: 4px 0; text-decoration: none; transition: color .15s; }
+  .toc-link:hover { color: var(--text-primary); }
+  .toc-link.active { color: var(--accent-bright); }
+
+  /* ── Sparkline ── */
+  .sparkline-demo { display: block; width: 100%; height: 40px; margin: 8px 0; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media(max-width:600px) { .two-col { grid-template-columns: 1fr; } body { padding: 24px 16px; } }
+</style>
+</head>
+<body>
+
+<h1>Linear Design System — Stock Research v3</h1>
+<p class="subtitle">Design token preview. All colors, typography, and components mapped from the Linear design system.</p>
+
+<!-- ═══════════════════════ PALETTE ═══════════════════════ -->
+<h2>🎨 Color Palette</h2>
+<div class="swatch-grid">
+  <div class="swatch"><div class="swatch-color" style="background:#08090a"></div><div class="swatch-label">Background<span>#08090a — Marketing Black</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#0f1011"></div><div class="swatch-label">Surface<span>#0f1011 — Panel Dark</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#191a1b"></div><div class="swatch-label">Surface 2<span>#191a1b — Elevated</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#28282c"></div><div class="swatch-label">Surface 3<span>#28282c — Hover</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#f7f8f8"></div><div class="swatch-label">Text Primary<span>#f7f8f8 — Near white</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#d0d6e0"></div><div class="swatch-label">Text Secondary<span>#d0d6e0 — Silver</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#8a8f98"></div><div class="swatch-label">Text Muted<span>#8a8f98 — Tertiary</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#62666d"></div><div class="swatch-label">Text Subtle<span>#62666d — Quaternary</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#5e6ad2"></div><div class="swatch-label">Accent<span>#5e6ad2 — Brand Indigo</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#7170ff"></div><div class="swatch-label">Accent Bright<span>#7170ff — Interactive</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#27a644"></div><div class="swatch-label">Green<span>#27a644 — Positive</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#e55c5c"></div><div class="swatch-label">Red<span>#e55c5c — Negative</span></div></div>
+</div>
+
+<div class="two-col">
+
+<!-- ═══════════════════════ TYPOGRAPHY ═══════════════════════ -->
+<div>
+<h2>🔤 Typography</h2>
+<div class="type-sample">
+  <div class="type-label">Display — 32px / 600</div>
+  <div class="type-display">Battered Tech + Sandisk Plays</div>
+</div>
+<div class="type-sample">
+  <div class="type-label">Heading — 18px / 600</div>
+  <div class="type-heading">Part 1: The Battered Tech Survivors</div>
+</div>
+<div class="type-sample">
+  <div class="type-label">Body — 14px / 400</div>
+  <div class="type-body">Beaten-down SaaS and software stocks that sold off from ATHs. The thesis: at current valuations, growth rates don't need to re-accelerate dramatically for these to work.</div>
+</div>
+<div class="type-sample">
+  <div class="type-label">Small — 12px</div>
+  <div class="type-small">$3.22B revenue · +7.8% YoY · Agreement cloud + AI assistant</div>
+</div>
+<div class="type-sample">
+  <div class="type-label">Mono — 13px JetBrains Mono</div>
+  <div class="type-mono">DOCU — $47.98 — HOLD — 6M: -31.2%</div>
+</div>
+</div>
+
+<!-- ═══════════════════════ COMPONENTS ═══════════════════════ -->
+<div>
+<h2>🧩 Components</h2>
+
+<h3>Buttons</h3>
+<div class="btn-row">
+  <button class="btn btn-primary">Primary CTA</button>
+  <button class="btn btn-ghost">Ghost Button</button>
+  <button class="btn btn-subtle">Subtle</button>
+</div>
+
+<h3>Verdict Badges</h3>
+<div class="btn-row">
+  <span class="badge badge-buy">BUY</span>
+  <span class="badge badge-hold">HOLD</span>
+  <span class="badge badge-watch">WATCH</span>
+</div>
+
+<h3>TOC Sidebar</h3>
+<div class="toc-preview">
+  <div class="toc-brand">← Research Home <span style="float:right;font-size:9px;color:var(--text-muted)">May 2026</span></div>
+  <div class="toc-label">📋 Guide</div>
+  <a class="toc-link" href="#">How to Use This Doc</a>
+  <a class="toc-link active" href="#">Investment Thesis</a>
+  <div class="toc-label">💻 Battered Tech</div>
+  <a class="toc-link" href="#">DOCU</a>
+  <a class="toc-link" href="#">SNOW</a>
+  <a class="toc-link" href="#">OKTA</a>
+  <div class="toc-label">⚡ Sandisk Plays</div>
+  <a class="toc-link" href="#">ANET</a>
+  <a class="toc-link" href="#">GLW</a>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════════════ STOCK CARD ═══════════════════════ -->
+<h2>📊 Sample Stock Card</h2>
+<div class="card">
+  <div class="card-header">
+    <div>
+      <div class="card-ticker">DOCU</div>
+      <div class="card-company">DocuSign — Intelligent Management Platform</div>
+    </div>
+    <span class="badge badge-hold">HOLD</span>
+  </div>
+  <div class="card-body">
+
+    <div class="price-bar">
+      <div class="price-cell">
+        <div class="price-label">6M</div>
+        <div class="price-value down">-31.2%</div>
+        <div class="price-sub">$47.98</div>
+      </div>
+      <div class="price-cell">
+        <div class="price-label">90-Day</div>
+        <div class="price-value up">+1.8%</div>
+        <div class="price-sub">$47.98 current</div>
+      </div>
+      <div class="price-cell">
+        <div class="price-label">30-Day</div>
+        <div class="price-value up">+5.3%</div>
+        <div class="price-sub">$47.98 current</div>
+      </div>
+      <div class="price-cell">
+        <div class="price-label">YTD</div>
+        <div class="price-value down">-31.2%</div>
+        <div class="price-sub">Jan 2026–now</div>
+      </div>
+    </div>
+
+    <svg class="sparkline-demo" viewBox="0 0 200 40">
+      <polyline fill="none" stroke="var(--red)" stroke-width="1.5" points="0,10 30,25 60,15 90,30 120,18 150,28 180,8 200,20"/>
+      <text x="196" y="14" text-anchor="end" font-size="9" fill="var(--text-muted)">$47.98</text>
+    </svg>
+
+    <div class="price-bar" style="grid-template-columns: repeat(5,1fr)">
+      <div class="price-cell">
+        <div class="price-label">Revenue</div>
+        <div class="price-value" style="font-size:13px;color:var(--text-primary)">$3.22B</div>
+        <div class="price-sub">+7.8% YoY</div>
+      </div>
+      <div class="price-cell">
+        <div class="price-label">FCF</div>
+        <div class="price-value" style="font-size:13px;color:var(--text-primary)">$1.20B</div>
+        <div class="price-sub">37.3% margin</div>
+      </div>
+      <div class="price-cell">
+        <div class="price-label">Gross Margin</div>
+        <div class="price-value" style="font-size:13px;color:var(--text-primary)">79.6%</div>
+      </div>
+      <div class="price-cell">
+        <div class="price-label">Net Cash</div>
+        <div class="price-value" style="font-size:13px;color:var(--text-primary)">$681M</div>
+      </div>
+      <div class="price-cell">
+        <div class="price-label">Op Margin</div>
+        <div class="price-value" style="font-size:13px;color:var(--text-primary)">10.5%</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:20px">🐂 Bull Case</h3>
+    <div class="analysis-block bull">
+      <p><strong>The AI Agent wave is DocuSign's next wave.</strong> AI agents need to execute agreements. DocuSign has 1.5 billion+ agreements in its network — the largest structured agreement dataset in the world.</p>
+    </div>
+
+    <h3>🐻 Bear Case</h3>
+    <div class="analysis-block bear">
+      <p><strong>AI agents could disintermediate DocuSign entirely.</strong> If Microsoft, Google, or OpenAI build agreement execution directly into their AI platforms, DocuSign's moat shrinks considerably.</p>
+    </div>
+
+    <div class="analysis-block call">
+      <p><strong>My Call: HOLD.</strong> The AI tailwind is real but not yet priced in. Wait for evidence of re-acceleration before building a full position. Current entry around $48 offers reasonable risk/reward for a starter position.</p>
+    </div>
+
+  </div>
+</div>
+
+<p style="font-size:12px;color:var(--text-muted);margin-top:40px;text-align:center;">
+  Linear Design System preview for Stock Research v3 · Based on Linear's design language · Hermes Agent Research
+</p>
+
+</body>
+</html>
