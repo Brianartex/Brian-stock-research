@@ -615,7 +615,17 @@ body.nav-open{overflow:hidden}
   max-width: 1100px;
   padding: 0 24px;
 }
-@media(max-width:768px){.page-content{margin-left:0!important;max-width:100%!important;padding:0 12px!important}}</style>
+@media(max-width:768px){.page-content{margin-left:0!important;max-width:100%!important;padding:0 12px!important}}
+.toc-group{border:none;margin:0;padding:0}
+.toc-group summary.toc-group-label{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);padding:8px 20px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:4px}
+.toc-group summary.toc-group-label::before{content:'▼';font-size:8px;transition:transform .15s}
+.toc-group:not([open]) summary.toc-group-label::before{transform:rotate(-90deg)}
+.toc-group summary.toc-group-label:hover{color:var(--text-primary)}
+.toc-group .toc-item{padding-left:28px;font-size:11px}
+
+.skip-section{margin-bottom:40px}
+.skip-section h2{margin-bottom:20px}
+</style>
 </head>
 <body>
 
@@ -648,39 +658,47 @@ body.nav-open{overflow:hidden}
   <a class="toc-item" href="#thesis">Investment Thesis</a>
 
   <div class="toc-divider"></div>
-  <div class="toc-section-label">💻 Battered Tech</div>
-  <a class="toc-item" href="#tier1-survivors">Tier 1 Survivors</a>
-  <a class="toc-item" data-toc="docu" href="#docu">DOCU</a>
-  <a class="toc-item" data-toc="snow" href="#snow">SNOW</a>
-  <a class="toc-item" data-toc="okta" href="#okta">OKTA</a>
-  <a class="toc-item" data-toc="mndy" href="#mndy">MNDY</a>
-  <a class="toc-item" data-toc="veev" href="#veev">VEEV</a>
-  <a class="toc-item" data-toc="ddog" href="#ddog">DDOG</a>
+  <details class="toc-group" open>
+    <summary class="toc-group-label">💻 Battered Tech</summary>
+    <a class="toc-item" href="#tier1-survivors">Tier 1 Survivors</a>
+    <a class="toc-item" data-toc="docu" href="#docu">DOCU</a>
+    <a class="toc-item" data-toc="snow" href="#snow">SNOW</a>
+    <a class="toc-item" data-toc="okta" href="#okta">OKTA</a>
+    <a class="toc-item" data-toc="mndy" href="#mndy">MNDY</a>
+    <a class="toc-item" data-toc="veev" href="#veev">VEEV</a>
+    <a class="toc-item" data-toc="ddog" href="#ddog">DDOG</a>
+  </details>
 
   <div class="toc-divider"></div>
-  <div class="toc-section-label">⚡ Sandisk-Type Plays</div>
-  <a class="toc-item" data-toc="anet" href="#anet">ANET</a>
-  <a class="toc-item" data-toc="glw" href="#glw">GLW (Corning)</a>
-  <a class="toc-item" data-toc="amkr" href="#amkr">AMKR</a>
-  <a class="toc-item" data-toc="etn" href="#etn">ETN (Eaton)</a>
-  <a class="toc-item" data-toc="lumn" href="#lumn">LUMN</a>
-  <a class="toc-item" data-toc="qcom" href="#qcom">QCOM</a>
-  <a class="toc-item" data-toc="ntap" href="#ntap">NTAP</a>
-  <a class="toc-item" data-toc="aep" href="#aep">AEP</a>
-  <a class="toc-item" data-toc="vst" href="#vst">VST</a>
-  <a class="toc-item" data-toc="stx" href="#stx">STX</a>
-  <a class="toc-item" data-toc="mu" href="#mu">MU (Micron)</a>
+  <details class="toc-group" open>
+    <summary class="toc-group-label">⚡ Sandisk-Type Plays</summary>
+    <a class="toc-item" data-toc="anet" href="#anet">ANET</a>
+    <a class="toc-item" data-toc="glw" href="#glw">GLW (Corning)</a>
+    <a class="toc-item" data-toc="amkr" href="#amkr">AMKR</a>
+    <a class="toc-item" data-toc="etn" href="#etn">ETN (Eaton)</a>
+    <a class="toc-item" data-toc="lumn" href="#lumn">LUMN</a>
+    <a class="toc-item" data-toc="qcom" href="#qcom">QCOM</a>
+    <a class="toc-item" data-toc="ntap" href="#ntap">NTAP</a>
+    <a class="toc-item" data-toc="aep" href="#aep">AEP</a>
+    <a class="toc-item" data-toc="vst" href="#vst">VST</a>
+    <a class="toc-item" data-toc="stx" href="#stx">STX</a>
+    <a class="toc-item" data-toc="mu" href="#mu">MU (Micron)</a>
+  </details>
 
   <div class="toc-divider"></div>
-  <div class="toc-section-label">🔬 New Research</div>
-  <a class="toc-item" data-toc="himx" href="#himx">HIMX</a>
-  <a class="toc-item" data-toc="aosl" href="#aosl">AOSL</a>
-  <a class="toc-item" data-toc="ampx" href="#ampx">AMPX</a>
-  <a class="toc-item" data-toc="smci" href="#smci">SMCI</a>
-  <a class="toc-item" data-toc="arm" href="#arm">ARM</a>
-  <a class="toc-item" data-toc="mrvl" href="#mrvl">MRVL</a>
+  <details class="toc-group" open>
+    <summary class="toc-group-label">🔬 New Research</summary>
+    <a class="toc-item" data-toc="himx" href="#himx">HIMX</a>
+    <a class="toc-item" data-toc="aosl" href="#aosl">AOSL</a>
+    <a class="toc-item" data-toc="ampx" href="#ampx">AMPX</a>
+    <a class="toc-item" data-toc="smci" href="#smci">SMCI</a>
+    <a class="toc-item" data-toc="arm" href="#arm">ARM</a>
+    <a class="toc-item" data-toc="mrvl" href="#mrvl">MRVL</a>
+  </details>
 
-  <a class="toc-item" href="#top-picks">🏆 Top 5 Picks</a>
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">🏆 Top Picks</div>
+  <a class="toc-item" href="#top-picks">Top 5 Picks — May 2026</a>
 
   <div class="toc-divider"></div>
   <div class="toc-section-label">⛔ Skips</div>
@@ -688,11 +706,7 @@ body.nav-open{overflow:hidden}
 
   <div class="toc-divider"></div>
   <a class="toc-item" href="#references">📚 References & Sources</a>
-
-
-
-<div class="page-content">
-</nav></nav>
+</nav></nav></nav>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- MAIN CONTENT -->
@@ -3378,7 +3392,7 @@ body.nav-open{overflow:hidden}
 
   <div class="skip-section">
     <div class="skip-grid">
-      <div class="skip-card">><section id="references" style="padding: 40px 48px 40px; max-width: 1100px; border-top: 1px solid #30363d;">
+      <div class="skip-card">><section id="references" style="padding:40px 0;max-width:1100px;border-top:1px solid #30363d;margin-bottom:60px">
     <h2 style="font-size:18px;font-weight:700;color:#e6edf3;margin-bottom:20px;letter-spacing:-0.01em;">📚 References &amp; Sources</h2>
     <p style="font-size:13px;color:#8b949e;margin-bottom:20px;">All claims in this document are backed by primary sources. Links open in a new tab.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;">
