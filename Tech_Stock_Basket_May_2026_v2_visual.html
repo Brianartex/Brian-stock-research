@@ -545,6 +545,23 @@ body.nav-open{overflow:hidden}
 
 .stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section{margin-left:230px;max-width:1100px}
 @media(max-width:768px){.stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section{margin-left:0!important}}.mobile-close-btn{display:none;background:none;border:1px solid var(--border);border-radius:6px;padding:6px 14px;color:var(--text-secondary);font-size:13px;cursor:pointer;margin-bottom:12px;width:100%;text-align:center}@media(max-width:768px){.mobile-close-btn{display:block}}
+
+.content-wrapper{margin-left:230px;max-width:1100px;padding:0 24px}
+@media(max-width:768px){.content-wrapper{margin-left:0!important;padding:0 12px}}
+
+#new-research{margin-top:40px}
+#new-research .stock-card{margin-left:0}
+.top-picks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin:20px 0 40px}
+.top-pick-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;transition:border-color .2s}
+.top-pick-card:hover{border-color:rgba(94,106,210,.3)}
+.top-pick-card .tp-rank{position:absolute;top:-14px;left:20px;background:linear-gradient(135deg,#5e6ad2,#7170ff);color:#fff;font-size:12px;font-weight:700;padding:3px 12px;border-radius:6px;letter-spacing:.04em}
+.top-pick-card .tp-ticker{font-size:18px;font-weight:700;color:var(--text-primary);margin:12px 0 4px}
+.top-pick-card .tp-verdict{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-bottom:12px}
+.top-pick-card .tp-verdict.buy{background:rgba(63,185,80,.15);color:var(--accent-green);border:1px solid rgba(63,185,80,.3)}
+.top-pick-card .tp-verdict.hold{background:rgba(210,153,34,.15);color:var(--accent-yellow);border:1px solid rgba(210,153,34,.3)}
+.top-pick-card p{font-size:13px;color:var(--text-secondary);line-height:1.6}
+.top-pick-card p strong{color:var(--text-primary)}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
@@ -562,32 +579,7 @@ body.nav-open{overflow:hidden}
   <span class="mt-title">Brian Stock Research</span>
 </div>
 
-<div id="nav-overlay">
-  <button class="nav-close-btn" id="nav-close-btn" aria-label="Close navigation">✕</button>
-  <div class="overlay-brand">Brian Stock Research</div>
-  <div class="toc-section-label">Navigation</div>
-  <a class="toc-item" href="#how-to-use">How to Use This Doc</a>
-  <a class="toc-item" href="#thesis">Investment Thesis</a>
-  <a class="toc-item" href="#tier1-survivors">Tier 1 Survivors</a>
-  <a class="toc-item" data-toc="docu" href="#docu">DOCU</a>
-  <a class="toc-item" data-toc="snow" href="#snow">SNOW</a>
-  <a class="toc-item" data-toc="okta" href="#okta">OKTA</a>
-  <a class="toc-item" data-toc="mndy" href="#mndy">MNDY</a>
-  <a class="toc-item" data-toc="veev" href="#veev">VEEV</a>
-  <a class="toc-item" data-toc="ddog" href="#ddog">DDOG</a>
-  <a class="toc-item" data-toc="anet" href="#anet">ANET</a>
-  <a class="toc-item" data-toc="glw" href="#glw">GLW (Corning)</a>
-  <a class="toc-item" data-toc="amkr" href="#amkr">AMKR</a>
-  <a class="toc-item" data-toc="etn" href="#etn">ETN (Eaton)</a>
-  <a class="toc-item" data-toc="lumn" href="#lumn">LUMN</a>
-  <a class="toc-item" data-toc="qcom" href="#qcom">QCOM</a>
-  <a class="toc-item" data-toc="ntap" href="#ntap">NTAP</a>
-  <a class="toc-item" data-toc="aep" href="#aep">AEP</a>
-  <a class="toc-item" data-toc="vst" href="#vst">VST</a>
-  <a class="toc-item" data-toc="stx" href="#stx">STX</a>
-  <a class="toc-item" data-toc="mu" href="#mu">MU (Micron)</a>
-  <a class="toc-item skip-item" href="#skip-list">10 Culled Stocks</a>
-</div>
+
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- LEFT SIDEBAR TOC -->
@@ -3567,25 +3559,9 @@ function renderCharts() {
 document.addEventListener('DOMContentLoaded', () => { renderSparklines(); renderCharts(); });
 </script>
 
-<script>
-(function(){
-  var btn=document.getElementById("hamburger-btn");
-  var overlay=document.getElementById("nav-overlay");
-  if(!btn||!overlay)return;
-  btn.addEventListener("click",function(){
-    overlay.classList.add("open");
-    document.body.classList.add("nav-open");
-  });
-  var closeBtn=document.getElementById("nav-close-btn");
-  if(closeBtn)closeBtn.addEventListener("click",function(){
-    overlay.classList.remove("open");
-    document.body.classList.remove("nav-open");
-  });
-  overlay.addEventListener("click",function(e){
-    if(e.target===overlay){overlay.classList.remove("open");document.body.classList.remove("nav-open");}
-  });
-})();
-</script>
+
+
+
 
 
 <script>
@@ -3593,12 +3569,8 @@ document.addEventListener('DOMContentLoaded', () => { renderSparklines(); render
   var btn=document.getElementById("hamburger-btn");
   var sidebar=document.querySelector(".toc-sidebar");
   if(!btn||!sidebar)return;
-  btn.addEventListener("click",function(){
-    sidebar.classList.toggle("mobile-open");
-    document.body.classList.toggle("nav-open");
-    btn.classList.toggle("active");
-  });
-  // Close button
+  
+  // Create close button
   var closeBtn=document.createElement("button");
   closeBtn.textContent="✕ Close";
   closeBtn.className="mobile-close-btn";
@@ -3608,7 +3580,15 @@ document.addEventListener('DOMContentLoaded', () => { renderSparklines(); render
     btn.classList.remove("active");
   });
   sidebar.insertBefore(closeBtn,sidebar.firstChild);
-  // Close when clicking a TOC link
+  
+  // Toggle on burger click
+  btn.addEventListener("click",function(){
+    sidebar.classList.toggle("mobile-open");
+    document.body.classList.toggle("nav-open");
+    btn.classList.toggle("active");
+  });
+  
+  // Close on TOC link click
   sidebar.querySelectorAll("a").forEach(function(a){
     a.addEventListener("click",function(){
       sidebar.classList.remove("mobile-open");
@@ -3618,6 +3598,5 @@ document.addEventListener('DOMContentLoaded', () => { renderSparklines(); render
   });
 })();
 </script>
-
 </body>
 </html>
