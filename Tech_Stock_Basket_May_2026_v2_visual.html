@@ -120,7 +120,8 @@ body {
 /* ── MAIN CONTENT SHIFT ── */
 .page-content {
   margin-left: 230px;
-  min-height: 100vh;
+  max-width: 1100px;
+  padding: 0 0 40px;
 }
 
 /* ── REPORT HEADER ── */
@@ -478,7 +479,10 @@ body {
   .toc-sidebar.mobile-open{display:block!important;position:fixed;top:48px;left:0;right:0;bottom:0;z-index:350;width:100%!important;overflow-y:auto;padding:16px;background:var(--surface)}
   .mobile-topbar { display: flex !important; }
   body { padding-left: 0 !important; padding-top: 48px; }
-  .page-content { margin-left: 0; }
+  .page-content {
+  max-width: 1100px;
+  padding: 0 0 40px;
+}
   .report-header { padding: 24px 20px 20px; }
   .guide-section, .intro-section { padding: 24px 20px; }
   .stock-section { padding: 0 20px 32px; }
@@ -544,7 +548,7 @@ body.nav-open{overflow:hidden}
 .sparkline{display:block;width:100%;height:40px;margin:8px 0;overflow:visible}
 
 .stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section{max-width:1100px}
-@media(max-width:768px){.stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section{margin-left:0!important}}.mobile-close-btn{display:none;background:none;border:1px solid var(--border);border-radius:6px;padding:6px 14px;color:var(--text-secondary);font-size:13px;cursor:pointer;margin-bottom:12px;width:100%;text-align:center}@media(max-width:768px){.mobile-close-btn{display:block}}
+@media(max-width:768px){.page-content{margin-left:0!important;max-width:100%!important;padding:0!important}.stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section{margin-left:0!important}}.mobile-close-btn{display:none;background:none;border:1px solid var(--border);border-radius:6px;padding:6px 14px;color:var(--text-secondary);font-size:13px;cursor:pointer;margin-bottom:12px;width:100%;text-align:center}@media(max-width:768px){.mobile-close-btn{display:block}}
 
 .content-wrapper{max-width:1100px;padding:0 24px}
 @media(max-width:768px){.content-wrapper{margin-left:0!important;padding:0 12px}}
@@ -666,6 +670,8 @@ body.nav-open{overflow:hidden}
 
   <div class="toc-divider"></div>
   <a class="toc-item" href="#references">📚 References & Sources</a>
+
+<div class="page-content">
 </nav></nav>
 
 <!-- ═══════════════════════════════════════════════════ -->
@@ -775,7 +781,7 @@ body.nav-open{overflow:hidden}
   <!-- ═══════════════════════════════════════════════════ -->
   <!-- TIER 1: SURVIVORS -->
   <!-- ═══════════════════════════════════════════════════ -->
-  <divstyle="margin-left:230px;max-width:1100px"  class="section-head" id="tier1-survivors">
+  <div class="section-head" id="tier1-survivors">
     <h2>💻 Part 1: The Battered Tech Survivors</h2>
     <p>6 stocks that survived the cull — each with a specific re-rating catalyst and a credible bull case.</p>
   </div>
@@ -2772,7 +2778,7 @@ body.nav-open{overflow:hidden}
   <!-- ═══════════════════════════════════════════════════ -->
   <!-- REFERENCES -->
   <!-- ═══════════════════════════════════════════════════ -->
-  <section style="margin-left:230px;max-width:1100px" id="references" style="padding: 40px 48px 40px; max-width: 1100px; border-top: 1px solid #30363d;">
+  <section id="references" style="padding: 40px 48px 40px; max-width: 1100px; border-top: 1px solid #30363d;">
     <h2 style="font-size:18px;font-weight:700;color:#e6edf3;margin-bottom:20px;letter-spacing:-0.01em;">📚 References &amp; Sources</h2>
     <p style="font-size:13px;color:#8b949e;margin-bottom:20px;">All claims in this document are backed by primary sources. Links open in a new tab.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;">
@@ -3621,5 +3627,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSparklines(); render
   });
 })();
 </script>
+
+</div>
 </body>
 </html>
