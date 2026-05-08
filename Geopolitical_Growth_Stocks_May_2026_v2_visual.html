@@ -286,6 +286,7 @@ details[open] summary.expandable-summary { border-bottom-color: var(--border); }
 /* ── MOBILE RESPONSIVE ── */
 @media (max-width: 768px) {
   .toc-sidebar { display: none !important; }
+  .toc-sidebar.mobile-open{display:block!important;position:fixed;top:48px;left:0;right:0;bottom:0;z-index:350;width:100%!important;overflow-y:auto;padding:16px;background:var(--surface)}
   .mobile-topbar { display: flex !important; }
   body { padding-left: 0 !important; padding-top: 48px; }
   .page-content { margin-left: 0; }

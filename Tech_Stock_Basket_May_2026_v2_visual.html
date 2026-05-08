@@ -475,6 +475,7 @@ body {
 /* ── MOBILE RESPONSIVE ── */
 @media (max-width: 768px) {
   .toc-sidebar { display: none !important; }
+  .toc-sidebar.mobile-open{display:block!important;position:fixed;top:48px;left:0;right:0;bottom:0;z-index:350;width:100%!important;overflow-y:auto;padding:16px;background:var(--surface)}
   .mobile-topbar { display: flex !important; }
   body { padding-left: 0 !important; padding-top: 48px; }
   .page-content { margin-left: 0; }
@@ -541,7 +542,7 @@ body.nav-open{overflow:hidden}
 
 
 .sparkline{display:block;width:100%;height:40px;margin:8px 0;overflow:visible}
-tyle>
+</style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -3586,13 +3587,3 @@ document.addEventListener('DOMContentLoaded', () => { renderSparklines(); render
 
 </body>
 </html>
-.top-picks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:20px 0 40px}
-.top-pick-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;position:relative}
-.top-pick-card .tp-rank{position:absolute;top:-12px;left:16px;background:var(--accent-blue);color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:4px}
-.top-pick-card .tp-ticker{font-size:18px;font-weight:700;color:var(--text-primary);margin:8px 0 4px}
-.top-pick-card .tp-verdict{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-bottom:10px}
-.top-pick-card .tp-verdict.buy{background:rgba(63,185,80,.15);color:var(--accent-green);border:1px solid rgba(63,185,80,.3)}
-.top-pick-card .tp-verdict.hold{background:rgba(210,153,34,.15);color:var(--accent-yellow);border:1px solid rgba(210,153,34,.3)}
-.top-pick-card p{font-size:13px;color:var(--text-secondary);line-height:1.55}
-
-
