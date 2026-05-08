@@ -307,7 +307,6 @@ a:focus-visible {
 
 /* ── STOCK CARDS ── */
 .stock-section {
-  margin-left: 230px;
   padding: 0 48px 40px;
   max-width: 1100px;
 }
@@ -455,7 +454,6 @@ a:focus-visible {
 
 /* ── BATTLET TECH HEADER ── */
 .section-head {
-  margin-left: 230px;
   padding: 28px 48px 20px;
   max-width: 1100px;
   border-bottom: 1px solid var(--border);
@@ -489,8 +487,7 @@ a:focus-visible {
   .report-header { padding: 24px 20px 20px; }
   .guide-section, .intro-section { padding: 24px 20px; }
   .stock-section { padding: 0 20px 32px; }
-  .section-head {
-  margin-left: 230px; padding: 24px 20px 16px; }
+  .section-head { padding: 24px 20px 16px; }
   .skip-section { padding: 24px 20px; }
   .guide-grid, .stock-card-body { grid-template-columns: 1fr; }
   .skip-grid { grid-template-columns: 1fr 1fr; }
@@ -561,7 +558,7 @@ body.nav-open{overflow:hidden}
 body.nav-open{overflow:hidden}
 
 /* === TOP 5 PICKS === */
-.top-picks-grid{margin-left:230px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin:20px 0 40px}
+.top-picks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin:20px 0 40px}
 .top-pick-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;transition:border-color .2s}
 .top-pick-card:hover{border-color:rgba(94,106,210,.3)}
 .top-pick-card .tp-rank{position:absolute;top:-14px;left:20px;background:linear-gradient(135deg,#5e6ad2,#7170ff);color:#fff;font-size:12px;font-weight:700;padding:3px 12px;border-radius:6px;letter-spacing:.04em}
@@ -573,7 +570,7 @@ body.nav-open{overflow:hidden}
 .top-pick-card p strong{color:var(--text-primary)}
 
 /* === MOBILE RESPONSIVE === */
-@media(max-width:768px){
+@media(max-width:768px){.page-content{margin-left:0!important;padding:0 12px!important}
   .toc-sidebar{display:none!important}
   .mobile-topbar{display:flex!important}
   .mobile-close-btn{display:block}
@@ -2747,57 +2744,7 @@ body.nav-open{overflow:hidden}
   <!-- ═══════════════════════════════════════════════════ -->
   <!-- REFERENCES -->
   <!-- ═══════════════════════════════════════════════════ -->
-  <section id="references" style="padding: 40px 48px 40px; max-width: 1100px; border-top: 1px solid #30363d;">
-    <h2 style="font-size:18px;font-weight:700;color:#e6edf3;margin-bottom:20px;letter-spacing:-0.01em;">📚 References &amp; Sources</h2>
-    <p style="font-size:13px;color:#8b949e;margin-bottom:20px;">All claims in this document are backed by primary sources. Links open in a new tab.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;">
-
-      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
-        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">EARNINGS REPORTS</div>
-        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
-          <li>[1] <a href="https://ir.docusign.com/" target="_blank" style="color:#58a6ff;" aria-label="DocuSign Annual Report 2025 — opens in new tab">DocuSign Annual Report 2025</a></li>
-          <li>[2] <a href="https://ir.okta.com/" target="_blank" style="color:#58a6ff;" aria-label="Okta Q4 2025 Earnings Call — opens in new tab">Okta Q4 2025 Earnings Call</a></li>
-          <li>[3] <a href="https://investors.snowflake.com/" target="_blank" style="color:#58a6ff;" aria-label="Snowflake Q4 FY2025 Earnings — opens in new tab">Snowflake Q4 FY2025 Earnings</a></li>
-          <li>[4] <a href="https://ir.monday.com/" target="_blank" style="color:#58a6ff;" aria-label="monday.com Q1 2026 Earnings — opens in new tab">monday.com Q1 2026 Earnings</a></li>
-          <li>[5] <a href="https://ir.veevasystems.com/" target="_blank" style="color:#58a6ff;" aria-label="Veeva Systems Annual Report 2025 — opens in new tab">Veeva Systems Annual Report 2025</a></li>
-          <li>[6] <a href="https://ir.datadog.com/" target="_blank" style="color:#58a6ff;" aria-label="Datadog Q4 2025 Earnings — opens in new tab">Datadog Q4 2025 Earnings</a></li>
-        </ul>
-      </div>
-
-      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
-        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">INFRASTRUCTURE &amp; AI</div>
-        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
-          <li>[7] <a href="https://investors.arista.com/" target="_blank" style="color:#58a6ff;" aria-label="Arista Networks Q1 2026 Earnings — opens in new tab">Arista Networks Q1 2026 Earnings</a></li>
-          <li>[8] <a href="https://ir.corning.com/" target="_blank" style="color:#58a6ff;" aria-label="Corning Q4 2025 Earnings — opens in new tab">Corning Q4 2025 Earnings</a></li>
-          <li>[9] <a href="https://ir.amkor.com/" target="_blank" style="color:#58a6ff;" aria-label="Amkor Technology Q1 2026 Earnings — opens in new tab">Amkor Technology Q1 2026 Earnings</a></li>
-          <li>[10] <a href="https://ir.eaton.com/" target="_blank" style="color:#58a6ff;" aria-label="Eaton Q1 2026 Earnings — opens in new tab">Eaton Q1 2026 Earnings</a></li>
-          <li>[11] <a href="https://investor.qualcomm.com/" target="_blank" style="color:#58a6ff;" aria-label="Qualcomm Q1 2026 Earnings — opens in new tab">Qualcomm Q1 2026 Earnings</a></li>
-          <li>[12] <a href="https://investors.netapp.com/" target="_blank" style="color:#58a6ff;" aria-label="NetApp Q3 FY2026 Earnings — opens in new tab">NetApp Q3 FY2026 Earnings</a></li>
-        </ul>
-      </div>
-
-      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
-        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">POWER &amp; SEMICONDUCTORS</div>
-        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
-          <li>[13] <a href="https://investor.vistra.com/" target="_blank" style="color:#58a6ff;" aria-label="Vistra Corp Q1 2026 Earnings — opens in new tab">Vistra Corp Q1 2026 Earnings</a></li>
-          <li>[14] <a href="https://ir.micron.com/" target="_blank" style="color:#58a6ff;" aria-label="Micron Q2 FY2026 Earnings — opens in new tab">Micron Q2 FY2026 Earnings</a></li>
-          <li>[15] <a href="https://ir.seagate.com/" target="_blank" style="color:#58a6ff;" aria-label="Seagate Technology Q3 FY2026 — opens in new tab">Seagate Technology Q3 FY2026</a></li>
-          <li>[16] <a href="https://ir.lumen.com/" target="_blank" style="color:#58a6ff;" aria-label="Lumen Technologies Q1 2026 — opens in new tab">Lumen Technologies Q1 2026</a></li>
-          <li>[17] <a href="https://ir.aep.com/" target="_blank" style="color:#58a6ff;" aria-label="American Electric Power Annual 2025 — opens in new tab">American Electric Power Annual 2025</a></li>
-        </ul>
-      </div>
-
-      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
-        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">RESEARCH &amp; ANALYSIS</div>
-        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
-          <li>[18] <a href="https://www.stockstory.com/" target="_blank" style="color:#58a6ff;" aria-label="StockStory — opens in new tab">StockStory</a></li>
-          <li>[19] <a href="https://www.goldmansachs.com/" target="_blank" style="color:#58a6ff;" aria-label="Goldman Sachs Equity Research — opens in new tab">Goldman Sachs Equity Research</a></li>
-          <li>[20] <a href="https://www.morganstanley.com/" target="_blank" style="color:#58a6ff;" aria-label="Morgan Stanley Equity Research — opens in new tab">Morgan Stanley Equity Research</a></li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
+  
 
 
   <!-- ═══════════════════════════════════════════════════ -->
@@ -3419,7 +3366,58 @@ body.nav-open{overflow:hidden}
 
   <div class="skip-section">
     <div class="skip-grid">
-      <div class="skip-card"><div class="ticker">TEAM</div><p>Atlassian: GAAP deeply negative at $2.8B revenue scale. AI agents replacing project management workflows is a real risk. No near-term catalyst.</p></div>
+      <div class="skip-card">><section id="references" style="padding: 40px 48px 40px; max-width: 1100px; border-top: 1px solid #30363d;">
+    <h2 style="font-size:18px;font-weight:700;color:#e6edf3;margin-bottom:20px;letter-spacing:-0.01em;">📚 References &amp; Sources</h2>
+    <p style="font-size:13px;color:#8b949e;margin-bottom:20px;">All claims in this document are backed by primary sources. Links open in a new tab.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;">
+
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">EARNINGS REPORTS</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
+          <li>[1] <a href="https://ir.docusign.com/" target="_blank" style="color:#58a6ff;" aria-label="DocuSign Annual Report 2025 — opens in new tab">DocuSign Annual Report 2025</a></li>
+          <li>[2] <a href="https://ir.okta.com/" target="_blank" style="color:#58a6ff;" aria-label="Okta Q4 2025 Earnings Call — opens in new tab">Okta Q4 2025 Earnings Call</a></li>
+          <li>[3] <a href="https://investors.snowflake.com/" target="_blank" style="color:#58a6ff;" aria-label="Snowflake Q4 FY2025 Earnings — opens in new tab">Snowflake Q4 FY2025 Earnings</a></li>
+          <li>[4] <a href="https://ir.monday.com/" target="_blank" style="color:#58a6ff;" aria-label="monday.com Q1 2026 Earnings — opens in new tab">monday.com Q1 2026 Earnings</a></li>
+          <li>[5] <a href="https://ir.veevasystems.com/" target="_blank" style="color:#58a6ff;" aria-label="Veeva Systems Annual Report 2025 — opens in new tab">Veeva Systems Annual Report 2025</a></li>
+          <li>[6] <a href="https://ir.datadog.com/" target="_blank" style="color:#58a6ff;" aria-label="Datadog Q4 2025 Earnings — opens in new tab">Datadog Q4 2025 Earnings</a></li>
+        </ul>
+      </div>
+
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">INFRASTRUCTURE &amp; AI</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
+          <li>[7] <a href="https://investors.arista.com/" target="_blank" style="color:#58a6ff;" aria-label="Arista Networks Q1 2026 Earnings — opens in new tab">Arista Networks Q1 2026 Earnings</a></li>
+          <li>[8] <a href="https://ir.corning.com/" target="_blank" style="color:#58a6ff;" aria-label="Corning Q4 2025 Earnings — opens in new tab">Corning Q4 2025 Earnings</a></li>
+          <li>[9] <a href="https://ir.amkor.com/" target="_blank" style="color:#58a6ff;" aria-label="Amkor Technology Q1 2026 Earnings — opens in new tab">Amkor Technology Q1 2026 Earnings</a></li>
+          <li>[10] <a href="https://ir.eaton.com/" target="_blank" style="color:#58a6ff;" aria-label="Eaton Q1 2026 Earnings — opens in new tab">Eaton Q1 2026 Earnings</a></li>
+          <li>[11] <a href="https://investor.qualcomm.com/" target="_blank" style="color:#58a6ff;" aria-label="Qualcomm Q1 2026 Earnings — opens in new tab">Qualcomm Q1 2026 Earnings</a></li>
+          <li>[12] <a href="https://investors.netapp.com/" target="_blank" style="color:#58a6ff;" aria-label="NetApp Q3 FY2026 Earnings — opens in new tab">NetApp Q3 FY2026 Earnings</a></li>
+        </ul>
+      </div>
+
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">POWER &amp; SEMICONDUCTORS</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
+          <li>[13] <a href="https://investor.vistra.com/" target="_blank" style="color:#58a6ff;" aria-label="Vistra Corp Q1 2026 Earnings — opens in new tab">Vistra Corp Q1 2026 Earnings</a></li>
+          <li>[14] <a href="https://ir.micron.com/" target="_blank" style="color:#58a6ff;" aria-label="Micron Q2 FY2026 Earnings — opens in new tab">Micron Q2 FY2026 Earnings</a></li>
+          <li>[15] <a href="https://ir.seagate.com/" target="_blank" style="color:#58a6ff;" aria-label="Seagate Technology Q3 FY2026 — opens in new tab">Seagate Technology Q3 FY2026</a></li>
+          <li>[16] <a href="https://ir.lumen.com/" target="_blank" style="color:#58a6ff;" aria-label="Lumen Technologies Q1 2026 — opens in new tab">Lumen Technologies Q1 2026</a></li>
+          <li>[17] <a href="https://ir.aep.com/" target="_blank" style="color:#58a6ff;" aria-label="American Electric Power Annual 2025 — opens in new tab">American Electric Power Annual 2025</a></li>
+        </ul>
+      </div>
+
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;color:#3fb950;margin-bottom:6px;">RESEARCH &amp; ANALYSIS</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#8b949e;line-height:1.8;">
+          <li>[18] <a href="https://www.stockstory.com/" target="_blank" style="color:#58a6ff;" aria-label="StockStory — opens in new tab">StockStory</a></li>
+          <li>[19] <a href="https://www.goldmansachs.com/" target="_blank" style="color:#58a6ff;" aria-label="Goldman Sachs Equity Research — opens in new tab">Goldman Sachs Equity Research</a></li>
+          <li>[20] <a href="https://www.morganstanley.com/" target="_blank" style="color:#58a6ff;" aria-label="Morgan Stanley Equity Research — opens in new tab">Morgan Stanley Equity Research</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section><div class="ticker">TEAM</div><p><h2 id="skip-list">⛔ The Skip List — 10 Stocks We Are Passing On</h2>
+<p>Atlassian: GAAP deeply negative at $2.8B revenue scale. AI agents replacing project management workflows is a real risk. No near-term catalyst.</p></div>
       <div class="skip-card"><div class="ticker">TWLO</div><p>Twilio: 49.9% GM is structural, not cyclical. 50% revenue from T-Mobile is dangerous concentration. CPaaS being commoditized by AI messaging.</p></div>
       <div class="skip-card"><div class="ticker">ZM</div><p>Zoom: 3.3% growth at 35x P/E. COVID winner that fully reverted. No AI product that changes the trajectory. Obvious mature business, no re-rating catalyst.</p></div>
       <div class="skip-card"><div class="ticker">RNG</div><p>RingCentral: +5% growth at $6B scale. Webex and Teams have won the UCaaS fight. No differentiation. AI integration lag vs. competition.</p></div>
@@ -3500,4 +3498,4 @@ window.addEventListener('scroll', onScroll, { passive: true });
 })();
 </script>
 </body>
-</html>
+</html
