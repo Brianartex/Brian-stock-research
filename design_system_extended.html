@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neubrutal v4.1 — Extended Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════
+     NEUBRUTAL v4.1 — EXTENDED DESIGN SYSTEM
+     Covers: palette, shadow, typography, TOC, hamburger,
+     stock cards, tier dividers, skip list, top-5 picks,
+     citations, sector headers, responsive, ADA
+     ═══════════════════════════════════════════════════════════ */
+
+  /* ── CRITICAL: prevents blank-page bug ── */
+  html,body { height: 100%; margin: 0; padding: 0; }
+  body { min-height: 100vh; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Raw material palette — stone, concrete, paper */
+    --bg: #ede8e0;
+    --bg-alt: #e6e0d8;
+    --surface: #f5f2ed;
+    --surface-alt: #faf8f5;
+    --text: #1a1816;
+    --text-dim: #5c5852;
+    --text-quiet: #8c8882;
+    --border: #d8d2c8;
+    --border-strong: #b8b0a4;
+
+    /* Neumorphic shadow system */
+    --shadow-sm-ext: 2px 2px 5px rgba(0,0,0,0.06), -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-md-ext: 4px 4px 10px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.9);
+    --shadow-lg-ext: 8px 8px 20px rgba(0,0,0,0.08), -8px -8px 20px rgba(255,255,255,0.95);
+    --shadow-sm-inset: inset 2px 2px 5px rgba(0,0,0,0.06), inset -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-pressed: inset 3px 3px 7px rgba(0,0,0,0.10), inset -2px -2px 5px rgba(255,255,255,0.6);
+
+    /* Accent — rich ocean blue */
+    --accent: #26609c;
+    --accent-light: #4d8ccc;
+    --accent-bg: rgba(38,96,156,0.08);
+
+    /* Semantic */
+    --green: #277a3e;
+    --green-bg: rgba(39,122,62,0.10);
+    --red: #a33636;
+    --red-bg: rgba(163,54,54,0.10);
+    --amber: #996e2c;
+    --amber-bg: rgba(153,110,44,0.10);
+
+    --radius-sm: 8px;
+    --radius: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+    --toc-width: 230px;
+  }
+
+  /* ── BASE BODY ── */
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Subtle texture overlay */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ═══════════ ADA SKIP LINK ═══════════ */
+  .skip-link {
+    position: absolute; top: -100px; left: 12px; z-index: 300;
+    background: var(--accent); color: #fff; padding: 8px 16px;
+    border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: top .2s;
+  }
+  .skip-link:focus { top: 12px; }
+
+  /* Focus ring for all interactive elements */
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ═══════════ SITE NAV BAR ═══════════ */
+  .site-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-sm-ext);
+    padding: 10px 24px; display: flex; gap: 24px; align-items: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  }
+  .site-nav a {
+    color: var(--text-dim); text-decoration: none;
+    font-weight: 500; letter-spacing: 0.02em;
+  }
+  .site-nav a:hover { color: var(--accent); }
+  .site-nav .nav-current { color: var(--accent); font-weight: 600; }
+
+  /* ═══════════ TOC SIDEBAR ═══════════ */
+  .toc-sidebar {
+    position: fixed; top: 0; left: 0; z-index: 200;
+    width: var(--toc-width); height: 100vh;
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-sm-inset);
+    overflow-y: auto; overflow-x: hidden;
+    padding: 20px 0 40px;
+  }
+  .toc-sidebar::-webkit-scrollbar { width: 4px; }
+  .toc-sidebar::-webkit-scrollbar-track { background: transparent; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+
+  .toc-brand {
+    padding: 0 16px 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  .toc-brand a {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--accent); text-decoration: none; font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .toc-brand a:hover { text-decoration: underline; }
+
+  .toc-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    padding: 14px 16px 6px; cursor: pointer;
+    transition: color .15s; display: flex; align-items: center; gap: 6px;
+  }
+  .toc-section-label:hover { color: var(--text); }
+  .toc-section-label .toc-arrow {
+    font-size: 7px; transition: transform .2s; display: inline-block;
+  }
+  .toc-section-label.collapsed .toc-arrow { transform: rotate(-90deg); }
+  .toc-section-group { overflow: hidden; transition: max-height .3s ease; }
+  .toc-section-group.collapsed { max-height: 0 !important; }
+
+  .toc-item {
+    display: block; padding: 5px 16px 5px 20px;
+    font-size: 11px; color: var(--text-dim); text-decoration: none;
+    font-weight: 400; transition: all .15s;
+    border-left: 2px solid transparent;
+  }
+  .toc-item:hover {
+    color: var(--text); background: rgba(0,0,0,0.02);
+    border-left-color: var(--accent); text-decoration: none;
+  }
+  .toc-item.active {
+    color: var(--accent); font-weight: 600;
+    background: var(--accent-bg); border-left-color: var(--accent);
+  }
+  .toc-item.skip-item { color: var(--text-quiet); font-style: italic; }
+  .toc-item.skip-item:hover { color: var(--text-dim); border-left-color: var(--text-quiet); }
+  .toc-divider {
+    border: none; height: 1px; background: var(--border); margin: 8px 16px;
+  }
+
+  /* ═══════════ MAIN CONTENT ═══════════ */
+  .page-content {
+    margin-left: var(--toc-width); padding: 48px 48px 80px;
+    max-width: 1200px; position: relative; z-index: 1;
+  }
+
+  /* ═══════════ HAMBURGER NAV ═══════════ */
+  .hamburger-btn {
+    display: none; position: fixed; top: 12px; right: 12px; z-index: 250;
+    width: 44px; height: 44px; cursor: pointer; border: none;
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-ext); transition: all .2s;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; touch-action: manipulation; user-select: none;
+    -webkit-user-select: none;
+  }
+  .hamburger-btn:hover { box-shadow: var(--shadow-md-ext); }
+  .hamburger-btn:active { box-shadow: var(--shadow-pressed); }
+  .hamburger-btn .ham-line {
+    width: 20px; height: 2.5px; background: var(--text);
+    border-radius: 1px; transition: all .2s;
+  }
+  .hamburger-btn.open .ham-line:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .hamburger-btn.open .ham-line:nth-child(2) { opacity: 0; }
+  .hamburger-btn.open .ham-line:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  .nav-overlay {
+    display: none; position: fixed; inset: 0; z-index: 240;
+    background: var(--bg); overflow-y: auto;
+    padding: 60px 24px 40px;
+  }
+  .nav-overlay.open { display: block; }
+  .nav-overlay .toc-section-label {
+    font-size: 12px; padding: 12px 0 8px;
+  }
+  .nav-overlay .toc-item {
+    font-size: 15px; padding: 10px 0;
+    border-left: none; border-bottom: 1px solid var(--border);
+  }
+
+  /* ═══════════ HERO + SECTION RULE ── */
+  .hero { margin-bottom: 80px; }
+  .hero-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--text-quiet); margin-bottom: 24px; padding: 4px 0; border-bottom: 2px solid var(--text); }
+  .hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 800; letter-spacing: -0.05em; line-height: 1.05; margin-bottom: 20px; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { font-size: 15px; color: var(--text-dim); max-width: 520px; line-height: 1.7; font-weight: 400; }
+
+  .rule { height: 2px; background: var(--text); opacity: 0.12; margin: 48px 0 32px; }
+  .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-quiet); margin-bottom: 20px; text-transform: uppercase; }
+
+  /* ═══════════ NEUMORPHIC CARD ── */
+  .neo-card {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); padding: 28px; margin-bottom: 24px;
+    transition: all .25s ease; cursor: pointer; border: none;
+  }
+  .neo-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-2px); }
+  .neo-card:active { box-shadow: var(--shadow-pressed); transform: translateY(0); }
+  .neo-card-inset {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 20px; margin-bottom: 16px;
+  }
+
+  /* ═══════════ STOCK CARD (details/summary) ── */
+  .stock-card {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); margin-bottom: 24px;
+    transition: all .25s ease; border: none; overflow: hidden;
+  }
+  .stock-card[open] { box-shadow: var(--shadow-lg-ext); }
+  .stock-card:hover { box-shadow: var(--shadow-lg-ext); }
+  .stock-card summary {
+    cursor: pointer; padding: 28px 28px 0; list-style: none;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .stock-card summary::-webkit-details-marker { display: none; }
+  .stock-card summary::after {
+    content: '▼'; font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-quiet); transition: transform .2s;
+    background: var(--bg-alt); border-radius: var(--radius-sm);
+    padding: 6px 10px; box-shadow: var(--shadow-sm-inset);
+  }
+  .stock-card[open] summary::after { transform: rotate(180deg); }
+  .stock-card-body { padding: 0 28px 28px; }
+
+  /* ═══════════ TICKER HEADER ── */
+  .ticker-row {
+    display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px;
+    padding-bottom: 14px;
+  }
+  .ticker { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; }
+  .ticker-name { font-size: 14px; color: var(--text-dim); font-weight: 500; }
+  .ticker-badge { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; padding: 6px 16px; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase;
+    background: var(--bg); box-shadow: var(--shadow-sm-ext); transition: all .15s;
+  }
+  .ticker-badge:hover { box-shadow: var(--shadow-pressed); }
+  .ticker-badge.buy { color: var(--green); }
+  .ticker-badge.hold { color: var(--amber); }
+  .ticker-badge.sell { color: var(--red); }
+
+  /* ═══════════ METRICS (price action) ── */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .metric {
+    text-align: center; background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 18px 10px;
+    transition: box-shadow .2s;
+  }
+  .metric:hover { box-shadow: var(--shadow-md-ext); }
+  .metric-val { font-size: 24px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .metric-val.up { color: var(--green); }
+  .metric-val.down { color: var(--red); }
+  .metric-val.neutral { color: var(--amber); }
+  .metric-lbl { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-quiet); margin-bottom: 4px; }
+  .metric-sub { font-size: 10px; color: var(--text-dim); }
+
+  /* reversal badge inside metric */
+  .reversal-badge {
+    display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 2px 6px; border-radius: 3px; margin-top: 4px;
+  }
+  .reversal-badge.confirmed { background: var(--green-bg); color: var(--green); box-shadow: var(--shadow-sm-inset); }
+  .reversal-badge.partial { background: var(--amber-bg); color: var(--amber); box-shadow: var(--shadow-sm-inset); }
+  .reversal-badge.negative { background: var(--red-bg); color: var(--red); box-shadow: var(--shadow-sm-inset); }
+
+  /* ═══════════ SPARKLINE ── */
+  .spark-wrap { margin-bottom: 24px; padding: 4px 0; }
+  .spark-wrap svg { width: 100%; height: 52px; display: block; }
+
+  /* ═══════════ FUNDAMENTALS ── */
+  .fund-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 32px; }
+  .fund-item {
+    text-align: center; background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 14px 8px; transition: all .2s;
+  }
+  .fund-item:hover { box-shadow: var(--shadow-md-ext); }
+  .fund-item .val { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .fund-item .lbl { font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.10em; color: var(--text-quiet); }
+  .fund-item .sub { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ═══════════ THESIS ── */
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+  .thesis-block {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); padding: 24px; transition: all .2s;
+  }
+  .thesis-block:hover { box-shadow: var(--shadow-lg-ext); }
+  .thesis-block h4 { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 14px; text-transform: uppercase; }
+  .thesis-block.bull h4 { color: var(--green); }
+  .thesis-block.bear h4 { color: var(--red); }
+  .thesis-block p { font-size: 12px; color: var(--text-dim); line-height: 1.7; margin-bottom: 8px; }
+  .thesis-block p strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ CALLOUT / VERDICT ── */
+  .callout {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg-ext); padding: 22px 26px;
+  }
+  .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 10px; text-transform: uppercase; }
+  .callout p { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .callout p strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ TIER DIVIDER ── */
+  .tier-divider {
+    display: flex; align-items: center; gap: 16px;
+    margin: 48px 0 20px;
+  }
+  .tier-divider .tier-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px;
+    border-radius: var(--radius-sm); white-space: nowrap;
+  }
+  .tier-divider .tier-label.tier-1 {
+    color: var(--green); background: var(--bg);
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .tier-divider .tier-label.tier-2 {
+    color: var(--accent); background: var(--bg);
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .tier-divider .tier-label.tier-3 {
+    color: var(--text-quiet); background: var(--bg);
+    box-shadow: var(--shadow-sm-inset);
+  }
+  .tier-divider .tier-line {
+    flex: 1; height: 2px; background: var(--text); opacity: 0.12;
+  }
+  .tier-intro {
+    font-size: 12px; color: var(--text-dim); font-style: italic;
+    margin-bottom: 20px; padding-left: 4px;
+  }
+
+  /* ═══════════ SKIP LIST ── */
+  .skip-section { margin: 48px 0 32px; }
+  .skip-section h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-quiet);
+    margin-bottom: 16px;
+  }
+  .skip-card {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 16px 20px; margin-bottom: 8px;
+    font-size: 12px; color: var(--text-dim); font-style: italic;
+  }
+  .skip-card strong { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-quiet); font-style: normal; }
+
+  /* ═══════════ TOP 5 PICKS ── */
+  .top-picks {
+    background: var(--bg); border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg-ext); padding: 32px; margin: 48px 0;
+  }
+  .top-picks h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .top-picks ol { list-style: none; padding: 0; counter-reset: top5; }
+  .top-picks ol li {
+    counter-increment: top5; padding: 12px 0;
+    border-bottom: 1px solid var(--border); font-size: 14px;
+    display: flex; gap: 14px; align-items: baseline;
+  }
+  .top-picks ol li:last-child { border-bottom: none; }
+  .top-picks ol li::before {
+    content: '0' counter(top5);
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    color: var(--accent); min-width: 28px;
+  }
+  .top-picks ol li strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ CITATIONS / REFERENCES ── */
+  .ref-section { margin-top: 48px; }
+  .ref-section h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-quiet);
+    margin-bottom: 16px;
+  }
+  .ref-list { list-style: none; padding: 0; }
+  .ref-list li {
+    font-size: 11px; color: var(--text-dim); padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-list li a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .ref-list li a:hover { text-decoration: underline; }
+
+  /* inline citation marker */
+  sup.cite {
+    font-size: 9px; font-weight: 600; color: var(--accent);
+    cursor: pointer; margin: 0 1px;
+  }
+  sup.cite:hover { text-decoration: underline; }
+
+  /* ═══════════ SECTOR HEADER (Geo doc) ── */
+  .sector-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 20px; border-radius: var(--radius);
+    margin-bottom: 18px; flex-wrap: wrap;
+    background: var(--bg); box-shadow: var(--shadow-md-ext);
+    border-left: none;
+  }
+  .sector-header .sector-icon { font-size: 22px; }
+  .sector-header .sector-name {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text);
+  }
+  .sector-header .sector-tag {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 30px; margin-left: auto;
+    background: var(--bg); box-shadow: var(--shadow-sm-inset);
+  }
+  .sector-header.oil .sector-tag { color: var(--red); }
+  .sector-header.fert .sector-tag { color: var(--amber); }
+  .sector-header.nuke .sector-tag { color: var(--green); }
+  .sector-header.energy .sector-tag { color: var(--accent); }
+  .sector-header.power .sector-tag { color: var(--accent); }
+
+  /* ═══════════ BUTTONS ── */
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  .btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    padding: 12px 24px; border-radius: var(--radius); cursor: pointer; transition: all .2s;
+    background: var(--bg); border: none; color: var(--text); box-shadow: var(--shadow-sm-ext); letter-spacing: 0.02em; text-transform: uppercase;
+    touch-action: manipulation; user-select: none; -webkit-user-select: none;
+  }
+  .btn:hover { box-shadow: var(--shadow-md-ext); }
+  .btn:active { box-shadow: var(--shadow-pressed); }
+  .btn-primary { color: var(--accent); }
+
+  /* ═══════════ DISCLAIMER ── */
+  .disclaimer {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 14px 20px;
+    margin-bottom: 24px; font-size: 12px; color: var(--text-dim);
+    font-style: italic;
+  }
+  .disclaimer strong { color: var(--text); font-weight: 600; font-style: normal; }
+
+  /* ═══════════ RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .toc-sidebar { display: none; }
+    .toc-sidebar.mobile-open {
+      display: block; position: fixed; inset: 0; z-index: 245;
+      width: 100%; height: 100vh; padding-top: 60px;
+    }
+    .page-content { margin-left: 0; padding: 24px 16px 60px; }
+    .hamburger-btn { display: flex; }
+    .hero h1 { font-size: 32px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .fund-strip { grid-template-columns: repeat(2, 1fr); }
+    .thesis-grid { grid-template-columns: 1fr; }
+    .stock-card summary { padding: 20px 20px 0; }
+    .stock-card-body { padding: 0 20px 20px; }
+    .ticker { font-size: 24px; }
+    .top-picks { padding: 20px; }
+    .site-nav { font-size: 10px; padding: 8px 16px; gap: 16px; }
+  }
+
+  @media (max-width: 412px) {
+    .page-content { padding: 16px 12px 48px; }
+    .hero h1 { font-size: 28px; }
+    .metrics { gap: 8px; }
+    .metric-val { font-size: 20px; }
+    .fund-strip { gap: 6px; }
+    .fund-item { padding: 10px 4px; }
+    .fund-item .val { font-size: 11px; }
+    .ticker-row { flex-wrap: wrap; gap: 8px; }
+    .ticker { font-size: 22px; }
+    .neo-card, .stock-card summary { padding: 18px 16px 0; }
+    .stock-card-body { padding: 0 16px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ADA skip link -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ═══════════ SITE NAV ═══════════ -->
+<nav class="site-nav" aria-label="Site navigation">
+  <a href="index.html">← Research Home</a>
+  <a href="Tech_Stock_Basket_May_2026_v3.html" class="nav-current">Tech Basket</a>
+  <a href="Geopolitical_Growth_Stocks_May_2026_v3.html">Geopolitical</a>
+</nav>
+
+<!-- ═══════════ HAMBURGER BUTTON ═══════════ -->
+<button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation menu" onclick="document.getElementById('nav-overlay').classList.toggle('open');this.classList.toggle('open');">
+  <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
+</button>
+
+<!-- ═══════════ TOC SIDEBAR ═══════════ -->
+<nav class="toc-sidebar" id="toc-sidebar" aria-label="Table of contents">
+  <div class="toc-brand">
+    <a href="index.html">← Research Home</a>
+  </div>
+
+  <div class="toc-section-label" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+    <span class="toc-arrow">▼</span> Part 1 — Survivors
+  </div>
+  <div class="toc-section-group">
+    <a class="toc-item active" href="#docu">DOCU — DocuSign</a>
+    <a class="toc-item" href="#okta">OKTA — Okta</a>
+    <a class="toc-item" href="#snow">SNOW — Snowflake</a>
+  </div>
+
+  <div class="toc-section-label" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+    <span class="toc-arrow">▼</span> Part 2 — AI Infra
+  </div>
+  <div class="toc-section-group">
+    <a class="toc-item" href="#mu">MU — Micron</a>
+    <a class="toc-item" href="#vrt">VRT — Vertiv</a>
+    <a class="toc-item" href="#aaoi">AAOI — Applied Opto</a>
+  </div>
+
+  <div class="toc-section-label" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+    <span class="toc-arrow">▼</span> Part 3 — New Research
+  </div>
+  <div class="toc-section-group">
+    <a class="toc-item" href="#new">New Stock Ideas</a>
+  </div>
+
+  <hr class="toc-divider">
+  <div class="toc-section-label" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+    <span class="toc-arrow">▼</span> Skip List
+  </div>
+  <div class="toc-section-group">
+    <a class="toc-item skip-item" href="#skip">Stocks We're Passing On</a>
+  </div>
+
+  <hr class="toc-divider">
+  <a class="toc-item" href="#top5">Top 5 Picks</a>
+  <a class="toc-item" href="#references">References</a>
+</nav>
+
+<!-- ═══════════ MOBILE NAV OVERLAY ═══════════ -->
+<div class="nav-overlay" id="nav-overlay">
+  <div class="toc-section-label" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+    <span class="toc-arrow">▼</span> Part 1 — Survivors
+  </div>
+  <div class="toc-section-group">
+    <a class="toc-item" href="#docu" onclick="document.getElementById('nav-overlay').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open');">DOCU — DocuSign</a>
+    <a class="toc-item" href="#okta" onclick="document.getElementById('nav-overlay').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open');">OKTA — Okta</a>
+  </div>
+  <div class="toc-section-label" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+    <span class="toc-arrow">▼</span> Part 2 — AI Infra
+  </div>
+  <div class="toc-section-group">
+    <a class="toc-item" href="#mu" onclick="document.getElementById('nav-overlay').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open');">MU — Micron</a>
+  </div>
+  <a class="toc-item" href="#top5" onclick="document.getElementById('nav-overlay').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open');">Top 5 Picks</a>
+  <a class="toc-item" href="#references" onclick="document.getElementById('nav-overlay').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open');">References</a>
+</div>
+
+<!-- ═══════════ MAIN CONTENT ═══════════ -->
+<main class="page-content" id="main-content">
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Research · May 2026</div>
+  <h1>Battered Tech + AI Infra.<br><span>Asymmetric upside.</span></h1>
+  <p>29 stocks across semiconductor, software, and AI infrastructure themes. Live data. Neumorphic depth. Just the thesis.</p>
+</div>
+
+<div class="disclaimer">
+  <strong>⚠️ Not investment advice.</strong> Educational research only. All positions speculative. Do your own due diligence. Past performance does not guarantee future results.
+</div>
+
+<!-- ── TIER 1 DIVIDER ── -->
+<div class="tier-divider">
+  <span class="tier-label tier-1">Tier 1</span>
+  <span class="tier-line"></span>
+</div>
+<p class="tier-intro">Highest-conviction positions. Structural winners with asymmetric risk/reward at current valuations.</p>
+
+<!-- ═══════════ SAMPLE STOCK CARD — DOCU ═══════════ -->
+<details class="stock-card" open>
+  <summary>
+    <div>
+      <div class="ticker" style="display:inline;margin-right:10px;">DOCU</div>
+      <span class="ticker-name">DocuSign — Agreement Cloud</span>
+    </div>
+    <span class="ticker-badge hold">Hold</span>
+  </summary>
+  <div class="stock-card-body">
+
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-lbl">6-Month</div>
+      <div class="metric-val down">−31.2%</div>
+      <div class="metric-sub">from $69.44</div>
+    </div>
+    <div class="metric">
+      <div class="metric-lbl">90-Day</div>
+      <div class="metric-val up">+1.8%</div>
+      <div class="metric-sub">basing</div>
+    </div>
+    <div class="metric">
+      <div class="metric-lbl">30-Day</div>
+      <div class="metric-val up">+5.3%</div>
+      <div class="metric-sub"><span class="reversal-badge confirmed">REVERSAL</span></div>
+    </div>
+    <div class="metric">
+      <div class="metric-lbl">YTD</div>
+      <div class="metric-val down">−31.2%</div>
+      <div class="metric-sub">since Jan</div>
+    </div>
+  </div>
+
+  <div class="spark-wrap">
+    <svg viewBox="0 0 800 52" preserveAspectRatio="none">
+      <path d="M0,26 C20,30 40,20 60,32 S100,14 140,24 S180,10 220,30 S260,8 300,26 S340,4 380,22 S420,2 460,18 S500,6 540,24 S580,16 620,10 S660,22 700,12 S740,24 780,8 L800,14" fill="none" stroke="#a33636" stroke-width="1.5" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <div class="fund-strip">
+    <div class="fund-item"><div class="lbl">Revenue</div><div class="val">$3.22B</div><div class="sub">+7.8% YoY</div></div>
+    <div class="fund-item"><div class="lbl">Free Cash Flow</div><div class="val">$1.20B</div><div class="sub">37.3% margin</div></div>
+    <div class="fund-item"><div class="lbl">Gross Margin</div><div class="val">79.6%</div></div>
+    <div class="fund-item"><div class="lbl">Net Cash</div><div class="val">$681M</div></div>
+    <div class="fund-item"><div class="lbl">Op Margin</div><div class="val">10.5%</div></div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-block bull">
+      <h4>bull_case</h4>
+      <p><strong>The AI Agent wave is DocuSign's next act.</strong> AI agents need to execute agreements. DocuSign has 1.5B+ agreements — the largest structured agreement dataset.</p>
+      <p><strong>Valuation is pricing in collapse.</strong> ~6x forward EV/revenue for a company still growing. Risk/reward asymmetrically favors buyers.</p>
+    </div>
+    <div class="thesis-block bear">
+      <h4>bear_case</h4>
+      <p><strong>AI could disintermediate DocuSign entirely.</strong> If Microsoft, Google, or OpenAI build agreement execution into their platforms, DocuSign's moat shrinks.</p>
+      <p><strong>The turnaround isn't confirmed.</strong> One quarter of stabilization doesn't make a trend. Billings growth remains weak.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">my_call · hold</div>
+    <p>The AI tailwind is real but not yet priced in. Wait for evidence of re-acceleration. Current entry around $48 offers reasonable risk/reward for a starter. <strong>Catalyst:</strong> Q2 FY2027 AI Agent Studio revenue above 5% of total.</p>
+  </div>
+
+  </div>
+</details>
+
+<div class="rule"></div>
+
+<!-- ── TIER 2 DIVIDER ── -->
+<div class="tier-divider">
+  <span class="tier-label tier-2">Tier 2</span>
+  <span class="tier-line"></span>
+</div>
+<p class="tier-intro">Promising setups that need a catalyst or better entry. Worth monitoring for position-building.</p>
+
+<!-- ═══════════ SAMPLE STOCK CARD — VRT (new research) ═══════════ -->
+<details class="stock-card">
+  <summary>
+    <div>
+      <div class="ticker" style="display:inline;margin-right:10px;">VRT</div>
+      <span class="ticker-name">Vertiv — AI Data Center Infrastructure</span>
+    </div>
+    <span class="ticker-badge buy">Buy</span>
+  </summary>
+  <div class="stock-card-body">
+
+  <div class="metrics">
+    <div class="metric"><div class="metric-lbl">Market Cap</div><div class="metric-val neutral">$132B</div><div class="metric-sub">large cap</div></div>
+    <div class="metric"><div class="metric-lbl">Forward P/E</div><div class="metric-val neutral">39.9x</div><div class="metric-sub">growth multiple</div></div>
+    <div class="metric"><div class="metric-lbl">Rev Growth</div><div class="metric-val up">+27%</div><div class="metric-sub">guidance</div></div>
+    <div class="metric"><div class="metric-lbl">EPS Growth</div><div class="metric-val up">40%+</div><div class="metric-sub">expected</div></div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-block bull">
+      <h4>bull_case</h4>
+      <p><strong>AI's picks-and-shovels play.</strong> Every GPU needs cooling, power management, and thermal systems. Vertiv provides the invisible infrastructure. $132B market cap, 40%+ EPS growth.</p>
+      <p><strong>What Eaton was to electrification.</strong> Vertiv is positioned as the essential infrastructure layer for the AI buildout cycle — a multi-decade secular trend.</p>
+    </div>
+    <div class="thesis-block bear">
+      <h4>bear_case</h4>
+      <p><strong>Not cheap anymore.</strong> At 40x forward earnings, this is a high-quality compounder, not deep value. Multiple compression risk if growth disappoints.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">my_call · buy</div>
+    <p>High-quality AI infrastructure compounder. Position-sizing matters at these multiples — starter position, add on pullbacks. <strong>Source:</strong> @ShardiB2 S&P 500 AI screen, May 2026 <sup class="cite">[1]</sup></p>
+  </div>
+
+  </div>
+</details>
+
+<div class="rule"></div>
+
+<!-- ═══════════ SKIP LIST ═══════════ -->
+<div class="skip-section" id="skip">
+  <h3>On Our Radar — Not Yet Actionable</h3>
+  <div class="skip-card">
+    <strong>STX</strong> — Seagate. HDD cycle play but overshadowed by flash/NAND competitors. Wait for clearer catalyst.
+  </div>
+  <div class="skip-card">
+    <strong>MU (skip at current)</strong> — Micron. HBM thesis is strong but wait for pullback. 7x P/E is compelling but memory cycles are brutal.
+  </div>
+</div>
+
+<!-- ═══════════ TOP 5 PICKS ═══════════ -->
+<div class="top-picks" id="top5">
+  <h3>Top 5 Picks — May 2026</h3>
+  <ol>
+    <li><span><strong>VRT</strong> — AI infrastructure compounder. 40% EPS growth at 40x. Starter position.</span></li>
+    <li><span><strong>FLNC</strong> — Energy storage with 2 hyperscaler MSAs. $5.6B backlog ≈ market cap. Deep value.</span></li>
+    <li><span><strong>DOCU</strong> — AI Agent thesis at 6x revenue. Asymmetric risk/reward.</span></li>
+    <li><span><strong>AAOI</strong> — Optical transceivers. Revenue doubling by Q4 2027.</span></li>
+    <li><span><strong>GEV</strong> — Grid power for AI. "AI constrained by electricity, not chips."</span></li>
+  </ol>
+</div>
+
+<!-- ═══════════ SECTOR HEADERS (Geo pattern) ═══════════ -->
+<div class="sec-label">/ geo-doc-pattern / sector-headers /</div>
+
+<div class="sector-header energy">
+  <span class="sector-icon">⚡</span>
+  <span class="sector-name">AI Power Infrastructure</span>
+  <span class="sector-tag">New Sector</span>
+</div>
+
+<div class="sector-header nuke">
+  <span class="sector-icon">☢️</span>
+  <span class="sector-name">Nuclear Energy</span>
+  <span class="sector-tag">4yr Horizon</span>
+</div>
+
+<div class="sector-header oil">
+  <span class="sector-icon">🛢️</span>
+  <span class="sector-name">Oil & Iran Supply Shock</span>
+  <span class="sector-tag">Active</span>
+</div>
+
+<!-- ═══════════ REFERENCES ═══════════ -->
+<div class="ref-section" id="references">
+  <h3>References</h3>
+  <ol class="ref-list">
+    <li>[1] <a href="https://x.com/ShardiB2/status/2052606694518096228" target="_blank" rel="noopener">@ShardiB2 — S&P 500 AI Stock Opportunities Analysis</a>, May 8, 2026</li>
+    <li>[2] <a href="https://x.com/aleabitoreddit/status/2052695450869014930" target="_blank" rel="noopener">@aleabitoreddit — FLNC Hyperscaler Thesis</a>, May 8, 2026</li>
+    <li>[3] <a href="https://x.com/IncomeSharks/status/2052483436112482753" target="_blank" rel="noopener">@IncomeSharks — FLNC Analysis</a>, May 7, 2026</li>
+  </ol>
+</div>
+
+</main>
+
+<!-- ═══════════ SCROLL-SPY JS ═══════════ -->
+<script>
+  // Collapsible TOC sections — set initial height for animation
+  document.querySelectorAll('.toc-section-group').forEach(g => {
+    g.style.maxHeight = g.scrollHeight + 'px';
+  });
+
+  // Close mobile nav on escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.getElementById('nav-overlay').classList.remove('open');
+      document.getElementById('hamburger-btn').classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>
