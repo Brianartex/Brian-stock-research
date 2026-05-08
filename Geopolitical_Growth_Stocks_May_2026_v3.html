@@ -542,6 +542,15 @@
 .sector-stat-item strong{color:var(--text)}
 @media(max-width:768px){.expert-grid{grid-template-columns:1fr}.geo-table{font-size:10px}.geo-table th,.geo-table td{padding:6px 8px}}
 
+
+.financial-strip{margin-bottom:20px;padding:16px;background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);}
+.fin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+.fin-cell{text-align:center;padding:10px;background:var(--surface-alt);border-radius:var(--radius-sm);}
+.fin-ticker{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px;}
+.fin-price{font-size:16px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.fin-meta{font-size:9px;color:var(--text-quiet);}
+@media(max-width:768px){.fin-grid{grid-template-columns:repeat(2,1fr)}}
+
 </style>
 </head>
 <body>
@@ -634,9 +643,17 @@
     <div class="expandable-body">
       <div class="sector-stats">
       <div class="sector-stat-item"><strong>Oil Impact:</strong> +80-100% price spike since war onset</div>
-      <div class="sector-stat-item"><strong>Demand Destruction:</strong> 已经开始 — 高油价抑制消费</div>
+      <div class="sector-stat-item"><strong>Demand Destruction:</strong> Already beginning — high prices suppressing consumption</div>
       <div class="sector-stat-item"><strong>Time Horizon:</strong> 12-24 month acute phase</div>
     </div>
+      <div class="financial-strip">
+  <div class="sec-label" style="margin-bottom:8px;">Live Financial Snapshot</div>
+  <div class="fin-grid">
+    <div class="fin-cell"><div class="fin-ticker">XOM</div><div class="fin-price">$144.57</div><div class="fin-meta">+27.4% YTD | $599B | P/E 14.2x</div></div>
+    <div class="fin-cell"><div class="fin-ticker">CVX</div><div class="fin-price">$181.62</div><div class="fin-meta">-0.5% YTD | $359B | P/E 15.1x</div></div>
+    <div class="fin-cell"><div class="fin-ticker">COP</div><div class="fin-price">$113.87</div><div class="fin-meta">-0.9% YTD | $139B | P/E 13.1x</div></div>
+  </div>
+</div>
       <div class="sec-label">Core Thesis</div>
       <p style="font-size:13px;color:var(--text-dim);line-height:1.7;margin-bottom:20px;">The Iran war has removed approximately 27-30% of global seaborne oil trade from the market. Iran was producing approximately 3.5-4 million barrels per day before the war. While some of this production may continue domestically, zero barrels are currently flowing through Hormuz to global markets. Additionally, the war has created significant insurance and tanker company reluctance to route any tankers through the Persian Gulf — even those from Saudi Arabia, UAE, and Kuwait — due to war risk insurance premiums that make such voyages economically unviable. This means the actual supply removal is larger than Iran's production alone: it is affecting all Gulf state exports.</p>
       <table class="geo-table">
@@ -664,7 +681,7 @@
   <div class="expert-block bear">
     <h5>Bear Case</h5>
     <div class="expert-item"><div class="expert-src">IEA — International Energy Agency</div><p>"We estimate 1.2M bbl/day of Iranian production is offline, but global demand is also contracting at 1.8M bbl/day due to the price shock. These roughly offset. The market was already oversupplied entering 2026 due to surging US production and soft Chinese demand. The net balance is not as tight as the headline price spike suggests."</p></div>
-<div class="expert-item"><div class="expert-src">Morgan Stanley — Oil Team</div><p>"At $150/bbl sustained, global GDP contracts by 0.8%. At $180/bbl, we model a 1.4% GDP contraction. The demand destruction from these price levels will cut oil consumption more than the supply shock removes. By Q4 2026, we expect Brent to回归 $100-110 as demand destruction exceeds supply loss."</p></div>
+<div class="expert-item"><div class="expert-src">Morgan Stanley — Oil Team</div><p>"At $150/bbl sustained, global GDP contracts by 0.8%. At $180/bbl, we model a 1.4% GDP contraction. The demand destruction from these price levels will cut oil consumption more than the supply shock removes. By Q4 2026, we expect Brent to return to $100-110 as demand destruction exceeds supply loss."</p></div>
 <div class="expert-item"><div class="expert-src">FT Energy Voice</div><p>"Saudi Arabia's refusal to open the taps is a catastrophic miscalculation. They are risking their own long-term market share — if oil demand contracts structurally due to $150+ prices, EVs and renewables capture that demand permanently. The kingdom should be flooding the market now to kill the nascent EV adoption curve, not allowing $150 oil to accelerate it."</p></div>
 <div class="expert-item"><div class="expert-src">Reuters Breakingviews</div><p>"Energy stocks are a trap. XOM and CVX are not energy plays anymore — they are FCF yield plays. The market already priced $100+ oil into these stocks in 2024. The incremental earnings from $150 oil go largely into share buybacks and renewables investment, not growth capex."</p></div>
   </div>
@@ -685,6 +702,14 @@
       <div class="sector-stat-item"><strong>Supply Disruption:</strong> 30% of global urea trade via Hormuz</div>
       <div class="sector-stat-item"><strong>Time Horizon:</strong> 2-4 year agricultural cycle</div>
     </div>
+      <div class="financial-strip">
+  <div class="sec-label" style="margin-bottom:8px;">Live Financial Snapshot</div>
+  <div class="fin-grid">
+    <div class="fin-cell"><div class="fin-ticker">NTR</div><div class="fin-price">$68.33</div><div class="fin-meta">-0.1% YTD | $33B | P/E 13.1x</div></div>
+    <div class="fin-cell"><div class="fin-ticker">MOS</div><div class="fin-price">$22.19</div><div class="fin-meta">-3.1% YTD | $7.1B | P/E 9.6x</div></div>
+    <div class="fin-cell"><div class="fin-ticker">CF</div><div class="fin-price">$115.02</div><div class="fin-meta">-3.1% YTD | $18B | P/E 11.7x</div></div>
+  </div>
+</div>
       <div class="sec-label">Core Thesis</div>
       <p style="font-size:13px;color:var(--text-dim);line-height:1.7;margin-bottom:20px;">The Strait of Hormuz closure has cut off approximately 30% of global seaborne urea trade at the precise moment Northern Hemisphere farmers are entering their primary planting season. Urea — the world's most-used nitrogen fertilizer — is now $650/ton, up $80/ton in weeks. The UN World Food Program estimates that if oil prices remain above $100/bbl through mid-2026, the number of people experiencing acute food insecurity globally rises by 80-120 million. North American farmers who locked in fertilizer contracts pre-war have a significant cost advantage over European and Asian farmers paying spot prices.</p>
       <table class="geo-table">
@@ -732,6 +757,13 @@
       <div class="sector-stat-item"><strong>GE Vernova Backlog:</strong> $30B+</div>
       <div class="sector-stat-item"><strong>AI Nuclear PPAs:</strong> 8-10 signed 2025-26</div>
     </div>
+      <div class="financial-strip">
+  <div class="sec-label" style="margin-bottom:8px;">Live Financial Snapshot</div>
+  <div class="fin-grid">
+    <div class="fin-cell"><div class="fin-ticker">CCJ</div><div class="fin-price">$116.75</div><div class="fin-meta">-1.7% YTD | $51B | P/E 60.0x</div></div>
+    <div class="fin-cell"><div class="fin-ticker">UEC</div><div class="fin-price">$15.16</div><div class="fin-meta">-2.8% YTD | $7.4B | P/E --</div></div>
+  </div>
+</div>
       <div class="sec-label">Core Thesis</div>
       <p style="font-size:13px;color:var(--text-dim);line-height:1.7;margin-bottom:20px;">AI data centers are the largest new source of electricity demand in a generation — and they need power that is continuous, reliable, and zero-carbon to meet corporate sustainability commitments. Solar and wind cannot deliver baseload power at the density AI campuses require. Nuclear is the only proven, dispatchable zero-carbon source that can power a 100MW+ AI campus 24/7. Google, Microsoft, Amazon, and Meta have collectively signed 8-10 nuclear power purchase agreements since 2025. The Iran war accelerates this thesis: oil and gas price spikes make the fixed, predictable cost of nuclear power more economically attractive relative to gas peaker plants.</p>
       <table class="geo-table">
@@ -1022,6 +1054,15 @@
         <div class="sector-stat-item"><strong>Hyperscaler Capex:</strong> $250B+ planned through 2028</div>
         <div class="sector-stat-item"><strong>Grid Constraint:</strong> 3-5 year lead on new transmission</div>
       </div>
+      <div class="financial-strip">
+  <div class="sec-label" style="margin-bottom:8px;">Live Financial Snapshot</div>
+  <div class="fin-grid">
+    <div class="fin-cell"><div class="fin-ticker">FLNC</div><div class="fin-price">$24.16</div><div class="fin-meta">+27.4% YTD | $4.5B | P/E 136.0x</div></div>
+    <div class="fin-cell"><div class="fin-ticker">GEV</div><div class="fin-price">$1,040</div><div class="fin-meta">-0.5% YTD | $280B | P/E 42.5x</div></div>
+    <div class="fin-cell"><div class="fin-ticker">OKLO</div><div class="fin-price">$72.51</div><div class="fin-meta">+0.9% YTD | $12.6B | P/E --</div></div>
+    <div class="fin-cell"><div class="fin-ticker">SMR</div><div class="fin-price">$12.55</div><div class="fin-meta">-0.2% YTD | $4.1B | P/E --</div></div>
+  </div>
+</div>
       <div class="sec-label">Core Thesis</div>
       <p style="font-size:13px;color:var(--text-dim);line-height:1.7;margin-bottom:20px;">AI data centers are the most power-hungry infrastructure since the aluminum smelter. A single large AI campus (100-200MW) consumes as much electricity as a small city. Microsoft, Google, Meta, and Amazon are collectively building dozens of new AI campuses, each requiring reliable, 24/7 power. The Iran war adds urgency: oil price spikes make natural gas and nuclear more attractive, and grid instability from energy supply disruption accelerates investment in domestic power infrastructure. This sector sits at the intersection of AI infrastructure demand and energy security — two of the strongest structural themes of 2026.</p>
       <table class="geo-table">
