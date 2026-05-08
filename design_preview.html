@@ -3,211 +3,317 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Linear Design Preview — Stock Research v3</title>
+<title>Hermes-Inspired Design Preview — Stock Research v3</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #08090a;
-    --surface: #0f1011;
-    --surface2: #191a1b;
-    --surface3: #28282c;
-    --border: rgba(255,255,255,0.08);
-    --border-subtle: rgba(255,255,255,0.05);
-    --text-primary: #f7f8f8;
-    --text-secondary: #d0d6e0;
-    --text-muted: #8a8f98;
-    --text-quaternary: #62666d;
-    --accent: #5e6ad2;
-    --accent-bright: #7170ff;
-    --accent-hover: #828fff;
-    --green: #27a644;
-    --green-bg: rgba(39,166,68,0.12);
-    --red: #e55c5c;
-    --red-bg: rgba(229,92,92,0.12);
-    --amber: #d29922;
-    --amber-bg: rgba(210,153,34,0.12);
-    --radius-sm: 4px;
-    --radius: 6px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --bg-deep: #050508;
+    --bg: #0a0a10;
+    --surface: #0f0f18;
+    --surface2: #151520;
+    --surface3: #1a1a28;
+    --border: rgba(255,255,255,0.06);
+    --border-glow: rgba(120,100,255,0.12);
+    --text-primary: #f0f0f5;
+    --text-secondary: #b0b0c0;
+    --text-muted: #686878;
+    --accent: #7c6ff7;
+    --accent-glow: rgba(124,111,247,0.25);
+    --accent-soft: rgba(124,111,247,0.10);
+    --green: #4ade80;
+    --green-glow: rgba(74,222,128,0.15);
+    --red: #f87171;
+    --red-glow: rgba(248,113,113,0.15);
+    --amber: #fbbf24;
+    --amber-glow: rgba(251,191,36,0.15);
+    --radius: 8px;
+    --radius-lg: 14px;
   }
 
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--bg);
+    background: var(--bg-deep);
     color: var(--text-primary);
-    line-height: 1.55;
-    padding: 48px;
-    max-width: 960px;
-    margin: 0 auto;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
   }
 
-  h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; }
-  h2 { font-size: 16px; font-weight: 600; margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-  h3 { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin: 20px 0 10px; text-transform: uppercase; letter-spacing: 0.06em; }
-  .subtitle { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
+  /* Atmospheric background effect */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120,100,255,0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(100,80,220,0.04), transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Subtle noise texture overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  h1 {
+    font-size: 36px;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, #f0f0f5 0%, #b0b0c0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-bottom: 64px;
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 56px 0 24px;
+  }
+  h2 span {
+    color: var(--accent);
+  }
+
+  h3.label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    color: var(--text-muted);
+    margin: 32px 0 16px;
+  }
 
   /* ── Swatches ── */
-  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: 12px; }
-  .swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
-  .swatch-color { height: 64px; }
-  .swatch-label { padding: 8px 12px; font-size: 11px; font-weight: 500; color: var(--text-secondary); background: var(--surface); }
-  .swatch-label span { display: block; font-size: 10px; color: var(--text-muted); margin-top: 2px; font-weight: 400; }
-
-  /* ── Type ── */
-  .type-sample { margin-bottom: 16px; }
-  .type-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 4px; }
-  .type-display { font-size: 32px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
-  .type-heading { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
-  .type-body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
-  .type-small { font-size: 12px; color: var(--text-muted); }
-  .type-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: var(--text-secondary); }
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 10px; margin-bottom: 32px; }
+  .swatch { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+  .swatch-color { height: 56px; position: relative; }
+  .swatch-color::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), transparent); }
+  .swatch-label { padding: 8px 10px; font-size: 10px; font-weight: 500; color: var(--text-secondary); }
+  .swatch-label span { display: block; font-size: 9px; color: var(--text-muted); margin-top: 1px; font-weight: 400; }
 
   /* ── Buttons ── */
-  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-  .btn { font-family: inherit; font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: var(--radius); cursor: pointer; transition: all .15s; }
-  .btn-primary { background: var(--accent); color: #fff; border: none; }
-  .btn-primary:hover { background: var(--accent-hover); }
-  .btn-ghost { background: rgba(255,255,255,0.02); color: var(--text-secondary); border: 1px solid var(--border); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--text-primary); }
-  .btn-subtle { background: rgba(255,255,255,0.04); color: var(--text-muted); border: none; padding: 4px 10px; font-size: 12px; }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 12px 0; }
+  .btn { font-family: inherit; font-size: 13px; font-weight: 500; padding: 10px 20px; border-radius: var(--radius); cursor: pointer; transition: all .2s; letter-spacing: -0.01em; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #9580ff);
+    color: #fff; border: none;
+    box-shadow: 0 0 20px var(--accent-glow), 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .btn-primary:hover { box-shadow: 0 0 30px var(--accent-glow), 0 4px 16px rgba(0,0,0,0.4); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--text-primary); background: var(--accent-soft); }
 
   /* ── Badges ── */
-  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase; }
-  .badge-buy { background: var(--green-bg); color: var(--green); border: 1px solid rgba(39,166,68,0.25); }
-  .badge-hold { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(210,153,34,0.25); }
-  .badge-watch { background: rgba(113,112,255,0.12); color: var(--accent-bright); border: 1px solid rgba(113,112,255,0.25); }
+  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .badge-buy { background: var(--green-glow); color: var(--green); border: 1px solid rgba(74,222,128,0.25); }
+  .badge-hold { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(251,191,36,0.25); }
+  .badge-watch { background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(124,111,247,0.25); }
 
-  /* ── Cards ── */
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; }
-  .card-header { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); cursor: pointer; }
+  /* ── Card System ── */
+  .card {
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: all .25s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .card:hover {
+    border-color: var(--border-glow);
+    box-shadow: 0 0 30px rgba(120,100,255,0.06), 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .card-header {
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+  }
   .card-header:hover { background: var(--surface2); }
-  .card-body { padding: 20px; background: var(--surface); }
-  .card-ticker { font-size: 13px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.02em; }
-  .card-company { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .card-ticker { font-size: 14px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.02em; }
+  .card-company { font-size: 12px; color: var(--text-muted); margin-top: 3px; font-weight: 400; }
+  .card-body { padding: 24px; }
 
   /* ── Price Bar ── */
-  .price-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); }
-  .price-cell { background: var(--surface2); padding: 12px 16px; text-align: center; }
-  .price-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 4px; }
-  .price-value { font-size: 14px; font-weight: 600; }
+  .price-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; }
+  .price-cell { background: var(--surface2); padding: 14px 16px; text-align: center; }
+  .price-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 5px; }
+  .price-value { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
   .price-value.up { color: var(--green); }
   .price-value.down { color: var(--red); }
   .price-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
 
-  /* ── Analysis Block ── */
-  .analysis-block { background: var(--surface2); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 8px; border-left: 3px solid; }
+  /* ── Sparkline ── */
+  .sparkline-demo { display: block; width: 100%; height: 44px; margin: 6px 0 2px; opacity: 0.8; }
+
+  /* ── Analysis ── */
+  .analysis-section { margin-top: 24px; }
+  .analysis-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .analysis-label.bull { color: var(--green); }
+  .analysis-label.bear { color: var(--red); }
+  .analysis-block {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    border-left: 2px solid;
+    transition: border-color .2s;
+  }
   .analysis-block.bull { border-left-color: var(--green); }
   .analysis-block.bear { border-left-color: var(--red); }
-  .analysis-block.call { border-left-color: var(--accent-bright); }
-  .analysis-block p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-  .analysis-block p strong { color: var(--text-primary); }
+  .analysis-block.call { border-left-color: var(--accent); background: linear-gradient(135deg, var(--surface2), var(--accent-soft)); }
+  .analysis-block p { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+  .analysis-block p strong { color: var(--text-primary); font-weight: 600; }
 
-  /* ── TOC Preview ── */
-  .toc-preview { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; max-width: 240px; }
-  .toc-brand { font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle); }
-  .toc-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin: 12px 0 6px; }
-  .toc-link { display: block; font-size: 12px; color: var(--text-muted); padding: 4px 0; text-decoration: none; transition: color .15s; }
+  /* ── TOC Sidebar ── */
+  .toc-preview {
+    background: linear-gradient(180deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    max-width: 240px;
+  }
+  .toc-brand {
+    font-size: 11px; font-weight: 600; color: var(--text-secondary);
+    margin-bottom: 18px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .toc-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.10em; color: var(--text-muted); margin: 14px 0 8px; }
+  .toc-link { display: block; font-size: 11px; color: var(--text-muted); padding: 5px 0; text-decoration: none; transition: all .15s; letter-spacing: -0.01em; }
   .toc-link:hover { color: var(--text-primary); }
-  .toc-link.active { color: var(--accent-bright); }
+  .toc-link.active { color: var(--accent); }
 
-  /* ── Sparkline ── */
-  .sparkline-demo { display: block; width: 100%; height: 40px; margin: 8px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  @media(max-width:700px) { .two-col { grid-template-columns: 1fr; } .page-wrap { padding: 32px 20px; } h1 { font-size: 26px; } }
 
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  @media(max-width:600px) { .two-col { grid-template-columns: 1fr; } body { padding: 24px 16px; } }
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 48px 0;
+  }
 </style>
 </head>
 <body>
+<div class="page-wrap">
 
-<h1>Linear Design System — Stock Research v3</h1>
-<p class="subtitle">Design token preview. All colors, typography, and components mapped from the Linear design system.</p>
+<h1>Stock Research</h1>
+<p class="subtitle">A design exploration — atmospheric, data-rich, and quietly confident.</p>
 
 <!-- ═══════════════════════ PALETTE ═══════════════════════ -->
-<h2>🎨 Color Palette</h2>
+<h2><span>◈</span> Palette</h2>
 <div class="swatch-grid">
-  <div class="swatch"><div class="swatch-color" style="background:#08090a"></div><div class="swatch-label">Background<span>#08090a — Marketing Black</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#0f1011"></div><div class="swatch-label">Surface<span>#0f1011 — Panel Dark</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#191a1b"></div><div class="swatch-label">Surface 2<span>#191a1b — Elevated</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#28282c"></div><div class="swatch-label">Surface 3<span>#28282c — Hover</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#f7f8f8"></div><div class="swatch-label">Text Primary<span>#f7f8f8 — Near white</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#d0d6e0"></div><div class="swatch-label">Text Secondary<span>#d0d6e0 — Silver</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#8a8f98"></div><div class="swatch-label">Text Muted<span>#8a8f98 — Tertiary</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#62666d"></div><div class="swatch-label">Text Subtle<span>#62666d — Quaternary</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#5e6ad2"></div><div class="swatch-label">Accent<span>#5e6ad2 — Brand Indigo</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#7170ff"></div><div class="swatch-label">Accent Bright<span>#7170ff — Interactive</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#27a644"></div><div class="swatch-label">Green<span>#27a644 — Positive</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#e55c5c"></div><div class="swatch-label">Red<span>#e55c5c — Negative</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#050508"></div><div class="swatch-label">Deep BG<span>#050508</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#0a0a10"></div><div class="swatch-label">Background<span>#0a0a10</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#0f0f18"></div><div class="swatch-label">Surface<span>#0f0f18</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#151520"></div><div class="swatch-label">Surface 2<span>#151520</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#f0f0f5"></div><div class="swatch-label">Text<span>#f0f0f5</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#b0b0c0"></div><div class="swatch-label">Secondary<span>#b0b0c0</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#686878"></div><div class="swatch-label">Muted<span>#686878</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#7c6ff7"></div><div class="swatch-label">Accent<span>#7c6ff7 — Purple</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#4ade80"></div><div class="swatch-label">Green<span>#4ade80</span></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#f87171"></div><div class="swatch-label">Red<span>#f87171</span></div></div>
 </div>
+
+<div class="section-divider"></div>
 
 <div class="two-col">
 
-<!-- ═══════════════════════ TYPOGRAPHY ═══════════════════════ -->
-<div>
-<h2>🔤 Typography</h2>
-<div class="type-sample">
-  <div class="type-label">Display — 32px / 600</div>
-  <div class="type-display">Battered Tech + Sandisk Plays</div>
-</div>
-<div class="type-sample">
-  <div class="type-label">Heading — 18px / 600</div>
-  <div class="type-heading">Part 1: The Battered Tech Survivors</div>
-</div>
-<div class="type-sample">
-  <div class="type-label">Body — 14px / 400</div>
-  <div class="type-body">Beaten-down SaaS and software stocks that sold off from ATHs. The thesis: at current valuations, growth rates don't need to re-accelerate dramatically for these to work.</div>
-</div>
-<div class="type-sample">
-  <div class="type-label">Small — 12px</div>
-  <div class="type-small">$3.22B revenue · +7.8% YoY · Agreement cloud + AI assistant</div>
-</div>
-<div class="type-sample">
-  <div class="type-label">Mono — 13px JetBrains Mono</div>
-  <div class="type-mono">DOCU — $47.98 — HOLD — 6M: -31.2%</div>
-</div>
-</div>
-
 <!-- ═══════════════════════ COMPONENTS ═══════════════════════ -->
 <div>
-<h2>🧩 Components</h2>
+<h2><span>◈</span> Components</h2>
 
-<h3>Buttons</h3>
+<h3 class="label">Buttons</h3>
 <div class="btn-row">
-  <button class="btn btn-primary">Primary CTA</button>
-  <button class="btn btn-ghost">Ghost Button</button>
-  <button class="btn btn-subtle">Subtle</button>
+  <button class="btn btn-primary">Primary Action</button>
+  <button class="btn btn-ghost">Secondary</button>
 </div>
 
-<h3>Verdict Badges</h3>
+<h3 class="label">Verdict Badges</h3>
 <div class="btn-row">
   <span class="badge badge-buy">BUY</span>
   <span class="badge badge-hold">HOLD</span>
   <span class="badge badge-watch">WATCH</span>
 </div>
 
-<h3>TOC Sidebar</h3>
+<h3 class="label">TOC Sidebar</h3>
 <div class="toc-preview">
-  <div class="toc-brand">← Research Home <span style="float:right;font-size:9px;color:var(--text-muted)">May 2026</span></div>
-  <div class="toc-label">📋 Guide</div>
+  <div class="toc-brand">← Research Home<span style="float:right;font-size:9px;color:var(--text-muted)">May 2026</span></div>
+  <div class="toc-label">Guide</div>
   <a class="toc-link" href="#">How to Use This Doc</a>
   <a class="toc-link active" href="#">Investment Thesis</a>
-  <div class="toc-label">💻 Battered Tech</div>
+  <div class="toc-label">Battered Tech</div>
   <a class="toc-link" href="#">DOCU</a>
   <a class="toc-link" href="#">SNOW</a>
   <a class="toc-link" href="#">OKTA</a>
-  <div class="toc-label">⚡ Sandisk Plays</div>
+  <div class="toc-label">Sandisk Plays</div>
   <a class="toc-link" href="#">ANET</a>
   <a class="toc-link" href="#">GLW</a>
 </div>
 </div>
+
+<!-- ═══════════════════════ TYPOGRAPHY ═══════════════════════ -->
+<div>
+<h2><span>◈</span> Typography</h2>
+<div style="margin-bottom:24px">
+  <div class="analysis-label" style="margin-bottom:4px">Display — 36px / 300</div>
+  <div style="font-size:36px;font-weight:300;letter-spacing:-0.03em;background:linear-gradient(135deg,#f0f0f5,#b0b0c0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Battered Tech Basket</div>
+</div>
+<div style="margin-bottom:20px">
+  <div class="analysis-label" style="margin-bottom:4px">Heading — 20px / 500</div>
+  <div style="font-size:20px;font-weight:500;letter-spacing:-0.02em">Part 1: The Survivors</div>
+</div>
+<div style="margin-bottom:16px">
+  <div class="analysis-label" style="margin-bottom:4px">Body — 14px / 400</div>
+  <div style="font-size:14px;color:var(--text-secondary);line-height:1.65">Beaten-down SaaS and software stocks that sold off from ATHs. The thesis: at current valuations, growth rates don't need to re-accelerate.</div>
+</div>
+<div style="margin-bottom:16px">
+  <div class="analysis-label" style="margin-bottom:4px">Small — 12px</div>
+  <div style="font-size:12px;color:var(--text-muted)">$3.22B revenue · +7.8% YoY · Agreement cloud + AI assistant</div>
+</div>
+<div>
+  <div class="analysis-label" style="margin-bottom:4px">Data Label — 9px / 600 uppercase</div>
+  <div style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.10em;color:var(--text-muted)">6M · 90-DAY · 30-DAY · YTD</div>
+</div>
+</div>
 </div>
 
+<div class="section-divider"></div>
+
 <!-- ═══════════════════════ STOCK CARD ═══════════════════════ -->
-<h2>📊 Sample Stock Card</h2>
+<h2><span>◈</span> Stock Card — DOCU</h2>
+
 <div class="card">
   <div class="card-header">
     <div>
@@ -221,76 +327,84 @@
     <div class="price-bar">
       <div class="price-cell">
         <div class="price-label">6M</div>
-        <div class="price-value down">-31.2%</div>
+        <div class="price-value down">−31.2%</div>
         <div class="price-sub">$47.98</div>
       </div>
       <div class="price-cell">
         <div class="price-label">90-Day</div>
         <div class="price-value up">+1.8%</div>
-        <div class="price-sub">$47.98 current</div>
+        <div class="price-sub">current</div>
       </div>
       <div class="price-cell">
         <div class="price-label">30-Day</div>
         <div class="price-value up">+5.3%</div>
-        <div class="price-sub">$47.98 current</div>
+        <div class="price-sub">current</div>
       </div>
       <div class="price-cell">
         <div class="price-label">YTD</div>
-        <div class="price-value down">-31.2%</div>
-        <div class="price-sub">Jan 2026–now</div>
+        <div class="price-value down">−31.2%</div>
+        <div class="price-sub">Jan 2026</div>
       </div>
     </div>
 
-    <svg class="sparkline-demo" viewBox="0 0 200 40">
-      <polyline fill="none" stroke="var(--red)" stroke-width="1.5" points="0,10 30,25 60,15 90,30 120,18 150,28 180,8 200,20"/>
-      <text x="196" y="14" text-anchor="end" font-size="9" fill="var(--text-muted)">$47.98</text>
+    <svg class="sparkline-demo" viewBox="0 0 200 44">
+      <defs>
+        <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--red)" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="var(--red)" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <polyline fill="url(#sparkGrad)" stroke="var(--red)" stroke-width="1.5" points="0,30 20,32 40,22 60,28 80,15 100,25 120,18 140,22 160,12 180,24 200,20"/>
     </svg>
 
-    <div class="price-bar" style="grid-template-columns: repeat(5,1fr)">
+    <div class="price-bar" style="grid-template-columns: repeat(5,1fr);margin-top:12px">
       <div class="price-cell">
         <div class="price-label">Revenue</div>
-        <div class="price-value" style="font-size:13px;color:var(--text-primary)">$3.22B</div>
+        <div class="price-value" style="color:var(--text-primary);font-size:13px">$3.22B</div>
         <div class="price-sub">+7.8% YoY</div>
       </div>
       <div class="price-cell">
         <div class="price-label">FCF</div>
-        <div class="price-value" style="font-size:13px;color:var(--text-primary)">$1.20B</div>
+        <div class="price-value" style="color:var(--text-primary);font-size:13px">$1.20B</div>
         <div class="price-sub">37.3% margin</div>
       </div>
       <div class="price-cell">
         <div class="price-label">Gross Margin</div>
-        <div class="price-value" style="font-size:13px;color:var(--text-primary)">79.6%</div>
+        <div class="price-value" style="color:var(--text-primary);font-size:13px">79.6%</div>
       </div>
       <div class="price-cell">
         <div class="price-label">Net Cash</div>
-        <div class="price-value" style="font-size:13px;color:var(--text-primary)">$681M</div>
+        <div class="price-value" style="color:var(--text-primary);font-size:13px">$681M</div>
       </div>
       <div class="price-cell">
         <div class="price-label">Op Margin</div>
-        <div class="price-value" style="font-size:13px;color:var(--text-primary)">10.5%</div>
+        <div class="price-value" style="color:var(--text-primary);font-size:13px">10.5%</div>
       </div>
     </div>
 
-    <h3 style="margin-top:20px">🐂 Bull Case</h3>
-    <div class="analysis-block bull">
-      <p><strong>The AI Agent wave is DocuSign's next wave.</strong> AI agents need to execute agreements. DocuSign has 1.5 billion+ agreements in its network — the largest structured agreement dataset in the world.</p>
-    </div>
+    <div class="analysis-section">
+      <div class="analysis-label bull">Bull Case</div>
+      <div class="analysis-block bull">
+        <p><strong>The AI Agent wave is DocuSign's next wave.</strong> AI agents need to execute agreements. DocuSign has 1.5 billion+ agreements in its network — the largest structured agreement dataset in the world. Its AI Agent Studio lets customers build agents that negotiate, execute, and manage agreements automatically. Management guides for AI-driven automation becoming a meaningful contributor in 2026–2027.</p>
+      </div>
 
-    <h3>🐻 Bear Case</h3>
-    <div class="analysis-block bear">
-      <p><strong>AI agents could disintermediate DocuSign entirely.</strong> If Microsoft, Google, or OpenAI build agreement execution directly into their AI platforms, DocuSign's moat shrinks considerably.</p>
-    </div>
+      <div class="analysis-label bear">Bear Case</div>
+      <div class="analysis-block bear">
+        <p><strong>AI agents could disintermediate DocuSign entirely.</strong> If Microsoft, Google, or OpenAI build agreement execution directly into their AI platforms, DocuSign's moat shrinks considerably. The company's growth has decelerated from 40%+ to single digits over three years — the structural growth story is in question.</p>
+      </div>
 
-    <div class="analysis-block call">
-      <p><strong>My Call: HOLD.</strong> The AI tailwind is real but not yet priced in. Wait for evidence of re-acceleration before building a full position. Current entry around $48 offers reasonable risk/reward for a starter position.</p>
+      <div class="analysis-block call">
+        <p><strong>My Call: HOLD.</strong> The AI tailwind is real but not yet priced in. Wait for evidence of re-acceleration before building a full position. Current entry around $48 offers reasonable risk/reward for a starter position. Catalyst: Q2 FY2027 earnings showing AI Agent Studio revenue contribution.</p>
+      </div>
     </div>
 
   </div>
 </div>
 
-<p style="font-size:12px;color:var(--text-muted);margin-top:40px;text-align:center;">
-  Linear Design System preview for Stock Research v3 · Based on Linear's design language · Hermes Agent Research
+<p style="font-size:12px;color:var(--text-muted);margin-top:48px;text-align:center;letter-spacing:-0.01em;">
+  Hermes Agent Research · Design exploration v3 · Atmospheric. Data-rich. Quietly confident.
 </p>
 
+</div>
 </body>
 </html>
