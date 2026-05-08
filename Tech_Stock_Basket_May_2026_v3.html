@@ -1859,6 +1859,64 @@
 
 <div class="rule"></div>
 
+<div class="top-picks" id="top5">
+  <h3>Top 5 Picks — May 8, 2026</h3>
+  <p style="font-size:13px;color:var(--text-dim);margin-bottom:24px;">Across all 23 stocks in this basket, these are the five highest-conviction positions ranked by risk/reward, catalyst clarity, and thesis differentiation.</p>
+  
+  <div class="neo-card-inset" style="margin-bottom:24px;padding:24px;">
+    <div class="sec-label" style="color:var(--accent);">Synthesis — The Three Themes Driving This Basket</div>
+    <p style="font-size:13px;color:var(--text-dim);line-height:1.7;">
+      <strong style="color:var(--green);">1. The Silicon-Photonics Convergence.</strong> AI datacenters are hitting a copper wall. Electrical interconnects can't keep up with GPU bandwidth demands. The solution — co-packaged optics and electro-photonics — is creating an entirely new semiconductor supply chain. <strong>MRVL</strong> (Peng photonics integration), <strong>HIMX</strong> (CPO leader), and <strong>ANET</strong> (optical switching) are positioned at different layers of this stack. This is not a 2026 trade — it's a 2027-2030 structural shift that the market has barely begun to price.<br><br>
+      <strong style="color:var(--green);">2. Power Management as the Bottleneck.</strong> Every NVIDIA Blackwell GPU draws 1,200W. A rack of 72 draws 86kW — enough to power a small office building. The companies solving power delivery, conversion, and cooling are the picks-and-shovels of the AI buildout. <strong>AOSL</strong> (server power semis), <strong>ETN</strong> (grid infrastructure), <strong>VST</strong> (power generation), and <strong>AMKR</strong> (advanced packaging) are all levered to the same thesis: AI doesn't work without reliable power.<br><br>
+      <strong style="color:var(--green);">3. The Inference-Everywhere Thesis.</strong> Training gets the headlines, but inference is where the installed base lives. As AI moves from the training cluster to every device and application, CPU efficiency matters as much as GPU throughput. <strong>ARM</strong> (CPU architecture for AGI), <strong>DDOG</strong> (observability for AI stacks), and <strong>QCOM</strong> (edge inference) benefit from the broadening of AI beyond the datacenter. This is the "second wave" that follows the GPU gold rush.
+    </p>
+  </div>
+
+  <div class="top-picks-grid">
+    <div class="top-pick-card">
+      <div class="tp-rank">#1</div>
+      <div class="tp-ticker">MRVL — Marvell Technology</div>
+      <span class="ticker-badge buy" style="margin-bottom:12px;">BUY</span>
+      <p>The photonics angle is the differentiator that separates MRVL from every other AI infrastructure play. If Penguin electro-optics integration succeeds, MRVL has a multi-year lead in solving the most critical AI datacenter bottleneck — moving data between chips at speed. Even without it, the custom ASIC business at $8.2B revenue scale is a compounding machine. Unlike GPU plays that are already crowded, MRVL's photonics thesis is underappreciated. <strong>Catalyst:</strong> First photonics-enabled product announcement with a named hyperscaler customer.</p>
+    </div>
+    <div class="top-pick-card">
+      <div class="tp-rank">#2</div>
+      <div class="tp-ticker">ARM — Arm Holdings</div>
+      <span class="ticker-badge buy" style="margin-bottom:12px;">BUY</span>
+      <p>The CPU-for-AI thesis is the most underappreciated call in this basket. Everyone is focused on GPUs, but inference at scale needs efficient CPU architecture — and Arm v9 is winning that battle. The royalty model (65%+ gross margins, asset-light) means every new AI CPU chip pays Arm. This is a multi-decade compounding story hiding in plain sight. <strong>Catalyst:</strong> Next earnings confirming AI CPU royalty acceleration.</p>
+    </div>
+    <div class="top-pick-card">
+      <div class="tp-rank">#3</div>
+      <div class="tp-ticker">ANET — Arista Networks</div>
+      <span class="ticker-badge buy" style="margin-bottom:12px;">BUY</span>
+      <p>The quiet compounder. 35% revenue growth, 42.7% operating margins, $12.4B net cash — these are not the numbers of a company in trouble. Arista is the networking backbone of AI datacenters, and unlike GPU names, it doesn't need a new product cycle to grow. Every AI cluster needs switching, and Arista owns the high-end. The best risk-managed AI infrastructure play in the basket. <strong>Catalyst:</strong> Steady earnings beats — no drama, just execution.</p>
+    </div>
+    <div class="top-pick-card">
+      <div class="tp-rank">#4</div>
+      <div class="tp-ticker">HIMX — Himax Technologies</div>
+      <span class="ticker-badge buy" style="margin-bottom:12px;">BUY</span>
+      <p>The highest-upside CPO play. If co-packaged optics becomes standard in next-gen AI datacenters — and the physics of copper interconnects suggests it must — HIMX is positioned to capture disproportionate value. The stock has run 101% in 6 months, so timing matters. But the asymmetric payoff is exactly what the Sandisk thesis looks for: a neglected technology that becomes mandatory infrastructure. <strong>Catalyst:</strong> NVIDIA Blackwell design win announcement for CPO components.</p>
+    </div>
+    <div class="top-pick-card">
+      <div class="tp-rank">#5</div>
+      <div class="tp-ticker">DDOG — Datadog</div>
+      <span class="ticker-badge hold" style="margin-bottom:12px;">HOLD</span>
+      <p>"The market is learning how dependent AI is on them" (@pennycheck). 29% revenue growth, 80% gross margins, $3.2B net cash — Datadog is the mission-critical observability layer that every AI infrastructure deployment needs. The moat is widening, not shrinking, as AI stacks become more complex. Premium valuation is the only concern. <strong>Catalyst:</strong> AI-specific product revenue disclosure showing inflection.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.top-picks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 8px; }
+.top-pick-card { background: var(--bg); border-radius: var(--radius-lg); box-shadow: var(--shadow-md-ext); padding: 24px; position: relative; transition: box-shadow .2s; }
+.top-pick-card:hover { box-shadow: var(--shadow-lg-ext); }
+.tp-rank { position: absolute; top: -14px; left: 20px; background: var(--accent); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 6px; letter-spacing: .04em; box-shadow: var(--shadow-sm-ext); }
+.tp-ticker { font-size: 17px; font-weight: 700; color: var(--text); margin: 12px 0 4px; }
+.top-pick-card p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+.top-pick-card p strong { color: var(--text); }
+@media(max-width:768px) { .top-picks-grid { grid-template-columns: 1fr; } }
+</style>
+
 <div class="skip-section" id="skip-list">
   <h3>The Skip List — 10 Stocks We're Passing On</h3>
   <div class="skip-card"><strong>TEAM</strong> — Atlassian: GAAP deeply negative at $2.8B revenue. AI agents replacing project management workflows is a real risk. No near-term catalyst.</div>
@@ -1873,16 +1931,7 @@
   <div class="skip-card"><strong>RPD</strong> — Rapid7: Flat ARR, slow growth. Disrupted from above by CrowdStrike/SentinelOne, from below by AI-native tools.</div>
 </div>
 
-<div class="top-picks" id="top5">
-  <h3>Top 5 Picks — May 8, 2026</h3>
-  <ol>
-    <li><span><strong>DOCU</strong> — 6x revenue with a real AI platform story. Market pricing this like it's terminal. It isn't.</span></li>
-    <li><span><strong>ANET</strong> — AI networking at a reasonable multiple. Arista prints cash while everyone chases GPU names.</span></li>
-    <li><span><strong>GLW</strong> — Optical fiber for AI data centers. Not sexy, prints money. Up 114% and still cheap.</span></li>
-    <li><span><strong>ARM</strong> — CPU architecture for inference at scale. Asset-light, 65%+ gross margins.</span></li>
-    <li><span><strong>MRVL</strong> — Photonics is the AI bottleneck differentiator. Custom ASIC at $8.2B. Accumulate on weakness.</span></li>
-  </ol>
-</div>
+
 
 <div class="ref-section" id="references">
   <h3>References &amp; Sources</h3>
