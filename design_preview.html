@@ -3,407 +3,241 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hermes-Inspired Design Preview — Stock Research v3</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Radical Design Preview — Stock Research v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg-deep: #050508;
-    --bg: #0a0a10;
-    --surface: #0f0f18;
-    --surface2: #151520;
-    --surface3: #1a1a28;
-    --border: rgba(255,255,255,0.06);
-    --border-glow: rgba(120,100,255,0.12);
-    --text-primary: #f0f0f5;
-    --text-secondary: #b0b0c0;
-    --text-muted: #686878;
-    --accent: #7c6ff7;
-    --accent-glow: rgba(124,111,247,0.25);
-    --accent-soft: rgba(124,111,247,0.10);
-    --green: #4ade80;
-    --green-glow: rgba(74,222,128,0.15);
-    --red: #f87171;
-    --red-glow: rgba(248,113,113,0.15);
-    --amber: #fbbf24;
-    --amber-glow: rgba(251,191,36,0.15);
-    --radius: 8px;
-    --radius-lg: 14px;
+    --void: #030308;
+    --space: #080810;
+    --deep: #0c0c18;
+    --surface: rgba(255,255,255,0.03);
+    --surface-hover: rgba(255,255,255,0.05);
+    --border: rgba(255,255,255,0.05);
+    --border-visible: rgba(255,255,255,0.08);
+    --text: #ededf0;
+    --text-dim: #9898a8;
+    --text-quiet: #585868;
+    --accent: #8b7cff;
+    --accent-ghost: rgba(139,124,255,0.12);
+    --accent-glow: rgba(139,124,255,0.20);
+    --green: #44d98a;
+    --green-ghost: rgba(68,217,138,0.10);
+    --red: #ff5c72;
+    --red-ghost: rgba(255,92,114,0.10);
+    --amber: #f0b848;
   }
 
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--bg-deep);
-    color: var(--text-primary);
+    background: var(--void);
+    color: var(--text);
     line-height: 1.6;
-    min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Atmospheric background effect */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
+  /* ── Atmosphere ── */
+  .atmos {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
     background:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120,100,255,0.08), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(100,80,220,0.04), transparent);
-    pointer-events: none;
-    z-index: 0;
+      radial-gradient(ellipse 70% 60% at 50% 0%, rgba(120,100,240,0.06), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 90%, rgba(100,140,255,0.04), transparent 60%),
+      radial-gradient(ellipse 40% 30% at 20% 50%, rgba(160,120,255,0.03), transparent 50%);
+  }
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* Subtle noise texture overlay */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    opacity: 0.015;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-  }
+  /* ── Layout ── */
+  .stage { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 80px 32px 120px; }
 
-  .page-wrap {
-    position: relative;
-    z-index: 1;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 60px 40px 80px;
-  }
+  /* ── Hero ── */
+  .hero { margin-bottom: 100px; }
+  .hero-eyebrow { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-quiet); margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 200; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; font-weight: 400; background: linear-gradient(135deg, var(--accent), #b8a0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: 16px; color: var(--text-dim); max-width: 520px; line-height: 1.7; font-weight: 300; }
 
-  h1 {
-    font-size: 36px;
-    font-weight: 300;
-    letter-spacing: -0.03em;
-    margin-bottom: 6px;
-    background: linear-gradient(135deg, #f0f0f5 0%, #b0b0c0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .subtitle {
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--text-muted);
-    margin-bottom: 64px;
-    letter-spacing: -0.01em;
-  }
+  /* ── Section Headers ── */
+  .section-rule { height: 1px; background: linear-gradient(90deg, transparent, var(--border-visible) 20%, var(--border-visible) 80%, transparent); margin: 80px 0 40px; }
+  .section-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-quiet); margin-bottom: 28px; }
 
-  h2 {
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    margin: 56px 0 24px;
-  }
-  h2 span {
-    color: var(--accent);
-  }
-
-  h3.label {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.10em;
-    color: var(--text-muted);
-    margin: 32px 0 16px;
-  }
-
-  /* ── Swatches ── */
-  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 10px; margin-bottom: 32px; }
-  .swatch { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
-  .swatch-color { height: 56px; position: relative; }
-  .swatch-color::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), transparent); }
-  .swatch-label { padding: 8px 10px; font-size: 10px; font-weight: 500; color: var(--text-secondary); }
-  .swatch-label span { display: block; font-size: 9px; color: var(--text-muted); margin-top: 1px; font-weight: 400; }
-
-  /* ── Buttons ── */
-  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 12px 0; }
-  .btn { font-family: inherit; font-size: 13px; font-weight: 500; padding: 10px 20px; border-radius: var(--radius); cursor: pointer; transition: all .2s; letter-spacing: -0.01em; }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #9580ff);
-    color: #fff; border: none;
-    box-shadow: 0 0 20px var(--accent-glow), 0 2px 8px rgba(0,0,0,0.3);
-  }
-  .btn-primary:hover { box-shadow: 0 0 30px var(--accent-glow), 0 4px 16px rgba(0,0,0,0.4); transform: translateY(-1px); }
-  .btn-ghost {
-    background: transparent; color: var(--text-secondary);
-    border: 1px solid var(--border);
-  }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--text-primary); background: var(--accent-soft); }
-
-  /* ── Badges ── */
-  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
-  .badge-buy { background: var(--green-glow); color: var(--green); border: 1px solid rgba(74,222,128,0.25); }
-  .badge-hold { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(251,191,36,0.25); }
-  .badge-watch { background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(124,111,247,0.25); }
-
-  /* ── Card System ── */
-  .card {
-    background: linear-gradient(135deg, var(--surface), var(--surface2));
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    margin-bottom: 20px;
-    transition: all .25s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  }
-  .card:hover {
-    border-color: var(--border-glow);
-    box-shadow: 0 0 30px rgba(120,100,255,0.06), 0 4px 16px rgba(0,0,0,0.4);
-  }
-  .card-header {
-    padding: 18px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+  /* ── Stock Panel ── */
+  .stock-panel { margin-bottom: 48px; }
+  .stock-panel-header {
+    display: flex; align-items: baseline; gap: 16px;
+    padding: 0 0 16px;
     border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
   }
-  .card-header:hover { background: var(--surface2); }
-  .card-ticker { font-size: 14px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.02em; }
-  .card-company { font-size: 12px; color: var(--text-muted); margin-top: 3px; font-weight: 400; }
-  .card-body { padding: 24px; }
+  .stock-panel-ticker { font-size: 28px; font-weight: 200; letter-spacing: -0.03em; }
+  .stock-panel-name { font-size: 14px; color: var(--text-dim); font-weight: 400; }
+  .stock-panel-verdict { margin-left: auto; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; }
+  .stock-panel-verdict.buy { background: var(--green-ghost); color: var(--green); border: 1px solid rgba(68,217,138,0.2); }
+  .stock-panel-verdict.hold { background: rgba(240,184,72,0.10); color: var(--amber); border: 1px solid rgba(240,184,72,0.2); }
 
-  /* ── Price Bar ── */
-  .price-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; }
-  .price-cell { background: var(--surface2); padding: 14px 16px; text-align: center; }
-  .price-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 5px; }
-  .price-value { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
-  .price-value.up { color: var(--green); }
-  .price-value.down { color: var(--red); }
-  .price-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  /* ── Metrics Row ── */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px; }
+  .metric { text-align: center; }
+  .metric-value { font-size: 28px; font-weight: 200; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .metric-value.up { color: var(--green); }
+  .metric-value.down { color: var(--red); }
+  .metric-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-quiet); margin-bottom: 3px; }
+  .metric-context { font-size: 11px; color: var(--text-dim); }
 
   /* ── Sparkline ── */
-  .sparkline-demo { display: block; width: 100%; height: 44px; margin: 6px 0 2px; opacity: 0.8; }
+  .spark-row { margin-bottom: 32px; padding: 10px 0; }
+  .spark-row svg { display: block; width: 100%; height: 48px; }
 
-  /* ── Analysis ── */
-  .analysis-section { margin-top: 24px; }
-  .analysis-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-  .analysis-label.bull { color: var(--green); }
-  .analysis-label.bear { color: var(--red); }
-  .analysis-block {
-    background: var(--surface2);
-    border-radius: var(--radius);
-    padding: 16px 18px;
-    margin-bottom: 10px;
-    border-left: 2px solid;
-    transition: border-color .2s;
+  /* ── Fundamentals Strip ── */
+  .fund-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; background: var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 40px; }
+  .fund-item { background: var(--surface); padding: 18px 14px; text-align: center; }
+  .fund-item .val { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .fund-item .lbl { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-quiet); }
+  .fund-item .sub { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ── Thesis Blocks ── */
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+  .thesis-block { padding: 20px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); }
+  .thesis-block h4 { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.10em; margin-bottom: 14px; }
+  .thesis-block.bull h4 { color: var(--green); }
+  .thesis-block.bear h4 { color: var(--red); }
+  .thesis-block p { font-size: 12px; color: var(--text-dim); line-height: 1.7; margin-bottom: 10px; }
+  .thesis-block p strong { color: var(--text); font-weight: 500; }
+
+  /* ── Callout ── */
+  .callout {
+    background: var(--accent-ghost);
+    border: 1px solid rgba(139,124,255,0.15);
+    border-radius: 12px;
+    padding: 20px 24px;
   }
-  .analysis-block.bull { border-left-color: var(--green); }
-  .analysis-block.bear { border-left-color: var(--red); }
-  .analysis-block.call { border-left-color: var(--accent); background: linear-gradient(135deg, var(--surface2), var(--accent-soft)); }
-  .analysis-block p { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
-  .analysis-block p strong { color: var(--text-primary); font-weight: 600; }
+  .callout-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px; }
+  .callout p { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
 
-  /* ── TOC Sidebar ── */
-  .toc-preview {
-    background: linear-gradient(180deg, var(--surface), var(--surface2));
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    max-width: 240px;
-  }
-  .toc-brand {
-    font-size: 11px; font-weight: 600; color: var(--text-secondary);
-    margin-bottom: 18px; padding-bottom: 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .toc-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.10em; color: var(--text-muted); margin: 14px 0 8px; }
-  .toc-link { display: block; font-size: 11px; color: var(--text-muted); padding: 5px 0; text-decoration: none; transition: all .15s; letter-spacing: -0.01em; }
-  .toc-link:hover { color: var(--text-primary); }
-  .toc-link.active { color: var(--accent); }
+  /* ── Palette Swatches ── */
+  .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; margin: 20px 0 40px; }
+  .chip { border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+  .chip-color { height: 40px; }
+  .chip-label { padding: 6px 8px; font-size: 9px; font-weight: 500; color: var(--text-dim); background: var(--surface); }
+  .chip-label span { display: block; font-size: 8px; color: var(--text-quiet); }
 
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-  @media(max-width:700px) { .two-col { grid-template-columns: 1fr; } .page-wrap { padding: 32px 20px; } h1 { font-size: 26px; } }
-
-  .section-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 48px 0;
+  @media(max-width:700px) {
+    .stage { padding: 40px 18px 80px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .fund-strip { grid-template-columns: repeat(2, 1fr); }
+    .thesis-grid { grid-template-columns: 1fr; }
+    .metric-value { font-size: 22px; }
   }
 </style>
 </head>
 <body>
-<div class="page-wrap">
+<div class="atmos"></div>
+<div class="grain"></div>
 
-<h1>Stock Research</h1>
-<p class="subtitle">A design exploration — atmospheric, data-rich, and quietly confident.</p>
+<div class="stage">
 
-<!-- ═══════════════════════ PALETTE ═══════════════════════ -->
-<h2><span>◈</span> Palette</h2>
-<div class="swatch-grid">
-  <div class="swatch"><div class="swatch-color" style="background:#050508"></div><div class="swatch-label">Deep BG<span>#050508</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#0a0a10"></div><div class="swatch-label">Background<span>#0a0a10</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#0f0f18"></div><div class="swatch-label">Surface<span>#0f0f18</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#151520"></div><div class="swatch-label">Surface 2<span>#151520</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#f0f0f5"></div><div class="swatch-label">Text<span>#f0f0f5</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#b0b0c0"></div><div class="swatch-label">Secondary<span>#b0b0c0</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#686878"></div><div class="swatch-label">Muted<span>#686878</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#7c6ff7"></div><div class="swatch-label">Accent<span>#7c6ff7 — Purple</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#4ade80"></div><div class="swatch-label">Green<span>#4ade80</span></div></div>
-  <div class="swatch"><div class="swatch-color" style="background:#f87171"></div><div class="swatch-label">Red<span>#f87171</span></div></div>
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-eyebrow">Research · May 2026</div>
+  <h1>Beaten-down tech.<br><em>Asymmetric upside.</em></h1>
+  <p>23 stocks across three structural themes — SaaS survivors, AI infrastructure, and next-gen photonics. Live data, concise analysis, no filler.</p>
 </div>
 
-<div class="section-divider"></div>
-
-<div class="two-col">
-
-<!-- ═══════════════════════ COMPONENTS ═══════════════════════ -->
-<div>
-<h2><span>◈</span> Components</h2>
-
-<h3 class="label">Buttons</h3>
-<div class="btn-row">
-  <button class="btn btn-primary">Primary Action</button>
-  <button class="btn btn-ghost">Secondary</button>
+<!-- ═══════════ PALETTE ═══════════ -->
+<div class="section-rule"></div>
+<div class="section-title">Design System</div>
+<div class="palette">
+  <div class="chip"><div class="chip-color" style="background:#030308"></div><div class="chip-label">Void<span>#030308</span></div></div>
+  <div class="chip"><div class="chip-color" style="background:#0c0c18"></div><div class="chip-label">Deep<span>#0c0c18</span></div></div>
+  <div class="chip"><div class="chip-color" style="background:rgba(255,255,255,0.03)"></div><div class="chip-label">Surface<span>3% white</span></div></div>
+  <div class="chip"><div class="chip-color" style="background:#ededf0"></div><div class="chip-label">Text<span>#ededf0</span></div></div>
+  <div class="chip"><div class="chip-color" style="background:#9898a8"></div><div class="chip-label">Dim<span>#9898a8</span></div></div>
+  <div class="chip"><div class="chip-color" style="background:#585868"></div><div class="chip-label">Quiet<span>#585868</span></div></div>
+  <div class="chip"><div class="chip-color" style="background:#8b7cff"></div><div class="chip-label">Accent<span>#8b7cff</span></div></div>
+  <div class="chip"><div class="chip-color" style="background:#44d98a"></div><div class="chip-label">Green<span>#44d98a</span></div></div>
+  <div class="chip"><div class="chip-color" style="background:#ff5c72"></div><div class="chip-label">Red<span>#ff5c72</span></div></div>
 </div>
 
-<h3 class="label">Verdict Badges</h3>
-<div class="btn-row">
-  <span class="badge badge-buy">BUY</span>
-  <span class="badge badge-hold">HOLD</span>
-  <span class="badge badge-watch">WATCH</span>
-</div>
+<!-- ═══════════ SAMPLE STOCK ═══════════ -->
+<div class="section-rule"></div>
+<div class="section-title">Sample Analysis — DOCU</div>
 
-<h3 class="label">TOC Sidebar</h3>
-<div class="toc-preview">
-  <div class="toc-brand">← Research Home<span style="float:right;font-size:9px;color:var(--text-muted)">May 2026</span></div>
-  <div class="toc-label">Guide</div>
-  <a class="toc-link" href="#">How to Use This Doc</a>
-  <a class="toc-link active" href="#">Investment Thesis</a>
-  <div class="toc-label">Battered Tech</div>
-  <a class="toc-link" href="#">DOCU</a>
-  <a class="toc-link" href="#">SNOW</a>
-  <a class="toc-link" href="#">OKTA</a>
-  <div class="toc-label">Sandisk Plays</div>
-  <a class="toc-link" href="#">ANET</a>
-  <a class="toc-link" href="#">GLW</a>
-</div>
-</div>
+<div class="stock-panel">
 
-<!-- ═══════════════════════ TYPOGRAPHY ═══════════════════════ -->
-<div>
-<h2><span>◈</span> Typography</h2>
-<div style="margin-bottom:24px">
-  <div class="analysis-label" style="margin-bottom:4px">Display — 36px / 300</div>
-  <div style="font-size:36px;font-weight:300;letter-spacing:-0.03em;background:linear-gradient(135deg,#f0f0f5,#b0b0c0);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Battered Tech Basket</div>
-</div>
-<div style="margin-bottom:20px">
-  <div class="analysis-label" style="margin-bottom:4px">Heading — 20px / 500</div>
-  <div style="font-size:20px;font-weight:500;letter-spacing:-0.02em">Part 1: The Survivors</div>
-</div>
-<div style="margin-bottom:16px">
-  <div class="analysis-label" style="margin-bottom:4px">Body — 14px / 400</div>
-  <div style="font-size:14px;color:var(--text-secondary);line-height:1.65">Beaten-down SaaS and software stocks that sold off from ATHs. The thesis: at current valuations, growth rates don't need to re-accelerate.</div>
-</div>
-<div style="margin-bottom:16px">
-  <div class="analysis-label" style="margin-bottom:4px">Small — 12px</div>
-  <div style="font-size:12px;color:var(--text-muted)">$3.22B revenue · +7.8% YoY · Agreement cloud + AI assistant</div>
-</div>
-<div>
-  <div class="analysis-label" style="margin-bottom:4px">Data Label — 9px / 600 uppercase</div>
-  <div style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.10em;color:var(--text-muted)">6M · 90-DAY · 30-DAY · YTD</div>
-</div>
-</div>
-</div>
-
-<div class="section-divider"></div>
-
-<!-- ═══════════════════════ STOCK CARD ═══════════════════════ -->
-<h2><span>◈</span> Stock Card — DOCU</h2>
-
-<div class="card">
-  <div class="card-header">
-    <div>
-      <div class="card-ticker">DOCU</div>
-      <div class="card-company">DocuSign — Intelligent Management Platform</div>
-    </div>
-    <span class="badge badge-hold">HOLD</span>
+  <div class="stock-panel-header">
+    <div class="stock-panel-ticker">DOCU</div>
+    <div class="stock-panel-name">DocuSign — Agreement Cloud</div>
+    <div class="stock-panel-verdict hold">Hold</div>
   </div>
-  <div class="card-body">
 
-    <div class="price-bar">
-      <div class="price-cell">
-        <div class="price-label">6M</div>
-        <div class="price-value down">−31.2%</div>
-        <div class="price-sub">$47.98</div>
-      </div>
-      <div class="price-cell">
-        <div class="price-label">90-Day</div>
-        <div class="price-value up">+1.8%</div>
-        <div class="price-sub">current</div>
-      </div>
-      <div class="price-cell">
-        <div class="price-label">30-Day</div>
-        <div class="price-value up">+5.3%</div>
-        <div class="price-sub">current</div>
-      </div>
-      <div class="price-cell">
-        <div class="price-label">YTD</div>
-        <div class="price-value down">−31.2%</div>
-        <div class="price-sub">Jan 2026</div>
-      </div>
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">6-Month</div>
+      <div class="metric-value down">−31.2%</div>
+      <div class="metric-context">from $69.44</div>
     </div>
+    <div class="metric">
+      <div class="metric-label">90-Day</div>
+      <div class="metric-value up">+1.8%</div>
+      <div class="metric-context">basing pattern</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">30-Day</div>
+      <div class="metric-value up">+5.3%</div>
+      <div class="metric-context">reversal forming</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">YTD</div>
+      <div class="metric-value down">−31.2%</div>
+      <div class="metric-context">since January</div>
+    </div>
+  </div>
 
-    <svg class="sparkline-demo" viewBox="0 0 200 44">
+  <div class="spark-row">
+    <svg viewBox="0 0 800 48" preserveAspectRatio="none">
       <defs>
-        <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="var(--red)" stop-opacity="0.3"/>
-          <stop offset="100%" stop-color="var(--red)" stop-opacity="0"/>
+        <linearGradient id="spark-docu" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ff5c72" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#ff5c72" stop-opacity="0"/>
         </linearGradient>
       </defs>
-      <polyline fill="url(#sparkGrad)" stroke="var(--red)" stroke-width="1.5" points="0,30 20,32 40,22 60,28 80,15 100,25 120,18 140,22 160,12 180,24 200,20"/>
+      <path d="M0,25 C20,28 40,22 60,30 S100,18 140,22 S180,15 220,28 S260,12 300,24 S340,8 380,20 S420,5 460,18 S500,10 540,22 S580,18 620,14 S660,20 700,16 S740,22 780,10 L800,14" fill="url(#spark-docu)" stroke="#ff5c72" stroke-width="1" fill="none"/>
     </svg>
-
-    <div class="price-bar" style="grid-template-columns: repeat(5,1fr);margin-top:12px">
-      <div class="price-cell">
-        <div class="price-label">Revenue</div>
-        <div class="price-value" style="color:var(--text-primary);font-size:13px">$3.22B</div>
-        <div class="price-sub">+7.8% YoY</div>
-      </div>
-      <div class="price-cell">
-        <div class="price-label">FCF</div>
-        <div class="price-value" style="color:var(--text-primary);font-size:13px">$1.20B</div>
-        <div class="price-sub">37.3% margin</div>
-      </div>
-      <div class="price-cell">
-        <div class="price-label">Gross Margin</div>
-        <div class="price-value" style="color:var(--text-primary);font-size:13px">79.6%</div>
-      </div>
-      <div class="price-cell">
-        <div class="price-label">Net Cash</div>
-        <div class="price-value" style="color:var(--text-primary);font-size:13px">$681M</div>
-      </div>
-      <div class="price-cell">
-        <div class="price-label">Op Margin</div>
-        <div class="price-value" style="color:var(--text-primary);font-size:13px">10.5%</div>
-      </div>
-    </div>
-
-    <div class="analysis-section">
-      <div class="analysis-label bull">Bull Case</div>
-      <div class="analysis-block bull">
-        <p><strong>The AI Agent wave is DocuSign's next wave.</strong> AI agents need to execute agreements. DocuSign has 1.5 billion+ agreements in its network — the largest structured agreement dataset in the world. Its AI Agent Studio lets customers build agents that negotiate, execute, and manage agreements automatically. Management guides for AI-driven automation becoming a meaningful contributor in 2026–2027.</p>
-      </div>
-
-      <div class="analysis-label bear">Bear Case</div>
-      <div class="analysis-block bear">
-        <p><strong>AI agents could disintermediate DocuSign entirely.</strong> If Microsoft, Google, or OpenAI build agreement execution directly into their AI platforms, DocuSign's moat shrinks considerably. The company's growth has decelerated from 40%+ to single digits over three years — the structural growth story is in question.</p>
-      </div>
-
-      <div class="analysis-block call">
-        <p><strong>My Call: HOLD.</strong> The AI tailwind is real but not yet priced in. Wait for evidence of re-acceleration before building a full position. Current entry around $48 offers reasonable risk/reward for a starter position. Catalyst: Q2 FY2027 earnings showing AI Agent Studio revenue contribution.</p>
-      </div>
-    </div>
-
   </div>
+
+  <div class="fund-strip">
+    <div class="fund-item"><div class="lbl">Revenue</div><div class="val">$3.22B</div><div class="sub">+7.8% YoY</div></div>
+    <div class="fund-item"><div class="lbl">Free Cash Flow</div><div class="val">$1.20B</div><div class="sub">37.3% margin</div></div>
+    <div class="fund-item"><div class="lbl">Gross Margin</div><div class="val">79.6%</div></div>
+    <div class="fund-item"><div class="lbl">Net Cash</div><div class="val">$681M</div></div>
+    <div class="fund-item"><div class="lbl">Op Margin</div><div class="val">10.5%</div></div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-block bull">
+      <h4>◈ Bull Case</h4>
+      <p><strong>The AI Agent wave is DocuSign's next act.</strong> AI agents need to execute agreements. DocuSign has 1.5 billion+ agreements — the largest structured agreement dataset in the world. AI Agent Studio lets customers build agents that negotiate and execute autonomously.</p>
+      <p><strong>Valuation is pricing in collapse.</strong> ~6x forward EV/revenue for a company still growing. If AI adoption drives re-acceleration to 12–15%, the stock deserves 10–12x. Risk/reward asymmetrically favors buyers at these levels.</p>
+    </div>
+    <div class="thesis-block bear">
+      <h4>◈ Bear Case</h4>
+      <p><strong>AI could disintermediate DocuSign entirely.</strong> If Microsoft, Google, or OpenAI build agreement execution into their platforms, DocuSign's moat shrinks. Growth decelerated from 40%+ to single digits over three years.</p>
+      <p><strong>The turnaround isn't confirmed.</strong> One quarter of stabilization doesn't make a trend. Billings growth remains weak, and the enterprise segment is seeing increased competitive pressure from Adobe and Dropbox.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">My Call · Hold</div>
+    <p>The AI tailwind is real but not yet priced in. Wait for evidence of re-acceleration before building a full position. Current entry around $48 offers reasonable risk/reward for a starter position. <strong>Catalyst:</strong> Q2 FY2027 showing AI Agent Studio revenue contribution above 5% of total.</p>
+  </div>
+
 </div>
 
-<p style="font-size:12px;color:var(--text-muted);margin-top:48px;text-align:center;letter-spacing:-0.01em;">
-  Hermes Agent Research · Design exploration v3 · Atmospheric. Data-rich. Quietly confident.
-</p>
+<div class="section-rule"></div>
+<p style="font-size:11px;color:var(--text-quiet);text-align:center;letter-spacing:0.02em;">Hermes Agent Research · Radical design exploration · Atmosphere over boxes · Data as art</p>
 
 </div>
 </body>
