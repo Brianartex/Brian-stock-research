@@ -448,7 +448,6 @@ body {
 
 /* ── BATTLET TECH HEADER ── */
 .section-head {
-  margin-left: 230px;
   padding: 28px 48px 20px;
   max-width: 1100px;
   border-bottom: 1px solid var(--border);
@@ -483,8 +482,7 @@ body {
   .report-header { padding: 24px 20px 20px; }
   .guide-section, .intro-section { padding: 24px 20px; }
   .stock-section { padding: 0 20px 32px; }
-  .section-head {
-  margin-left: 230px; padding: 24px 20px 16px; }
+  .section-head { padding: 24px 20px 16px; }
   .skip-section { padding: 24px 20px; }
   .guide-grid, .stock-card-body { grid-template-columns: 1fr; }
   .skip-grid { grid-template-columns: 1fr 1fr; }
@@ -545,15 +543,15 @@ body.nav-open{overflow:hidden}
 
 .sparkline{display:block;width:100%;height:40px;margin:8px 0;overflow:visible}
 
-.stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section{margin-left:230px;max-width:1100px}
+.stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section{max-width:1100px}
 @media(max-width:768px){.stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section{margin-left:0!important}}.mobile-close-btn{display:none;background:none;border:1px solid var(--border);border-radius:6px;padding:6px 14px;color:var(--text-secondary);font-size:13px;cursor:pointer;margin-bottom:12px;width:100%;text-align:center}@media(max-width:768px){.mobile-close-btn{display:block}}
 
-.content-wrapper{margin-left:230px;max-width:1100px;padding:0 24px}
+.content-wrapper{max-width:1100px;padding:0 24px}
 @media(max-width:768px){.content-wrapper{margin-left:0!important;padding:0 12px}}
 
 #new-research{margin-top:40px}
 #new-research .stock-card{margin-left:0}
-.top-picks-grid{margin-left:230px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin:20px 0 40px}
+.top-picks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin:20px 0 40px}
 .top-pick-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;transition:border-color .2s}
 .top-pick-card:hover{border-color:rgba(94,106,210,.3)}
 .top-pick-card .tp-rank{position:absolute;top:-14px;left:20px;background:linear-gradient(135deg,#5e6ad2,#7170ff);color:#fff;font-size:12px;font-weight:700;padding:3px 12px;border-radius:6px;letter-spacing:.04em}
