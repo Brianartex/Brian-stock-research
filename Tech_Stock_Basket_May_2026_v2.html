@@ -531,6 +531,9 @@ body.nav-open{overflow:hidden}
 
 
 .sparkline{display:block;width:100%;height:40px;margin:8px 0;overflow:visible}
+
+.stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section{margin-left:230px;max-width:1100px}
+@media(max-width:768px){.stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section{margin-left:0!important}}.mobile-close-btn{display:none;background:none;border:1px solid var(--border);border-radius:6px;padding:6px 14px;color:var(--text-secondary);font-size:13px;cursor:pointer;margin-bottom:12px;width:100%;text-align:center}@media(max-width:768px){.mobile-close-btn{display:block}}
 </style>
 </head>
 <body>
@@ -632,6 +635,10 @@ body.nav-open{overflow:hidden}
   <a class="toc-item" <a class="toc-item" data-toc="mrvl" href="#mrvl">MRVL</a>
 
   <div class="toc-divider"></div>
+  <a class="toc-item" <a class="toc-item" href="#new-research">🔬 Part 3: New Research</a>
+
+  <a class="toc-item" <a class="toc-item" href="#top-picks">🏆 Top 5 Picks</a>
+
   <a class="toc-item" href="#references">📚 References & Sources</a>
 </nav>
 
@@ -2767,7 +2774,7 @@ body.nav-open{overflow:hidden}
   </div>
 
 
-    <details class="stock-card">
+    <details class="stock-card" id="himx">
       <summary class="stock-card-header">
         <div class="stock-card-left">
           <span class="stock-ticker">HIMX</span>
@@ -2859,7 +2866,7 @@ body.nav-open{overflow:hidden}
       </div>
     </details>
 
-    <details class="stock-card">
+    <details class="stock-card" id="aosl">
       <summary class="stock-card-header">
         <div class="stock-card-left">
           <span class="stock-ticker">AOSL</span>
@@ -2951,7 +2958,7 @@ body.nav-open{overflow:hidden}
       </div>
     </details>
 
-    <details class="stock-card">
+    <details class="stock-card" id="ampx">
       <summary class="stock-card-header">
         <div class="stock-card-left">
           <span class="stock-ticker">AMPX</span>
@@ -3043,7 +3050,7 @@ body.nav-open{overflow:hidden}
       </div>
     </details>
 
-    <details class="stock-card">
+    <details class="stock-card" id="smci">
       <summary class="stock-card-header">
         <div class="stock-card-left">
           <span class="stock-ticker">SMCI</span>
@@ -3135,7 +3142,7 @@ body.nav-open{overflow:hidden}
       </div>
     </details>
 
-    <details class="stock-card">
+    <details class="stock-card" id="arm">
       <summary class="stock-card-header">
         <div class="stock-card-left">
           <span class="stock-ticker">ARM</span>
@@ -3227,7 +3234,7 @@ body.nav-open{overflow:hidden}
       </div>
     </details>
 
-    <details class="stock-card">
+    <details class="stock-card" id="mrvl">
       <summary class="stock-card-header">
         <div class="stock-card-left">
           <span class="stock-ticker">MRVL</span>
@@ -3327,41 +3334,44 @@ body.nav-open{overflow:hidden}
     <p style="color:var(--text-secondary);font-size:14px;margin-top:6px;">Across all 23 stocks in this basket, these are the five highest-conviction positions ranked by risk/reward, catalyst clarity, and thesis differentiation.</p>
   </div>
   <div class="top-picks-grid">
+    <div class="top-pick-card" style="grid-column:1/-1;background:linear-gradient(135deg,rgba(94,106,210,.08),rgba(113,112,255,.04));border-color:rgba(94,106,210,.25);padding:24px;">
+      <div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:8px;">🧠 Synthesis — The Three Themes Driving This Basket</div>
+      <p style="font-size:14px;line-height:1.6;color:var(--text-primary);">Across 23 stocks, three structural themes emerge:<br><br>
+      <strong style="color:var(--accent-green);">1. The Silicon-Photonics Convergence.</strong> AI datacenters are hitting a copper wall. Electrical interconnects can't keep up with GPU bandwidth demands. The solution — co-packaged optics and electro-photonics — is creating an entirely new semiconductor supply chain. <strong>MRVL</strong> (Peng photonics integration), <strong>HIMX</strong> (CPO leader), and <strong>ANET</strong> (optical switching) are positioned at different layers of this stack. This is not a 2026 trade — it's a 2027-2030 structural shift that the market has barely begun to price.<br><br>
+      <strong style="color:var(--accent-green);">2. Power Management as the Bottleneck.</strong> Every NVIDIA Blackwell GPU draws 1,200W. A rack of 72 draws 86kW — enough to power a small office building. The companies solving power delivery, conversion, and cooling are the picks-and-shovels of the AI buildout. <strong>AOSL</strong> (server power semis, +40% seq), <strong>ETN</strong> (grid infrastructure), <strong>VST</strong> (power generation), and <strong>AMKR</strong> (advanced packaging) are all levered to the same thesis: AI doesn't work without reliable power.<br><br>
+      <strong style="color:var(--accent-green);">3. The Inference- Everywhere Thesis.</strong> Training gets the headlines, but inference is where the installed base lives. As AI moves from the training cluster to every device and application, CPU efficiency matters as much as GPU throughput. <strong>ARM</strong> (CPU architecture for AGI), <strong>DDOG</strong> (observability for AI stacks), and <strong>QCOM</strong> (edge inference) benefit from the broadening of AI beyond the datacenter. This is the "second wave" that follows the GPU gold rush.</p>
+    </div>
+
     <div class="top-pick-card">
       <div class="tp-rank">#1</div>
-      <div class="tp-ticker">MRVL</div>
+      <div class="tp-ticker">MRVL — Marvell Technology</div>
       <div class="tp-verdict buy">BUY</div>
-      <p><strong>Marvell Technology</strong> — The photonics angle is truly differentiated. If Penguin electro-optics integration succeeds, MRVL has a multi-year lead in the most critical AI datacenter bottleneck. Even without it, the custom ASIC business at $8.2B revenue scale is a compounding machine. Best risk/reward in the basket.</p>
+      <p>The photonics angle is the differentiator that separates MRVL from every other AI infrastructure play. If Penguin electro-optics integration succeeds, MRVL has a multi-year lead in solving the most critical AI datacenter bottleneck — moving data between chips at speed. Even without it, the custom ASIC business at $8.2B revenue scale is a compounding machine. Unlike GPU plays that are already crowded, MRVL's photonics thesis is underappreciated. <strong>Catalyst:</strong> First photonics-enabled product announcement with a named hyperscaler customer.</p>
     </div>
     <div class="top-pick-card">
       <div class="tp-rank">#2</div>
-      <div class="tp-ticker">ARM</div>
+      <div class="tp-ticker">ARM — Arm Holdings</div>
       <div class="tp-verdict buy">BUY</div>
-      <p><strong>Arm Holdings</strong> — The CPU-for-AI thesis is underappreciated. Everyone is focused on GPUs, but inference at scale needs efficient CPU architecture. Arm v9 royalty ramp provides multi-year visibility. Buy on any pullback below $180.</p>
+      <p>The CPU-for-AI thesis is the most underappreciated call in this basket. Everyone is focused on GPUs, but inference at scale needs efficient CPU architecture — and Arm v9 is winning that battle. AWS Graviton, Google Axion, and now explicit AGI CPU demand from the CEO. The royalty model (65%+ gross margins, asset-light) means every new AI CPU chip pays Arm. This is a multi-decade compounding story hiding in plain sight. <strong>Catalyst:</strong> Next earnings confirming AI CPU royalty acceleration.</p>
     </div>
     <div class="top-pick-card">
       <div class="tp-rank">#3</div>
-      <div class="tp-ticker">ANET</div>
+      <div class="tp-ticker">ANET — Arista Networks</div>
       <div class="tp-verdict buy">BUY</div>
-      <p><strong>Arista Networks</strong> — The quiet compounder of AI infrastructure. 35% revenue growth, 42.7% operating margins, $12.4B net cash. Every AI datacenter needs Arista switching. Not as flashy as GPU names, but far more consistent. The best risk-managed AI infrastructure play.</p>
+      <p>The quiet compounder. 35% revenue growth, 42.7% operating margins, $12.4B net cash — these are not the numbers of a company in trouble. Arista is the networking backbone of AI datacenters, and unlike GPU names, it doesn't need a new product cycle to grow. Every AI cluster needs switching, and Arista owns the high-end. The best risk-managed AI infrastructure play in the basket. <strong>Catalyst:</strong> Steady earnings beats — no drama, just execution.</p>
     </div>
     <div class="top-pick-card">
       <div class="tp-rank">#4</div>
-      <div class="tp-ticker">HIMX</div>
+      <div class="tp-ticker">HIMX — Himax Technologies</div>
       <div class="tp-verdict buy">BUY</div>
-      <p><strong>Himax Technologies</strong> — The highest-upside CPO play. If co-packaged optics becomes standard in next-gen AI datacenters (and it likely will), HIMX is positioned to capture disproportionate value. Wait for a pullback — the stock has run 101% — but this is the kind of asymmetric bet that defines the Sandisk thesis.</p>
+      <p>The highest-upside CPO play. If co-packaged optics becomes standard in next-gen AI datacenters — and the physics of copper interconnects suggests it must — HIMX is positioned to capture disproportionate value. The stock has run 101% in 6 months, so timing matters. But the asymmetric payoff is exactly what the Sandisk thesis looks for: a neglected technology that becomes mandatory infrastructure. <strong>Catalyst:</strong> NVIDIA Blackwell design win announcement for CPO components.</p>
     </div>
     <div class="top-pick-card">
       <div class="tp-rank">#5</div>
-      <div class="tp-ticker">DDOG</div>
+      <div class="tp-ticker">DDOG — Datadog</div>
       <div class="tp-verdict hold">HOLD</div>
-      <p><strong>Datadog</strong> — "The market is learning how dependent AI is on them" (@pennycheck). 29% revenue growth, 80% gross margins, $3.2B net cash. The observability layer is mission-critical for AI infrastructure. Premium valuation (still) but the moat is widening, not shrinking. Accumulate on dips.</p>
+      <p>"The market is learning how dependent AI is on them" (@pennycheck). 29% revenue growth, 80% gross margins, $3.2B net cash — Datadog is the mission-critical observability layer that every AI infrastructure deployment needs. The moat is widening, not shrinking, as AI stacks become more complex. Premium valuation is the only concern. <strong>Catalyst:</strong> AI-specific product revenue disclosure showing inflection.</p>
     </div>
-  </div>
-
-<div class="section-head" id="skip-list">
-    <h2>⛔ The Skip List — 10 Stocks We Are Passing On</h2>
-    <p>These names had valid theses once. Here's why the thesis broke.</p>
   </div>
 
   <div class="skip-section">
@@ -3436,12 +3446,24 @@ window.addEventListener('scroll', onScroll, { passive: true });
   btn.addEventListener("click",function(){
     sidebar.classList.toggle("mobile-open");
     document.body.classList.toggle("nav-open");
+    btn.classList.toggle("active");
   });
+  // Close button
+  var closeBtn=document.createElement("button");
+  closeBtn.textContent="✕ Close";
+  closeBtn.className="mobile-close-btn";
+  closeBtn.addEventListener("click",function(){
+    sidebar.classList.remove("mobile-open");
+    document.body.classList.remove("nav-open");
+    btn.classList.remove("active");
+  });
+  sidebar.insertBefore(closeBtn,sidebar.firstChild);
   // Close when clicking a TOC link
   sidebar.querySelectorAll("a").forEach(function(a){
     a.addEventListener("click",function(){
       sidebar.classList.remove("mobile-open");
       document.body.classList.remove("nav-open");
+      btn.classList.remove("active");
     });
   });
 })();
