@@ -516,7 +516,7 @@ a:focus-visible {
 .fund-cell-label{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px}
 .fund-cell-value{font-size:13px;font-weight:600;color:var(--text-primary)}
 .fund-cell-sub{font-size:9px;color:var(--text-muted);margin-top:1px}
-@media(max-width:768px){.price-action-bar{grid-template-columns:repeat(2,1fr)}.fundamentals-grid{grid-template-columns:repeat(2,1fr)}}
+
 
 /* ── MOBILE HAMBURGER NAV ── */
 .mobile-topbar{display:none;position:fixed;top:0;left:0;right:0;height:48px;background:var(--surface);border-bottom:1px solid var(--border);z-index:300;align-items:center;justify-content:space-between;padding:0 16px}
@@ -583,6 +583,33 @@ body.nav-open{overflow:hidden}
   .fundamentals-grid{grid-template-columns:repeat(2,1fr)!important}
   .toc-sidebar.mobile-open{display:block!important;position:fixed;top:48px;left:0;right:0;bottom:0;z-index:350;width:100%!important;overflow-y:auto;padding:16px;background:var(--surface)}
 }
+
+@media(max-width:768px){
+  .toc-sidebar{display:none!important}
+  .toc-sidebar.mobile-open{display:block!important;position:fixed;top:48px;left:0;right:0;bottom:0;z-index:350;width:100%!important;overflow-y:auto;padding:16px;background:var(--surface)}
+  .mobile-topbar{display:flex!important}
+  body{padding-left:0!important;padding-top:48px}
+  .page-content,.stock-section,.section-head,.top-picks-grid,.intro-section,.skip-section,.report-header{margin-left:0!important;padding:0 12px!important}
+  .price-action-bar{grid-template-columns:repeat(2,1fr)!important}
+  .fundamentals-grid{grid-template-columns:repeat(2,1fr)!important}
+  .pa-cell{padding:8px 6px!important}
+  .pa-cell-value{font-size:11px!important}
+  .fund-cell{padding:8px 6px!important}
+  .fund-cell-value{font-size:11px!important}
+  .stock-card-header{padding:12px 16px!important;flex-direction:column!important;align-items:flex-start!important;gap:8px}
+  .stock-card-body{padding:14px 16px!important}
+  .stock-card-body .bb-section{padding:0!important}
+  .stock-card-body ul{padding-left:16px!important;margin:0 0 10px!important}
+  .stock-card-body ul li{font-size:12px!important;line-height:1.5!important;padding:2px 0!important}
+  .stock-card-body p{font-size:12px!important}
+  .stock-card-body h3{font-size:11px!important;margin:12px 0 6px!important}
+  .verdict-box{padding:12px!important;margin:0 0 12px!important}
+  .verdict-box p{font-size:12px!important}
+  .guide-box{padding:16px!important}
+  .guide-cell p{font-size:11px!important}
+  .sparkline{height:30px!important}
+  #new-research .stock-card-body{padding:12px 14px!important}
+}
 </style>
 </head>
 <body>
@@ -616,18 +643,11 @@ body.nav-open{overflow:hidden}
   <a class="toc-item" href="#thesis">Investment Thesis</a>
 
   <div class="toc-divider"></div>
-  <div class="toc-section-label">⛔ Skips</div>
-<a class="toc-item skip-item" href="#skip-list">10 Culled Stocks</a>
-
-  <div class="toc-divider"></div>
   <div class="toc-section-label">💻 Battered Tech</div>
   <a class="toc-item" href="#tier1-survivors">Tier 1 Survivors</a>
   <a class="toc-item" data-toc="docu" href="#docu">DOCU</a>
   <a class="toc-item" data-toc="snow" href="#snow">SNOW</a>
   <a class="toc-item" data-toc="okta" href="#okta">OKTA</a>
-
-  <div class="toc-divider"></div>
-  <div class="toc-section-label">💻 Battered Tech Cont.</div>
   <a class="toc-item" data-toc="mndy" href="#mndy">MNDY</a>
   <a class="toc-item" data-toc="veev" href="#veev">VEEV</a>
   <a class="toc-item" data-toc="ddog" href="#ddog">DDOG</a>
@@ -646,25 +666,24 @@ body.nav-open{overflow:hidden}
   <a class="toc-item" data-toc="stx" href="#stx">STX</a>
   <a class="toc-item" data-toc="mu" href="#mu">MU (Micron)</a>
 
-  <a class="toc-item" <a class="toc-item" data-toc="himx" href="#himx">HIMX</a>
+  <div class="toc-divider"></div>
+  <div class="toc-section-label">🔬 New Research</div>
+  <a class="toc-item" data-toc="himx" href="#himx">HIMX</a>
+  <a class="toc-item" data-toc="aosl" href="#aosl">AOSL</a>
+  <a class="toc-item" data-toc="ampx" href="#ampx">AMPX</a>
+  <a class="toc-item" data-toc="smci" href="#smci">SMCI</a>
+  <a class="toc-item" data-toc="arm" href="#arm">ARM</a>
+  <a class="toc-item" data-toc="mrvl" href="#mrvl">MRVL</a>
 
-  <a class="toc-item" <a class="toc-item" data-toc="aosl" href="#aosl">AOSL</a>
-
-  <a class="toc-item" <a class="toc-item" data-toc="ampx" href="#ampx">AMPX</a>
-
-  <a class="toc-item" <a class="toc-item" data-toc="smci" href="#smci">SMCI</a>
-
-  <a class="toc-item" <a class="toc-item" data-toc="arm" href="#arm">ARM</a>
-
-  <a class="toc-item" <a class="toc-item" data-toc="mrvl" href="#mrvl">MRVL</a>
+  <a class="toc-item" href="#top-picks">🏆 Top 5 Picks</a>
 
   <div class="toc-divider"></div>
-  <a class="toc-item" <a class="toc-item" href="#new-research">🔬 Part 3: New Research</a>
+  <div class="toc-section-label">⛔ Skips</div>
+  <a class="toc-item skip-item" href="#skip-list">10 Culled Stocks</a>
 
-  <a class="toc-item" <a class="toc-item" href="#top-picks">🏆 Top 5 Picks</a>
-
+  <div class="toc-divider"></div>
   <a class="toc-item" href="#references">📚 References & Sources</a>
-</nav>
+</nav></nav>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- MAIN CONTENT -->
