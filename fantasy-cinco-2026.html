@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinco League — Keeper Analysis | 2026 Fantasy Football</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  html,body{height:100%;margin:0;padding:0}body{min-height:100vh}
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root {
+    --bg:#1a1c14;--bg-alt:#22261c;--surface:#2a2e22;--surface-alt:#32382a;
+    --text:#e8e4dc;--text-dim:#a09b8f;--text-quiet:#6e6a5e;
+    --border:#3a3e32;--border-strong:#4a4e42;
+    --accent:#c4943a;--accent-light:#e0b84c;--accent-bg:rgba(196,148,58,0.10);
+    --green:#5a8a3c;--green-bg:rgba(90,138,60,0.10);
+    --red:#b8443c;--red-bg:rgba(184,68,60,0.10);
+    --amber:#c4943a;--amber-bg:rgba(196,148,58,0.10);
+    --shadow-sm-ext:2px 2px 6px rgba(0,0,0,0.20),-2px -2px 6px rgba(255,255,255,0.03);
+    --shadow-md-ext:4px 4px 12px rgba(0,0,0,0.25),-4px -4px 12px rgba(255,255,255,0.04);
+    --shadow-lg-ext:8px 8px 24px rgba(0,0,0,0.30),-8px -8px 24px rgba(255,255,255,0.05);
+    --shadow-sm-inset:inset 2px 2px 6px rgba(0,0,0,0.20),inset -2px -2px 6px rgba(255,255,255,0.03);
+    --shadow-pressed:inset 3px 3px 8px rgba(0,0,0,0.30),inset -2px -2px 5px rgba(255,255,255,0.02);
+    --radius-sm:6px;--radius:12px;--radius-lg:18px;--radius-xl:24px;--toc-width:220px;
+  }
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .skip-link{position:absolute;top:-100px;left:12px;z-index:300;background:var(--accent);color:#1a1c14;padding:8px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:700;text-decoration:none}
+  .skip-link:focus{top:12px}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  
+  .site-nav{position:sticky;top:0;z-index:250;background:var(--surface-alt);box-shadow:var(--shadow-sm-ext);padding:10px 24px;display:flex;gap:24px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-weight:500;letter-spacing:.02em}
+  .site-nav a:hover{color:var(--accent)}
+  .site-nav .nav-current{color:var(--accent);font-weight:600}
+
+  .toc-sidebar{position:fixed;top:0;left:0;z-index:200;width:var(--toc-width);height:100vh;background:var(--surface-alt);box-shadow:var(--shadow-sm-inset);overflow-y:auto;padding:20px 0 40px}
+  .toc-sidebar::-webkit-scrollbar{width:4px}
+  .toc-sidebar::-webkit-scrollbar-track{background:transparent}
+  .toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:2px}
+  .toc-brand{padding:0 14px 16px;border-bottom:1px solid var(--border);margin-bottom:12px}
+  .toc-brand a{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-decoration:none;font-weight:600}
+  .toc-item{display:block;padding:5px 14px 5px 18px;font-size:11px;color:var(--text-dim);text-decoration:none;border-left:2px solid transparent;transition:all .15s}
+  .toc-item:hover{color:var(--text);background:rgba(255,255,255,.02);border-left-color:var(--accent)}
+  .toc-item.active{color:var(--accent);font-weight:600;background:var(--accent-bg);border-left-color:var(--accent)}
+  .toc-divider{border:none;height:1px;background:var(--border);margin:8px 14px}
+
+  .hamburger-btn{display:none;position:fixed;top:10px;right:12px;z-index:260;width:44px;height:44px;cursor:pointer;border:none;background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-ext);flex-direction:column;align-items:center;justify-content:center;gap:5px;touch-action:manipulation;user-select:none}
+  .hamburger-btn:hover{box-shadow:var(--shadow-md-ext)}
+  .hamburger-btn:active{box-shadow:var(--shadow-pressed)}
+  .ham-line{width:20px;height:2.5px;background:var(--text);border-radius:1px}
+  .nav-overlay{display:none;position:fixed;inset:0;z-index:240;background:var(--bg);overflow-y:auto;padding:60px 24px 40px}
+  .nav-overlay.open{display:block}
+
+  .page-content{margin-left:var(--toc-width);padding:48px 48px 80px;max-width:1100px;position:relative;z-index:1}
+
+  .hero{margin-bottom:40px}
+  .hero-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;padding:4px 0;border-bottom:2px solid var(--text)}
+  .hero h1{font-size:clamp(32px,5vw,48px);font-weight:900;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px}
+  .hero h1 span{color:var(--accent)}
+  .hero p{font-size:15px;color:var(--text-dim);max-width:520px;line-height:1.7}
+
+  .disclaimer{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:14px 20px;margin-bottom:24px;font-size:12px;color:var(--text-dim);font-style:italic}
+  .disclaimer strong{color:var(--text);font-weight:600;font-style:normal}
+
+  .rule{height:2px;background:var(--text);opacity:.10;margin:40px 0 28px}
+  .sec-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.06em;color:var(--text-quiet);margin-bottom:20px;text-transform:uppercase}
+  .section-title{font-size:20px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px;color:var(--text)}
+  .section-subtitle{font-size:13px;color:var(--text-dim);margin-bottom:20px;line-height:1.6}
+
+  .neo-card{background:var(--bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-md-ext);padding:28px;margin-bottom:24px;transition:all .25s ease;border:none}
+  .neo-card:hover{box-shadow:var(--shadow-lg-ext)}
+  .neo-card-inset{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:20px;margin-bottom:16px}
+
+  .keeper-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
+  .keeper-table th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-quiet);padding:10px 10px;border-bottom:2px solid var(--border)}
+  .keeper-table td{padding:9px 10px;color:var(--text-dim);border-bottom:1px solid var(--border);vertical-align:middle}
+  .keeper-table tr:hover td{background:rgba(255,255,255,.02)}
+  .keeper-table .rk{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text-quiet);width:30px}
+  .keeper-table .ticker-cell{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text)}
+  .keeper-table .cost{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;width:60px}
+  .keeper-table .cost.keep{color:var(--accent);font-weight:700}
+
+  .key-insight{background:var(--accent-bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:16px 20px;margin:16px 0;font-size:12px;color:var(--text-dim);line-height:1.6}
+  .key-insight strong{color:var(--accent)}
+
+  @media(max-width:768px){
+    .toc-sidebar{display:none}.page-content{margin-left:0;padding:24px 16px 60px}
+    .hamburger-btn{display:flex}
+    .hero h1{font-size:28px}
+    .keeper-table{font-size:11px}
+    .keeper-table th,.keeper-table td{padding:6px 6px}
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav class="site-nav" aria-label="Site navigation">
+  <a href="index.html">← Research Home</a>
+  <a href="fantasy-cinco-2026.html" class="nav-current">Cinco League</a>
+</nav>
+
+<button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation" onclick="document.getElementById('nav-overlay').classList.toggle('open');this.classList.toggle('open');">
+  <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
+</button>
+
+<nav class="toc-sidebar" id="toc-sidebar" aria-label="Table of contents">
+  <div class="toc-brand"><a href="index.html">← Research Home</a></div>
+  <a class="toc-item active" href="#overview">League Overview</a>
+  <a class="toc-item" href="#keeper-rankings">Keeper Rankings</a>
+  <a class="toc-item" href="#value-keepers">Value Keeper Targets</a>
+  <a class="toc-item" href="#strategy">Keeper Strategy</a>
+  <hr class="toc-divider">
+  <a class="toc-item" href="#draft-board">Draft Board (Coming Soon)</a>
+</nav>
+
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<main class="page-content" id="main-content">
+
+<div class="hero">
+  <div class="hero-tag">Fantasy Football · July 2026</div>
+  <h1>THE CINCO LEAGUE.<br><span>Keeper Analysis.</span></h1>
+  <p>10-team superflex auction keeper league. Up to 2 keepers per team. Keeper cost = 2025 draft price + $7. 2025 champion data pulled live from Yahoo.</p>
+</div>
+
+<div class="disclaimer">
+  <strong>🏈 Cinco League Rules:</strong> Superflex (Q/W/R/T slot), $200 auction budget, 2 keepers max, keeper cost = draft price + $7. Undrafted players cost $7 to keep. Roster: QB/WR/WR/RB/TE/WRT/WRT/QWRT/DEF/BNx5.
+</div>
+
+<div class="neo-card-inset" id="overview">
+  <div class="sec-label">League Overview</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px;">
+    <div class="neo-card" style="padding:16px;text-align:center;margin-bottom:0;"><div style="font-size:24px;font-weight:800;color:var(--accent);">$200</div><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.10em;color:var(--text-quiet);margin-top:4px;">Auction Budget</div></div>
+    <div class="neo-card" style="padding:16px;text-align:center;margin-bottom:0;"><div style="font-size:24px;font-weight:800;color:var(--accent);">2</div><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.10em;color:var(--text-quiet);margin-top:4px;">Max Keepers</div></div>
+    <div class="neo-card" style="padding:16px;text-align:center;margin-bottom:0;"><div style="font-size:24px;font-weight:800;color:var(--accent);">+$7</div><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.10em;color:var(--text-quiet);margin-top:4px;">Keeper Tax</div></div>
+    <div class="neo-card" style="padding:16px;text-align:center;margin-bottom:0;"><div style="font-size:24px;font-weight:800;color:var(--accent);">SF</div><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.10em;color:var(--text-quiet);margin-top:4px;">Superflex</div></div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<div class="section-title" id="keeper-rankings">Keeper Rankings — Top 40</div>
+<p class="section-subtitle">All 140 drafted players ranked by 2025 auction cost. Keeper cost = draft price + $7. 💰 = value keeper (cheap cost relative to production). 💰💰 = strong value. 💰💰💰 = elite value.</p>
+
+<div class="key-insight">
+  <strong>🔑 Key Insight:</strong> Superflex makes QBs premium keepers. Josh Allen ($56 keep), Lamar Jackson ($58), and Jalen Hurts ($55) are expensive but worth it — top QBs go for $50+ in redraft. The real steals are Ja'Marr Chase ($42 keep — drafted for $35 in Rd 14 as a prior-year keeper), Puka Nacua ($21 keep), and Nico Collins ($22 keep).
+</div>
+
+<table class="keeper-table">
+  <thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Team</th><th>2025 $</th><th>Keep $</th><th>Value</th></tr></thead>
+  <tbody>
+<tr><td class="rk">1</td><td class="ticker-cell">Bijan Robinson</td><td>RB</td><td>Atl</td><td class="cost">$59</td><td class="cost keep">$66</td><td></td></tr>
+<tr><td class="rk">2</td><td class="ticker-cell">CeeDee Lamb</td><td>WR</td><td>Dal</td><td class="cost">$57</td><td class="cost keep">$64</td><td></td></tr>
+<tr><td class="rk">3</td><td class="ticker-cell">Saquon Barkley</td><td>RB</td><td>Phi</td><td class="cost">$55</td><td class="cost keep">$62</td><td></td></tr>
+<tr><td class="rk">4</td><td class="ticker-cell">Justin Jefferson</td><td>WR</td><td>Min</td><td class="cost">$52</td><td class="cost keep">$59</td><td></td></tr>
+<tr><td class="rk">5</td><td class="ticker-cell">Lamar Jackson</td><td>QB</td><td>Bal</td><td class="cost">$51</td><td class="cost keep">$58</td><td></td></tr>
+<tr><td class="rk">6</td><td class="ticker-cell">Derrick Henry</td><td>RB</td><td>Bal</td><td class="cost">$50</td><td class="cost keep">$57</td><td></td></tr>
+<tr><td class="rk">7</td><td class="ticker-cell">Josh Allen</td><td>QB</td><td>Buf</td><td class="cost">$49</td><td class="cost keep">$56</td><td></td></tr>
+<tr><td class="rk">8</td><td class="ticker-cell">Joe Burrow</td><td>QB</td><td>Cin</td><td class="cost">$49</td><td class="cost keep">$56</td><td></td></tr>
+<tr><td class="rk">9</td><td class="ticker-cell">Jalen Hurts</td><td>QB</td><td>Phi</td><td class="cost">$48</td><td class="cost keep">$55</td><td></td></tr>
+<tr><td class="rk">10</td><td class="ticker-cell">Christian McCaffrey</td><td>RB</td><td>SF</td><td class="cost">$46</td><td class="cost keep">$53</td><td></td></tr>
+<tr><td class="rk">11</td><td class="ticker-cell">Ashton Jeanty</td><td>RB</td><td>LV</td><td class="cost">$46</td><td class="cost keep">$53</td><td></td></tr>
+<tr><td class="rk">12</td><td class="ticker-cell">Amon-Ra St. Brown</td><td>WR</td><td>Det</td><td class="cost">$46</td><td class="cost keep">$53</td><td></td></tr>
+<tr><td class="rk">13</td><td class="ticker-cell">Josh Jacobs</td><td>RB</td><td>GB</td><td class="cost">$44</td><td class="cost keep">$51</td><td></td></tr>
+<tr><td class="rk">14</td><td class="ticker-cell">Jayden Daniels</td><td>QB</td><td>Was</td><td class="cost">$40</td><td class="cost keep">$47</td><td></td></tr>
+<tr><td class="rk">15</td><td class="ticker-cell">Jahmyr Gibbs</td><td>RB</td><td>Det</td><td class="cost">$40</td><td class="cost keep">$47</td><td></td></tr>
+<tr><td class="rk">16</td><td class="ticker-cell">Patrick Mahomes</td><td>QB</td><td>KC</td><td class="cost">$39</td><td class="cost keep">$46</td><td></td></tr>
+<tr><td class="rk">17</td><td class="ticker-cell">Jonathan Taylor</td><td>RB</td><td>Ind</td><td class="cost">$37</td><td class="cost keep">$44</td><td></td></tr>
+<tr><td class="rk">18</td><td class="ticker-cell">Brian Thomas Jr.</td><td>WR</td><td>Jax</td><td class="cost">$36</td><td class="cost keep">$43</td><td></td></tr>
+<tr><td class="rk">19</td><td class="ticker-cell">Ja'Marr Chase</td><td>WR</td><td>Cin</td><td class="cost">$35</td><td class="cost keep">$42</td><td>💰</td></tr>
+<tr><td class="rk">20</td><td class="ticker-cell">De'Von Achane</td><td>RB</td><td>Mia</td><td class="cost">$34</td><td class="cost keep">$41</td><td>💰</td></tr>
+<tr><td class="rk">21</td><td class="ticker-cell">A.J. Brown</td><td>WR</td><td>Phi</td><td class="cost">$34</td><td class="cost keep">$41</td><td>💰</td></tr>
+<tr><td class="rk">22</td><td class="ticker-cell">George Kittle</td><td>TE</td><td>SF</td><td class="cost">$33</td><td class="cost keep">$40</td><td>💰</td></tr>
+<tr><td class="rk">23</td><td class="ticker-cell">Malik Nabers</td><td>WR</td><td>NYG</td><td class="cost">$33</td><td class="cost keep">$40</td><td>💰</td></tr>
+<tr><td class="rk">24</td><td class="ticker-cell">Brock Purdy</td><td>QB</td><td>SF</td><td class="cost">$28</td><td class="cost keep">$35</td><td>💰</td></tr>
+<tr><td class="rk">25</td><td class="ticker-cell">Drake London</td><td>WR</td><td>Atl</td><td class="cost">$27</td><td class="cost keep">$34</td><td>💰</td></tr>
+<tr><td class="rk">26</td><td class="ticker-cell">Tee Higgins</td><td>WR</td><td>Cin</td><td class="cost">$26</td><td class="cost keep">$33</td><td>💰</td></tr>
+<tr><td class="rk">27</td><td class="ticker-cell">Trey McBride</td><td>TE</td><td>Ari</td><td class="cost">$26</td><td class="cost keep">$33</td><td>💰</td></tr>
+<tr><td class="rk">28</td><td class="ticker-cell">Bo Nix</td><td>QB</td><td>Den</td><td class="cost">$25</td><td class="cost keep">$32</td><td>💰</td></tr>
+<tr><td class="rk">29</td><td class="ticker-cell">Kyler Murray</td><td>QB</td><td>Min</td><td class="cost">$24</td><td class="cost keep">$31</td><td>💰</td></tr>
+<tr><td class="rk">30</td><td class="ticker-cell">James Cook III</td><td>RB</td><td>Buf</td><td class="cost">$23</td><td class="cost keep">$30</td><td>💰</td></tr>
+<tr><td class="rk">31</td><td class="ticker-cell">Omarion Hampton</td><td>RB</td><td>LAC</td><td class="cost">$23</td><td class="cost keep">$30</td><td>💰</td></tr>
+<tr><td class="rk">32</td><td class="ticker-cell">Dak Prescott</td><td>QB</td><td>Dal</td><td class="cost">$22</td><td class="cost keep">$29</td><td>💰</td></tr>
+<tr><td class="rk">33</td><td class="ticker-cell">Jared Goff</td><td>QB</td><td>Det</td><td class="cost">$21</td><td class="cost keep">$28</td><td>💰</td></tr>
+<tr><td class="rk">34</td><td class="ticker-cell">Kenneth Walker III</td><td>RB</td><td>KC</td><td class="cost">$21</td><td class="cost keep">$28</td><td>💰</td></tr>
+<tr><td class="rk">35</td><td class="ticker-cell">Tetairoa McMillan</td><td>WR</td><td>Car</td><td class="cost">$20</td><td class="cost keep">$27</td><td>💰💰</td></tr>
+<tr><td class="rk">36</td><td class="ticker-cell">Tyreek Hill</td><td>WR</td><td>Mia</td><td class="cost">$19</td><td class="cost keep">$26</td><td>💰💰</td></tr>
+<tr><td class="rk">37</td><td class="ticker-cell">Mike Evans</td><td>WR</td><td>SF</td><td class="cost">$19</td><td class="cost keep">$26</td><td>💰💰</td></tr>
+<tr><td class="rk">38</td><td class="ticker-cell">Justin Herbert</td><td>QB</td><td>LAC</td><td class="cost">$18</td><td class="cost keep">$25</td><td>💰💰</td></tr>
+<tr><td class="rk">39</td><td class="ticker-cell">Terry McLaurin</td><td>WR</td><td>Was</td><td class="cost">$18</td><td class="cost keep">$25</td><td>💰💰</td></tr>
+<tr><td class="rk">40</td><td class="ticker-cell">James Conner</td><td>RB</td><td>Ari</td><td class="cost">$18</td><td class="cost keep">$25</td><td>💰💰</td></tr>
+  </tbody>
+</table>
+
+<div class="rule"></div>
+
+<div class="section-title" id="value-keepers">Value Keeper Targets — Drafted Under $10</div>
+<p class="section-subtitle">Players who cost almost nothing in 2025 but could return starter-level production. At $7-17 to keep, these are the highest-ROI keeper decisions in the league.</p>
+
+<table class="keeper-table">
+  <thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>2025 $</th><th>Keep $</th></tr></thead>
+  <tbody>
+<tr><td class="ticker-cell">Ravens</td><td>DEF</td><td>Bal</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Jerry Jeudy</td><td>WR</td><td>Cle</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Kayshon Boutte</td><td>WR</td><td>NE</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Evan Engram</td><td>TE</td><td>Den</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Travis Etienne Jr.</td><td>RB</td><td>NO</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Vikings</td><td>DEF</td><td>Min</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Khalil Shakir</td><td>WR</td><td>Buf</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">J.J. McCarthy</td><td>QB</td><td>Min</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Chris Godwin Jr.</td><td>WR</td><td>TB</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Javonte Williams</td><td>RB</td><td>Dal</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Texans</td><td>DEF</td><td>Hou</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Cam Skattebo</td><td>RB</td><td>NYG</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Kaleb Johnson</td><td>RB</td><td>Pit</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Tua Tagovailoa</td><td>QB</td><td>Atl</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+<tr><td class="ticker-cell">Colston Loveland</td><td>TE</td><td>Chi</td><td class="cost">$1</td><td class="cost keep">$8</td></tr>
+  </tbody>
+</table>
+
+<div class="rule"></div>
+
+<div class="section-title" id="strategy">Keeper Strategy — How to Decide</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+  <div class="neo-card" style="margin-bottom:0;">
+    <div class="sec-label" style="color:var(--green);">Keep If...</div>
+    <ul style="font-size:12px;color:var(--text-dim);line-height:1.8;padding-left:16px;">
+      <li>Player is projected top-5 at their position and keeper cost is below market ADP</li>
+      <li>Player was drafted for $1-5 and is now a starter (free money)</li>
+      <li>You have a top-3 QB in superflex — the positional scarcity is real</li>
+      <li>Rookie RBs who broke out (Jeanty $53 keep, Hampton $30 keep)</li>
+    </ul>
+  </div>
+  <div class="neo-card" style="margin-bottom:0;">
+    <div class="sec-label" style="color:var(--red);">Don't Keep If...</div>
+    <ul style="font-size:12px;color:var(--text-dim);line-height:1.8;padding-left:16px;">
+      <li>Keeper cost exceeds projected auction value (you're overpaying)</li>
+      <li>Player is aging out (McCaffrey at $53 is risky at his age/injury history)</li>
+      <li>You can get similar production for less in the draft</li>
+      <li>You're keeping a player just because you like them — be ruthless</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<div class="section-title" id="draft-board">Draft Board — Coming Next</div>
+<p class="section-subtitle">Round-by-round draft targets based on keeper depletion, ADP, and positional scarcity. This section will be built once we pull ADP data and map keeper impacts.</p>
+
+<div class="neo-card" style="text-align:center;padding:40px;">
+  <div class="sec-label">🏈 More sections coming</div>
+  <p style="font-size:13px;color:var(--text-dim);">Draft Board • Sleepers & Late Value • Strength of Schedule • Injury Watch • Weekly Waiver Wire (in-season)</p>
+</div>
+
+</main>
+
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.getElementById('nav-overlay').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open');}});
+var c=document.getElementById('toc-sidebar').cloneNode(true);c.removeAttribute('id');document.getElementById('nav-overlay').appendChild(c);
+</script>
+
+</body>
+</html>
