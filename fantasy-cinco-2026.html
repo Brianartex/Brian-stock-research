@@ -24,7 +24,7 @@
     --radius-sm:6px;--radius:12px;--radius-lg:18px;--radius-xl:24px;--toc-width:220px;
   }
   body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
-  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75 0.15' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(80,120,50,0.03) 3px,rgba(80,120,50,0.03) 6px)}
   .skip-link{position:absolute;top:-100px;left:12px;z-index:300;background:var(--accent);color:#1a1c14;padding:8px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:700;text-decoration:none}
   .skip-link:focus{top:12px}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   
@@ -111,6 +111,8 @@
   <a class="toc-item" href="#keeper-rankings">Keeper Rankings</a>
   <a class="toc-item" href="#value-keepers">Value Keeper Targets</a>
   <a class="toc-item" href="#strategy">Keeper Strategy</a>
+  <hr class="toc-divider">
+  <a class="toc-item" href="#your-team">Your Team — Brian</a>
   <hr class="toc-divider">
   <a class="toc-item" href="#draft-board">Draft Board (Coming Soon)</a>
 </nav>
@@ -246,6 +248,34 @@
 </div>
 
 <div class="rule"></div>
+
+
+<div class="rule"></div>
+
+<div class="section-title" id="your-team">Your Team — Cross 4 Air Cross 4 Mayor</div>
+<p class="section-subtitle">Your end-of-season roster with keeper costs. Top recommendation: <strong>Puka Nacua ($21) + Kyren Williams ($21)</strong> — two starters for $42 total.</p>
+
+<table class="keeper-table">
+  <thead><tr><th>Player</th><th>Pos</th><th>NFL</th><th>2025 $</th><th>Keep $</th><th>Value</th><th>Recommendation</th></tr></thead>
+  <tbody>
+<tr><td class="ticker-cell">Brock Purdy</td><td>QB</td><td>SF</td><td class="cost">$28</td><td class="cost keep">$35</td><td>💰</td><td style="font-size:11px;color:var(--text-dim);">Not worth $35 — replaceable in draft</td></tr>
+<tr><td class="ticker-cell">Puka Nacua</td><td>WR</td><td>LAR</td><td class="cost">$14</td><td class="cost keep">$21</td><td>💰💰</td><td style="font-size:11px;color:var(--text-dim);">KEEP — WR1 for $21 is elite value</td></tr>
+<tr><td class="ticker-cell">Amon-Ra St. Brown</td><td>WR</td><td>Det</td><td class="cost">$46</td><td class="cost keep">$53</td><td></td><td style="font-size:11px;color:var(--text-dim);">Expensive — $53 is near market price</td></tr>
+<tr><td class="ticker-cell">Christian McCaffrey</td><td>RB</td><td>SF</td><td class="cost">$46</td><td class="cost keep">$53</td><td></td><td style="font-size:11px;color:var(--text-dim);">Risky — $53 for aging RB with injury history</td></tr>
+<tr><td class="ticker-cell">Trey McBride</td><td>TE</td><td>Ari</td><td class="cost">$26</td><td class="cost keep">$33</td><td>💰</td><td style="font-size:11px;color:var(--text-dim);">Consider — top-3 TE at $33, but TE is deep</td></tr>
+<tr><td class="ticker-cell">James Cook III</td><td>RB</td><td>Buf</td><td class="cost">$23</td><td class="cost keep">$30</td><td>💰</td><td style="font-size:11px;color:var(--text-dim);">Consider — $30 for a top-15 RB</td></tr>
+<tr><td class="ticker-cell">Travis Etienne Jr.</td><td>RB</td><td>NO</td><td class="cost">$1</td><td class="cost keep">$8</td><td>💰💰💰</td><td style="font-size:11px;color:var(--text-dim);"></td></tr>
+<tr><td class="ticker-cell">Joe Burrow</td><td>QB</td><td>Cin</td><td class="cost">$49</td><td class="cost keep">$56</td><td></td><td style="font-size:11px;color:var(--text-dim);">Pricey — $56 in superflex is fair but not a bargain</td></tr>
+<tr><td class="ticker-cell">Jaxson Dart</td><td>QB</td><td>NYG</td><td class="cost">$1</td><td class="cost keep">$8</td><td>💰💰💰</td><td style="font-size:11px;color:var(--text-dim);"></td></tr>
+<tr><td class="ticker-cell">Kyren Williams</td><td>RB</td><td>LAR</td><td class="cost">$14</td><td class="cost keep">$21</td><td>💰💰</td><td style="font-size:11px;color:var(--text-dim);">Strong keep — starting RB at $21</td></tr>
+<tr><td class="ticker-cell">Kyle Monangai</td><td>?</td><td>?</td><td class="cost">$0</td><td class="cost keep">$7</td><td>💰💰💰</td><td style="font-size:11px;color:var(--text-dim);"></td></tr>
+<tr><td class="ticker-cell">Brian Robinson Jr.</td><td>RB</td><td>Atl</td><td class="cost">$4</td><td class="cost keep">$11</td><td>💰💰💰</td><td style="font-size:11px;color:var(--text-dim);"></td></tr>
+<tr><td class="ticker-cell">Blake Corum</td><td>?</td><td>?</td><td class="cost">$0</td><td class="cost keep">$7</td><td>💰💰💰</td><td style="font-size:11px;color:var(--text-dim);"></td></tr>
+<tr><td class="ticker-cell">Tee Higgins</td><td>WR</td><td>Cin</td><td class="cost">$26</td><td class="cost keep">$33</td><td>💰</td><td style="font-size:11px;color:var(--text-dim);">Good value at $33 if he stays healthy</td></tr>
+  </tbody>
+</table>
+
+<div class="key-insight"><strong>Recommended Keepers:</strong> Puka Nacua ($21) and Kyren Williams ($21). Two starters for $42 — you would have $158 left for the auction. Draft a top QB with that budget. If you prefer to lock in a QB, Burrow at $56 is defensible in superflex but limits your auction flexibility. McCaffrey at $53 is the trap — avoid.</div>
 
 <div class="section-title" id="draft-board">Draft Board — Coming Next</div>
 <p class="section-subtitle">Round-by-round draft targets based on keeper depletion, ADP, and positional scarcity. This section will be built once we pull ADP data and map keeper impacts.</p>
