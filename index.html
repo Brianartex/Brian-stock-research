@@ -3,303 +3,578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brian's Stock Research</title>
+<title>Brian Stock Research — May 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+
+  /* ═══════════════════════════════════════════════════════════
+     NEUBRUTAL v4.1 — EXTENDED DESIGN SYSTEM
+     Covers: palette, shadow, typography, TOC, hamburger,
+     stock cards, tier dividers, skip list, top-5 picks,
+     citations, sector headers, responsive, ADA
+     ═══════════════════════════════════════════════════════════ */
+
+  /* ── CRITICAL: prevents blank-page bug ── */
+  html,body { height: 100%; margin: 0; padding: 0; }
+  body { min-height: 100vh; }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Raw material palette — stone, concrete, paper */
+    --bg: #ede8e0;
+    --bg-alt: #e6e0d8;
+    --surface: #f5f2ed;
+    --surface-alt: #faf8f5;
+    --text: #1a1816;
+    --text-dim: #5c5852;
+    --text-quiet: #8c8882;
+    --border: #d8d2c8;
+    --border-strong: #b8b0a4;
+
+    /* Neumorphic shadow system */
+    --shadow-sm-ext: 2px 2px 5px rgba(0,0,0,0.06), -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-md-ext: 4px 4px 10px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.9);
+    --shadow-lg-ext: 8px 8px 20px rgba(0,0,0,0.08), -8px -8px 20px rgba(255,255,255,0.95);
+    --shadow-sm-inset: inset 2px 2px 5px rgba(0,0,0,0.06), inset -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-pressed: inset 3px 3px 7px rgba(0,0,0,0.10), inset -2px -2px 5px rgba(255,255,255,0.6);
+
+    /* Accent — rich ocean blue */
+    --accent: #26609c;
+    --accent-light: #4d8ccc;
+    --accent-bg: rgba(38,96,156,0.08);
+
+    /* Semantic */
+    --green: #277a3e;
+    --green-bg: rgba(39,122,62,0.10);
+    --red: #a33636;
+    --red-bg: rgba(163,54,54,0.10);
+    --amber: #996e2c;
+    --amber-bg: rgba(153,110,44,0.10);
+
+    --radius-sm: 8px;
+    --radius: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+    --toc-width: 230px;
+  }
+
+  /* ── BASE BODY ── */
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-    background: #0d1117;
-    color: #e6edf3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.6;
-  }
-  .container {
-    max-width: 640px;
-    padding: 40px;
-    text-align: center;
-  }
-  h1 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: -0.02em;
-  }
-  .subtitle {
-    color: #8b949e;
-    font-size: 15px;
-    margin-bottom: 40px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 32px 0 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #30363d;
-  }
-  .section-header:first-of-type { margin-top: 0; }
-  .section-icon { font-size: 20px; }
-  .section-title {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #8b949e;
+  /* Subtle texture overlay */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .doc-card {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 24px;
+  /* ═══════════ ADA SKIP LINK ═══════════ */
+  .skip-link {
+    position: absolute; top: -100px; left: 12px; z-index: 300;
+    background: var(--accent); color: #fff; padding: 8px 16px;
+    border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: top .2s;
+  }
+  .skip-link:focus { top: 12px; }
+
+  /* Focus ring for all interactive elements */
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ═══════════ SITE NAV BAR ═══════════ */
+  .site-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-sm-ext);
+    padding: 10px 24px; display: flex; gap: 24px; align-items: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  }
+  .site-nav a {
+    color: var(--text-dim); text-decoration: none;
+    font-weight: 500; letter-spacing: 0.02em;
+  }
+  .site-nav a:hover { color: var(--accent); }
+  .site-nav .nav-current { color: var(--accent); font-weight: 600; }
+
+  /* ═══════════ TOC SIDEBAR ═══════════ */
+  .toc-sidebar {
+    position: fixed; top: 0; left: 0; z-index: 200;
+    width: var(--toc-width); height: 100vh;
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-sm-inset);
+    overflow-y: auto; overflow-x: hidden;
+    padding: 20px 0 40px;
+  }
+  .toc-sidebar::-webkit-scrollbar { width: 4px; }
+  .toc-sidebar::-webkit-scrollbar-track { background: transparent; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+
+  .toc-brand {
+    padding: 0 16px 16px;
+    border-bottom: 1px solid var(--border);
     margin-bottom: 12px;
-    text-align: left;
-    text-decoration: none;
-    transition: border-color 0.2s, transform 0.2s;
-    display: block;
   }
-  .doc-card:hover {
-    border-color: #58a6ff;
-    transform: translateY(-2px);
+  .toc-brand a {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--accent); text-decoration: none; font-weight: 600;
+    letter-spacing: 0.04em;
   }
-  .doc-card h2 {
-    font-size: 17px;
-    font-weight: 600;
-    color: #e6edf3;
-    margin-bottom: 6px;
+  .toc-brand a:hover { text-decoration: underline; }
+
+  .toc-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    padding: 14px 16px 6px; cursor: pointer;
+    transition: color .15s; display: flex; align-items: center; gap: 6px;
   }
-  .doc-card .doc-date {
-    font-size: 11px;
-    color: #58a6ff;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 8px;
+  .toc-section-label:hover { color: var(--text); }
+  .toc-section-label .toc-arrow {
+    font-size: 7px; transition: transform .2s; display: inline-block;
   }
-  .doc-card p {
-    font-size: 13px;
-    color: #8b949e;
+  .toc-section-label.collapsed .toc-arrow { transform: rotate(-90deg); }
+  .toc-section-group { overflow: hidden; transition: max-height .3s ease; }
+  .toc-section-group.collapsed { max-height: 0 !important; }
+
+  .toc-item {
+    display: block; padding: 5px 16px 5px 20px;
+    font-size: 11px; color: var(--text-dim); text-decoration: none;
+    font-weight: 400; transition: all .15s;
+    border-left: 2px solid transparent;
   }
-  .tag {
-    display: inline-block;
-    background: rgba(63, 185, 80, 0.12);
-    color: #3fb950;
-    border: 1px solid rgba(63, 185, 80, 0.25);
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-top: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  .toc-item:hover {
+    color: var(--text); background: rgba(0,0,0,0.02);
+    border-left-color: var(--accent); text-decoration: none;
   }
-  .tag.geo {
-    background: rgba(240, 136, 62, 0.12);
-    color: #f0883e;
-    border-color: rgba(240, 136, 62, 0.25);
+  .toc-item.active {
+    color: var(--accent); font-weight: 600;
+    background: var(--accent-bg); border-left-color: var(--accent);
   }
-  .tag.visual {
-    background: rgba(188, 140, 255, 0.12);
-    color: #bc8cff;
-    border-color: rgba(188, 140, 255, 0.25);
+  .toc-item.skip-item { color: var(--text-quiet); font-style: italic; }
+  .toc-item.skip-item:hover { color: var(--text-dim); border-left-color: var(--text-quiet); }
+  .toc-divider {
+    border: none; height: 1px; background: var(--border); margin: 8px 16px;
   }
-  .tag.refined {
-    background: rgba(88, 166, 255, 0.12);
-    color: #58a6ff;
-    border-color: rgba(88, 166, 255, 0.25);
+
+  /* ═══════════ MAIN CONTENT ═══════════ */
+  .page-content {
+    margin-left: var(--toc-width); padding: 48px 48px 80px;
+    max-width: 1200px; position: relative; z-index: 1;
   }
-  .tag.archive {
-    background: rgba(110, 118, 129, 0.12);
-    color: #8b949e;
-    border-color: rgba(110, 118, 129, 0.25);
+
+  /* ═══════════ HAMBURGER NAV ═══════════ */
+  .hamburger-btn {
+    display: none; position: fixed; top: 12px; right: 12px; z-index: 250;
+    width: 44px; height: 44px; cursor: pointer; border: none;
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-ext); transition: all .2s;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; touch-action: manipulation; user-select: none;
+    -webkit-user-select: none;
   }
-  .subcards {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  .hamburger-btn:hover { box-shadow: var(--shadow-md-ext); }
+  .hamburger-btn:active { box-shadow: var(--shadow-pressed); }
+  .hamburger-btn .ham-line {
+    width: 20px; height: 2.5px; background: var(--text);
+    border-radius: 1px; transition: all .2s;
+  }
+  .hamburger-btn.open .ham-line:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .hamburger-btn.open .ham-line:nth-child(2) { opacity: 0; }
+  .hamburger-btn.open .ham-line:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  .nav-overlay {
+    display: none; position: fixed; inset: 0; z-index: 240;
+    background: var(--bg); overflow-y: auto;
+    padding: 60px 24px 40px;
+  }
+  .nav-overlay.open { display: block; }
+  .nav-overlay .toc-section-label {
+    font-size: 12px; padding: 12px 0 8px;
+  }
+  .nav-overlay .toc-item {
+    font-size: 15px; padding: 10px 0;
+    border-left: none; border-bottom: 1px solid var(--border);
+  }
+
+  /* ═══════════ HERO + SECTION RULE ── */
+  .hero { margin-bottom: 48px; }
+  .hero-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--text-quiet); margin-bottom: 20px; padding: 4px 0; border-bottom: 2px solid var(--text); }
+  .hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 800; letter-spacing: -0.05em; line-height: 1.05; margin-bottom: 16px; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { font-size: 15px; color: var(--text-dim); max-width: 520px; line-height: 1.7; font-weight: 400; }
+
+  .rule { height: 2px; background: var(--text); opacity: 0.12; margin: 40px 0 28px; }
+  .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-quiet); margin-bottom: 20px; text-transform: uppercase; }
+
+  /* ═══════════ NEUMORPHIC CARD ── */
+  .neo-card {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); padding: 28px; margin-bottom: 24px;
+    transition: all .25s ease; cursor: pointer; border: none;
+  }
+  .neo-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-2px); }
+  .neo-card:active { box-shadow: var(--shadow-pressed); transform: translateY(0); }
+  .neo-card-inset {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 20px; margin-bottom: 16px;
+  }
+
+  /* ═══════════ STOCK CARD (details/summary) ── */
+  .stock-card {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); margin-bottom: 24px;
+    transition: all .25s ease; border: none; overflow: hidden;
+  }
+  .stock-card[open] { box-shadow: var(--shadow-lg-ext); }
+  .stock-card:hover { box-shadow: var(--shadow-lg-ext); }
+  .stock-card summary {
+    cursor: pointer; padding: 24px 28px 10px; list-style: none;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .stock-card summary::-webkit-details-marker { display: none; }
+  .stock-card summary::after {
+    content: '▼'; font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-quiet); transition: transform .2s;
+    background: var(--bg-alt); border-radius: var(--radius-sm);
+    padding: 6px 10px; box-shadow: var(--shadow-sm-inset);
+  }
+  .stock-card[open] summary::after { transform: rotate(180deg); }
+  .stock-card-body { padding: 0 28px 28px; }
+
+  /* ═══════════ TICKER HEADER ── */
+  .ticker-row {
+    display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px;
+    padding-bottom: 14px;
+  }
+  .ticker { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; }
+  .ticker-name { font-size: 14px; color: var(--text-dim); font-weight: 500; }
+  .ticker-badge { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; padding: 6px 16px; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase;
+    background: var(--bg); box-shadow: var(--shadow-sm-ext); transition: all .15s;
+  }
+  .ticker-badge:hover { box-shadow: var(--shadow-pressed); }
+  .ticker-badge.buy { color: var(--green); }
+  .ticker-badge.hold { color: var(--amber); }
+  .ticker-badge.sell { color: var(--red); }
+
+  /* ═══════════ METRICS (price action) ── */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .metric {
+    text-align: center; background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 18px 10px;
+    transition: box-shadow .2s;
+  }
+  .metric:hover { box-shadow: var(--shadow-md-ext); }
+  .metric-val { font-size: 24px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .metric-val.up { color: var(--green); }
+  .metric-val.down { color: var(--red); }
+  .metric-val.neutral { color: var(--amber); }
+  .metric-lbl { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-quiet); margin-bottom: 4px; }
+  .metric-sub { font-size: 10px; color: var(--text-dim); }
+
+  /* reversal badge inside metric */
+  .reversal-badge {
+    display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 2px 6px; border-radius: 3px; margin-top: 4px;
+  }
+  .reversal-badge.confirmed { background: var(--green-bg); color: var(--green); box-shadow: var(--shadow-sm-inset); }
+  .reversal-badge.partial { background: var(--amber-bg); color: var(--amber); box-shadow: var(--shadow-sm-inset); }
+  .reversal-badge.negative { background: var(--red-bg); color: var(--red); box-shadow: var(--shadow-sm-inset); }
+
+  /* ═══════════ SPARKLINE ── */
+  .spark-wrap { margin-bottom: 24px; padding: 4px 0; }
+  .spark-wrap svg { width: 100%; height: 52px; display: block; }
+
+  /* ═══════════ FUNDAMENTALS ── */
+  .fund-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 32px; }
+  .fund-item {
+    text-align: center; background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 14px 8px; transition: all .2s;
+  }
+  .fund-item:hover { box-shadow: var(--shadow-md-ext); }
+  .fund-item .val { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .fund-item .lbl { font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.10em; color: var(--text-quiet); }
+  .fund-item .sub { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ═══════════ THESIS ── */
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+  .thesis-block {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); padding: 24px; transition: all .2s;
+  }
+  .thesis-block:hover { box-shadow: var(--shadow-lg-ext); }
+  .thesis-block h4 { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; margin-bottom: 14px; text-transform: uppercase; }
+  .thesis-block.bull h4 { color: var(--green); }
+  .thesis-block.bear h4 { color: var(--red); }
+  .thesis-block p { font-size: 12px; color: var(--text-dim); line-height: 1.7; margin-bottom: 8px; }
+  .thesis-block p strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ CALLOUT / VERDICT ── */
+  .callout {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg-ext); padding: 22px 26px;
+  }
+  .callout-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+  }
+  .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); text-transform: uppercase; }
+  .callout-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    padding: 5px 16px; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase;
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .callout-badge.buy { color: var(--green); background: var(--green-bg); }
+  .callout-badge.hold { color: var(--amber); background: var(--amber-bg); }
+  .callout-badge.sell { color: var(--red); background: var(--red-bg); }
+  .callout p { font-size: 13px; color: var(--text-dim); line-height: 1.7; margin-top: 4px; }
+  .callout p strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ TIER DIVIDER ── */
+  .tier-divider {
+    display: flex; align-items: center; gap: 20px;
+    margin: 40px 0 20px;
+  }
+  .tier-divider .tier-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 18px;
+    border-radius: var(--radius-sm); white-space: nowrap;
+  }
+  .tier-divider .tier-label.tier-1 {
+    color: var(--green); background: var(--bg);
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .tier-divider .tier-label.tier-2 {
+    color: var(--accent); background: var(--bg);
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .tier-divider .tier-label.tier-3 {
+    color: var(--text-quiet); background: var(--bg);
+    box-shadow: var(--shadow-sm-inset);
+  }
+  .tier-divider .tier-line {
+    flex: 1; height: 2px; background: var(--text); opacity: 0.12;
+  }
+  .tier-intro {
+    font-size: 12px; color: var(--text-dim); font-style: italic;
+    margin-bottom: 20px; padding-left: 4px;
+  }
+
+  /* ═══════════ SKIP LIST ── */
+  .skip-section { margin: 48px 0 32px; }
+  .skip-section h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-quiet);
     margin-bottom: 16px;
   }
-  .subcards .doc-card {
-    margin-bottom: 0;
+  .skip-card {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 16px 20px; margin-bottom: 8px;
+    font-size: 12px; color: var(--text-dim); font-style: italic;
   }
-  .subcards .doc-card:hover {
-    transform: translateY(-1px);
+  .skip-card strong { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-quiet); font-style: normal; }
+
+  /* ═══════════ TOP 5 PICKS ── */
+  .top-picks {
+    background: var(--bg); border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg-ext); padding: 32px; margin: 48px 0;
   }
-  .doc-card .variant-label {
-    font-size: 10px;
-    color: #484f58;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 4px;
+  .top-picks h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 20px;
   }
-  .variant-divider {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 6px 0;
+  .top-picks ol { list-style: none; padding: 0; counter-reset: top5; }
+  .top-picks ol li {
+    counter-increment: top5; padding: 12px 0;
+    border-bottom: 1px solid var(--border); font-size: 14px;
+    display: flex; gap: 14px; align-items: baseline;
   }
-  .variant-divider span {
-    font-size: 11px;
-    color: #484f58;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+  .top-picks ol li:last-child { border-bottom: none; }
+  .top-picks ol li::before {
+    content: '0' counter(top5);
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    color: var(--accent); min-width: 28px;
   }
-  .variant-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #21262d;
+  .top-picks ol li strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ CITATIONS / REFERENCES ── */
+  .ref-section { margin-top: 48px; }
+  .ref-section h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-quiet);
+    margin-bottom: 16px;
+  }
+  .ref-list { list-style: none; padding: 0; }
+  .ref-list li {
+    font-size: 11px; color: var(--text-dim); padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-list li a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .ref-list li a:hover { text-decoration: underline; }
+
+  /* inline citation marker */
+  sup.cite {
+    font-size: 9px; font-weight: 600; color: var(--accent);
+    cursor: pointer; margin: 0 1px;
+  }
+  sup.cite:hover { text-decoration: underline; }
+
+  /* ═══════════ SECTOR HEADER (Geo doc) ── */
+  .sector-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 20px; border-radius: var(--radius);
+    margin-bottom: 18px; flex-wrap: wrap;
+    background: var(--bg); box-shadow: var(--shadow-md-ext);
+    border-left: none;
+  }
+  .sector-header .sector-icon { font-size: 22px; }
+  .sector-header .sector-name {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text);
+  }
+  .sector-header .sector-tag {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 30px; margin-left: auto;
+    background: var(--bg); box-shadow: var(--shadow-sm-inset);
+  }
+  .sector-header.oil .sector-tag { color: var(--red); }
+  .sector-header.fert .sector-tag { color: var(--amber); }
+  .sector-header.nuke .sector-tag { color: var(--green); }
+  .sector-header.energy .sector-tag { color: var(--accent); }
+  .sector-header.power .sector-tag { color: var(--accent); }
+
+  /* ═══════════ BUTTONS ── */
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  .btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    padding: 12px 24px; border-radius: var(--radius); cursor: pointer; transition: all .2s;
+    background: var(--bg); border: none; color: var(--text); box-shadow: var(--shadow-sm-ext); letter-spacing: 0.02em; text-transform: uppercase;
+    touch-action: manipulation; user-select: none; -webkit-user-select: none;
+  }
+  .btn:hover { box-shadow: var(--shadow-md-ext); }
+  .btn:active { box-shadow: var(--shadow-pressed); }
+  .btn-primary { color: var(--accent); }
+
+  /* ═══════════ DISCLAIMER ── */
+  .disclaimer {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 14px 20px;
+    margin-bottom: 24px; font-size: 12px; color: var(--text-dim);
+    font-style: italic;
+  }
+  .disclaimer strong { color: var(--text); font-weight: 600; font-style: normal; }
+
+  /* ═══════════ RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .toc-sidebar { display: none; }
+    .toc-sidebar.mobile-open {
+      display: block; position: fixed; inset: 0; z-index: 245;
+      width: 100%; height: 100vh; padding-top: 60px;
+    }
+    .page-content { margin-left: 0; padding: 24px 16px 60px; }
+    .hamburger-btn { display: flex; }
+    .hero h1 { font-size: 32px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .fund-strip { grid-template-columns: repeat(2, 1fr); }
+    .thesis-grid { grid-template-columns: 1fr; }
+    .stock-card summary { padding: 20px 20px 0; }
+    .stock-card-body { padding: 0 20px 20px; }
+    .ticker { font-size: 24px; }
+    .top-picks { padding: 20px; }
+    .site-nav { font-size: 10px; padding: 8px 16px; gap: 16px; }
   }
 
-  /* ── Archive section ── */
-  .archive-section {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid #21262d;
-  }
-  .archive-toggle {
-    background: none;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    color: #6e7681;
-    font-size: 12px;
-    font-family: inherit;
-    padding: 6px 14px;
-    cursor: pointer;
-    letter-spacing: 0.04em;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .archive-toggle:hover {
-    border-color: #58a6ff;
-    color: #58a6ff;
-  }
-  .archive-list {
-    display: none;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 16px;
-    text-align: left;
-  }
-  .archive-list.open { display: flex; }
-  .archive-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    background: #161b22;
-    border: 1px solid #21262d;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: border-color 0.2s;
-  }
-  .archive-item:hover { border-color: #30363d; }
-  .archive-item .arch-icon { font-size: 14px; }
-  .archive-item .arch-title {
-    font-size: 12px;
-    color: #8b949e;
-    flex: 1;
-  }
-  .archive-item .arch-date {
-    font-size: 11px;
-    color: #484f58;
+  @media (max-width: 412px) {
+    .page-content { padding: 16px 12px 48px; }
+    .hero h1 { font-size: 28px; }
+    .metrics { gap: 8px; }
+    .metric-val { font-size: 20px; }
+    .fund-strip { gap: 6px; }
+    .fund-item { padding: 10px 4px; }
+    .fund-item .val { font-size: 11px; }
+    .ticker-row { flex-wrap: wrap; gap: 8px; }
+    .ticker { font-size: 22px; }
+    .neo-card, .stock-card summary { padding: 18px 16px 0; }
+    .stock-card-body { padding: 0 16px 16px; }
   }
 
-  .footer {
-    margin-top: 32px;
-    font-size: 12px;
-    color: #6e7681;
-  }
+.index-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:20px;margin:32px 0}
+.doc-card{background:var(--bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-md-ext);padding:28px;text-decoration:none;color:var(--text);transition:all .25s ease;display:block;border:none}
+.doc-card:hover{box-shadow:var(--shadow-lg-ext);transform:translateY(-2px)}
+.doc-card .doc-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.10em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.doc-card h2{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px;color:var(--text)}
+.doc-card .doc-meta{font-size:11px;color:var(--text-quiet);margin-bottom:12px;font-family:'JetBrains Mono',monospace}
+.doc-card p{font-size:13px;color:var(--text-dim);line-height:1.6}
+.doc-card .doc-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.doc-card .doc-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;padding:4px 10px;border-radius:var(--radius-sm);letter-spacing:.04em;text-transform:uppercase}
+.doc-tag.stocks{color:var(--green);background:var(--green-bg);box-shadow:var(--shadow-sm-inset)}
+.doc-tag.geo{color:var(--red);background:var(--red-bg);box-shadow:var(--shadow-sm-inset)}
+.doc-tag.data{color:var(--accent);background:var(--accent-bg);box-shadow:var(--shadow-sm-inset)}
+@media(max-width:768px){.index-grid{grid-template-columns:1fr}.hero h1{font-size:32px}}
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>Brian's Stock Research</h1>
-  <p class="subtitle">May 2026 Research Reports</p>
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- Technology & Infrastructure -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="section-header">
-    <span class="section-icon">💻</span>
-    <span class="section-title">Technology & Infrastructure</span>
-  </div>
+<main class="page-content" id="main-content" style="margin-left:0;max-width:1000px;">
 
-  <div class="subcards">
-    <a href="Tech_Stock_Basket_May_2026_v2.html" class="doc-card">
-      <div class="doc-date">Primary — May 2026</div>
-      <h2>23-Stock Battered Tech + Sandisk-Type Basket</h2>
-      <p>23 stocks across three sections: 6 battered SaaS survivors, 11 Sandisk-type infrastructure plays, and 6 new research picks (photonics, power semis, drone batteries, AI silicon). Collapsible TOC with scroll-highlight. Live price action bars, fundamentals grids, sparklines, bull/bear analysis, and Top 5 Picks synthesis.</p>
-    </a>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- Geopolitical & Commodities -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="section-header">
-    <span class="section-icon">🌏</span>
-    <span class="section-title">Geopolitical & Commodities</span>
-  </div>
-
-  <div class="subcards">
-    <a href="Geopolitical_Growth_Stocks_May_2026_v2_visual.html" class="doc-card">
-      <div class="doc-date">Primary — May 2026</div>
-      <h2>High Potential Growth Sectors — Supply Shock Edition</h2>
-      <p>8 sectors: Oil, Fertilizer, Nuclear Power, Plastics, Helium, Water Infrastructure, Grid & Power, Defense. Iran war Hormuz closure analysis with cascading second/third-order supply shock effects. Chart.js sector conviction charts and commodity price spike visualizations.</p>
-    </a>
-  </div>
-
-
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- Archived Older Versions -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="archive-section">
-    <button class="archive-toggle" onclick="document.getElementById('arch-list').classList.toggle('open'); this.textContent = document.getElementById('arch-list').classList.contains('open') ? '▲ Hide older versions' : '▼ Show older versions'">▼ Show older versions</button>
-    <div id="arch-list" class="archive-list">
-
-      <a href="Tech_Stock_Basket_May_2026.html" class="archive-item">
-        <span class="arch-icon">💾</span>
-        <span class="arch-title">17-Stock Battered Tech Basket (pre-refresh)</span>
-        <span class="arch-date">May 2026</span>
-      </a>
-      <a href="Geopolitical_Growth_Stocks_May_2026.html" class="archive-item">
-        <span class="arch-icon">💾</span>
-        <span class="arch-title">Geopolitical Winners — Supply Shock Edition (pre-refresh)</span>
-        <span class="arch-date">May 2026</span>
-      </a>
-      <a href="Tech_Stock_Basket_Analysis_May_2026_v2.html" class="archive-item">
-        <span class="arch-icon">💾</span>
-        <span class="arch-title">Tier 1–3 Battered Tech Basket v2</span>
-        <span class="arch-date">May 2026</span>
-      </a>
-      <a href="Tech_Stock_Basket_Analysis_May_2026_v4.html" class="archive-item">
-        <span class="arch-icon">💾</span>
-        <span class="arch-title">Tier 1–2 Battered Tech Basket v4 (condensed)</span>
-        <span class="arch-date">May 2026</span>
-      </a>
-      <a href="Geopolitical_Growth_Stocks_May_2026_v2.html" class="archive-item">
-        <span class="arch-icon">💾</span>
-        <span class="arch-title">Geopolitical Winners v2 (7-sector original layout)</span>
-        <span class="arch-date">May 2026</span>
-      </a>
-      <a href="Tech_Stock_Basket_Analysis_April_2026_v2.html" class="archive-item">
-        <span class="arch-icon">💾</span>
-        <span class="arch-title">Battered Tech Basket v2 (April 2026)</span>
-        <span class="arch-date">April 2026</span>
-      </a>
-
-    </div>
-  </div>
-
-  <div class="footer">
-    Reports generated by Hermes Agent Research · For informational purposes only
-  </div>
+<div class="hero">
+  <div class="hero-tag">Research · May 8, 2026</div>
+  <h1>Brian Stock Research.<br><span>Asymmetric opportunities.</span></h1>
+  <p>Deep-dive investment research across technology, AI infrastructure, and geopolitical supply shock sectors. Live data. Neumorphic depth. No filler.</p>
 </div>
+
+<div class="disclaimer">
+  <strong>Educational research only.</strong> Not investment advice. All positions are speculative. I hold positions in some of these names. Do your own work before putting money down.
+</div>
+
+<div class="index-grid">
+
+  <a href="Tech_Stock_Basket_May_2026_v3.html" class="doc-card">
+    <div class="doc-eyebrow">Primary Research</div>
+    <h2>Tech Survivors + AI Infrastructure</h2>
+    <div class="doc-meta">23 stocks · 3 sections · v3 · May 8, 2026</div>
+    <p>SaaS survivors at single-digit revenue multiples, AI infrastructure plays riding the capex wave, and emerging semiconductor research — all with live price data, fundamentals, and detailed bull/bear analysis.</p>
+    <div class="doc-tags">
+      <span class="doc-tag stocks">SaaS</span>
+      <span class="doc-tag stocks">AI Infra</span>
+      <span class="doc-tag data">Live Data</span>
+    </div>
+  </a>
+
+  <a href="Geopolitical_Growth_Stocks_May_2026_v3.html" class="doc-card">
+    <div class="doc-eyebrow">Supply Shock Edition</div>
+    <h2>Geopolitical Growth Sectors</h2>
+    <div class="doc-meta">9 sectors · 35+ stocks · v3 · May 8, 2026</div>
+    <p>Second-order effects of the Iran war across oil, fertilizer, nuclear, grid infrastructure, and defense. Live financial snapshots, expert council opinions, and stock-level thesis analysis.</p>
+    <div class="doc-tags">
+      <span class="doc-tag geo">Energy</span>
+      <span class="doc-tag geo">Defense</span>
+      <span class="doc-tag data">Live Data</span>
+    </div>
+  </a>
+
+</div>
+
+<div class="rule"></div>
+
+<div style="text-align:center;padding:20px 0 40px;">
+  <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-quiet);letter-spacing:.04em;">
+    neubrutal · neumorphic depth · warm stone palette · live data pipeline · updated weekdays 9am ET
+  </p>
+</div>
+
+</main>
+
 </body>
 </html>
