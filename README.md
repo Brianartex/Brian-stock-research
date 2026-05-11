@@ -1,4 +1,4 @@
-# Brian's Stock Research
+# Stock Research
 
 Deep fundamental research on AI infrastructure, semiconductors, energy, and geopolitically-sensitive growth sectors. Updated daily with live financial data.
 
