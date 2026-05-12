@@ -1,0 +1,68 @@
+{
+  "project": "Brian Stock Research",
+  "repo": "Brianartex/Brian-stock-research",
+  "last_updated": "2026-05-12T20:00:00-04:00",
+  "active_docs": {
+    "investment-deep-dive-v5.html": {
+      "status": "live",
+      "picks": 10,
+      "last_price_refresh": "2026-05-12T15:00:00-04:00",
+      "key_alerts": "FLNC S-3ASR overhang alert added, allocation trimmed $300->$200",
+      "next_action": "Post-May 14 earnings review for FLNC position sizing"
+    },
+    "Tech_Stock_Basket_May_2026_v3.html": {
+      "status": "live",
+      "stocks": 23,
+      "watchlist": ["AMBA", "VICR"],
+      "scouting": ["WYFI", "NBIS", "CRWV"],
+      "last_price_refresh": "2026-05-12T15:00:00-04:00",
+      "re_rates": "QCOM: WATCH updated after -12.4% drop. Entry $175-180.",
+      "next_action": "None — prices current, verdicts stable"
+    },
+    "Geopolitical_Growth_May_2026_v3.html": {
+      "status": "live",
+      "last_updated": "2026-05-10",
+      "next_action": "None"
+    },
+    "fantasy-cinco-2026.html": {
+      "status": "live",
+      "last_updated": "2026-05-12",
+      "next_action": "None"
+    }
+  },
+  "index_page": {
+    "status": "live",
+    "archive": "hierarchical by document/month/week",
+    "external_section": "removed",
+    "last_updated": "2026-05-12"
+  },
+  "archive_page": {
+    "status": "live",
+    "versions_tracked": "all historical versions per document",
+    "last_updated": "2026-05-12"
+  },
+  "blockers": [],
+  "upcoming_dates": [
+    "2026-05-14: FLNC earnings",
+    "2026-05-14: AVAX halving (crypto watch)",
+    "2026-05-15: AAOI earnings (estimate)",
+    "2026-07-29: QCOM Q2 2026 earnings (re-rate trigger)"
+  ],
+  "pending_work": [
+    "FLNC post-earnings review (May 14)",
+    "AMBA alert at $60-65 (set price alert)",
+    "Humanoid robot watchlist expansion (scout X threads)",
+    "Tech doc full metrics+sparkline refresh (deferred — low ROI)",
+    "FBA All Listings Report integration (awaiting data from Brian)"
+  ],
+  "completed_today": [
+    "v5 deep-dive: FLNC overhang alert, SIVE nesting fix, price refresh",
+    "Morgan action sheet sent to Discord #investment",
+    "Index page: Archive restructured (doc→month→week), External removed",
+    "Archive page: Full version history added",
+    "Tech doc v3: Watchlist section added (AMBA, VICR, WYFI/NBIS/CRWV scouting)",
+    "Tech doc v3: All 23 inline prices refreshed to May 12 afternoon",
+    "Tech doc v3: QCOM re-rated to WATCH with updated May 12 analysis",
+    "Morgan approved for Discord bot pairing"
+  ]
+}

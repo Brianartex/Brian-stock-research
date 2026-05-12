@@ -33,6 +33,28 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Versions are
 
 ---
 
+## [2026-05-12] — v5 Deep-Dive Live + Tech Doc Refresh
+
+### Added
+- **investment-deep-dive-v5.html** — 10-pick asymmetric basket with macro dashboard, performance tracker, position sizing, earnings calendar, stop-losses. FLNC overhang alert added post S-3ASR. SIVE added as 10th pick (CPO/photonics).
+- **Morgan action sheet** — Discord-only actionable doc with allocations, entries, stops, and buying sequence. Sent to #investment.
+- **index.html** — Archive restructured: hierarchical by document → month → week with version links. External section removed.
+- **archive.html** — Full version history page with all historical releases, dates, and version numbers.
+- **Tech doc v3** — Watchlist section added with AMBA (edge AI/robot vision, $60–65 target) and VICR (power modules, scouting). Scouting list for WYFI/NBIS/CRWV.
+- **project_state.json** — Created with machine-readable state of all docs, blockers, upcoming dates, and pending work.
+
+### Changed
+- **Tech doc v3** — All 23 inline prices refreshed to May 12 afternoon. QCOM re-rated to WATCH after -12.4% broad-tech drop (no company-specific news). P/E compressed to 19.6x forward. Entry target revised to $175–180.
+- **Morgan approved** for Discord bot pairing (user ID: 894243263777763389).
+
+### Fixed
+- Desktop nav bar TOC overlap — shifted right by `--toc-width` so nav links are fully clickable.
+- SIVE card nesting — added missing `</div>` closures so SIVE renders as sibling to VST, not child.
+- Orphaned risk-meter dots removed from below SIVE card.
+- Archive TOC clipping — removed inline `max-height:0` constraints; expanded groups use 2000px.
+
+---
+
 ## [2026-05-07] — Major Polish Sprint
 
 ### Added
