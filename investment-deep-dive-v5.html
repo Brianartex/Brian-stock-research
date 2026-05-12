@@ -164,6 +164,35 @@
     border: none; height: 1px; background: var(--border); margin: 8px 16px;
   }
 
+  /* Archive month/week */
+  .archive-month {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 6px 16px 2px 20px;
+    cursor: pointer; user-select: none;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .archive-month:hover { color: var(--text); }
+  .archive-month .toc-arrow {
+    font-size: 7px; transition: transform .2s; display: inline-block;
+  }
+  .archive-month.collapsed .toc-arrow { transform: rotate(-90deg); }
+  .archive-week {
+    display: block; padding: 3px 16px 3px 28px;
+    font-size: 10px; color: var(--text-quiet); text-decoration: none;
+    font-weight: 400; transition: all .15s;
+    border-left: 2px solid transparent;
+  }
+  .archive-week:hover {
+    color: var(--text-dim); background: rgba(0,0,0,0.02);
+    border-left-color: var(--text-quiet); text-decoration: none;
+  }
+  .archive-week .week-date {
+    font-size: 9px; color: var(--text-quiet); margin-left: 4px;
+  }
+
   /* ═══════════ MAIN CONTENT ═══════════ */
   .page-content {
     margin-left: var(--toc-width); padding: 48px 48px 80px;
@@ -573,6 +602,77 @@
 </head>
 <body>
 
+<button class="hamburger-btn" id="hamBtn" aria-label="Toggle menu" onclick="document.getElementById('toc').classList.toggle('mobile-open');this.classList.toggle('open');">
+  <span class="ham-line"></span>
+  <span class="ham-line"></span>
+  <span class="ham-line"></span>
+</button>
+
+<nav class="toc-sidebar" id="toc">
+  <div class="toc-brand">
+    <a href="index.html">Stock Research</a>
+  </div>
+
+  <div class="toc-section-label collapsed" onclick="toggleGroup(this)">
+    <span class="toc-arrow">&#9662;</span> On This Page
+  </div>
+  <div class="toc-section-group collapsed" style="max-height:0">
+    <a href="#macro" class="toc-item">Macro Framework</a>
+    <a href="#macro-dash" class="toc-item">Macro Dashboard</a>
+    <a href="#methodology" class="toc-item">Methodology</a>
+    <a href="#performance" class="toc-item">Performance Tracker</a>
+    <a href="#flnc" class="toc-item">FLNC</a>
+    <a href="#aaoi" class="toc-item">AAOI</a>
+    <a href="#mu" class="toc-item">MU</a>
+    <a href="#smci" class="toc-item">SMCI</a>
+    <a href="#sndk" class="toc-item">SNDK</a>
+    <a href="#aph" class="toc-item">APH</a>
+    <a href="#anet" class="toc-item">ANET</a>
+    <a href="#ampx" class="toc-item">AMPX</a>
+    <a href="#vst" class="toc-item">VST</a>
+    <a href="#position-sizing" class="toc-item">Position Sizing</a>
+    <a href="#earnings" class="toc-item">Earnings Calendar</a>
+    <a href="#references" class="toc-item">References</a>
+  </div>
+
+  <div class="toc-divider"></div>
+
+  <div class="toc-section-label collapsed" onclick="toggleGroup(this)">
+    <span class="toc-arrow">&#9662;</span> Current
+  </div>
+  <div class="toc-section-group collapsed" style="max-height:0">
+    <a href="investment-deep-dive-v5.html" class="toc-item active">Asymmetric Basket v5</a>
+    <a href="Tech_Stock_Basket_May_2026_v3.html" class="toc-item">Tech Survivors + AI</a>
+    <a href="Geopolitical_Growth_Stocks_May_2026_v3.html" class="toc-item">Geopolitical Growth</a>
+    <a href="fantasy-cinco-2026.html" class="toc-item">Fantasy Football</a>
+  </div>
+
+  <div class="toc-divider"></div>
+
+  <div class="toc-section-label collapsed" onclick="toggleGroup(this)">
+    <span class="toc-arrow">&#9662;</span> Archive
+  </div>
+  <div class="toc-section-group collapsed" style="max-height:0">
+    <div class="archive-month" onclick="toggleGroup(this)">
+      <span class="toc-arrow">&#9662;</span> May 2026
+    </div>
+    <div class="toc-section-group">
+      <a href="investment-deep-dive-v5.html" class="archive-week">Week 2 <span class="week-date">May 11</span></a>
+      <a href="investment-deep-dive-v4.html" class="archive-week">Week 1 <span class="week-date">May 9</span></a>
+    </div>
+  </div>
+
+  <div class="toc-divider"></div>
+
+  <div class="toc-section-label collapsed" onclick="toggleGroup(this)">
+    <span class="toc-arrow">&#9662;</span> External
+  </div>
+  <div class="toc-section-group collapsed" style="max-height:0">
+    <a href="https://finance.yahoo.com" class="toc-item" target="_blank" rel="noopener">Yahoo Finance</a>
+    <a href="https://x.com" class="toc-item" target="_blank" rel="noopener">X / Twitter</a>
+  </div>
+</nav>
+
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav class="site-nav" aria-label="Site navigation">
@@ -582,7 +682,7 @@
   <a href="Geopolitical_Growth_Stocks_May_2026_v3.html">Geopolitical</a>
 </nav>
 
-<main class="page-content" id="main-content" style="margin-left:0;max-width:880px;">
+<main class="page-content" id="main-content" style="margin-left:var(--toc-width);max-width:840px;">
 
 <div class="hero">
   <div class="hero-tag">Deep-Dive Research · May 11, 2026</div>
@@ -1001,6 +1101,21 @@
 
 
 </main>
+
+<script>
+function toggleGroup(el) {
+  el.classList.toggle('collapsed');
+  var group = el.nextElementSibling;
+  if (!group) return;
+  if (group.classList.contains('collapsed')) {
+    group.style.maxHeight = group.scrollHeight + 'px';
+    group.classList.remove('collapsed');
+  } else {
+    group.style.maxHeight = '0';
+    group.classList.add('collapsed');
+  }
+}
+</script>
 
 </body>
 </html>
