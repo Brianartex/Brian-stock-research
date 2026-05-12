@@ -263,17 +263,17 @@
   <div class="toc-section-label collapsed" onclick="toggleGroup(this)">
     <span class="toc-arrow">&#9662;</span> Archive
   </div>
-  <div class="toc-section-group collapsed" style="max-height:0">
+  <div class="toc-section-group collapsed">
 
     <!-- Asymmetric Basket -->
     <div class="toc-section-label collapsed" style="padding-left:18px;font-size:9px;color:var(--text-dim);" onclick="toggleGroup(this);event.stopPropagation();">
       <span class="toc-arrow">&#9662;</span> Asymmetric Basket
     </div>
-    <div class="toc-section-group collapsed" style="max-height:0">
+    <div class="toc-section-group collapsed">
       <div class="archive-month collapsed" style="padding-left:28px;" onclick="toggleGroup(this);event.stopPropagation();">
         <span class="toc-arrow">&#9662;</span> May 2026
       </div>
-      <div class="toc-section-group collapsed" style="max-height:0">
+      <div class="toc-section-group collapsed">
         <a href="investment-deep-dive-v5.html" class="archive-week">Week 2 — v5 <span class="week-date">May 12, 2026</span></a>
         <a href="investment-deep-dive-v4.html" class="archive-week">Week 1 — v4 <span class="week-date">May 9, 2026</span></a>
       </div>
@@ -283,11 +283,11 @@
     <div class="toc-section-label collapsed" style="padding-left:18px;font-size:9px;color:var(--text-dim);" onclick="toggleGroup(this);event.stopPropagation();">
       <span class="toc-arrow">&#9662;</span> Tech Survivors
     </div>
-    <div class="toc-section-group collapsed" style="max-height:0">
+    <div class="toc-section-group collapsed">
       <div class="archive-month collapsed" style="padding-left:28px;" onclick="toggleGroup(this);event.stopPropagation();">
         <span class="toc-arrow">&#9662;</span> May 2026
       </div>
-      <div class="toc-section-group collapsed" style="max-height:0">
+      <div class="toc-section-group collapsed">
         <a href="Tech_Stock_Basket_May_2026_v3.html" class="archive-week">Week 1 — v3 <span class="week-date">May 8, 2026</span></a>
       </div>
     </div>
@@ -296,11 +296,11 @@
     <div class="toc-section-label collapsed" style="padding-left:18px;font-size:9px;color:var(--text-dim);" onclick="toggleGroup(this);event.stopPropagation();">
       <span class="toc-arrow">&#9662;</span> Geopolitical Growth
     </div>
-    <div class="toc-section-group collapsed" style="max-height:0">
+    <div class="toc-section-group collapsed">
       <div class="archive-month collapsed" style="padding-left:28px;" onclick="toggleGroup(this);event.stopPropagation();">
         <span class="toc-arrow">&#9662;</span> May 2026
       </div>
-      <div class="toc-section-group collapsed" style="max-height:0">
+      <div class="toc-section-group collapsed">
         <a href="Geopolitical_Growth_Stocks_May_2026_v3.html" class="archive-week">Week 1 — v3 <span class="week-date">May 8, 2026</span></a>
       </div>
     </div>
@@ -309,11 +309,11 @@
     <div class="toc-section-label collapsed" style="padding-left:18px;font-size:9px;color:var(--text-dim);" onclick="toggleGroup(this);event.stopPropagation();">
       <span class="toc-arrow">&#9662;</span> Fantasy Football
     </div>
-    <div class="toc-section-group collapsed" style="max-height:0">
+    <div class="toc-section-group collapsed">
       <div class="archive-month collapsed" style="padding-left:28px;" onclick="toggleGroup(this);event.stopPropagation();">
         <span class="toc-arrow">&#9662;</span> May 2026
       </div>
-      <div class="toc-section-group collapsed" style="max-height:0">
+      <div class="toc-section-group collapsed">
         <a href="fantasy-cinco-2026.html" class="archive-week">Week 2 — current <span class="week-date">May 12, 2026</span></a>
       </div>
     </div>
@@ -407,16 +407,19 @@ function toggleGroup(el) {
   var group = el.nextElementSibling;
   if (!group) return;
   if (group.classList.contains('collapsed')) {
-    group.style.maxHeight = group.scrollHeight + 'px';
+    group.style.maxHeight = '2000px';
     group.classList.remove('collapsed');
   } else {
     group.style.maxHeight = '0';
     group.classList.add('collapsed');
   }
 }
-// Initialize: measure and set max-height for non-collapsed groups
+// Initialize: ensure collapsed groups are at 0, open groups are tall
+document.querySelectorAll('.toc-section-group.collapsed').forEach(function(g) {
+  g.style.maxHeight = '0';
+});
 document.querySelectorAll('.toc-section-group:not(.collapsed)').forEach(function(g) {
-  g.style.maxHeight = g.scrollHeight + 'px';
+  g.style.maxHeight = '2000px';
 });
 </script>
 
