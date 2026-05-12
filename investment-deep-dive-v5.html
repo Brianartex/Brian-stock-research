@@ -164,39 +164,10 @@
     border: none; height: 1px; background: var(--border); margin: 8px 16px;
   }
 
-  /* Archive month/week */
-  .archive-month {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px; font-weight: 600;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--text-dim);
-    padding: 6px 16px 2px 20px;
-    cursor: pointer; user-select: none;
-    display: flex; align-items: center; gap: 6px;
-  }
-  .archive-month:hover { color: var(--text); }
-  .archive-month .toc-arrow {
-    font-size: 7px; transition: transform .2s; display: inline-block;
-  }
-  .archive-month.collapsed .toc-arrow { transform: rotate(-90deg); }
-  .archive-week {
-    display: block; padding: 3px 16px 3px 28px;
-    font-size: 10px; color: var(--text-quiet); text-decoration: none;
-    font-weight: 400; transition: all .15s;
-    border-left: 2px solid transparent;
-  }
-  .archive-week:hover {
-    color: var(--text-dim); background: rgba(0,0,0,0.02);
-    border-left-color: var(--text-quiet); text-decoration: none;
-  }
-  .archive-week .week-date {
-    font-size: 9px; color: var(--text-quiet); margin-left: 4px;
-  }
-
   /* ═══════════ MAIN CONTENT ═══════════ */
   .page-content {
     margin-left: var(--toc-width); padding: 48px 48px 80px;
-    max-width: 840px; position: relative; z-index: 1;
+    max-width: 1200px; position: relative; z-index: 1;
   }
 
   /* ═══════════ HAMBURGER NAV ═══════════ */
@@ -508,10 +479,8 @@
     .toc-sidebar.mobile-open {
       display: block; position: fixed; inset: 0; z-index: 245;
       width: 100%; height: 100vh; padding-top: 60px;
-      background: var(--surface-alt);
-      box-shadow: var(--shadow-lg-ext);
     }
-    .page-content { margin-left: 0 !important; padding: 24px 16px 60px; max-width: 100% !important; }
+    .page-content { margin-left: 0; padding: 24px 16px 60px; }
     .hamburger-btn { display: flex; }
     .hero h1 { font-size: 32px; }
     .metrics { grid-template-columns: repeat(2, 1fr); }
@@ -565,44 +534,68 @@
 .quote-block .quote-src{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--accent);margin-top:8px;font-style:normal;text-transform:uppercase}
 @media(max-width:768px){.pick-grid{grid-template-columns:1fr}}
 
+
 /* ═══════════ MACRO DASHBOARD ═══════════ */
 .macro-dash{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 16px}
 .macro-dash-item{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:14px 10px;text-align:center}
 .macro-dash-item .val{font-size:20px;font-weight:700;letter-spacing:-0.03em}
 .macro-dash-item .lbl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-quiet);margin-top:4px}
 .macro-dash-item .sub{font-size:10px;color:var(--text-dim);margin-top:2px}
+
 /* ═══════════ PERFORMANCE TRACKER ═══════════ */
-.perf-tracker{background:var(--bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-md-ext);padding:24px;margin:24px 0}
-.perf-table{width:100%;border-collapse:collapse;font-size:12px}
-.perf-table th{text-align:left;padding:10px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-quiet);border-bottom:1px solid var(--border)}
-.perf-table td{padding:10px 8px;border-bottom:1px solid var(--border);color:var(--text-dim)}
-.perf-table td.ticker{font-weight:700;color:var(--text)}
-.perf-table .up{color:var(--green);font-weight:600}
-.perf-table .down{color:var(--red);font-weight:600}
-.perf-table .runner{background:var(--green-bg)}
-.perf-table .laggard{background:var(--red-bg)}
-.perf-table .neutral{background:var(--accent-bg)}
-/* ═══════════ CONVICTION BADGE ═══════════ */
-.conviction-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 10px;border-radius:var(--radius-sm);margin-left:8px;display:inline-block}
-.conviction-badge.increased{color:var(--green);background:var(--green-bg);box-shadow:var(--shadow-sm-ext)}
-.conviction-badge.decreased{color:var(--red);background:var(--red-bg);box-shadow:var(--shadow-sm-ext)}
-.conviction-badge.unchanged{color:var(--accent);background:var(--accent-bg);box-shadow:var(--shadow-sm-ext)}
-/* ═══════════ EARNINGS CALENDAR ═══════════ */
-.earnings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-.earnings-card{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:14px 16px}
-.earnings-card .ticker{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700}
-.earnings-card .date{font-size:12px;color:var(--text-dim);margin-top:4px}
-.earnings-card .days{font-size:10px;color:var(--text-quiet);margin-top:2px}
-.earnings-card.imminent{box-shadow:var(--shadow-sm-ext);border-left:3px solid var(--amber)}
+.perf-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}
+.perf-table th{text-align:left;padding:8px 10px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-quiet);border-bottom:1px solid var(--border)}
+.perf-table td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text-dim)}
+.perf-table tr:hover td{background:rgba(0,0,0,0.02)}
+.status-badge{display:inline-block;font-size:9px;font-weight:600;padding:3px 8px;border-radius:var(--radius-sm);text-transform:uppercase;letter-spacing:0.04em}
+.status-badge.runner{background:var(--green-bg);color:var(--green)}
+.status-badge.laggard{background:var(--red-bg);color:var(--red)}
+.status-badge.neutral{background:var(--amber-bg);color:var(--amber)}
+.status-badge.new{background:var(--accent-bg);color:var(--accent)}
+
 /* ═══════════ POSITION SIZING ═══════════ */
-.sizing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-.sizing-card{background:var(--bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-md-ext);padding:24px}
-.sizing-card h4{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px}
-.sizing-card p{font-size:12px;color:var(--text-dim);line-height:1.7}
-@media(max-width:768px){.macro-dash{grid-template-columns:repeat(2,1fr)}.earnings-grid{grid-template-columns:1fr}.sizing-grid{grid-template-columns:1fr}}
+.sizing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+.sizing-card{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:14px 16px}
+.sizing-card h4{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;color:var(--accent)}
+.sizing-card .sizing-amount{font-size:20px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+.sizing-card p{font-size:11px;color:var(--text-dim);line-height:1.6}
+
+/* ═══════════ EARNINGS CALENDAR ═══════════ */
+.earnings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.earnings-item{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:12px;text-align:center}
+.earnings-item .tck{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--accent)}
+.earnings-item .dt{font-size:10px;color:var(--text-dim);margin-top:4px}
+.earnings-item .tm{font-size:9px;color:var(--text-quiet);margin-top:2px}
+
+/* ═══════════ CONVICTION BADGE ═══════════ */
+.conviction-badge{display:inline-block;font-size:9px;font-weight:600;padding:3px 10px;border-radius:var(--radius-sm);text-transform:uppercase;letter-spacing:0.04em;margin-left:8px;vertical-align:middle}
+.conviction-badge.increased{background:var(--green-bg);color:var(--green)}
+.conviction-badge.decreased{background:var(--red-bg);color:var(--red)}
+.conviction-badge.unchanged{background:var(--amber-bg);color:var(--amber)}
+.conviction-badge.new{background:var(--accent-bg);color:var(--accent)}
+
+/* ═══════════ TOC RESPONSIVE FIXES ═══════════ */
+.page-content{max-width:840px}
+@media (max-width: 768px) {
+  .toc-sidebar { display: none; }
+  .toc-sidebar.mobile-open {
+    display: block; position: fixed; inset: 0; z-index: 245;
+    width: 100%; height: 100vh; padding-top: 60px;
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-lg-ext);
+  }
+  .page-content { margin-left: 0 !important; padding: 24px 16px 60px; max-width: 100% !important; }
+  .hamburger-btn { display: flex; }
+}
+@media (max-width: 412px) {
+  .page-content { padding: 16px 12px 48px; }
+}
+
 </style>
 </head>
 <body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <button class="hamburger-btn" id="hamBtn" aria-label="Toggle menu" onclick="document.getElementById('toc').classList.toggle('mobile-open');this.classList.toggle('open');">
   <span class="ham-line"></span>
@@ -631,8 +624,8 @@
     <a href="#aph" class="toc-item">APH</a>
     <a href="#anet" class="toc-item">ANET</a>
     <a href="#ampx" class="toc-item">AMPX</a>
-    <a href="#sive" class="toc-item">SIVE</a>
     <a href="#vst" class="toc-item">VST</a>
+    <a href="#sive" class="toc-item">SIVE</a>
     <a href="#position-sizing" class="toc-item">Position Sizing</a>
     <a href="#earnings" class="toc-item">Earnings Calendar</a>
     <a href="#references" class="toc-item">References</a>
@@ -644,8 +637,8 @@
     <span class="toc-arrow">&#9662;</span> Analysis
   </div>
   <div class="toc-section-group collapsed" style="max-height:0">
-    <a href="investment-deep-dive-v5.html" class="toc-item active">Asymmetric Basket v5</a>
-    <a href="Tech_Stock_Basket_May_2026_v3.html" class="toc-item">Tech Survivors + AI</a>
+    <a href="investment-deep-dive-v5.html" class="toc-item active">Asymmetric Basket (v5)</a>
+    <a href="Tech_Stock_Basket_May_2026_v3.html" class="toc-item">Tech Survivors</a>
     <a href="Geopolitical_Growth_Stocks_May_2026_v3.html" class="toc-item">Geopolitical Growth</a>
     <a href="fantasy-cinco-2026.html" class="toc-item">Fantasy Football</a>
   </div>
@@ -656,19 +649,31 @@
     <span class="toc-arrow">&#9662;</span> Archive
   </div>
   <div class="toc-section-group collapsed" style="max-height:0">
-    <div class="archive-month" onclick="toggleGroup(this)">
+    <div class="toc-section-label collapsed" style="padding-left:16px;color:var(--text-dim);" onclick="toggleGroup(this);event.stopPropagation();">
       <span class="toc-arrow">&#9662;</span> May 2026
     </div>
-    <div class="toc-section-group">
-      <a href="investment-deep-dive-v5.html" class="archive-week">Week 2 <span class="week-date">May 11</span></a>
-      <a href="investment-deep-dive-v4.html" class="archive-week">Week 1 <span class="week-date">May 9</span></a>
+    <div class="toc-section-group collapsed" style="max-height:0">
+      <a href="investment-deep-dive-v5.html" class="toc-item" style="padding-left:28px;">Week 2 (May 12)</a>
+      <a href="investment-deep-dive-v4.html" class="toc-item" style="padding-left:28px;">Week 1 (May 9)</a>
     </div>
   </div>
 
-  
+  <script>
+  function toggleGroup(el) {
+    el.classList.toggle('collapsed');
+    var group = el.nextElementSibling;
+    if (group && group.classList.contains('toc-section-group')) {
+      if (group.style.maxHeight === '0px' || !group.style.maxHeight) {
+        group.style.maxHeight = group.scrollHeight + 'px';
+        group.classList.remove('collapsed');
+      } else {
+        group.style.maxHeight = '0px';
+        group.classList.add('collapsed');
+      }
+    }
+  }
+  </script>
 </nav>
-
-<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav class="site-nav" aria-label="Site navigation">
   <a href="index.html">← Research Home</a>
@@ -680,9 +685,9 @@
 <main class="page-content" id="main-content">
 
 <div class="hero">
-  <div class="hero-tag">Deep-Dive Research · May 11, 2026</div>
+  <div class="hero-tag">Deep-Dive Research · May 12, 2026</div>
   <h1>Asymmetric Basket.<br><span>High upside. Managed risk.</span></h1>
-  <p>9 stocks selected for asymmetric risk/reward over a 5+ year horizon. $2,000 allocation. The thesis: analyst targets are floors, not ceilings — these stocks have catalysts that haven't made it into the models yet.</p>
+  <p>10 stocks selected for asymmetric risk/reward over a 5+ year horizon. $2,000 allocation. The thesis: analyst targets are floors, not ceilings — these stocks have catalysts that haven't made it into the models yet.</p>
 </div>
 
 <div class="disclaimer">
@@ -705,20 +710,35 @@
     <strong>New — May 2026:</strong> Adata reports DRAM and NAND contract prices climbing 40%+ in the second quarter. Big Tech reportedly offers to directly fund memory fabs — the bottleneck is so severe that hyperscalers want to pay for manufacturing capacity. Semiconductor sector added $3.8 trillion in market value. Glass substrate timelines moved up to end of 2026. Power chip shortages deepening. These are not projections — they are real-time confirmations that the thesis is accelerating.
     <div class="quote-src">Verified via Yahoo Finance, industry reports, supply chain checks</div>
   </div>
-</div><div class="macro-card" id="macro-dash" style="margin-top:32px;">
-  <div class="sec-label">Macro Dashboard</div>
-  <h3>Real-Time Macro Wind Check</h3>
-  <p>One glance tells you if the macro tailwind is still at your back.</p>
-  <div class="macro-dash">
-    <div class="macro-dash-item"><div class="val" style="color:var(--green)">7.8x</div><div class="lbl">MU Fwd P/E</div><div class="sub">Memory supercycle intact</div></div>
-    <div class="macro-dash-item"><div class="val" style="color:var(--green)">+40%</div><div class="lbl">DRAM/NAND Q2</div><div class="sub">Adata contract prices</div></div>
-    <div class="macro-dash-item"><div class="val" style="color:var(--amber)">$3.8T</div><div class="lbl">Semi Mkt Cap Add</div><div class="sub">Sector value surge</div></div>
-    <div class="macro-dash-item"><div class="val" style="color:var(--accent)">97%</div><div class="lbl">MU/SNDK 52w</div><div class="sub">At highs = caution</div></div>
-  </div>
-  <p style="font-size:12px;color:var(--text-dim);margin-top:8px;"><strong>Verdict:</strong> AI infrastructure buildout is accelerating. Memory pricing confirms supply constraint. Risk: easy money made in memory complex. New capital should favor laggards (SMCI, FLNC) over runners (MU, SNDK).</p>
 </div>
 
-
+<div class="macro-card" id="macro-dash" style="margin-top:24px;">
+  <div class="sec-label">Macro Dashboard</div>
+  <h3>Real-Time Wind Indicators</h3>
+  <div class="macro-dash">
+    <div class="macro-dash-item">
+      <div class="val" style="color:var(--green)">7.5x</div>
+      <div class="lbl">MU Forward P/E</div>
+      <div class="sub">Still cheap vs growth</div>
+    </div>
+    <div class="macro-dash-item">
+      <div class="val" style="color:var(--green)">+40%</div>
+      <div class="lbl">DRAM/NAND Pricing</div>
+      <div class="sub">Adata Q2 2026</div>
+    </div>
+    <div class="macro-dash-item">
+      <div class="val" style="color:var(--green)">$3.8T</div>
+      <div class="lbl">Semi Market Cap Surge</div>
+      <div class="sub">Sector added in 2026</div>
+    </div>
+    <div class="macro-dash-item">
+      <div class="val" style="color:var(--amber)">Caution</div>
+      <div class="lbl">Memory at 52w Highs</div>
+      <div class="sub">MU/SNDK parabolic</div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--text-dim);margin-top:12px;"><strong>Verdict:</strong> The AI infrastructure buildout is accelerating, not slowing. DRAM/NAND pricing up 40%+, hyperscalers offering to fund memory fabs directly, and the semiconductor talent shortage keeps supply constrained. Our basket is positioned for this tailwind. The risk is that memory stocks (MU, SNDK) are technically extended — any sector rotation could cause 15–20% pullbacks.</p>
+</div></div>
 
 
 <div class="macro-card" id="methodology" style="margin-top:32px;">
@@ -751,42 +771,46 @@
   <p style="margin-top:16px;font-size:12px;color:var(--text-dim);">Independent research and analysis supports this framework <sup>[1]</sup> <sup>[2]</sup>. The semiconductor talent shortage creates multi-year supply constraints <sup>[2]</sup>. AI revenue growth at companies like Anthropic validates the capex cycle is real <sup>[6]</sup>. Optical and photonics bottlenecks are the next frontier <sup>[3]</sup> <sup>[5]</sup>. This basket is the result of applying the playbook systematically, not following any single source.</p>
 </div>
 
+<div class="macro-card" id="performance" style="margin-top:24px;">
+  <div class="sec-label">Performance Tracker</div>
+  <h3>Basket Performance Since May 9, 2026</h3>
+  <table class="perf-table">
+    <thead>
+      <tr><th>Ticker</th><th>Doc Price</th><th>Current</th><th>Change</th><th>vs 52w Range</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>AAOI</strong></td><td>$184.90</td><td>$192.71</td><td style="color:var(--green)">+4.2%</td><td>93%</td><td><span class="status-badge runner">Runner</span></td></tr>
+      <tr><td><strong>ANET</strong></td><td>$136.43</td><td>$140.19</td><td style="color:var(--green)">+2.8%</td><td>78%</td><td><span class="status-badge runner">Runner</span></td></tr>
+      <tr><td><strong>APH</strong></td><td>$122.47</td><td>$126.63</td><td style="color:var(--green)">+3.4%</td><td>76%</td><td><span class="status-badge runner">Runner</span></td></tr>
+      <tr><td><strong>AMPX</strong></td><td>$17.68</td><td>$17.77</td><td style="color:var(--green)">+0.5%</td><td>78%</td><td><span class="status-badge neutral">Neutral</span></td></tr>
+      <tr><td><strong>MU</strong></td><td>$795.33</td><td>$764.90</td><td style="color:var(--red)">-3.8%</td><td>93%</td><td><span class="status-badge neutral">Neutral</span></td></tr>
+      <tr><td><strong>SMCI</strong></td><td>$33.52</td><td>$32.43</td><td style="color:var(--red)">-3.3%</td><td>52%</td><td><span class="status-badge laggard">Laggard</span></td></tr>
+      <tr><td><strong>SNDK</strong></td><td>$1,547.56</td><td>$1,466.37</td><td style="color:var(--red)">-5.3%</td><td>92%</td><td><span class="status-badge laggard">Laggard</span></td></tr>
+      <tr><td><strong>VST</strong></td><td>$152.05</td><td>$147.48</td><td style="color:var(--red)">-3.0%</td><td>67%</td><td><span class="status-badge laggard">Laggard</span></td></tr>
+      <tr><td><strong>FLNC</strong></td><td>$25.23</td><td>$21.18</td><td style="color:var(--red)">-16.1%</td><td>63%</td><td><span class="status-badge laggard">Laggard</span></td></tr>
+      <tr><td><strong>SIVE</strong></td><td>—</td><td>$5.59</td><td style="color:var(--accent)">NEW</td><td>87%</td><td><span class="status-badge new">New Addition</span></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px;color:var(--text-dim);margin-top:12px;"><strong>Leaders:</strong> AAOI (+4.2%), ANET (+2.8%), APH (+3.4%). <strong>Laggards:</strong> FLNC (-16.1%), SNDK (-5.3%), SMCI (-3.3%). <strong>Notable:</strong> FLNC dropped 16% today on no obvious news — likely profit-taking after the recent run. The MSA thesis is unchanged.</p>
+</div></div>
+
 <div class="rule"></div>
 
-<div class="sec-label">The Basket — 9 Picks, $2,000</div>
+<div class="sec-label">The Basket — 10 Picks, $2,000</div>
 
 <div class="allocation-bar">
   <div class="alloc-segment" style="background:var(--accent);width:15%"></div>
   <div class="alloc-segment" style="background:var(--green);width:12.5%"></div>
   <div class="alloc-segment" style="background:#4d8ccc;width:12.5%"></div>
-  <div class="alloc-segment" style="background:var(--amber);width:12.5%"></div>
-  <div class="alloc-segment" style="background:#8c5a9e;width:10%"></div>
-  <div class="alloc-segment" style="background:var(--red);width:10%"></div>
-  <div class="alloc-segment" style="background:var(--text-quiet);width:10%"></div>
-  <div class="alloc-segment" style="background:var(--text-dim);width:10%"></div>
+  <div class="alloc-segment" style="background:var(--amber);width:10%"></div>
+  <div class="alloc-segment" style="background:#8c5a9e;width:7.5%"></div>
+  <div class="alloc-segment" style="background:var(--red);width:7.5%"></div>
+  <div class="alloc-segment" style="background:var(--text-quiet);width:7.5%"></div>
+  <div class="alloc-segment" style="background:var(--text-dim);width:7.5%"></div>
   <div class="alloc-segment" style="background:#6b8e6b;width:7.5%"></div>
+  <div class="alloc-segment" style="background:#a67c52;width:7.5%"></div>
 </div>
-<div class="alloc-label" style="text-align:center;">FLNC $300 | ANET $250 | MU $250 | SMCI $250 | AAOI $200 | VST $200 | APH $200 | SNDK $200 | AMPX $150</div>
-<div class="perf-tracker" id="performance">
-  <div class="sec-label">Basket Performance Tracker</div>
-  <h3>Doc Price → Current — Who Moved?</h3>
-  <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px;">Prices refreshed May 11, 2026 at market close. Sorted by performance vs. doc price (May 9).</p>
-  <table class="perf-table">
-    <tr><th>Ticker</th><th>Doc Price</th><th>Current</th><th>Change</th><th>52w Position</th><th>Verdict</th></tr>
-    <tr class="neutral"><td class="ticker">VST</td><td>$147.97</td><td>$152.05</td><td class="up">+2.8%</td><td>17%</td><td>Neutral</td></tr>
-<tr class="neutral"><td class="ticker">MU</td><td>$780.80</td><td>$795.33</td><td class="up">+1.9%</td><td>97%</td><td>Neutral</td></tr>
-<tr class="neutral"><td class="ticker">AAOI</td><td>$183.58</td><td>$184.90</td><td class="up">+0.7%</td><td>96%</td><td>Neutral</td></tr>
-<tr class="neutral"><td class="ticker">SNDK</td><td>$1543.05</td><td>$1547.56</td><td class="up">+0.3%</td><td>97%</td><td>Neutral</td></tr>
-<tr class="neutral"><td class="ticker">APH</td><td>$124.29</td><td>$122.47</td><td class="down">-1.5%</td><td>47%</td><td>Neutral</td></tr>
-<tr class="neutral"><td class="ticker">ANET</td><td>$138.97</td><td>$136.43</td><td class="down">-1.8%</td><td>55%</td><td>Neutral</td></tr>
-<tr class="neutral"><td class="ticker">FLNC</td><td>$26.36</td><td>$25.23</td><td class="down">-4.3%</td><td>72%</td><td>Neutral</td></tr>
-<tr class="laggard"><td class="ticker">AMPX</td><td>$18.69</td><td>$17.68</td><td class="down">-5.4%</td><td>75%</td><td>Laggard</td></tr>
-<tr class="laggard"><td class="ticker">SMCI</td><td>$35.62</td><td>$33.52</td><td class="down">-5.9%</td><td>33%</td><td>Laggard</td></tr>
-
-  </table>
-</div>
-
-
+<div class="alloc-label" style="text-align:center;">SMCI $300 | FLNC $250 | SIVE $200 | ANET $200 | AAOI $150 | MU $150 | SNDK $150 | APH $150 | VST $150 | AMPX $150</div>
 
 <!-- PICK 1: FLNC -->
 <div class="pick-card" id="flnc">
@@ -794,20 +818,20 @@
     <div style="display:flex;align-items:baseline;gap:16px;">
       <div class="pick-rank">01</div>
       <div>
-        <div class="pick-ticker">FLNC <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$25.23</span><span class="conviction-badge unchanged">unchanged</span></div>
+        <div class="pick-ticker">FLNC <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$21.18</span><span class="conviction-badge unchanged">unchanged</span></div>
         <div style="font-size:13px;color:var(--text-dim);">Fluence Energy — Grid-Scale Battery Storage</div>
       </div>
     </div>
-    <div class="pick-alloc">$300 — 15%</div>
+    <div class="pick-alloc">$150 — 7.5%</div>
   </div>
   <p class="pick-thesis"><strong>The most mispriced stock in either doc.</strong> $4.5B market cap. $5.6B backlog. Two hyperscaler master supply agreements pending. The stock is 38% above analyst targets because NO target includes the MSA conversion. If the framework agreements convert to contracts in Q3 2026 — and Citi says "the possibility of a hyperscaler order will likely overshadow everything" — revenue doubles overnight. At 1x revenue, FLNC is priced for the MSAs to fail. If they succeed, this is a multi-bagger.</p>
   <div class="pick-grid">
     <div class="pick-box green"><h5>Catalyst</h5><p>Q3 2026 hyperscaler order announcement. Citi analyst: "The possibility of a hyperscaler order will likely overshadow everything else in the quarter." Two hyperscaler framework agreements converting — either one triggers the re-rating.</p></div>
     <div class="pick-box red"><h5>Risk</h5><p>Framework agreements are NOT obligations — they can expire unconverted. 17 analysts rate it Hold (2.75) — weakest conviction in the basket. Negative FCF and margins until revenue scales. If MSAs don't convert by Q1 2027, thesis is dead.</p></div>
     <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>Analyst models use CURRENT revenue. The $5.6B backlog + 2 hyperscaler MSAs represent future revenue not in any model. When (not if) those convert, every target gets revised up 50-100%.</p></div>
-    <div class="pick-box"><h5>Wall Street</h5><p>17 analysts | Hold 2.75 | Mean target $17.35 (stock at $26) | High $28, Low $8<br><strong>Our take:</strong> Targets are stale. The MSA catalyst changes the math. Buy before the revision.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>17 analysts | Hold 2.75 | Mean target $17.35 (stock at $25) | High $28, Low $8<br><strong>Our take:</strong> Targets are stale. The MSA catalyst changes the math. Buy before the revision.</p></div>
   </div>
-  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $22–24 on pullback. Stock pulled back – better entry than May 9. MSA thesis unchanged. Scale in on weakness.<br><strong>Stop-Loss:</strong> $20.00 (below 200d MA support break)<br><strong>Take Profit:</strong> $33 (52w high), $40+ if hyperscaler MSAs convert.<br><strong>Trend:</strong> Strong uptrend. Above both MAs. Pulled back from 52w high resistance – healthy.<br><strong>50d MA:</strong> $14.86 | <strong>200d MA:</strong> $16.10 | <strong>52w High:</strong> $33.51</p></div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> Current levels ($21). Dropped 16% today on profit-taking — MSA thesis unchanged. The $18–22 entry zone is now in play.<br><strong>Stop-Loss:</strong> $16.00 (below 200d MA)<br><strong>Take Profit:</strong> $33 (52w high), $40+ if hyperscaler MSAs convert.<br><strong>Trend:</strong> Strong uptrend with sharp pullback. Above 200d MA. Buy the dip.<br><strong>50d MA:</strong> $14.86 | <strong>200d MA:</strong> $16.10 | <strong>52w High:</strong> $33.51</p></div>
   <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">High</span></div>
 </div>
 
@@ -817,20 +841,20 @@
     <div style="display:flex;align-items:baseline;gap:16px;">
       <div class="pick-rank">02</div>
       <div>
-        <div class="pick-ticker">AAOI <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$184.90</span><span class="conviction-badge decreased">decreased</span></div>
+        <div class="pick-ticker">AAOI <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$192.71</span><span class="conviction-badge unchanged">unchanged</span></div>
         <div style="font-size:13px;color:var(--text-dim);">Applied Optoelectronics — Made-in-America Optical</div>
       </div>
     </div>
-    <div class="pick-alloc">$200 — 10%</div>
+    <div class="pick-alloc">$150 — 7.5%</div>
   </div>
   <p class="pick-thesis"><strong>The optical version of Intel, but lean and fast.</strong> Only 5 analysts cover this — it is wildly underfollowed. The thesis from [3]: "Basically this is the Optical version of INTC, where they're scaling capacity from laser fab to assembly Made in America. Anything they make is likely to be bought out by hyperscalers." Revenue is projected to ramp from $312M to $1.97B by Q4 2027. The high analyst target is $220 — 48% above current price. The low is $57. This is what asymmetric risk/reward looks like on paper.</p>
   <div class="pick-grid">
     <div class="pick-box green"><h5>Catalyst</h5><p>Next hyperscaler optical order. 100K units/month capacity for 800G transceivers. Revenue doubling thesis plays out over 18 months. [5]: "Photonics is the next NVDA/TSLA."</p></div>
     <div class="pick-box red"><h5>Risk</h5><p>Only 5 analysts. Negative FCF (-$447M) and negative operating margins (-8.6%). Pure story stock — if the optical thesis takes longer than expected, the stock has no earnings floor. Massive spread in analyst targets ($57-$220) shows extreme uncertainty.</p></div>
     <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>5 analysts cannot properly model a company whose revenue is doubling. The mean $151 target assumes linear growth. The optical supercycle is exponential. As more analysts pick up coverage, targets will be revised up.</p></div>
-    <div class="pick-box"><h5>Wall Street</h5><p>5 analysts | Hold 2.33 | Mean $151 (stock at $183) | High $220, Low $57<br><strong>Our take:</strong> Underfollowed. The high target ($220) is closer to reality if the optical thesis holds.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>5 analysts | Hold 2.33 | Mean $151 (stock at $185) | High $220, Low $57<br><strong>Our take:</strong> Underfollowed. The high target ($220) is closer to reality if the optical thesis holds.</p></div>
   </div>
-  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> DO NOT CHASE at $185. Stock hit $190.96 intraday – 99% of 52w high. The ideal $150–160 entry is gone. Wait for a 15%+ pullback to $150–160 range.<br><strong>Stop-Loss:</strong> $140.00 (below 50d MA break)<br><strong>Take Profit:</strong> $220 (analyst high).<br><strong>Trend:</strong> Explosive uptrend but severely extended. 50d MA at $127 – a reversion to mean would be healthy.<br><strong>50d MA:</strong> $127.38 | <strong>200d MA:</strong> $55.65 | <strong>52w High:</strong> $191.87</p></div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $150–160 on pullback. DO NOT CHASE at $193. New 52w high is $208 — room to run but extended.<br><strong>Stop-Loss:</strong> $110.00 (below 50d MA)<br><strong>Take Profit:</strong> $208 (52w high), $220 (analyst high).<br><strong>Trend:</strong> Explosive uptrend. Extended but momentum intact.<br><strong>50d MA:</strong> $127.38 | <strong>200d MA:</strong> $55.65 | <strong>52w High:</strong> $208.00</p></div>
   <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Very High</span></div>
 </div>
 
@@ -840,20 +864,20 @@
     <div style="display:flex;align-items:baseline;gap:16px;">
       <div class="pick-rank">03</div>
       <div>
-        <div class="pick-ticker">MU <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$795.33</span><span class="conviction-badge decreased">decreased</span></div>
+        <div class="pick-ticker">MU <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$764.90</span><span class="conviction-badge unchanged">unchanged</span></div>
         <div style="font-size:13px;color:var(--text-dim);">Micron Technology — HBM Memory Supercycle</div>
       </div>
     </div>
-    <div class="pick-alloc">$250 — 12.5%</div>
+    <div class="pick-alloc">$300 — 15%</div>
   </div>
   <p class="pick-thesis"><strong>196% revenue growth at 7x forward P/E.</strong> This is the most asymmetric large-cap semiconductor on the board. 42 analysts rate it Strong Buy (1.45). The HBM memory supercycle is real — every AI GPU needs high-bandwidth memory. The [2] semiconductor talent shortage thesis adds a structural supply constraint: it takes 3-4 years to train a competent fab engineer, and they're all going into software. MU's pricing power extends for 2-3 years minimum. Yes, the stock is 34% above the mean target of $556. But at 7x P/E, the target is wrong — not the stock price.</p>
   <div class="pick-grid">
     <div class="pick-box green"><h5>Catalyst</h5><p><strong>Verified — May 2026:</strong> Adata reports DRAM and NAND contract prices climbing 40%+ in Q2 2026. Big Tech reportedly offering to directly fund SK Hynix fabs — the memory bottleneck is so severe that hyperscalers want to pay for manufacturing capacity. Yahoo Finance confirms semiconductor sector added $3.8 trillion in market value. MU stock up 40% in five trading days. The semi talent shortage [2] keeps supply constrained for 2-3 years minimum. <strong>This is no longer a thesis — it is happening in real time.</strong></p></div>
     <div class="pick-box red"><h5>Risk</h5><p>Memory cycles are vicious. 34% above mean target means if the cycle turns, the drop is fast. Samsung HBM4 catching up would erode pricing power. Already up 194% in 6 months — some good news is priced in.</p></div>
     <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>42 analysts covering a stock with 196% growth and 7x P/E. The targets haven't caught up because analysts revise quarterly and the HBM cycle is moving faster than their models. The semi talent shortage means this cycle lasts longer than any model predicts.</p></div>
-    <div class="pick-box"><h5>Wall Street</h5><p>42 analysts | Strong Buy 1.45 | Mean $556 (stock at $780) | High $1,000, Low $249<br><strong>Our take:</strong> 7x P/E with 196% growth. Even at the low target of $249, it's not expensive. The upside case is $1,000+ if the cycle extends.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>42 analysts | Strong Buy 1.45 | Mean $556 (stock at $795) | High $1,000, Low $249<br><strong>Our take:</strong> 7x P/E with 196% growth. Even at the low target of $249, it's not expensive. The upside case is $1,000+ if the cycle extends.</p></div>
   </div>
-  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> DO NOT CHASE at $795. Hit NEW 52w high of $818.67 intraday. Forward P/E is 7.8x — still cheap fundamentally, but technically parabolic. If you own it, trim 1/3 into strength above $800. Re-buy on 10%+ pullback.<br><strong>Stop-Loss:</strong> $650.00 (below 50d MA break)<br><strong>Take Profit:</strong> $1,000 (analyst high).<br><strong>Trend:</strong> At 52w highs. Parabolic. Do not chase new money here.<br><strong>50d MA:</strong> $456.62 | <strong>200d MA:</strong> $294.02 | <strong>52w High:</strong> $818.67</p></div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $650–700 on pullback. Hit 52w high of $818, now pulling back. Forward P/E is 7.5x — still cheap.<br><strong>Stop-Loss:</strong> $550.00 (below 50d MA)<br><strong>Take Profit:</strong> $1,000 (analyst high).<br><strong>Trend:</strong> Parabolic pullback from highs. Healthy consolidation.<br><strong>50d MA:</strong> $456.62 | <strong>200d MA:</strong> $294.02 | <strong>52w High:</strong> $818.67</p></div>
   <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active medium"></div><div class="risk-dot active medium"></div><div class="risk-dot active"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Medium-High</span></div>
 </div>
 
@@ -863,20 +887,20 @@
     <div style="display:flex;align-items:baseline;gap:16px;">
       <div class="pick-rank">04</div>
       <div>
-        <div class="pick-ticker">SMCI <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$33.52</span><span class="conviction-badge increased">increased</span></div>
+        <div class="pick-ticker">SMCI <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$32.43</span><span class="conviction-badge unchanged">unchanged</span></div>
         <div style="font-size:13px;color:var(--text-dim);">Super Micro Computer — AI Server Builder</div>
       </div>
     </div>
-    <div class="pick-alloc">$250 — 12.5%</div>
+    <div class="pick-alloc">$150 — 7.5%</div>
   </div>
   <p class="pick-thesis"><strong>122% revenue growth at 11x P/E.</strong> SMCI builds the physical servers that hold the GPUs. Every AI cluster needs them. The xAI Colossus 2 deal is transformative — it validates SMCI as a tier-1 AI infrastructure supplier. Yes, there are accounting concerns (negative $7.4B FCF, 16 analysts rate it Hold at 2.83). But the bear case is priced in at 11x earnings. If they get a clean audit sign-off and the xAI revenue hits the income statement, this re-rates to 20-25x. That's a double from here. [4] called DELL and SMCI together — DELL at 17.7x is fairly priced, SMCI at 11x is mispriced.</p>
   <div class="pick-grid">
     <div class="pick-box green"><h5>Catalyst</h5><p>Clean audit sign-off. xAI Colossus 2 revenue hitting Q3/Q4 2026 earnings. Every new AI cluster announcement is incremental demand. [4]: "massive opportunity."</p></div>
     <div class="pick-box red"><h5>Risk</h5><p>Accounting concerns. Negative $7.4B FCF. Customer concentration with xAI. If audit reveals problems or xAI scales back, the stock gets cut in half. 16 analysts at Hold 2.83 reflect this uncertainty.</p></div>
     <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>The $15-$58 analyst range (widest in the basket) shows no one knows how to model this. If SMCI cleans up accounting and the xAI deal is real, the $58 high target is the floor — not the ceiling.</p></div>
-    <div class="pick-box"><h5>Wall Street</h5><p>16 analysts | Hold 2.83 | Mean $36.75 (stock at $36) | High $58, Low $15<br><strong>Our take:</strong> 11x P/E prices in the bear case. The bull case is a double.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>16 analysts | Hold 2.83 | Mean $36.75 (stock at $34) | High $58, Low $15<br><strong>Our take:</strong> 11x P/E prices in the bear case. The bull case is a double.</p></div>
   </div>
-  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $30–34 current levels. Below 200d MA — technically weak but fundamentally cheaper than May 9. Conviction increased: same catalysts, lower price.<br><strong>Stop-Loss:</strong> $28.00 (below 50d MA support)<br><strong>Take Profit:</strong> $58 (analyst high). Re-rate to 20x P/E on clean audit.<br><strong>Trend:</strong> Below 200d MA. Consolidating. Waiting for catalyst.<br><strong>50d MA:</strong> $27.75 | <strong>200d MA:</strong> $37.18 | <strong>52w High:</strong> $62.36</p></div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $30–33 current levels. Cheaper than doc price with same catalysts.<br><strong>Stop-Loss:</strong> $25.00 (below 50d MA)<br><strong>Take Profit:</strong> $58 (analyst high).<br><strong>Trend:</strong> Below 200d MA. Consolidating. Waiting for catalyst.<br><strong>50d MA:</strong> $27.75 | <strong>200d MA:</strong> $37.18 | <strong>52w High:</strong> $62.36</p></div>
   <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">High</span></div>
 </div>
 
@@ -886,20 +910,20 @@
     <div style="display:flex;align-items:baseline;gap:16px;">
       <div class="pick-rank">05</div>
       <div>
-        <div class="pick-ticker">SNDK <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$1,547.56</span><span class="conviction-badge decreased">decreased</span></div>
+        <div class="pick-ticker">SNDK <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$1,466.37</span><span class="conviction-badge unchanged">unchanged</span></div>
         <div style="font-size:13px;color:var(--text-dim);">SanDisk — Storage Memory Supercycle</div>
       </div>
     </div>
-    <div class="pick-alloc">$200 — 10%</div>
+    <div class="pick-alloc">$150 — 7.5%</div>
   </div>
   <p class="pick-thesis"><strong>251% revenue growth at 9.2x forward P/E.</strong> SanDisk is the storage twin of MU's memory thesis. The same semiconductor talent shortage that constrains HBM supply also constrains NAND flash. 22 analysts rate it Strong Buy (1.59) with a high target of $2,000. The stock is 12% above the mean target of $1,399 — but with 70% operating margins and 251% growth, the target is a moving number that gets revised up every quarter. [2]'s thesis applies directly: storage supply will be structurally tight for 2-3 years. SNDK prints cash during shortages.</p>
   <div class="pick-grid">
     <div class="pick-box green"><h5>Catalyst</h5><p><strong>Verified — May 2026:</strong> 2D NAND shortage intensifying as Samsung and Micron exited the market. Macronix and Winbond are the primary beneficiaries but SNDK captures the broader NAND pricing upcycle. Adata confirms NAND contract prices climbing 40%+ in Q2 2026. 251% revenue growth at 9.2x P/E is not a projection — it is the current reality with pricing tailwinds accelerating.</p></div>
     <div class="pick-box red"><h5>Risk</h5><p>NAND is more commoditized than HBM — pricing power is weaker. 12% above mean target. If memory cycle turns, the fall is steep. NAND has historically been boom-bust.</p></div>
     <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>251% growth at 9.2x P/E. The semi talent shortage extends the cycle beyond what any quarterly model predicts. Targets are revised up every earnings — this quarter won't be different.</p></div>
-    <div class="pick-box"><h5>Wall Street</h5><p>22 analysts | Strong Buy 1.59 | Mean $1,399 (stock at $1,543) | High $2,000, Low $1,000<br><strong>Our take:</strong> 9.2x P/E with 70% margins. Even at the low target, it's cheap. The high target is realistic if the cycle extends.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>22 analysts | Strong Buy 1.59 | Mean $1,399 (stock at $1,548) | High $2,000, Low $1,000<br><strong>Our take:</strong> 9.2x P/E with 70% margins. Even at the low target, it's cheap. The high target is realistic if the cycle extends.</p></div>
   </div>
-  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> DO NOT CHASE at $1,548. Hit $1,600.00 intraday – new 52w high. Forward P/E is 9.1x — cheap, but technically parabolic. If you own it, trim 1/3 into strength above $1,550. Re-buy on 10%+ pullback.<br><strong>Stop-Loss:</strong> $1,200.00 (below 50d MA break)<br><strong>Take Profit:</strong> $2,000 (analyst high).<br><strong>Trend:</strong> At 52w highs. Parabolic. Do not chase new money here.<br><strong>50d MA:</strong> $855.85 | <strong>200d MA:</strong> $394.35 | <strong>52w High:</strong> $1,600.00</p></div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $1,200–1,400 on pullback. Pulled back from 52w highs.<br><strong>Stop-Loss:</strong> $1,000.00 (below 50d MA)<br><strong>Take Profit:</strong> $2,000 (analyst high).<br><strong>Trend:</strong> Parabolic pullback. Healthy consolidation.<br><strong>50d MA:</strong> $855.85 | <strong>200d MA:</strong> $394.35 | <strong>52w High:</strong> $1,600.00</p></div>
   <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active medium"></div><div class="risk-dot active medium"></div><div class="risk-dot active"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Medium-High</span></div>
 </div>
 
@@ -909,11 +933,11 @@
     <div style="display:flex;align-items:baseline;gap:16px;">
       <div class="pick-rank">06</div>
       <div>
-        <div class="pick-ticker">APH <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$122.47</span><span class="conviction-badge unchanged">unchanged</span></div>
+        <div class="pick-ticker">APH <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$126.63</span><span class="conviction-badge unchanged">unchanged</span></div>
         <div style="font-size:13px;color:var(--text-dim);">Amphenol — High-Speed Connectors &amp; Cabling for AI Data Centers</div>
       </div>
     </div>
-    <div class="pick-alloc">$200 — 10%</div>
+    <div class="pick-alloc">$150 — 7.5%</div>
   </div>
   <p class="pick-thesis"><strong>The boring physical layer nobody talks about — growing 58.4%.</strong> Every AI GPU rack needs thousands of high-speed interconnects. Amphenol makes the connectors and cabling that link GPUs to switches, switches to storage, and racks to racks. 58.4% revenue growth at 22.8x forward P/E. 27.3% operating margins. $3.56B free cash flow. 18 analysts, Strong Buy (1.56), mean target $182 — 42% upside from $128. Stock is below both 50d MA ($137) and 200d MA ($132) — a rare dip in a strong uptrend. This is ANET's less-famous cousin: essential, overlooked, prints cash, and the AI buildout cannot happen without it.</p>
   <div class="pick-grid">
@@ -922,7 +946,7 @@
     <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>18 analysts cover it but 58.4% growth forces revisions. The NVDA architecture change creates a new product cycle not fully captured in current models. At 22.8x P/E with 58% growth, this is a GARP (growth at a reasonable price) play hiding in plain sight — the market is pricing it like a cyclical industrial, not a secular AI beneficiary.</p></div>
     <div class="pick-box"><h5>Wall Street</h5><p>18 analysts | Strong Buy 1.56 | Mean $182 (42% upside) | High $210, Low $155<br><strong>Our take:</strong> Best risk/reward in the physical layer. Stock below both MAs — buy the dip.</p></div>
   </div>
-  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> Current levels ($124). Stock is below 50d MA ($137.01) and 200d MA ($132.00) — this is a pullback in an uptrend. Buy the weakness.<br><strong>Take Profit:</strong> $182 (analyst mean), $210 (high target).<br><strong>Trend:</strong> Pulling back from $167 high. Below both MAs — oversold. Strong uptrend intact.<br><strong>50d MA:</strong> $137.01 | <strong>200d MA:</strong> $132.00 | <strong>52w High:</strong> $167.04</p></div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> Current levels ($127). Below both MAs — pullback in uptrend.<br><strong>Stop-Loss:</strong> $115.00 (below 52w low support)<br><strong>Take Profit:</strong> $182 (analyst mean), $210 (high target).<br><strong>Trend:</strong> Pulling back from $167 high. Below both MAs. Buy the dip.<br><strong>50d MA:</strong> $136.53 | <strong>200d MA:</strong> $132.09 | <strong>52w High:</strong> $167.04</p></div>
   <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active low"></div><div class="risk-dot active low"></div><div class="risk-dot active medium"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Low-Medium</span></div>
 </div>
 
@@ -932,7 +956,7 @@
     <div style="display:flex;align-items:baseline;gap:16px;">
       <div class="pick-rank">07</div>
       <div>
-        <div class="pick-ticker">ANET <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$136.43</span><span class="conviction-badge unchanged">unchanged</span></div>
+        <div class="pick-ticker">ANET <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$140.19</span><span class="conviction-badge unchanged">unchanged</span></div>
         <div style="font-size:13px;color:var(--text-dim);">Arista Networks — AI Datacenter Networking</div>
       </div>
     </div>
@@ -943,9 +967,9 @@
     <div class="pick-box green"><h5>Catalyst</h5><p>Steady earnings beats — no drama, just execution. Every hyperscaler capex announcement is incremental demand for Arista switching. 35% growth with 42.7% margins is a compounding machine.</p></div>
     <div class="pick-box red"><h5>Risk</h5><p>Low risk relative to the basket. The only real risk is a hyperscaler capex pause — which would hit everyone, not just ANET. Premium valuation (but justified by margins).</p></div>
     <div class="pick-box accent"><h5>Why It's Here</h5><p>33% upside to targets + elite margins + 26 analysts strong buy. This is the anchor of the basket — the one where even the conservative analysts agree the stock is undervalued.</p></div>
-    <div class="pick-box"><h5>Wall Street</h5><p>26 analysts | Strong Buy 1.31 | Mean $189 (stock at $138) | High $220, Low $173<br><strong>Our take:</strong> Best risk/reward in the basket. Buy with conviction.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>26 analysts | Strong Buy 1.31 | Mean $189 (stock at $136) | High $220, Low $173<br><strong>Our take:</strong> Best risk/reward in the basket. Buy with conviction.</p></div>
   </div>
-  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $135–140 current levels. Right at 200d MA ($138.76). Below 50d MA ($145.28) — healthy basing. Best risk/reward entry in the basket.<br><strong>Stop-Loss:</strong> $128.00 (below 200d MA break)<br><strong>Take Profit:</strong> $189 (mean), $220 (high). 38% upside to mean alone.<br><strong>Trend:</strong> Consolidating between MAs. Basing. Lowest risk entry.<br><strong>50d MA:</strong> $145.28 | <strong>200d MA:</strong> $138.76 | <strong>52w High:</strong> $179.80</p></div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> Current levels ($140). Right at 200d MA. Healthy basing.<br><strong>Stop-Loss:</strong> $125.00 (below 200d MA)<br><strong>Take Profit:</strong> $189 (mean), $220 (high).<br><strong>Trend:</strong> Consolidating between MAs. Basing. Best risk/reward entry.<br><strong>50d MA:</strong> $145.28 | <strong>200d MA:</strong> $138.76 | <strong>52w High:</strong> $179.80</p></div>
   <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active low"></div><div class="risk-dot active low"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Low-Medium</span></div>
 </div>
 
@@ -955,7 +979,7 @@
     <div style="display:flex;align-items:baseline;gap:16px;">
       <div class="pick-rank">08</div>
       <div>
-        <div class="pick-ticker">AMPX <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$17.68</span><span class="conviction-badge unchanged">unchanged</span></div>
+        <div class="pick-ticker">AMPX <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$17.77</span><span class="conviction-badge unchanged">unchanged</span></div>
         <div style="font-size:13px;color:var(--text-dim);">Amprius Technologies — Next-Gen Drone/Defense Batteries</div>
       </div>
     </div>
@@ -966,9 +990,9 @@
     <div class="pick-box green"><h5>Catalyst</h5><p>First major DoD contract award. 153% revenue growth already happening. Silicon anode technology is the next leap in battery density — and AMPX owns the patents.</p></div>
     <div class="pick-box red"><h5>Risk</h5><p>Pre-revenue scale ($73M). Negative margins (-23%). If the DoD contract doesn't materialize, the stock has no floor. This is a venture-stage bet in public markets.</p></div>
     <div class="pick-box accent"><h5>Why It's Here</h5><p>1.11 conviction (most bullish on Wall Street) + 153% growth + defense catalyst. The tight analyst range ($18-$25) suggests the outcome is binary but the upside is agreed upon.</p></div>
-    <div class="pick-box"><h5>Wall Street</h5><p>8 analysts | Strong Buy 1.11 | Mean $21.62 (stock at $18.69) | High $25, Low $18<br><strong>Our take:</strong> Tightest consensus in the basket. If they're right, 27% upside to the MEAN. If the DoD hits, it's much higher.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>8 analysts | Strong Buy 1.11 | Mean $21.62 (stock at $17.68) | High $25, Low $18<br><strong>Our take:</strong> Tightest consensus in the basket. If they're right, 27% upside to the MEAN. If the DoD hits, it's much higher.</p></div>
   </div>
-  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $16–17.50 on pullback. Pulled back to $17.68, now below 50d MA ($18.07). Entry zone is back. Scale in gradually.<br><strong>Stop-Loss:</strong> $15.50 (below recent support)<br><strong>Take Profit:</strong> $22 (52w high), $25+ on DoD contract.<br><strong>Trend:</strong> Mid-cycle pullback. Above 200d MA support. Waiting.<br><strong>50d MA:</strong> $18.07 | <strong>200d MA:</strong> $12.25 | <strong>52w High:</strong> $22.80</p></div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> Current levels ($18). Slightly above 50d MA.<br><strong>Stop-Loss:</strong> $14.00 (below 50d MA)<br><strong>Take Profit:</strong> $22 (52w high), $25+ on DoD contract.<br><strong>Trend:</strong> Mid-cycle. Above 200d MA support.<br><strong>50d MA:</strong> $18.07 | <strong>200d MA:</strong> $12.25 | <strong>52w High:</strong> $22.80</p></div>
   <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Very High</span></div>
 </div>
 
@@ -978,108 +1002,8 @@
   <div class="pick-header">
     <div style="display:flex;align-items:baseline;gap:16px;">
       <div class="pick-rank">09</div>
-
-<div class="pick-card" id="sive">
-
-<div class="pick-header">
-  <div class="pick-ticker">SIVE</div>
-  <div class="pick-name">Sivers Semiconductors AB</div>
-  <div class="pick-conviction decreased">➕ NEW ADDITION</div>
-</div>
-
-<div class="metrics">
-  <div class="metric">
-    <div class="metric-lbl">Price</div>
-    <div class="metric-val">$5.59</div>
-    <div class="metric-sub">SIVEF (OTC Pink)</div>
-  </div>
-  <div class="metric">
-    <div class="metric-lbl">Market Cap</div>
-    <div class="metric-val">$1.3B</div>
-    <div class="metric-sub">296.5M shares</div>
-  </div>
-  <div class="metric">
-    <div class="metric-lbl">52w Range</div>
-    <div class="metric-val">$0.96–$6.40</div>
-    <div class="metric-sub">87% of high</div>
-  </div>
-  <div class="metric">
-    <div class="metric-lbl">EPS TTM</div>
-    <div class="metric-val" style="color:var(--red)">-$0.07</div>
-    <div class="metric-sub">Near breakeven</div>
-  </div>
-</div>
-
-<div class="fund-strip">
-  <div class="fund-item">
-    <div class="val">—</div>
-    <div class="lbl">P/E</div>
-    <div class="sub">Pre-profit</div>
-  </div>
-  <div class="fund-item">
-    <div class="val">—</div>
-    <div class="lbl">Fwd P/E</div>
-    <div class="sub">Pre-profit</div>
-  </div>
-  <div class="fund-item">
-    <div class="val">$6.40</div>
-    <div class="lbl">52w High</div>
-    <div class="sub">Resistance</div>
-  </div>
-  <div class="fund-item">
-    <div class="val">$0.96</div>
-    <div class="lbl">52w Low</div>
-    <div class="sub">+482% since</div>
-  </div>
-  <div class="fund-item">
-    <div class="val">OTC Pink</div>
-    <div class="lbl">Exchange</div>
-    <div class="sub">Also SIVE.ST</div>
-  </div>
-</div>
-
-<div class="thesis-grid">
-  <div class="thesis-block bull">
-    <h4>🐂 Bull Case</h4>
-    <p><strong>CPO pure play.</strong> Sivers makes III-V compound semiconductor lasers for external light source modules used in Co-Packaged Optics (CPO). This is the next frontier after optical transceivers — instead of copper between switch and transceiver, CPO integrates optics directly on the package.</p>
-    <p><strong>AI datacenter partnership.</strong> Strategic partnership with O-Net Technologies and Enablence Technologies to develop an advanced external light source module for AI datacenters and HPC systems. This is not speculative — it is announced and underway.</p>
-    <p><strong>Two-segment diversification.</strong> Wireless segment (5G mmWave RFICs, fixed wireless, satellite) provides a revenue floor while photonics ramps.</p>
-    <p><strong>Near breakeven.</strong> EPS of -$0.07 means the company is one quarter away from profitability. Revenue inflection from the AI partnership could flip this immediately.</p>
-    <p><strong>Small cap, asymmetric.</strong> At $1.3B market cap, Sivers is tiny compared to CPO-adjacent giants like Lumentum ($82B), Coherent ($74B), and MACOM ($28B). If the external light source module gains traction with hyperscalers, revenue could 2–3x and the stock follows.</p>
-    <p><strong>Smart-money dismissal pattern.</strong> European media is calling Sivers and CPO "nothing special" — the same dismissal that preceded runs in $RPI and $SOI (per @aleabitoreddit). This is textbook contrarian setup: the Street underestimates a real technology transition.</p>
-  </div>
-  <div class="thesis-block bear">
-    <h4>🐻 Bear Case</h4>
-    <p><strong>Pink sheet / foreign stock.</strong> SIVEF trades on the OTC Pink market with lower liquidity and wider spreads. The primary listing is Stockholm (SIVE.ST). US investors face currency risk and less transparency.</p>
-    <p><strong>Already up 482%.</strong> The stock has run from $0.96 to $5.59 in 12 months. The easy money may be gone. A pullback to $3.50–$4 is possible if the market rotates out of speculative AI names.</p>
-    <p><strong>Revenue concentration risk.</strong> Partnerships with O-Net/Enablence are early-stage. If the external light source module encounters technical delays or design-out, the thesis breaks.</p>
-    <p><strong>No US analyst coverage.</strong> There is no US-based analyst coverage for SIVEF. You are flying blind on earnings estimates and price targets.</p>
-    <p><strong>Competition from giants.</strong> Lumentum, Coherent, and MACOM have deeper R&D budgets, existing hyperscaler relationships, and broader product portfolios. Sivers is a specialist — a feature and a vulnerability.</p>
-  </div>
-</div>
-
-<div class="tech-snapshot">
-  <h4>📈 Technical Snapshot</h4>
-  <p><strong>Entry zone:</strong> $4.50–$5.50 (current area, or wait for pullback to $4)</p>
-  <p><strong>Stop-loss:</strong> $3.20 (below 50-day MA and prior consolidation)</p>
-  <p><strong>Take-profit #1:</strong> $8.00 (2-year resistance projection, +43%)</p>
-  <p><strong>Take-profit #2:</strong> $12.00 (if CPO adoption accelerates and hyperscaler design wins materialize, +114%)</p>
-  <p><strong>Trend:</strong> Parabolic run from $0.96 to $5.59. Consolidating near highs. High risk of a 20–30% pullback before next leg. <strong>Do not chase above $6.</strong></p>
-</div>
-
-<div class="callout" style="margin-top:20px;">
-  <div class="callout-header">
-    <span class="callout-label">Verdict</span>
-    <span class="callout-badge buy">BUY</span>
-  </div>
-  <p><strong>SIVE is the most asymmetric CPO play we have found.</strong> It is the only small-cap ($1.3B) name in a theme dominated by $30B–$80B giants. The external light source partnership with O-Net/Enablence gives it a real AI datacenter catalyst. The stock is near breakeven, has two revenue segments, and is being dismissed by European media — a contrarian signal.</p>
-  <p><strong>Warning:</strong> This is a pink sheet / foreign stock. Use limit orders, expect wider spreads, and size it as a speculative position. The 482% run from lows means the easy money is gone — wait for a pullback below $5 or accumulate on weakness. <strong>Target allocation: $200 (10% of basket).</strong></p>
-</div>
-
-</div>
-
       <div>
-        <div class="pick-ticker">VST <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$152.05</span><span class="conviction-badge unchanged">unchanged</span></div>
+        <div class="pick-ticker">VST <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$147.48</span><span class="conviction-badge unchanged">unchanged</span></div>
         <div style="font-size:13px;color:var(--text-dim);">Vistra Corp — Nuclear + Gas Power for AI Data Centers</div>
       </div>
     </div>
@@ -1092,149 +1016,37 @@
     <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>18 analysts, Strong Buy 1.40, but targets do not fully capture the AI data center demand wave. ERCOT load growth forecasts keep being revised up as new data centers announce. Every revision is incremental upside that models lag.</p></div>
     <div class="pick-box"><h5>Wall Street</h5><p>18 analysts | Strong Buy 1.40 | Mean $229 (55% upside) | High $320, Low $97<br><strong>Our take:</strong> Second-best risk/reward in the basket behind ANET. Buy the dip.</p></div>
   </div>
-  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> Current levels ($152). Stock is below 50d MA ($158.02) — pullback in an uptrend. Slight improvement from doc price.<br><strong>Stop-Loss:</strong> $140.00 (below 200d MA support)<br><strong>Take Profit:</strong> $229 (analyst mean), $320 (high target).<br><strong>Trend:</strong> Below 50d MA, above 200d MA ($176.81). Mid-cycle pullback. Buy.<br><strong>50d MA:</strong> $158.02 | <strong>200d MA:</strong> $176.81 | <strong>52w High:</strong> $219.82</p></div>
-  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active low"></div><div class="risk-dot active medium"></div><div class="risk-dot active medium"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Medium</span></div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> Current levels ($147). Below 50d MA — pullback in uptrend.<br><strong>Stop-Loss:</strong> $135.00 (below 52w low)<br><strong>Take Profit:</strong> $229 (analyst mean), $320 (high target).<br><strong>Trend:</strong> Below 50d MA, above 200d MA. Mid-cycle pullback. Buy.<br><strong>50d MA:</strong> $158.02 | <strong>200d MA:</strong> $176.81 | <strong>52w High:</strong> $219.82</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active low"></div><div class="risk-dot active medium"></div>
+
+<!-- PICK 10: SIVE -->
+<div class="pick-card" id="sive">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">10</div>
+      <div>
+        <div class="pick-ticker">SIVE <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$5.59</span><span class="conviction-badge new">new addition</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Sivers Semiconductors — CPO External Light Source for AI Datacenters</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$200 — 10%</div>
+  </div>
+  <p class="pick-thesis"><strong>The most asymmetric CPO play we have found.</strong> Sivers makes III-V compound semiconductor lasers for external light source modules used in Co-Packaged Optics (CPO). Partnership with O-Net Technologies and Enablence Technologies to develop an advanced external light source module for AI datacenters and HPC systems. At $1.3B market cap, it is tiny compared to CPO-adjacent giants like Lumentum ($82B), Coherent ($74B), and MACOM ($28B). Near breakeven (-$0.07 EPS) with two revenue segments (wireless + photonics). European media is dismissing Sivers as "nothing special" — the same dismissal that preceded runs in $RPI and $SOI.</p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Catalyst</h5><p>O-Net/Enablence partnership for AI datacenter external light source module. First commercial CPO design wins with hyperscalers. Wireless segment (5G mmWave) provides revenue floor.</p></div>
+    <div class="pick-box red"><h5>Risk</h5><p>Pink sheet / foreign stock (SIVEF OTC, primary SIVE.ST Stockholm). Already up 482% from lows. No US analyst coverage. Competition from Lumentum, Coherent, MACOM with deeper R&D budgets. Early-stage partnerships could face delays.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>No US analyst coverage means no targets exist. The stock is discovered via Twitter/X scouts, not Wall Street. When (not if) coverage begins, the $1.3B market cap will look absurdly cheap for a CPO player with hyperscaler partnerships.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>No US coverage | No targets | Stockholm listing primary<br><strong>Our take:</strong> The absence of coverage is the opportunity. This is a scout pick, not a consensus pick.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $4.50–5.50 current area, or wait for pullback to $4. Do not chase above $6.<br><strong>Stop-Loss:</strong> $3.20 (below prior consolidation)<br><strong>Take Profit:</strong> $8.00 (+43%), $12.00 (+114%) if CPO adoption accelerates.<br><strong>Trend:</strong> Parabolic run from $0.96 to $5.59. Consolidating near highs. High risk of 20–30% pullback.<br><strong>52w High:</strong> $6.40 | <strong>52w Low:</strong> $0.96</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Very High</span></div>
+</div>
+
+<div class="risk-dot active medium"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Medium</span></div>
 </div>
 
 
 <div class="rule"></div>
-
-</div>
-<div class="pick-card" id="sive">
-
-<div class="pick-header">
-  <div class="pick-ticker">SIVE</div>
-  <div class="pick-name">Sivers Semiconductors AB</div>
-  <div class="pick-conviction decreased">➕ NEW ADDITION</div>
-</div>
-
-<div class="metrics">
-  <div class="metric">
-    <div class="metric-lbl">Price</div>
-    <div class="metric-val">$5.59</div>
-    <div class="metric-sub">SIVEF (OTC Pink)</div>
-  </div>
-  <div class="metric">
-    <div class="metric-lbl">Market Cap</div>
-    <div class="metric-val">$1.3B</div>
-    <div class="metric-sub">296.5M shares</div>
-  </div>
-  <div class="metric">
-    <div class="metric-lbl">52w Range</div>
-    <div class="metric-val">$0.96–$6.40</div>
-    <div class="metric-sub">87% of high</div>
-  </div>
-  <div class="metric">
-    <div class="metric-lbl">EPS TTM</div>
-    <div class="metric-val" style="color:var(--red)">-$0.07</div>
-    <div class="metric-sub">Near breakeven</div>
-  </div>
-</div>
-
-<div class="fund-strip">
-  <div class="fund-item">
-    <div class="val">—</div>
-    <div class="lbl">P/E</div>
-    <div class="sub">Pre-profit</div>
-  </div>
-  <div class="fund-item">
-    <div class="val">—</div>
-    <div class="lbl">Fwd P/E</div>
-    <div class="sub">Pre-profit</div>
-  </div>
-  <div class="fund-item">
-    <div class="val">$6.40</div>
-    <div class="lbl">52w High</div>
-    <div class="sub">Resistance</div>
-  </div>
-  <div class="fund-item">
-    <div class="val">$0.96</div>
-    <div class="lbl">52w Low</div>
-    <div class="sub">+482% since</div>
-  </div>
-  <div class="fund-item">
-    <div class="val">OTC Pink</div>
-    <div class="lbl">Exchange</div>
-    <div class="sub">Also SIVE.ST</div>
-  </div>
-</div>
-
-<div class="thesis-grid">
-  <div class="thesis-block bull">
-    <h4>🐂 Bull Case</h4>
-    <p><strong>CPO pure play.</strong> Sivers makes III-V compound semiconductor lasers for external light source modules used in Co-Packaged Optics (CPO). This is the next frontier after optical transceivers — instead of copper between switch and transceiver, CPO integrates optics directly on the package.</p>
-    <p><strong>AI datacenter partnership.</strong> Strategic partnership with O-Net Technologies and Enablence Technologies to develop an advanced external light source module for AI datacenters and HPC systems. This is not speculative — it is announced and underway.</p>
-    <p><strong>Two-segment diversification.</strong> Wireless segment (5G mmWave RFICs, fixed wireless, satellite) provides a revenue floor while photonics ramps.</p>
-    <p><strong>Near breakeven.</strong> EPS of -$0.07 means the company is one quarter away from profitability. Revenue inflection from the AI partnership could flip this immediately.</p>
-    <p><strong>Small cap, asymmetric.</strong> At $1.3B market cap, Sivers is tiny compared to CPO-adjacent giants like Lumentum ($82B), Coherent ($74B), and MACOM ($28B). If the external light source module gains traction with hyperscalers, revenue could 2–3x and the stock follows.</p>
-    <p><strong>Smart-money dismissal pattern.</strong> European media is calling Sivers and CPO "nothing special" — the same dismissal that preceded runs in $RPI and $SOI (per @aleabitoreddit). This is textbook contrarian setup: the Street underestimates a real technology transition.</p>
-  </div>
-  <div class="thesis-block bear">
-    <h4>🐻 Bear Case</h4>
-    <p><strong>Pink sheet / foreign stock.</strong> SIVEF trades on the OTC Pink market with lower liquidity and wider spreads. The primary listing is Stockholm (SIVE.ST). US investors face currency risk and less transparency.</p>
-    <p><strong>Already up 482%.</strong> The stock has run from $0.96 to $5.59 in 12 months. The easy money may be gone. A pullback to $3.50–$4 is possible if the market rotates out of speculative AI names.</p>
-    <p><strong>Revenue concentration risk.</strong> Partnerships with O-Net/Enablence are early-stage. If the external light source module encounters technical delays or design-out, the thesis breaks.</p>
-    <p><strong>No US analyst coverage.</strong> There is no US-based analyst coverage for SIVEF. You are flying blind on earnings estimates and price targets.</p>
-    <p><strong>Competition from giants.</strong> Lumentum, Coherent, and MACOM have deeper R&D budgets, existing hyperscaler relationships, and broader product portfolios. Sivers is a specialist — a feature and a vulnerability.</p>
-  </div>
-</div>
-
-<div class="tech-snapshot">
-  <h4>📈 Technical Snapshot</h4>
-  <p><strong>Entry zone:</strong> $4.50–$5.50 (current area, or wait for pullback to $4)</p>
-  <p><strong>Stop-loss:</strong> $3.20 (below 50-day MA and prior consolidation)</p>
-  <p><strong>Take-profit #1:</strong> $8.00 (2-year resistance projection, +43%)</p>
-  <p><strong>Take-profit #2:</strong> $12.00 (if CPO adoption accelerates and hyperscaler design wins materialize, +114%)</p>
-  <p><strong>Trend:</strong> Parabolic run from $0.96 to $5.59. Consolidating near highs. High risk of a 20–30% pullback before next leg. <strong>Do not chase above $6.</strong></p>
-</div>
-
-<div class="callout" style="margin-top:20px;">
-  <div class="callout-header">
-    <span class="callout-label">Verdict</span>
-    <span class="callout-badge buy">BUY</span>
-  </div>
-  <p><strong>SIVE is the most asymmetric CPO play we have found.</strong> It is the only small-cap ($1.3B) name in a theme dominated by $30B–$80B giants. The external light source partnership with O-Net/Enablence gives it a real AI datacenter catalyst. The stock is near breakeven, has two revenue segments, and is being dismissed by European media — a contrarian signal.</p>
-  <p><strong>Warning:</strong> This is a pink sheet / foreign stock. Use limit orders, expect wider spreads, and size it as a speculative position. The 482% run from lows means the easy money is gone — wait for a pullback below $5 or accumulate on weakness. <strong>Target allocation: $200 (10% of basket).</strong></p>
-</div>
-
-</div>
-
-<div class="macro-card" id="position-sizing" style="margin-top:32px;">
-  <div class="sec-label">Position Sizing Addendum</div>
-  <h3>If You Were Starting Today</h3>
-  <p>The May 9 allocation was built for a different price environment. Two days later, the runners have run and the laggards have lagged. Here is how a new $2,000 deployment should differ from the original weights.</p>
-  <div class="sizing-grid">
-    <div class="sizing-card">
-      <h4>Original Allocation (May 9)</h4>
-      <p>FLNC $300 | ANET $250 | MU $250 | SMCI $250 | AAOI $200 | VST $200 | APH $200 | SNDK $200 | AMPX $150</p>
-      <p style="margin-top:8px;font-size:11px;color:var(--text-quiet);">Built when MU was $781 and SMCI was $36. Equal-weight-ish with a tilt toward conviction.</p>
-    </div>
-    <div class="sizing-card">
-      <h4>Revised Allocation (May 11)</h4>
-      <p><strong>Overweight laggards:</strong> SMCI $350, FLNC $300, ANET $250<br><strong>Underweight runners:</strong> MU $150, SNDK $150, AAOI $150<br><strong>Unchanged:</strong> VST $200, APH $200, AMPX $200</p>
-      <p style="margin-top:8px;font-size:11px;color:var(--text-quiet);">Rationale: SMCI is cheaper with the same catalysts. MU/SNDK/AAOI are technically extended. New money gets better risk/reward in the laggards.</p>
-    </div>
-  </div>
-  <p style="font-size:12px;color:var(--text-dim);margin-top:16px;"><strong>Rule:</strong> Never chase a stock up 20%+ in 48 hours. If the thesis is intact but the price has run, wait for a 10–15% pullback or reallocate to the laggards. The basket's edge comes from asymmetric entry points, not FOMO.</p>
-</div>
-
-<div class="macro-card" id="earnings" style="margin-top:32px;">
-  <div class="sec-label">Earnings Calendar</div>
-  <h3>Upcoming Binary Events</h3>
-  <p>These are the dates that could re-rate everything. Mark them. Do not be surprised.</p>
-  <div class="earnings-grid">
-    <div class="earnings-card imminent"><div class="ticker">FLNC</div><div class="date">May 14, 2026</div><div class="days">3 days</div></div>
-    <div class="earnings-card"><div class="ticker">AAOI</div><div class="date">May 8, 2026</div><div class="days">3 days ago</div></div>
-    <div class="earnings-card"><div class="ticker">SNDK</div><div class="date">July 1, 2026</div><div class="days">51 days</div></div>
-    <div class="earnings-card"><div class="ticker">MU</div><div class="date">July 22, 2026</div><div class="days">72 days</div></div>
-    <div class="earnings-card"><div class="ticker">VST</div><div class="date">July 15, 2026</div><div class="days">65 days</div></div>
-    <div class="earnings-card"><div class="ticker">APH</div><div class="date">Aug 5, 2026</div><div class="days">86 days</div></div>
-    <div class="earnings-card"><div class="ticker">SMCI</div><div class="date">Aug 27, 2026</div><div class="days">108 days</div></div>
-    <div class="earnings-card"><div class="ticker">ANET</div><div class="date">Aug 27, 2026</div><div class="days">108 days</div></div>
-    <div class="earnings-card"><div class="ticker">AMPX</div><div class="date">Aug 30, 2026</div><div class="days">111 days</div></div>
-  </div>
-  <p style="font-size:12px;color:var(--text-dim);margin-top:12px;"><strong>Note:</strong> AAOI reported May 8 (beat/miss already priced). FLNC reports May 14 — imminent. The rest are July–August. Summer earnings season is when the memory supercycle thesis gets tested.</p>
-</div>
 
 <div class="macro-card">
   <div class="sec-label">Risk Management</div>
@@ -1267,7 +1079,7 @@
 
 <div style="text-align:center;padding:20px 0 40px;">
   <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-quiet);letter-spacing:.04em;">
-    asymmetric basket · neumorphic depth · analyst-informed · catalyst-driven · updated May 11, 2026
+    asymmetric basket · neumorphic depth · analyst-informed · catalyst-driven · updated May 12, 2026
   </p>
 </div>
 
@@ -1296,21 +1108,6 @@
 
 
 </main>
-
-<script>
-function toggleGroup(el) {
-  el.classList.toggle('collapsed');
-  var group = el.nextElementSibling;
-  if (!group) return;
-  if (group.classList.contains('collapsed')) {
-    group.style.maxHeight = group.scrollHeight + 'px';
-    group.classList.remove('collapsed');
-  } else {
-    group.style.maxHeight = '0';
-    group.classList.add('collapsed');
-  }
-}
-</script>
 
 </body>
 </html>
