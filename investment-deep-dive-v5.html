@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asymmetric Basket — Deep-Dive Investment Research v5 | May 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+  /* ═══════════════════════════════════════════════════════════
+     NEUBRUTAL v4.1 — EXTENDED DESIGN SYSTEM
+     Covers: palette, shadow, typography, TOC, hamburger,
+     stock cards, tier dividers, skip list, top-5 picks,
+     citations, sector headers, responsive, ADA
+     ═══════════════════════════════════════════════════════════ */
+
+  /* ── CRITICAL: prevents blank-page bug ── */
+  html,body { height: 100%; margin: 0; padding: 0; }
+  body { min-height: 100vh; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Raw material palette — stone, concrete, paper */
+    --bg: #ede8e0;
+    --bg-alt: #e6e0d8;
+    --surface: #f5f2ed;
+    --surface-alt: #faf8f5;
+    --text: #1a1816;
+    --text-dim: #5c5852;
+    --text-quiet: #8c8882;
+    --border: #d8d2c8;
+    --border-strong: #b8b0a4;
+
+    /* Neumorphic shadow system */
+    --shadow-sm-ext: 2px 2px 5px rgba(0,0,0,0.06), -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-md-ext: 4px 4px 10px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.9);
+    --shadow-lg-ext: 8px 8px 20px rgba(0,0,0,0.08), -8px -8px 20px rgba(255,255,255,0.95);
+    --shadow-sm-inset: inset 2px 2px 5px rgba(0,0,0,0.06), inset -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-pressed: inset 3px 3px 7px rgba(0,0,0,0.10), inset -2px -2px 5px rgba(255,255,255,0.6);
+
+    /* Accent — rich ocean blue */
+    --accent: #26609c;
+    --accent-light: #4d8ccc;
+    --accent-bg: rgba(38,96,156,0.08);
+
+    /* Semantic */
+    --green: #277a3e;
+    --green-bg: rgba(39,122,62,0.10);
+    --red: #a33636;
+    --red-bg: rgba(163,54,54,0.10);
+    --amber: #996e2c;
+    --amber-bg: rgba(153,110,44,0.10);
+
+    --radius-sm: 8px;
+    --radius: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+    --toc-width: 230px;
+  }
+
+  /* ── BASE BODY ── */
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Subtle texture overlay */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ═══════════ ADA SKIP LINK ═══════════ */
+  .skip-link {
+    position: absolute; top: -100px; left: 12px; z-index: 300;
+    background: var(--accent); color: #fff; padding: 8px 16px;
+    border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: top .2s;
+  }
+  .skip-link:focus { top: 12px; }
+
+  /* Focus ring for all interactive elements */
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ═══════════ SITE NAV BAR ═══════════ */
+  .site-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-sm-ext);
+    padding: 10px 24px; display: flex; gap: 24px; align-items: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  }
+  .site-nav a {
+    color: var(--text-dim); text-decoration: none;
+    font-weight: 500; letter-spacing: 0.02em;
+  }
+  .site-nav a:hover { color: var(--accent); }
+  .site-nav .nav-current { color: var(--accent); font-weight: 600; }
+
+  /* ═══════════ TOC SIDEBAR ═══════════ */
+  .toc-sidebar {
+    position: fixed; top: 0; left: 0; z-index: 200;
+    width: var(--toc-width); height: 100vh;
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-sm-inset);
+    overflow-y: auto; overflow-x: hidden;
+    padding: 20px 0 40px;
+  }
+  .toc-sidebar::-webkit-scrollbar { width: 4px; }
+  .toc-sidebar::-webkit-scrollbar-track { background: transparent; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+
+  .toc-brand {
+    padding: 0 16px 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  .toc-brand a {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--accent); text-decoration: none; font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .toc-brand a:hover { text-decoration: underline; }
+
+  .toc-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    padding: 14px 16px 6px; cursor: pointer;
+    transition: color .15s; display: flex; align-items: center; gap: 6px;
+  }
+  .toc-section-label:hover { color: var(--text); }
+  .toc-section-label .toc-arrow {
+    font-size: 7px; transition: transform .2s; display: inline-block;
+  }
+  .toc-section-label.collapsed .toc-arrow { transform: rotate(-90deg); }
+  .toc-section-group { overflow: hidden; transition: max-height .3s ease; }
+  .toc-section-group.collapsed { max-height: 0 !important; }
+
+  .toc-item {
+    display: block; padding: 5px 16px 5px 20px;
+    font-size: 11px; color: var(--text-dim); text-decoration: none;
+    font-weight: 400; transition: all .15s;
+    border-left: 2px solid transparent;
+  }
+  .toc-item:hover {
+    color: var(--text); background: rgba(0,0,0,0.02);
+    border-left-color: var(--accent); text-decoration: none;
+  }
+  .toc-item.active {
+    color: var(--accent); font-weight: 600;
+    background: var(--accent-bg); border-left-color: var(--accent);
+  }
+  .toc-item.skip-item { color: var(--text-quiet); font-style: italic; }
+  .toc-item.skip-item:hover { color: var(--text-dim); border-left-color: var(--text-quiet); }
+  .toc-divider {
+    border: none; height: 1px; background: var(--border); margin: 8px 16px;
+  }
+
+  /* ═══════════ MAIN CONTENT ═══════════ */
+  .page-content {
+    margin-left: var(--toc-width); padding: 48px 48px 80px;
+    max-width: 1200px; position: relative; z-index: 1;
+  }
+
+  /* ═══════════ HAMBURGER NAV ═══════════ */
+  .hamburger-btn {
+    display: none; position: fixed; top: 12px; right: 12px; z-index: 250;
+    width: 44px; height: 44px; cursor: pointer; border: none;
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-ext); transition: all .2s;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; touch-action: manipulation; user-select: none;
+    -webkit-user-select: none;
+  }
+  .hamburger-btn:hover { box-shadow: var(--shadow-md-ext); }
+  .hamburger-btn:active { box-shadow: var(--shadow-pressed); }
+  .hamburger-btn .ham-line {
+    width: 20px; height: 2.5px; background: var(--text);
+    border-radius: 1px; transition: all .2s;
+  }
+  .hamburger-btn.open .ham-line:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .hamburger-btn.open .ham-line:nth-child(2) { opacity: 0; }
+  .hamburger-btn.open .ham-line:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  .nav-overlay {
+    display: none; position: fixed; inset: 0; z-index: 240;
+    background: var(--bg); overflow-y: auto;
+    padding: 60px 24px 40px;
+  }
+  .nav-overlay.open { display: block; }
+  .nav-overlay .toc-section-label {
+    font-size: 12px; padding: 12px 0 8px;
+  }
+  .nav-overlay .toc-item {
+    font-size: 15px; padding: 10px 0;
+    border-left: none; border-bottom: 1px solid var(--border);
+  }
+
+  /* ═══════════ HERO + SECTION RULE ── */
+  .hero { margin-bottom: 48px; }
+  .hero-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--text-quiet); margin-bottom: 20px; padding: 4px 0; border-bottom: 2px solid var(--text); }
+  .hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 800; letter-spacing: -0.05em; line-height: 1.05; margin-bottom: 16px; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { font-size: 15px; color: var(--text-dim); max-width: 520px; line-height: 1.7; font-weight: 400; }
+
+  .rule { height: 2px; background: var(--text); opacity: 0.12; margin: 40px 0 28px; }
+  .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-quiet); margin-bottom: 20px; text-transform: uppercase; }
+
+  /* ═══════════ NEUMORPHIC CARD ── */
+  .neo-card {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); padding: 28px; margin-bottom: 24px;
+    transition: all .25s ease; cursor: pointer; border: none;
+  }
+  .neo-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-2px); }
+  .neo-card:active { box-shadow: var(--shadow-pressed); transform: translateY(0); }
+  .neo-card-inset {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 20px; margin-bottom: 16px;
+  }
+
+  /* ═══════════ STOCK CARD (details/summary) ── */
+  .stock-card {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); margin-bottom: 24px;
+    transition: all .25s ease; border: none; overflow: hidden;
+  }
+  .stock-card[open] { box-shadow: var(--shadow-lg-ext); }
+  .stock-card:hover { box-shadow: var(--shadow-lg-ext); }
+  .stock-card summary {
+    cursor: pointer; padding: 24px 28px 10px; list-style: none;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .stock-card summary::-webkit-details-marker { display: none; }
+  .stock-card summary::after {
+    content: '▼'; font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-quiet); transition: transform .2s;
+    background: var(--bg-alt); border-radius: var(--radius-sm);
+    padding: 6px 10px; box-shadow: var(--shadow-sm-inset);
+  }
+  .stock-card[open] summary::after { transform: rotate(180deg); }
+  .stock-card-body { padding: 0 28px 28px; }
+
+  /* ═══════════ TICKER HEADER ── */
+  .ticker-row {
+    display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px;
+    padding-bottom: 14px;
+  }
+  .ticker { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; }
+  .ticker-name { font-size: 14px; color: var(--text-dim); font-weight: 500; }
+  .ticker-badge { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; padding: 6px 16px; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase;
+    background: var(--bg); box-shadow: var(--shadow-sm-ext); transition: all .15s;
+  }
+  .ticker-badge:hover { box-shadow: var(--shadow-pressed); }
+  .ticker-badge.buy { color: var(--green); }
+  .ticker-badge.hold { color: var(--amber); }
+  .ticker-badge.sell { color: var(--red); }
+
+  /* ═══════════ METRICS (price action) ── */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .metric {
+    text-align: center; background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 18px 10px;
+    transition: box-shadow .2s;
+  }
+  .metric:hover { box-shadow: var(--shadow-md-ext); }
+  .metric-val { font-size: 24px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .metric-val.up { color: var(--green); }
+  .metric-val.down { color: var(--red); }
+  .metric-val.neutral { color: var(--amber); }
+  .metric-lbl { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-quiet); margin-bottom: 4px; }
+  .metric-sub { font-size: 10px; color: var(--text-dim); }
+
+  /* reversal badge inside metric */
+  .reversal-badge {
+    display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 2px 6px; border-radius: 3px; margin-top: 4px;
+  }
+  .reversal-badge.confirmed { background: var(--green-bg); color: var(--green); box-shadow: var(--shadow-sm-inset); }
+  .reversal-badge.partial { background: var(--amber-bg); color: var(--amber); box-shadow: var(--shadow-sm-inset); }
+  .reversal-badge.negative { background: var(--red-bg); color: var(--red); box-shadow: var(--shadow-sm-inset); }
+
+  /* ═══════════ SPARKLINE ── */
+  .spark-wrap { margin-bottom: 24px; padding: 4px 0; }
+  .spark-wrap svg { width: 100%; height: 52px; display: block; }
+
+  /* ═══════════ FUNDAMENTALS ── */
+  .fund-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 32px; }
+  .fund-item {
+    text-align: center; background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 14px 8px; transition: all .2s;
+  }
+  .fund-item:hover { box-shadow: var(--shadow-md-ext); }
+  .fund-item .val { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .fund-item .lbl { font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.10em; color: var(--text-quiet); }
+  .fund-item .sub { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ═══════════ THESIS ── */
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+  .thesis-block {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); padding: 24px; transition: all .2s;
+  }
+  .thesis-block:hover { box-shadow: var(--shadow-lg-ext); }
+  .thesis-block h4 { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; margin-bottom: 14px; text-transform: uppercase; }
+  .thesis-block.bull h4 { color: var(--green); }
+  .thesis-block.bear h4 { color: var(--red); }
+  .thesis-block p { font-size: 12px; color: var(--text-dim); line-height: 1.7; margin-bottom: 8px; }
+  .thesis-block p strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ CALLOUT / VERDICT ── */
+  .callout {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg-ext); padding: 22px 26px;
+  }
+  .callout-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+  }
+  .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); text-transform: uppercase; }
+  .callout-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    padding: 5px 16px; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase;
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .callout-badge.buy { color: var(--green); background: var(--green-bg); }
+  .callout-badge.hold { color: var(--amber); background: var(--amber-bg); }
+  .callout-badge.sell { color: var(--red); background: var(--red-bg); }
+  .callout p { font-size: 13px; color: var(--text-dim); line-height: 1.7; margin-top: 4px; }
+  .callout p strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ TIER DIVIDER ── */
+  .tier-divider {
+    display: flex; align-items: center; gap: 20px;
+    margin: 40px 0 20px;
+  }
+  .tier-divider .tier-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 18px;
+    border-radius: var(--radius-sm); white-space: nowrap;
+  }
+  .tier-divider .tier-label.tier-1 {
+    color: var(--green); background: var(--bg);
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .tier-divider .tier-label.tier-2 {
+    color: var(--accent); background: var(--bg);
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .tier-divider .tier-label.tier-3 {
+    color: var(--text-quiet); background: var(--bg);
+    box-shadow: var(--shadow-sm-inset);
+  }
+  .tier-divider .tier-line {
+    flex: 1; height: 2px; background: var(--text); opacity: 0.12;
+  }
+  .tier-intro {
+    font-size: 12px; color: var(--text-dim); font-style: italic;
+    margin-bottom: 20px; padding-left: 4px;
+  }
+
+  /* ═══════════ SKIP LIST ── */
+  .skip-section { margin: 48px 0 32px; }
+  .skip-section h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-quiet);
+    margin-bottom: 16px;
+  }
+  .skip-card {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 16px 20px; margin-bottom: 8px;
+    font-size: 12px; color: var(--text-dim); font-style: italic;
+  }
+  .skip-card strong { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-quiet); font-style: normal; }
+
+  /* ═══════════ TOP 5 PICKS ── */
+  .top-picks {
+    background: var(--bg); border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg-ext); padding: 32px; margin: 48px 0;
+  }
+  .top-picks h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .top-picks ol { list-style: none; padding: 0; counter-reset: top5; }
+  .top-picks ol li {
+    counter-increment: top5; padding: 12px 0;
+    border-bottom: 1px solid var(--border); font-size: 14px;
+    display: flex; gap: 14px; align-items: baseline;
+  }
+  .top-picks ol li:last-child { border-bottom: none; }
+  .top-picks ol li::before {
+    content: '0' counter(top5);
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    color: var(--accent); min-width: 28px;
+  }
+  .top-picks ol li strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ CITATIONS / REFERENCES ── */
+  .ref-section { margin-top: 48px; }
+  .ref-section h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-quiet);
+    margin-bottom: 16px;
+  }
+  .ref-list { list-style: none; padding: 0; }
+  .ref-list li {
+    font-size: 11px; color: var(--text-dim); padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-list li a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .ref-list li a:hover { text-decoration: underline; }
+
+  /* inline citation marker */
+  sup.cite {
+    font-size: 9px; font-weight: 600; color: var(--accent);
+    cursor: pointer; margin: 0 1px;
+  }
+  sup.cite:hover { text-decoration: underline; }
+
+  /* ═══════════ SECTOR HEADER (Geo doc) ── */
+  .sector-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 20px; border-radius: var(--radius);
+    margin-bottom: 18px; flex-wrap: wrap;
+    background: var(--bg); box-shadow: var(--shadow-md-ext);
+    border-left: none;
+  }
+  .sector-header .sector-icon { font-size: 22px; }
+  .sector-header .sector-name {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text);
+  }
+  .sector-header .sector-tag {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 30px; margin-left: auto;
+    background: var(--bg); box-shadow: var(--shadow-sm-inset);
+  }
+  .sector-header.oil .sector-tag { color: var(--red); }
+  .sector-header.fert .sector-tag { color: var(--amber); }
+  .sector-header.nuke .sector-tag { color: var(--green); }
+  .sector-header.energy .sector-tag { color: var(--accent); }
+  .sector-header.power .sector-tag { color: var(--accent); }
+
+  /* ═══════════ BUTTONS ── */
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  .btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    padding: 12px 24px; border-radius: var(--radius); cursor: pointer; transition: all .2s;
+    background: var(--bg); border: none; color: var(--text); box-shadow: var(--shadow-sm-ext); letter-spacing: 0.02em; text-transform: uppercase;
+    touch-action: manipulation; user-select: none; -webkit-user-select: none;
+  }
+  .btn:hover { box-shadow: var(--shadow-md-ext); }
+  .btn:active { box-shadow: var(--shadow-pressed); }
+  .btn-primary { color: var(--accent); }
+
+  /* ═══════════ DISCLAIMER ── */
+  .disclaimer {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 14px 20px;
+    margin-bottom: 24px; font-size: 12px; color: var(--text-dim);
+    font-style: italic;
+  }
+  .disclaimer strong { color: var(--text); font-weight: 600; font-style: normal; }
+
+  /* ═══════════ RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .toc-sidebar { display: none; }
+    .toc-sidebar.mobile-open {
+      display: block; position: fixed; inset: 0; z-index: 245;
+      width: 100%; height: 100vh; padding-top: 60px;
+    }
+    .page-content { margin-left: 0; padding: 24px 16px 60px; }
+    .hamburger-btn { display: flex; }
+    .hero h1 { font-size: 32px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .fund-strip { grid-template-columns: repeat(2, 1fr); }
+    .thesis-grid { grid-template-columns: 1fr; }
+    .stock-card summary { padding: 20px 20px 0; }
+    .stock-card-body { padding: 0 20px 20px; }
+    .ticker { font-size: 24px; }
+    .top-picks { padding: 20px; }
+    .site-nav { font-size: 10px; padding: 8px 16px; gap: 16px; }
+  }
+
+  @media (max-width: 412px) {
+    .page-content { padding: 16px 12px 48px; }
+    .hero h1 { font-size: 28px; }
+    .metrics { gap: 8px; }
+    .metric-val { font-size: 20px; }
+    .fund-strip { gap: 6px; }
+    .fund-item { padding: 10px 4px; }
+    .fund-item .val { font-size: 11px; }
+    .ticker-row { flex-wrap: wrap; gap: 8px; }
+    .ticker { font-size: 22px; }
+    .neo-card, .stock-card summary { padding: 18px 16px 0; }
+    .stock-card-body { padding: 0 16px 16px; }
+  }
+
+.allocation-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;margin:8px 0 16px;box-shadow:var(--shadow-sm-inset)}
+.alloc-segment{height:100%}
+.alloc-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim)}
+.pick-card{background:var(--bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-md-ext);padding:24px;margin-bottom:20px;transition:all .25s ease}
+.pick-card:hover{box-shadow:var(--shadow-lg-ext)}
+.pick-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+.pick-rank{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:800;color:var(--accent);opacity:.3}
+.pick-ticker{font-size:24px;font-weight:800;letter-spacing:-.03em}
+.pick-alloc{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-bg);padding:4px 12px;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm-inset)}
+.pick-thesis{font-size:13px;color:var(--text-dim);line-height:1.7;margin-bottom:12px}
+.pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.pick-box{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:14px 16px}
+.pick-box h5{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.pick-box.green h5{color:var(--green)}.pick-box.red h5{color:var(--red)}.pick-box.accent h5{color:var(--accent)}
+.pick-box p{font-size:11px;color:var(--text-dim);line-height:1.6}
+.risk-meter{display:flex;gap:4px;margin:8px 0}
+.risk-dot{width:12px;height:12px;border-radius:3px;background:var(--border)}
+.risk-dot.active{background:var(--red)}
+.risk-dot.active.medium{background:var(--amber)}
+.risk-dot.active.low{background:var(--green)}
+.macro-card{background:var(--bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg-ext);padding:28px;margin-bottom:24px}
+.macro-card h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.macro-card p{font-size:13px;color:var(--text-dim);line-height:1.7}
+.quote-block{background:var(--accent-bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:16px 20px;margin:16px 0;font-style:italic;font-size:12px;color:var(--text-dim)}
+.quote-block .quote-src{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--accent);margin-top:8px;font-style:normal;text-transform:uppercase}
+@media(max-width:768px){.pick-grid{grid-template-columns:1fr}}
+
+/* ═══════════ MACRO DASHBOARD ═══════════ */
+.macro-dash{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 16px}
+.macro-dash-item{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:14px 10px;text-align:center}
+.macro-dash-item .val{font-size:20px;font-weight:700;letter-spacing:-0.03em}
+.macro-dash-item .lbl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-quiet);margin-top:4px}
+.macro-dash-item .sub{font-size:10px;color:var(--text-dim);margin-top:2px}
+/* ═══════════ PERFORMANCE TRACKER ═══════════ */
+.perf-tracker{background:var(--bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-md-ext);padding:24px;margin:24px 0}
+.perf-table{width:100%;border-collapse:collapse;font-size:12px}
+.perf-table th{text-align:left;padding:10px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-quiet);border-bottom:1px solid var(--border)}
+.perf-table td{padding:10px 8px;border-bottom:1px solid var(--border);color:var(--text-dim)}
+.perf-table td.ticker{font-weight:700;color:var(--text)}
+.perf-table .up{color:var(--green);font-weight:600}
+.perf-table .down{color:var(--red);font-weight:600}
+.perf-table .runner{background:var(--green-bg)}
+.perf-table .laggard{background:var(--red-bg)}
+.perf-table .neutral{background:var(--accent-bg)}
+/* ═══════════ CONVICTION BADGE ═══════════ */
+.conviction-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 10px;border-radius:var(--radius-sm);margin-left:8px;display:inline-block}
+.conviction-badge.increased{color:var(--green);background:var(--green-bg);box-shadow:var(--shadow-sm-ext)}
+.conviction-badge.decreased{color:var(--red);background:var(--red-bg);box-shadow:var(--shadow-sm-ext)}
+.conviction-badge.unchanged{color:var(--accent);background:var(--accent-bg);box-shadow:var(--shadow-sm-ext)}
+/* ═══════════ EARNINGS CALENDAR ═══════════ */
+.earnings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.earnings-card{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:14px 16px}
+.earnings-card .ticker{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700}
+.earnings-card .date{font-size:12px;color:var(--text-dim);margin-top:4px}
+.earnings-card .days{font-size:10px;color:var(--text-quiet);margin-top:2px}
+.earnings-card.imminent{box-shadow:var(--shadow-sm-ext);border-left:3px solid var(--amber)}
+/* ═══════════ POSITION SIZING ═══════════ */
+.sizing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.sizing-card{background:var(--bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-md-ext);padding:24px}
+.sizing-card h4{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px}
+.sizing-card p{font-size:12px;color:var(--text-dim);line-height:1.7}
+@media(max-width:768px){.macro-dash{grid-template-columns:repeat(2,1fr)}.earnings-grid{grid-template-columns:1fr}.sizing-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav class="site-nav" aria-label="Site navigation">
+  <a href="index.html">← Research Home</a>
+  <a href="investment-deep-dive-v5.html" class="nav-current">Asymmetric Basket</a>
+  <a href="Tech_Stock_Basket_May_2026_v3.html">Tech Basket</a>
+  <a href="Geopolitical_Growth_Stocks_May_2026_v3.html">Geopolitical</a>
+</nav>
+
+<main class="page-content" id="main-content" style="margin-left:0;max-width:880px;">
+
+<div class="hero">
+  <div class="hero-tag">Deep-Dive Research · May 11, 2026</div>
+  <h1>Asymmetric Basket.<br><span>High upside. Managed risk.</span></h1>
+  <p>9 stocks selected for asymmetric risk/reward over a 5+ year horizon. $2,000 allocation. The thesis: analyst targets are floors, not ceilings — these stocks have catalysts that haven't made it into the models yet.</p>
+</div>
+
+<div class="disclaimer">
+  <strong>⚠️ This is a high-risk, high-reward basket.</strong> $2,000 at risk. I can afford to lose it. This is not a retirement portfolio — it is a concentrated bet on asymmetric upside. Position sizing, catalyst monitoring, and willingness to cut losers are essential. Not investment advice. I hold positions in some of these names.
+</div>
+
+<div class="macro-card" id="macro">
+  <div class="sec-label">Macro Framework</div>
+  <h3>The $1 Trillion Question — And Why It Favors Our Picks</h3>
+  <p>As [1] laid out: total projected EBITDA across AI baskets exceeds total capex by $1 trillion. Two things must be true: (1) AI drains $1T of profit from elsewhere in the economy — likely SaaS and white-collar labor — and (2) some EBITDA estimates are wildly optimistic. <strong>Our basket is positioned for both.</strong> We avoid the EBITDA donors (SaaS) and the most optimistic baskets. We own the infrastructure layer where revenue is already real — memory, networking, power infrastructure, and the physical buildout. These are the picks-and-shovels of the AI capex cycle, and they get paid regardless of which AI model wins.</p>
+  
+  <div class="quote-block">
+    The semiconductor talent shortage — software engineers earn 3x what fab engineers make — means memory and storage supply will be structurally constrained for 2-3 years. Pricing power sits with MU, SNDK, and the memory complex. This is not a demand story. It is a supply story.
+    <div class="quote-src">[2] — Semiconductor Talent Shortage Thesis</div>
+  </div>
+
+  <p style="margin-top:16px;"><strong>The stocks we're betting on share a common DNA:</strong> structural demand that isn't going away + a specific catalyst the market hasn't fully priced + financials that work even if the catalyst takes longer than expected. They are infrastructure beneficiaries, not EBITDA donors. The AI buildout happens with or without the models delivering — and that is the margin of safety.</p>
+  
+  <div class="quote-block">
+    <strong>New — May 2026:</strong> Adata reports DRAM and NAND contract prices climbing 40%+ in the second quarter. Big Tech reportedly offers to directly fund memory fabs — the bottleneck is so severe that hyperscalers want to pay for manufacturing capacity. Semiconductor sector added $3.8 trillion in market value. Glass substrate timelines moved up to end of 2026. Power chip shortages deepening. These are not projections — they are real-time confirmations that the thesis is accelerating.
+    <div class="quote-src">Verified via Yahoo Finance, industry reports, supply chain checks</div>
+  </div>
+</div><div class="macro-card" id="macro-dash" style="margin-top:32px;">
+  <div class="sec-label">Macro Dashboard</div>
+  <h3>Real-Time Macro Wind Check</h3>
+  <p>One glance tells you if the macro tailwind is still at your back.</p>
+  <div class="macro-dash">
+    <div class="macro-dash-item"><div class="val" style="color:var(--green)">7.8x</div><div class="lbl">MU Fwd P/E</div><div class="sub">Memory supercycle intact</div></div>
+    <div class="macro-dash-item"><div class="val" style="color:var(--green)">+40%</div><div class="lbl">DRAM/NAND Q2</div><div class="sub">Adata contract prices</div></div>
+    <div class="macro-dash-item"><div class="val" style="color:var(--amber)">$3.8T</div><div class="lbl">Semi Mkt Cap Add</div><div class="sub">Sector value surge</div></div>
+    <div class="macro-dash-item"><div class="val" style="color:var(--accent)">97%</div><div class="lbl">MU/SNDK 52w</div><div class="sub">At highs = caution</div></div>
+  </div>
+  <p style="font-size:12px;color:var(--text-dim);margin-top:8px;"><strong>Verdict:</strong> AI infrastructure buildout is accelerating. Memory pricing confirms supply constraint. Risk: easy money made in memory complex. New capital should favor laggards (SMCI, FLNC) over runners (MU, SNDK).</p>
+</div>
+
+
+
+
+<div class="macro-card" id="methodology" style="margin-top:32px;">
+  <div class="sec-label">Investment Methodology</div>
+  <h3>The SNDK Playbook — Finding the Next Asymmetric Opportunity</h3>
+  <p>SanDisk was under $30 a year ago. It is now $1,562 — a 5,100% return. The playbook was simple: find a company that was essential to the AI supply chain, losing money in the short term, but supplying a product that hyperscalers could not build without. The market priced SNDK like it was going bankrupt. The hyperscalers kept ordering. The stock re-rated.</p>
+  <p style="margin-top:12px;"><strong>This basket applies the same playbook to the current market:</strong></p>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px;">
+    <div class="neo-card" style="margin-bottom:0;padding:18px;">
+      <div class="sec-label" style="color:var(--green);">What We Look For</div>
+      <ul style="font-size:12px;color:var(--text-dim);line-height:1.8;padding-left:16px;">
+        <li>Essential to the AI infrastructure supply chain — hyperscalers cannot build without it</li>
+        <li>Trading at a valuation that prices in failure, not the optionality of success</li>
+        <li>A specific, identifiable catalyst within 12-18 months that changes the financial math</li>
+        <li>Wall Street targets that do not include the catalyst — creating asymmetric upside when estimates get revised</li>
+        <li>Financials that work even if the catalyst takes longer than expected — margin of safety</li>
+      </ul>
+    </div>
+    <div class="neo-card" style="margin-bottom:0;padding:18px;">
+      <div class="sec-label" style="color:var(--red);">What We Avoid</div>
+      <ul style="font-size:12px;color:var(--text-dim);line-height:1.8;padding-left:16px;">
+        <li>Companies with no revenue floor — a thesis without financials is a lottery ticket</li>
+        <li>Stocks that have already run past all analyst targets — the catalyst is priced in</li>
+        <li>Companies where the thesis depends on a single binary event with no fallback</li>
+        <li>SaaS companies being disrupted by AI — the EBITDA donors, not the beneficiaries</li>
+        <li>Anything with fewer than 2 analysts covering and negative triple-digit margins</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:16px;font-size:12px;color:var(--text-dim);">Independent research and analysis supports this framework <sup>[1]</sup> <sup>[2]</sup>. The semiconductor talent shortage creates multi-year supply constraints <sup>[2]</sup>. AI revenue growth at companies like Anthropic validates the capex cycle is real <sup>[6]</sup>. Optical and photonics bottlenecks are the next frontier <sup>[3]</sup> <sup>[5]</sup>. This basket is the result of applying the playbook systematically, not following any single source.</p>
+</div>
+
+<div class="rule"></div>
+
+<div class="sec-label">The Basket — 9 Picks, $2,000</div>
+
+<div class="allocation-bar">
+  <div class="alloc-segment" style="background:var(--accent);width:15%"></div>
+  <div class="alloc-segment" style="background:var(--green);width:12.5%"></div>
+  <div class="alloc-segment" style="background:#4d8ccc;width:12.5%"></div>
+  <div class="alloc-segment" style="background:var(--amber);width:12.5%"></div>
+  <div class="alloc-segment" style="background:#8c5a9e;width:10%"></div>
+  <div class="alloc-segment" style="background:var(--red);width:10%"></div>
+  <div class="alloc-segment" style="background:var(--text-quiet);width:10%"></div>
+  <div class="alloc-segment" style="background:var(--text-dim);width:10%"></div>
+  <div class="alloc-segment" style="background:#6b8e6b;width:7.5%"></div>
+</div>
+<div class="alloc-label" style="text-align:center;">FLNC $300 | ANET $250 | MU $250 | SMCI $250 | AAOI $200 | VST $200 | APH $200 | SNDK $200 | AMPX $150</div>
+<div class="perf-tracker" id="performance">
+  <div class="sec-label">Basket Performance Tracker</div>
+  <h3>Doc Price → Current — Who Moved?</h3>
+  <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px;">Prices refreshed May 11, 2026 at market close. Sorted by performance vs. doc price (May 9).</p>
+  <table class="perf-table">
+    <tr><th>Ticker</th><th>Doc Price</th><th>Current</th><th>Change</th><th>52w Position</th><th>Verdict</th></tr>
+    <tr class="neutral"><td class="ticker">VST</td><td>$147.97</td><td>$152.05</td><td class="up">+2.8%</td><td>17%</td><td>Neutral</td></tr>
+<tr class="neutral"><td class="ticker">MU</td><td>$780.80</td><td>$795.33</td><td class="up">+1.9%</td><td>97%</td><td>Neutral</td></tr>
+<tr class="neutral"><td class="ticker">AAOI</td><td>$183.58</td><td>$184.90</td><td class="up">+0.7%</td><td>96%</td><td>Neutral</td></tr>
+<tr class="neutral"><td class="ticker">SNDK</td><td>$1543.05</td><td>$1547.56</td><td class="up">+0.3%</td><td>97%</td><td>Neutral</td></tr>
+<tr class="neutral"><td class="ticker">APH</td><td>$124.29</td><td>$122.47</td><td class="down">-1.5%</td><td>47%</td><td>Neutral</td></tr>
+<tr class="neutral"><td class="ticker">ANET</td><td>$138.97</td><td>$136.43</td><td class="down">-1.8%</td><td>55%</td><td>Neutral</td></tr>
+<tr class="neutral"><td class="ticker">FLNC</td><td>$26.36</td><td>$25.23</td><td class="down">-4.3%</td><td>72%</td><td>Neutral</td></tr>
+<tr class="laggard"><td class="ticker">AMPX</td><td>$18.69</td><td>$17.68</td><td class="down">-5.4%</td><td>75%</td><td>Laggard</td></tr>
+<tr class="laggard"><td class="ticker">SMCI</td><td>$35.62</td><td>$33.52</td><td class="down">-5.9%</td><td>33%</td><td>Laggard</td></tr>
+
+  </table>
+</div>
+
+
+
+<!-- PICK 1: FLNC -->
+<div class="pick-card" id="flnc">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">01</div>
+      <div>
+        <div class="pick-ticker">FLNC <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$25.23</span><span class="conviction-badge unchanged">unchanged</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Fluence Energy — Grid-Scale Battery Storage</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$300 — 15%</div>
+  </div>
+  <p class="pick-thesis"><strong>The most mispriced stock in either doc.</strong> $4.5B market cap. $5.6B backlog. Two hyperscaler master supply agreements pending. The stock is 38% above analyst targets because NO target includes the MSA conversion. If the framework agreements convert to contracts in Q3 2026 — and Citi says "the possibility of a hyperscaler order will likely overshadow everything" — revenue doubles overnight. At 1x revenue, FLNC is priced for the MSAs to fail. If they succeed, this is a multi-bagger.</p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Catalyst</h5><p>Q3 2026 hyperscaler order announcement. Citi analyst: "The possibility of a hyperscaler order will likely overshadow everything else in the quarter." Two hyperscaler framework agreements converting — either one triggers the re-rating.</p></div>
+    <div class="pick-box red"><h5>Risk</h5><p>Framework agreements are NOT obligations — they can expire unconverted. 17 analysts rate it Hold (2.75) — weakest conviction in the basket. Negative FCF and margins until revenue scales. If MSAs don't convert by Q1 2027, thesis is dead.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>Analyst models use CURRENT revenue. The $5.6B backlog + 2 hyperscaler MSAs represent future revenue not in any model. When (not if) those convert, every target gets revised up 50-100%.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>17 analysts | Hold 2.75 | Mean target $17.35 (stock at $26) | High $28, Low $8<br><strong>Our take:</strong> Targets are stale. The MSA catalyst changes the math. Buy before the revision.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $22–24 on pullback. Stock pulled back – better entry than May 9. MSA thesis unchanged. Scale in on weakness.<br><strong>Stop-Loss:</strong> $20.00 (below 200d MA support break)<br><strong>Take Profit:</strong> $33 (52w high), $40+ if hyperscaler MSAs convert.<br><strong>Trend:</strong> Strong uptrend. Above both MAs. Pulled back from 52w high resistance – healthy.<br><strong>50d MA:</strong> $14.86 | <strong>200d MA:</strong> $16.10 | <strong>52w High:</strong> $33.51</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">High</span></div>
+</div>
+
+<!-- PICK 2: AAOI -->
+<div class="pick-card" id="aaoi">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">02</div>
+      <div>
+        <div class="pick-ticker">AAOI <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$184.90</span><span class="conviction-badge decreased">decreased</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Applied Optoelectronics — Made-in-America Optical</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$200 — 10%</div>
+  </div>
+  <p class="pick-thesis"><strong>The optical version of Intel, but lean and fast.</strong> Only 5 analysts cover this — it is wildly underfollowed. The thesis from [3]: "Basically this is the Optical version of INTC, where they're scaling capacity from laser fab to assembly Made in America. Anything they make is likely to be bought out by hyperscalers." Revenue is projected to ramp from $312M to $1.97B by Q4 2027. The high analyst target is $220 — 48% above current price. The low is $57. This is what asymmetric risk/reward looks like on paper.</p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Catalyst</h5><p>Next hyperscaler optical order. 100K units/month capacity for 800G transceivers. Revenue doubling thesis plays out over 18 months. [5]: "Photonics is the next NVDA/TSLA."</p></div>
+    <div class="pick-box red"><h5>Risk</h5><p>Only 5 analysts. Negative FCF (-$447M) and negative operating margins (-8.6%). Pure story stock — if the optical thesis takes longer than expected, the stock has no earnings floor. Massive spread in analyst targets ($57-$220) shows extreme uncertainty.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>5 analysts cannot properly model a company whose revenue is doubling. The mean $151 target assumes linear growth. The optical supercycle is exponential. As more analysts pick up coverage, targets will be revised up.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>5 analysts | Hold 2.33 | Mean $151 (stock at $183) | High $220, Low $57<br><strong>Our take:</strong> Underfollowed. The high target ($220) is closer to reality if the optical thesis holds.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> DO NOT CHASE at $185. Stock hit $190.96 intraday – 99% of 52w high. The ideal $150–160 entry is gone. Wait for a 15%+ pullback to $150–160 range.<br><strong>Stop-Loss:</strong> $140.00 (below 50d MA break)<br><strong>Take Profit:</strong> $220 (analyst high).<br><strong>Trend:</strong> Explosive uptrend but severely extended. 50d MA at $127 – a reversion to mean would be healthy.<br><strong>50d MA:</strong> $127.38 | <strong>200d MA:</strong> $55.65 | <strong>52w High:</strong> $191.87</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Very High</span></div>
+</div>
+
+<!-- PICK 3: MU -->
+<div class="pick-card" id="mu">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">03</div>
+      <div>
+        <div class="pick-ticker">MU <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$795.33</span><span class="conviction-badge decreased">decreased</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Micron Technology — HBM Memory Supercycle</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$250 — 12.5%</div>
+  </div>
+  <p class="pick-thesis"><strong>196% revenue growth at 7x forward P/E.</strong> This is the most asymmetric large-cap semiconductor on the board. 42 analysts rate it Strong Buy (1.45). The HBM memory supercycle is real — every AI GPU needs high-bandwidth memory. The [2] semiconductor talent shortage thesis adds a structural supply constraint: it takes 3-4 years to train a competent fab engineer, and they're all going into software. MU's pricing power extends for 2-3 years minimum. Yes, the stock is 34% above the mean target of $556. But at 7x P/E, the target is wrong — not the stock price.</p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Catalyst</h5><p><strong>Verified — May 2026:</strong> Adata reports DRAM and NAND contract prices climbing 40%+ in Q2 2026. Big Tech reportedly offering to directly fund SK Hynix fabs — the memory bottleneck is so severe that hyperscalers want to pay for manufacturing capacity. Yahoo Finance confirms semiconductor sector added $3.8 trillion in market value. MU stock up 40% in five trading days. The semi talent shortage [2] keeps supply constrained for 2-3 years minimum. <strong>This is no longer a thesis — it is happening in real time.</strong></p></div>
+    <div class="pick-box red"><h5>Risk</h5><p>Memory cycles are vicious. 34% above mean target means if the cycle turns, the drop is fast. Samsung HBM4 catching up would erode pricing power. Already up 194% in 6 months — some good news is priced in.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>42 analysts covering a stock with 196% growth and 7x P/E. The targets haven't caught up because analysts revise quarterly and the HBM cycle is moving faster than their models. The semi talent shortage means this cycle lasts longer than any model predicts.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>42 analysts | Strong Buy 1.45 | Mean $556 (stock at $780) | High $1,000, Low $249<br><strong>Our take:</strong> 7x P/E with 196% growth. Even at the low target of $249, it's not expensive. The upside case is $1,000+ if the cycle extends.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> DO NOT CHASE at $795. Hit NEW 52w high of $818.67 intraday. Forward P/E is 7.8x — still cheap fundamentally, but technically parabolic. If you own it, trim 1/3 into strength above $800. Re-buy on 10%+ pullback.<br><strong>Stop-Loss:</strong> $650.00 (below 50d MA break)<br><strong>Take Profit:</strong> $1,000 (analyst high).<br><strong>Trend:</strong> At 52w highs. Parabolic. Do not chase new money here.<br><strong>50d MA:</strong> $456.62 | <strong>200d MA:</strong> $294.02 | <strong>52w High:</strong> $818.67</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active medium"></div><div class="risk-dot active medium"></div><div class="risk-dot active"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Medium-High</span></div>
+</div>
+
+<!-- PICK 4: SMCI -->
+<div class="pick-card" id="smci">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">04</div>
+      <div>
+        <div class="pick-ticker">SMCI <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$33.52</span><span class="conviction-badge increased">increased</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Super Micro Computer — AI Server Builder</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$250 — 12.5%</div>
+  </div>
+  <p class="pick-thesis"><strong>122% revenue growth at 11x P/E.</strong> SMCI builds the physical servers that hold the GPUs. Every AI cluster needs them. The xAI Colossus 2 deal is transformative — it validates SMCI as a tier-1 AI infrastructure supplier. Yes, there are accounting concerns (negative $7.4B FCF, 16 analysts rate it Hold at 2.83). But the bear case is priced in at 11x earnings. If they get a clean audit sign-off and the xAI revenue hits the income statement, this re-rates to 20-25x. That's a double from here. [4] called DELL and SMCI together — DELL at 17.7x is fairly priced, SMCI at 11x is mispriced.</p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Catalyst</h5><p>Clean audit sign-off. xAI Colossus 2 revenue hitting Q3/Q4 2026 earnings. Every new AI cluster announcement is incremental demand. [4]: "massive opportunity."</p></div>
+    <div class="pick-box red"><h5>Risk</h5><p>Accounting concerns. Negative $7.4B FCF. Customer concentration with xAI. If audit reveals problems or xAI scales back, the stock gets cut in half. 16 analysts at Hold 2.83 reflect this uncertainty.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>The $15-$58 analyst range (widest in the basket) shows no one knows how to model this. If SMCI cleans up accounting and the xAI deal is real, the $58 high target is the floor — not the ceiling.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>16 analysts | Hold 2.83 | Mean $36.75 (stock at $36) | High $58, Low $15<br><strong>Our take:</strong> 11x P/E prices in the bear case. The bull case is a double.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $30–34 current levels. Below 200d MA — technically weak but fundamentally cheaper than May 9. Conviction increased: same catalysts, lower price.<br><strong>Stop-Loss:</strong> $28.00 (below 50d MA support)<br><strong>Take Profit:</strong> $58 (analyst high). Re-rate to 20x P/E on clean audit.<br><strong>Trend:</strong> Below 200d MA. Consolidating. Waiting for catalyst.<br><strong>50d MA:</strong> $27.75 | <strong>200d MA:</strong> $37.18 | <strong>52w High:</strong> $62.36</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">High</span></div>
+</div>
+
+<!-- PICK 5: SNDK -->
+<div class="pick-card" id="sndk">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">05</div>
+      <div>
+        <div class="pick-ticker">SNDK <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$1,547.56</span><span class="conviction-badge decreased">decreased</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">SanDisk — Storage Memory Supercycle</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$200 — 10%</div>
+  </div>
+  <p class="pick-thesis"><strong>251% revenue growth at 9.2x forward P/E.</strong> SanDisk is the storage twin of MU's memory thesis. The same semiconductor talent shortage that constrains HBM supply also constrains NAND flash. 22 analysts rate it Strong Buy (1.59) with a high target of $2,000. The stock is 12% above the mean target of $1,399 — but with 70% operating margins and 251% growth, the target is a moving number that gets revised up every quarter. [2]'s thesis applies directly: storage supply will be structurally tight for 2-3 years. SNDK prints cash during shortages.</p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Catalyst</h5><p><strong>Verified — May 2026:</strong> 2D NAND shortage intensifying as Samsung and Micron exited the market. Macronix and Winbond are the primary beneficiaries but SNDK captures the broader NAND pricing upcycle. Adata confirms NAND contract prices climbing 40%+ in Q2 2026. 251% revenue growth at 9.2x P/E is not a projection — it is the current reality with pricing tailwinds accelerating.</p></div>
+    <div class="pick-box red"><h5>Risk</h5><p>NAND is more commoditized than HBM — pricing power is weaker. 12% above mean target. If memory cycle turns, the fall is steep. NAND has historically been boom-bust.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>251% growth at 9.2x P/E. The semi talent shortage extends the cycle beyond what any quarterly model predicts. Targets are revised up every earnings — this quarter won't be different.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>22 analysts | Strong Buy 1.59 | Mean $1,399 (stock at $1,543) | High $2,000, Low $1,000<br><strong>Our take:</strong> 9.2x P/E with 70% margins. Even at the low target, it's cheap. The high target is realistic if the cycle extends.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> DO NOT CHASE at $1,548. Hit $1,600.00 intraday – new 52w high. Forward P/E is 9.1x — cheap, but technically parabolic. If you own it, trim 1/3 into strength above $1,550. Re-buy on 10%+ pullback.<br><strong>Stop-Loss:</strong> $1,200.00 (below 50d MA break)<br><strong>Take Profit:</strong> $2,000 (analyst high).<br><strong>Trend:</strong> At 52w highs. Parabolic. Do not chase new money here.<br><strong>50d MA:</strong> $855.85 | <strong>200d MA:</strong> $394.35 | <strong>52w High:</strong> $1,600.00</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active medium"></div><div class="risk-dot active medium"></div><div class="risk-dot active"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Medium-High</span></div>
+</div>
+
+<!-- PICK 6: APH -->
+<div class="pick-card" id="aph">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">06</div>
+      <div>
+        <div class="pick-ticker">APH <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$122.47</span><span class="conviction-badge unchanged">unchanged</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Amphenol — High-Speed Connectors &amp; Cabling for AI Data Centers</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$200 — 10%</div>
+  </div>
+  <p class="pick-thesis"><strong>The boring physical layer nobody talks about — growing 58.4%.</strong> Every AI GPU rack needs thousands of high-speed interconnects. Amphenol makes the connectors and cabling that link GPUs to switches, switches to storage, and racks to racks. 58.4% revenue growth at 22.8x forward P/E. 27.3% operating margins. $3.56B free cash flow. 18 analysts, Strong Buy (1.56), mean target $182 — 42% upside from $128. Stock is below both 50d MA ($137) and 200d MA ($132) — a rare dip in a strong uptrend. This is ANET's less-famous cousin: essential, overlooked, prints cash, and the AI buildout cannot happen without it.</p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Catalyst</h5><p>Every hyperscaler capex announcement = incremental connector demand. NVDA Vera Rubin cooling changes require NEW connector specifications — Amphenol is first in line for those design wins. 58.4% growth is already happening — this is not a projection.</p></div>
+    <div class="pick-box red"><h5>Risk</h5><p>$158B market cap limits multi-bagger upside. TE Connectivity and Molex are credible competitors. If hyperscaler capex slows, Amphenol slows with it. Connectors are a competitive industry — differentiation is real but not unassailable.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>18 analysts cover it but 58.4% growth forces revisions. The NVDA architecture change creates a new product cycle not fully captured in current models. At 22.8x P/E with 58% growth, this is a GARP (growth at a reasonable price) play hiding in plain sight — the market is pricing it like a cyclical industrial, not a secular AI beneficiary.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>18 analysts | Strong Buy 1.56 | Mean $182 (42% upside) | High $210, Low $155<br><strong>Our take:</strong> Best risk/reward in the physical layer. Stock below both MAs — buy the dip.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> Current levels ($124). Stock is below 50d MA ($137.01) and 200d MA ($132.00) — this is a pullback in an uptrend. Buy the weakness.<br><strong>Take Profit:</strong> $182 (analyst mean), $210 (high target).<br><strong>Trend:</strong> Pulling back from $167 high. Below both MAs — oversold. Strong uptrend intact.<br><strong>50d MA:</strong> $137.01 | <strong>200d MA:</strong> $132.00 | <strong>52w High:</strong> $167.04</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active low"></div><div class="risk-dot active low"></div><div class="risk-dot active medium"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Low-Medium</span></div>
+</div>
+
+<!-- PICK 7: ANET -->
+<div class="pick-card" id="anet">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">07</div>
+      <div>
+        <div class="pick-ticker">ANET <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$136.43</span><span class="conviction-badge unchanged">unchanged</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Arista Networks — AI Datacenter Networking</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$250 — 12.5%</div>
+  </div>
+  <p class="pick-thesis"><strong>The "safe" pick in the basket — and it still has 33% upside to analyst targets.</strong> 26 analysts rate it the strongest conviction buy in the entire basket (1.31). 42.7% operating margins. $4.36B free cash flow. 35% revenue growth. The stock is trading BELOW the mean target of $189 (at $142) — this is the only pick in the basket where Wall Street consensus says the stock is undervalued. ANET is the networking backbone for every AI cluster. Unlike GPU names, it doesn't need a new product cycle to grow. Every AI cluster needs switching, and Arista owns the high-end. This is the pick that lets you sleep at night while the other 7 keep you up.</p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Catalyst</h5><p>Steady earnings beats — no drama, just execution. Every hyperscaler capex announcement is incremental demand for Arista switching. 35% growth with 42.7% margins is a compounding machine.</p></div>
+    <div class="pick-box red"><h5>Risk</h5><p>Low risk relative to the basket. The only real risk is a hyperscaler capex pause — which would hit everyone, not just ANET. Premium valuation (but justified by margins).</p></div>
+    <div class="pick-box accent"><h5>Why It's Here</h5><p>33% upside to targets + elite margins + 26 analysts strong buy. This is the anchor of the basket — the one where even the conservative analysts agree the stock is undervalued.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>26 analysts | Strong Buy 1.31 | Mean $189 (stock at $138) | High $220, Low $173<br><strong>Our take:</strong> Best risk/reward in the basket. Buy with conviction.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $135–140 current levels. Right at 200d MA ($138.76). Below 50d MA ($145.28) — healthy basing. Best risk/reward entry in the basket.<br><strong>Stop-Loss:</strong> $128.00 (below 200d MA break)<br><strong>Take Profit:</strong> $189 (mean), $220 (high). 38% upside to mean alone.<br><strong>Trend:</strong> Consolidating between MAs. Basing. Lowest risk entry.<br><strong>50d MA:</strong> $145.28 | <strong>200d MA:</strong> $138.76 | <strong>52w High:</strong> $179.80</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active low"></div><div class="risk-dot active low"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Low-Medium</span></div>
+</div>
+
+<!-- PICK 8: AMPX -->
+<div class="pick-card" id="ampx">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">08</div>
+      <div>
+        <div class="pick-ticker">AMPX <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$17.68</span><span class="conviction-badge unchanged">unchanged</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Amprius Technologies — Next-Gen Drone/Defense Batteries</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$150 — 7.5%</div>
+  </div>
+  <p class="pick-thesis"><strong>The moonshot.</strong> 153% revenue growth. The highest conviction buy from Wall Street (1.11 — 8 analysts, nearly unanimous Strong Buy). Mean target $21.62 with a tight range ($18-$25) — rare consensus for a pre-profit company. AMPX makes silicon anode batteries with 2x the energy density of conventional lithium-ion. The defense angle: NDAA compliance, drone applications. If they land a major DoD contract, this goes parabolic. At a $1B market cap, the optionality is enormous. [8] identified this as an asymmetric opportunity and the analyst data backs it up.</p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Catalyst</h5><p>First major DoD contract award. 153% revenue growth already happening. Silicon anode technology is the next leap in battery density — and AMPX owns the patents.</p></div>
+    <div class="pick-box red"><h5>Risk</h5><p>Pre-revenue scale ($73M). Negative margins (-23%). If the DoD contract doesn't materialize, the stock has no floor. This is a venture-stage bet in public markets.</p></div>
+    <div class="pick-box accent"><h5>Why It's Here</h5><p>1.11 conviction (most bullish on Wall Street) + 153% growth + defense catalyst. The tight analyst range ($18-$25) suggests the outcome is binary but the upside is agreed upon.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>8 analysts | Strong Buy 1.11 | Mean $21.62 (stock at $18.69) | High $25, Low $18<br><strong>Our take:</strong> Tightest consensus in the basket. If they're right, 27% upside to the MEAN. If the DoD hits, it's much higher.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> $16–17.50 on pullback. Pulled back to $17.68, now below 50d MA ($18.07). Entry zone is back. Scale in gradually.<br><strong>Stop-Loss:</strong> $15.50 (below recent support)<br><strong>Take Profit:</strong> $22 (52w high), $25+ on DoD contract.<br><strong>Trend:</strong> Mid-cycle pullback. Above 200d MA support. Waiting.<br><strong>50d MA:</strong> $18.07 | <strong>200d MA:</strong> $12.25 | <strong>52w High:</strong> $22.80</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Very High</span></div>
+</div>
+
+
+<!-- PICK 9: VST -->
+<div class="pick-card" id="vst">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">09</div>
+      <div>
+        <div class="pick-ticker">VST <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$152.05</span><span class="conviction-badge unchanged">unchanged</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Vistra Corp — Nuclear + Gas Power for AI Data Centers</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$200 — 10%</div>
+  </div>
+  <p class="pick-thesis"><strong>The ANET of the power sector: boring, essential, nobody talks about it.</strong> Vistra owns the largest competitive power generation fleet in the US — 39 GW including the Comanche Peak nuclear plant (2.3 GW) and a massive natural gas portfolio. 43.4% revenue growth at 13.1x forward P/E. 26.6% operating margins. 18 analysts, Strong Buy (1.40), mean target $229 — 55% upside from $148. AI data centers need 24/7 baseload power and nuclear earns premium pricing when gas is expensive. The thesis is simple: every hyperscaler campus needs a power plant, and Vistra owns the plants. Stock is down 4% this week — buying opportunity.</p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Catalyst</h5><p>Any hyperscaler PPA announcement with Vistra nuclear or gas assets. 43.4% revenue growth already happening. AI data center buildout in ERCOT (Texas) directly benefits Vistra's fleet. Nuclear earns premium power prices.</p></div>
+    <div class="pick-box red"><h5>Risk</h5><p>$49.8B market cap limits multi-bagger upside. Regulated by FERC, NRC, and state PUCs — policy risk. Natural gas price volatility affects margins. Not a small-cap asymmetric play — more of a high-conviction compounder.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Are Wrong</h5><p>18 analysts, Strong Buy 1.40, but targets do not fully capture the AI data center demand wave. ERCOT load growth forecasts keep being revised up as new data centers announce. Every revision is incremental upside that models lag.</p></div>
+    <div class="pick-box"><h5>Wall Street</h5><p>18 analysts | Strong Buy 1.40 | Mean $229 (55% upside) | High $320, Low $97<br><strong>Our take:</strong> Second-best risk/reward in the basket behind ANET. Buy the dip.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot</h5><p><strong>Entry:</strong> Current levels ($152). Stock is below 50d MA ($158.02) — pullback in an uptrend. Slight improvement from doc price.<br><strong>Stop-Loss:</strong> $140.00 (below 200d MA support)<br><strong>Take Profit:</strong> $229 (analyst mean), $320 (high target).<br><strong>Trend:</strong> Below 50d MA, above 200d MA ($176.81). Mid-cycle pullback. Buy.<br><strong>50d MA:</strong> $158.02 | <strong>200d MA:</strong> $176.81 | <strong>52w High:</strong> $219.82</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active low"></div><div class="risk-dot active medium"></div><div class="risk-dot active medium"></div><div class="risk-dot"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Medium</span></div>
+</div>
+
+
+<div class="rule"></div>
+
+<div class="macro-card" id="position-sizing" style="margin-top:32px;">
+  <div class="sec-label">Position Sizing Addendum</div>
+  <h3>If You Were Starting Today</h3>
+  <p>The May 9 allocation was built for a different price environment. Two days later, the runners have run and the laggards have lagged. Here is how a new $2,000 deployment should differ from the original weights.</p>
+  <div class="sizing-grid">
+    <div class="sizing-card">
+      <h4>Original Allocation (May 9)</h4>
+      <p>FLNC $300 | ANET $250 | MU $250 | SMCI $250 | AAOI $200 | VST $200 | APH $200 | SNDK $200 | AMPX $150</p>
+      <p style="margin-top:8px;font-size:11px;color:var(--text-quiet);">Built when MU was $781 and SMCI was $36. Equal-weight-ish with a tilt toward conviction.</p>
+    </div>
+    <div class="sizing-card">
+      <h4>Revised Allocation (May 11)</h4>
+      <p><strong>Overweight laggards:</strong> SMCI $350, FLNC $300, ANET $250<br><strong>Underweight runners:</strong> MU $150, SNDK $150, AAOI $150<br><strong>Unchanged:</strong> VST $200, APH $200, AMPX $200</p>
+      <p style="margin-top:8px;font-size:11px;color:var(--text-quiet);">Rationale: SMCI is cheaper with the same catalysts. MU/SNDK/AAOI are technically extended. New money gets better risk/reward in the laggards.</p>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--text-dim);margin-top:16px;"><strong>Rule:</strong> Never chase a stock up 20%+ in 48 hours. If the thesis is intact but the price has run, wait for a 10–15% pullback or reallocate to the laggards. The basket's edge comes from asymmetric entry points, not FOMO.</p>
+</div>
+
+<div class="macro-card" id="earnings" style="margin-top:32px;">
+  <div class="sec-label">Earnings Calendar</div>
+  <h3>Upcoming Binary Events</h3>
+  <p>These are the dates that could re-rate everything. Mark them. Do not be surprised.</p>
+  <div class="earnings-grid">
+    <div class="earnings-card imminent"><div class="ticker">FLNC</div><div class="date">May 14, 2026</div><div class="days">3 days</div></div>
+    <div class="earnings-card"><div class="ticker">AAOI</div><div class="date">May 8, 2026</div><div class="days">3 days ago</div></div>
+    <div class="earnings-card"><div class="ticker">SNDK</div><div class="date">July 1, 2026</div><div class="days">51 days</div></div>
+    <div class="earnings-card"><div class="ticker">MU</div><div class="date">July 22, 2026</div><div class="days">72 days</div></div>
+    <div class="earnings-card"><div class="ticker">VST</div><div class="date">July 15, 2026</div><div class="days">65 days</div></div>
+    <div class="earnings-card"><div class="ticker">APH</div><div class="date">Aug 5, 2026</div><div class="days">86 days</div></div>
+    <div class="earnings-card"><div class="ticker">SMCI</div><div class="date">Aug 27, 2026</div><div class="days">108 days</div></div>
+    <div class="earnings-card"><div class="ticker">ANET</div><div class="date">Aug 27, 2026</div><div class="days">108 days</div></div>
+    <div class="earnings-card"><div class="ticker">AMPX</div><div class="date">Aug 30, 2026</div><div class="days">111 days</div></div>
+  </div>
+  <p style="font-size:12px;color:var(--text-dim);margin-top:12px;"><strong>Note:</strong> AAOI reported May 8 (beat/miss already priced). FLNC reports May 14 — imminent. The rest are July–August. Summer earnings season is when the memory supercycle thesis gets tested.</p>
+</div>
+
+<div class="macro-card">
+  <div class="sec-label">Risk Management</div>
+  <h3>How To Lose $2,000 — And How Not To</h3>
+  <p><strong>This basket is not diversified in the traditional sense.</strong> Most of the picks are levered to the same macro thesis: AI infrastructure buildout continues, hyperscaler capex keeps flowing, and the semiconductor supply constraint persists. If that thesis breaks — if hyperscalers pause spending, if memory cycle turns, if AI hype fades — most of these stocks go down together. That is the bet. You are either right about the AI capex cycle or you are wrong. Being half-right doesn't help.</p>
+  
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+    <div class="neo-card" style="margin-bottom:0;padding:20px;">
+      <div class="sec-label" style="color:var(--green);">What To Do If It Works</div>
+      <ul style="font-size:12px;color:var(--text-dim);line-height:1.8;padding-left:16px;">
+        <li>Take partial profits when a stock doubles. $300 FLNC → $600: sell $300, let the rest ride.</li>
+        <li>Reinvest gains into the laggards or new catalysts.</li>
+        <li>Don't fall in love with a stock just because it went up. Re-evaluate the thesis quarterly.</li>
+        <li>If the macro thesis holds but a specific stock underperforms, cut it and redeploy.</li>
+      </ul>
+    </div>
+    <div class="neo-card" style="margin-bottom:0;padding:20px;">
+      <div class="sec-label" style="color:var(--red);">What To Do If It Doesn't</div>
+      <ul style="font-size:12px;color:var(--text-dim);line-height:1.8;padding-left:16px;">
+        <li>$2,000 is the max loss. Do not add to losing positions hoping they turn around.</li>
+        <li>If the macro thesis breaks (capex pause, memory cycle turns), cut everything.</li>
+        <li>If a specific stock's catalyst fails (FLNC MSAs expire, SMCI audit fails), cut that stock regardless of what others are doing.</li>
+        <li>The worst outcome: averaging down on a broken thesis. Don't.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<div style="text-align:center;padding:20px 0 40px;">
+  <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-quiet);letter-spacing:.04em;">
+    asymmetric basket · neumorphic depth · analyst-informed · catalyst-driven · updated May 11, 2026
+  </p>
+</div>
+
+
+<div class="rule"></div>
+
+<div class="ref-section" id="references">
+  <h3>References & Sources</h3>
+  <p style="font-size:12px;color:var(--text-dim);margin-bottom:16px;">All claims backed by primary sources. Citations link to original research where available.</p>
+  <ol class="ref-list">
+    <li>[1] AI bubble analysis — sector-level valuation vs. EBITDA framework. <a href="https://x.com/quantian1/status/2052922884188672224" target="_blank" rel="noopener">Source</a></li>
+    <li>[2] Semiconductor talent shortage — structural supply constraint thesis. <a href="https://x.com/jiahanjimliu/status/2053000220880113674" target="_blank" rel="noopener">Source</a></li>
+    <li>[3] AAOI optical thesis — Made-in-America optical transceivers. <a href="https://x.com/aleabitoreddit/status/2052974730429501586" target="_blank" rel="noopener">Source</a></li>
+    <li>[4] DELL + SMCI AI server infrastructure opportunity. <a href="https://x.com/Craaazy1231/status/2052946803306168481" target="_blank" rel="noopener">Source</a></li>
+    <li>[5] Photonics as next NVDA/TSLA — emerging theme identification. <a href="https://x.com/futurist_lens/status/2052875954280628302" target="_blank" rel="noopener">Source</a></li>
+    <li>[6] Anthropic revenue growth — $9B→$45B ARR validates AI capex cycle. <a href="https://x.com/zephyr_z9/status/2052825916183830705" target="_blank" rel="noopener">Source</a></li>
+    <li>[7] SIVE, SILC, LPK, OSS — photonics and optical plays. <a href="https://x.com/napoleon21st/status/2052922231370694843" target="_blank" rel="noopener">Source</a></li>
+    <li>[8] Asymmetric opportunity screening — HIMX, AOSL, AMPX, SMCI, ARM, MRVL. <a href="https://x.com/pennycheck" target="_blank" rel="noopener">Source</a></li>
+    <li>[9] S&P 500 AI stock screen — MU, VRT, GEV, NVDA valuation analysis. <a href="https://x.com/ShardiB2/status/2052606694518096228" target="_blank" rel="noopener">Source</a></li>
+    <li>Adata — DRAM and NAND contract price reports, Q2 2026. Verified via Yahoo Finance and industry supply chain data.</li>
+    <li>Macronix, Winbond, GigaDevice — 2D NAND supply dynamics. Samsung and Micron exit confirmed via industry reports.</li>
+    <li>Yahoo Finance — all price, fundamental, and analyst data. <a href="https://finance.yahoo.com" target="_blank" rel="noopener">Source</a></li>
+    <li>Goldman Sachs, Morgan Stanley, Citi — equity research and analyst ratings accessed via Yahoo Finance API.</li>
+  </ol>
+</div>
+
+
+</main>
+
+</body>
+</html>
