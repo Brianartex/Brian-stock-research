@@ -1,23 +1,31 @@
 {
   "project": "Brian Stock Research",
   "repo": "Brianartex/Brian-stock-research",
-  "last_updated": "2026-05-12T20:00:00-04:00",
+  "last_updated": "2026-05-12T21:30:00-04:00",
   "active_docs": {
     "investment-deep-dive-v5.html": {
       "status": "live",
-      "picks": 10,
-      "last_price_refresh": "2026-05-12T15:00:00-04:00",
-      "key_alerts": "FLNC S-3ASR overhang alert added, allocation trimmed $300->$200",
-      "next_action": "Post-May 14 earnings review for FLNC position sizing"
+      "picks": 11,
+      "last_price_refresh": "2026-05-12T21:30:00-04:00",
+      "key_alerts": "PENG added at $200 (10%). FLNC trimmed to $100 (shelf overhang). MU/ANET/VST/SIVE trimmed. Prices refreshed.",
+      "next_action": "Post-May 14 earnings review for FLNC. Monitor PENG for pullback to $35-40 entry."
     },
     "Tech_Stock_Basket_May_2026_v3.html": {
       "status": "live",
       "stocks": 23,
-      "watchlist": ["AMBA", "VICR"],
-      "scouting": ["WYFI", "NBIS", "CRWV"],
+      "watchlist": [
+        "AMBA",
+        "VICR",
+        "PENG"
+      ],
+      "scouting": [
+        "WYFI",
+        "NBIS",
+        "CRWV"
+      ],
       "last_price_refresh": "2026-05-12T15:00:00-04:00",
       "re_rates": "QCOM: WATCH updated after -12.4% drop. Entry $175-180.",
-      "next_action": "None — prices current, verdicts stable"
+      "next_action": "None \u2014 prices current, verdicts stable"
     },
     "Geopolitical_Growth_May_2026_v3.html": {
       "status": "live",
@@ -50,19 +58,20 @@
   ],
   "pending_work": [
     "FLNC post-earnings review (May 14)",
+    "PENG: monitor for pullback to $35-40 ideal entry",
     "AMBA alert at $60-65 (set price alert)",
     "Humanoid robot watchlist expansion (scout X threads)",
-    "Tech doc full metrics+sparkline refresh (deferred — low ROI)",
-    "FBA All Listings Report integration (awaiting data from Brian)"
+    "Tech doc full metrics+sparkline refresh (deferred)",
+    "FBA All Listings Report integration (awaiting data)"
   ],
   "completed_today": [
-    "v5 deep-dive: FLNC overhang alert, SIVE nesting fix, price refresh",
-    "Morgan action sheet sent to Discord #investment",
-    "Index page: Archive restructured (doc→month→week), External removed",
-    "Archive page: Full version history added",
-    "Tech doc v3: Watchlist section added (AMBA, VICR, WYFI/NBIS/CRWV scouting)",
-    "Tech doc v3: All 23 inline prices refreshed to May 12 afternoon",
-    "Tech doc v3: QCOM re-rated to WATCH with updated May 12 analysis",
-    "Morgan approved for Discord bot pairing"
+    "PENG added to deep-dive v5 as Pick #11 ($200 / 10%)",
+    "Deep-dive v5: All 11 pick prices refreshed to May 12 close",
+    "Deep-dive v5: Rebalanced allocations (FLNC $100, MU $250, ANET $200, VST $150, SIVE $150)",
+    "Deep-dive v5: Performance tracker updated with PENG + QCOM re-rate note",
+    "Tech doc v3: QCOM re-rated to WATCH after -11.5% drop ($210)",
+    "Discord alert sent to #investment with full basket update for Morgan",
+    "Vision API permanently fixed (removed api_key: '' from config.yaml)",
+    "PENG research: Rosenblatt report, pennycheck comparison, Needham conference, KV Cache thesis verified via vision"
   ]
 }

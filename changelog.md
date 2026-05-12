@@ -33,9 +33,10 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Versions are
 
 ---
 
-## [2026-05-12] — v5 Deep-Dive Live + Tech Doc Refresh
+## [2026-05-12] — v5 Deep-Dive: PENG Added + Prices Refreshed
 
 ### Added
+- **PENG (Penguin Solutions)** — Added to deep-dive v5 as Pick #11 ($200 / 10%). Photonic Memory Appliance (PMA) for Marvell using Celestial AI silicon. Rosenblatt Buy rating, $54 target (up from $32). SK Telecom $200M investment at $32.80. H1 FY26 AI-driven revenue >50% YoY. Needham conference confirmed CXL-based KV Cache product.
 - **investment-deep-dive-v5.html** — 10-pick asymmetric basket with macro dashboard, performance tracker, position sizing, earnings calendar, stop-losses. FLNC overhang alert added post S-3ASR. SIVE added as 10th pick (CPO/photonics).
 - **Morgan action sheet** — Discord-only actionable doc with allocations, entries, stops, and buying sequence. Sent to #investment.
 - **index.html** — Archive restructured: hierarchical by document → month → week with version links. External section removed.
@@ -44,10 +45,13 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Versions are
 - **project_state.json** — Created with machine-readable state of all docs, blockers, upcoming dates, and pending work.
 
 ### Changed
-- **Tech doc v3** — All 23 inline prices refreshed to May 12 afternoon. QCOM re-rated to WATCH after -12.4% broad-tech drop (no company-specific news). P/E compressed to 19.6x forward. Entry target revised to $175–180.
+- **Deep-dive v5 rebalanced** — FLNC trimmed $200→$100 (shelf overhang), MU $300→$250, ANET $250→$200, VST $200→$150, SIVE $200→$150. Total stays $2,000.
+- **Deep-dive v5 prices refreshed** — All 11 pick prices updated to May 12 close. Performance tracker updated.
+- **Tech doc v3** — All 23 inline prices refreshed to May 12 afternoon. QCOM re-rated to WATCH after -11.5% broad-tech drop (no company-specific news). P/E compressed to 19.8x forward. Entry target revised to $175–180.
 - **Morgan approved** for Discord bot pairing (user ID: 894243263777763389).
 
 ### Fixed
+- **Vision API** — Permanently fixed by removing `api_key: ''` from config.yaml auxiliary.vision. Now resolves from .env via `get_env_value()`.
 - Desktop nav bar TOC overlap — shifted right by `--toc-width` so nav links are fully clickable.
 - SIVE card nesting — added missing `</div>` closures so SIVE renders as sibling to VST, not child.
 - Orphaned risk-meter dots removed from below SIVE card.
