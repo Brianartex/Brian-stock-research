@@ -1,14 +1,14 @@
 {
   "project": "Brian Stock Research",
   "repo": "Brianartex/Brian-stock-research",
-  "last_updated": "2026-05-12T21:30:00-04:00",
+  "last_updated": "2026-05-14T11:15:00-04:00",
   "active_docs": {
     "investment-deep-dive-v5.html": {
       "status": "live",
       "picks": 11,
       "last_price_refresh": "2026-05-12T21:30:00-04:00",
-      "key_alerts": "PENG added at $200 (10%). FLNC trimmed to $100 (shelf overhang). MU/ANET/VST/SIVE trimmed. Prices refreshed.",
-      "next_action": "Post-May 14 earnings review for FLNC. Monitor PENG for pullback to $35-40 entry."
+      "key_alerts": "PENG added at $200 (10%). FLNC trimmed to $100 (shelf overhang). MU/ANET/VST/SIVE trimmed. Prices refreshed. FLNC earnings May 14: EPS beat -$0.12 vs -$0.18 est, revenue $464.9M, backlog $5.6B. Sponsor block sale 20M shares at $21.00 (424B7 May 13).",
+      "next_action": "Post-May 14 earnings review DONE. Monitor PENG for pullback to $35-40 entry."
     },
     "Tech_Stock_Basket_May_2026_v3.html": {
       "status": "live",
@@ -24,8 +24,8 @@
         "CRWV"
       ],
       "last_price_refresh": "2026-05-12T15:00:00-04:00",
-      "re_rates": "QCOM: WATCH updated after -12.4% drop. Entry $175-180.",
-      "next_action": "None \u2014 prices current, verdicts stable"
+      "re_rates": "QCOM: WATCH updated after -12.4% drop. Entry $175-180. SMCI: accounting concerns flagged (accrual ratios, internal controls).",
+      "next_action": "Monitor SMCI for audit resolution news"
     },
     "Geopolitical_Growth_May_2026_v3.html": {
       "status": "live",
@@ -37,6 +37,16 @@
       "last_updated": "2026-05-12",
       "next_action": "None"
     }
+  },
+  "trading_journal": {
+    "sheet_id": "1T8pSi8vL8jxFoF3sPQRCcyL8xYO1TB8Zn0UKArLMnFc",
+    "status": "live",
+    "tabs": 7,
+    "crypto_positions": "AVICI (2,700 @ $2.96), SOL (0.333 @ $175), ETH (0.703 @ $2,878)",
+    "stock_positions": "APH (1.2 @ $127.01), ANET (1.43 @ $139.45)",
+    "watchlist": "PENG (ideal entry $35-40)",
+    "daily_price_refresh": "cron f97754373724 @ 10:00am ET",
+    "last_updated": "2026-05-13T14:30:00-04:00"
   },
   "index_page": {
     "status": "live",
@@ -57,21 +67,22 @@
     "2026-07-29: QCOM Q2 2026 earnings (re-rate trigger)"
   ],
   "pending_work": [
-    "FLNC post-earnings review (May 14)",
     "PENG: monitor for pullback to $35-40 ideal entry",
+    "SMCI: follow up on accounting concerns (accrual ratios, internal controls)",
     "AMBA alert at $60-65 (set price alert)",
     "Humanoid robot watchlist expansion (scout X threads)",
     "Tech doc full metrics+sparkline refresh (deferred)",
     "FBA All Listings Report integration (awaiting data)"
   ],
   "completed_today": [
-    "PENG added to deep-dive v5 as Pick #11 ($200 / 10%)",
-    "Deep-dive v5: All 11 pick prices refreshed to May 12 close",
-    "Deep-dive v5: Rebalanced allocations (FLNC $100, MU $250, ANET $200, VST $150, SIVE $150)",
-    "Deep-dive v5: Performance tracker updated with PENG + QCOM re-rate note",
-    "Tech doc v3: QCOM re-rated to WATCH after -11.5% drop ($210)",
-    "Discord alert sent to #investment with full basket update for Morgan",
-    "Vision API permanently fixed (removed api_key: '' from config.yaml)",
-    "PENG research: Rosenblatt report, pennycheck comparison, Needham conference, KV Cache thesis verified via vision"
+    "Trading Journal built: 7-tab Google Sheets with live prices, formulas, color coding",
+    "Trade journal daily price refresh cron created (f97754373724, 10am ET)",
+    "Google Workspace auth fixed permanently (production mode)",
+    "Discord trade-log channel created, Morgan tagged with screenshot instructions",
+    "APH avg cost corrected in journal ($2.96 → confirmed ~$3 actual)",
+    "PENG added to deep-dive watchlist (NOT open position, ideal entry $35-40)",
+    "SMCI accounting red flags identified (Yahoo Finance: accrual ratios, internal control weaknesses)",
+    "Basket prices refreshed, Morgan sent corrected Discord recommendation",
+    "todo.md and project_state.json updated"
   ]
 }
