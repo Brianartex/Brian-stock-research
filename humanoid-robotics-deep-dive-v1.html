@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humanoid Robotics Deep-Dive | Harmonic Drive · Leader Drive · Sanhua · $ROBO | May 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+  /* ═══════════════════════════════════════════════════════════
+     NEUBRUTAL v4.1 — WARM STONE DESIGN SYSTEM
+     Standalone Humanoid Robotics Deep-Dive
+     ═══════════════════════════════════════════════════════════ */
+
+  html,body { height: 100%; margin: 0; padding: 0; }
+  body { min-height: 100vh; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ede8e0;
+    --bg-alt: #e6e0d8;
+    --surface: #f5f2ed;
+    --surface-alt: #faf8f5;
+    --text: #1a1816;
+    --text-dim: #5c5852;
+    --text-quiet: #8c8882;
+    --border: #d8d2c8;
+    --border-strong: #b8b0a4;
+
+    --shadow-sm-ext: 2px 2px 5px rgba(0,0,0,0.06), -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-md-ext: 4px 4px 10px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.9);
+    --shadow-lg-ext: 8px 8px 20px rgba(0,0,0,0.08), -8px -8px 20px rgba(255,255,255,0.95);
+    --shadow-sm-inset: inset 2px 2px 5px rgba(0,0,0,0.06), inset -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-pressed: inset 3px 3px 7px rgba(0,0,0,0.10), inset -2px -2px 5px rgba(255,255,255,0.6);
+
+    --accent: #26609c;
+    --accent-light: #4d8ccc;
+    --accent-bg: rgba(38,96,156,0.08);
+
+    --green: #277a3e;
+    --green-bg: rgba(39,122,62,0.10);
+    --red: #a33636;
+    --red-bg: rgba(163,54,54,0.10);
+    --amber: #996e2c;
+    --amber-bg: rgba(153,110,44,0.10);
+
+    --radius-sm: 8px;
+    --radius: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+    --toc-width: 230px;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .skip-link {
+    position: absolute; top: -100px; left: 12px; z-index: 300;
+    background: var(--accent); color: #fff; padding: 8px 16px;
+    border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: top .2s;
+  }
+  .skip-link:focus { top: 12px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .site-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-sm-ext);
+    padding: 10px 24px; display: flex; gap: 24px; align-items: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    margin-left: var(--toc-width);
+  }
+  .site-nav a {
+    color: var(--text-dim); text-decoration: none;
+    font-weight: 500; letter-spacing: 0.02em;
+  }
+  .site-nav a:hover { color: var(--accent); }
+  .site-nav .nav-current { color: var(--accent); font-weight: 600; }
+
+  .toc-sidebar {
+    position: fixed; top: 0; left: 0; z-index: 200;
+    width: var(--toc-width); height: 100vh;
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-sm-inset);
+    overflow-y: auto; overflow-x: hidden;
+    padding: 20px 0 40px;
+  }
+  .toc-sidebar::-webkit-scrollbar { width: 4px; }
+  .toc-sidebar::-webkit-scrollbar-track { background: transparent; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+
+  .toc-brand {
+    padding: 0 16px 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  .toc-brand a {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--accent); text-decoration: none; font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .toc-brand a:hover { text-decoration: underline; }
+
+  .toc-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    padding: 14px 16px 6px; cursor: pointer;
+    transition: color .15s; display: flex; align-items: center; gap: 6px;
+  }
+  .toc-section-label:hover { color: var(--text); }
+  .toc-section-label .toc-arrow {
+    font-size: 7px; transition: transform .2s; display: inline-block;
+  }
+  .toc-section-label.collapsed .toc-arrow { transform: rotate(-90deg); }
+  .toc-section-group { overflow: hidden; transition: max-height .3s ease; }
+  .toc-section-group.collapsed { max-height: 0 !important; }
+
+  .toc-item {
+    display: block; padding: 5px 16px 5px 20px;
+    font-size: 11px; color: var(--text-dim); text-decoration: none;
+    font-weight: 400; transition: all .15s;
+    border-left: 2px solid transparent;
+  }
+  .toc-item:hover {
+    color: var(--text); background: rgba(0,0,0,0.02);
+    border-left-color: var(--accent); text-decoration: none;
+  }
+  .toc-item.active {
+    color: var(--accent); font-weight: 600;
+    background: var(--accent-bg); border-left-color: var(--accent);
+  }
+  .toc-divider {
+    border: none; height: 1px; background: var(--border); margin: 8px 16px;
+  }
+
+  .page-content {
+    margin-left: var(--toc-width); padding: 48px 48px 80px;
+    max-width: 1200px; position: relative; z-index: 1;
+  }
+
+  .hamburger-btn {
+    display: none; position: fixed; top: 12px; right: 12px; z-index: 250;
+    width: 44px; height: 44px; cursor: pointer; border: none;
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-ext); transition: all .2s;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; touch-action: manipulation; user-select: none;
+    -webkit-user-select: none;
+  }
+  .hamburger-btn:hover { box-shadow: var(--shadow-md-ext); }
+  .hamburger-btn:active { box-shadow: var(--shadow-pressed); }
+  .hamburger-btn .ham-line {
+    width: 20px; height: 2.5px; background: var(--text);
+    border-radius: 1px; transition: all .2s;
+  }
+  .hamburger-btn.open .ham-line:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .hamburger-btn.open .ham-line:nth-child(2) { opacity: 0; }
+  .hamburger-btn.open .ham-line:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  .nav-overlay {
+    display: none; position: fixed; inset: 0; z-index: 240;
+    background: var(--bg); overflow-y: auto;
+    padding: 60px 24px 40px;
+  }
+  .nav-overlay.open { display: block; }
+  .nav-overlay .toc-section-label {
+    font-size: 12px; padding: 12px 0 8px;
+  }
+  .nav-overlay .toc-item {
+    font-size: 15px; padding: 10px 0;
+    border-left: none; border-bottom: 1px solid var(--border);
+  }
+
+  /* ═══════════ HERO / THEMATIC HEADER ═══════════ */
+  .hero { margin-bottom: 48px; }
+  .hero-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--text-quiet); margin-bottom: 20px; padding: 4px 0; border-bottom: 2px solid var(--text); }
+  .hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 800; letter-spacing: -0.05em; line-height: 1.05; margin-bottom: 16px; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { font-size: 15px; color: var(--text-dim); max-width: 600px; line-height: 1.7; font-weight: 400; }
+
+  .rule { height: 2px; background: var(--text); opacity: 0.12; margin: 40px 0 28px; }
+  .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-quiet); margin-bottom: 20px; text-transform: uppercase; }
+
+  /* ═══════════ NEO CARDS ═══════════ */
+  .neo-card {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); padding: 28px; margin-bottom: 24px;
+    transition: all .25s ease; border: none;
+  }
+  .neo-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-2px); }
+  .neo-card-inset {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 20px; margin-bottom: 16px;
+  }
+
+  /* ═══════════ STOCK CARD ═══════════ */
+  .stock-card {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); margin-bottom: 24px;
+    transition: all .25s ease; border: none; overflow: hidden;
+  }
+  .stock-card[open] { box-shadow: var(--shadow-lg-ext); }
+  .stock-card:hover { box-shadow: var(--shadow-lg-ext); }
+  .stock-card summary {
+    cursor: pointer; padding: 24px 28px 10px; list-style: none;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .stock-card summary::-webkit-details-marker { display: none; }
+  .stock-card summary::after {
+    content: '▼'; font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-quiet); transition: transform .2s;
+    background: var(--bg-alt); border-radius: var(--radius-sm);
+    padding: 6px 10px; box-shadow: var(--shadow-sm-inset);
+  }
+  .stock-card[open] summary::after { transform: rotate(180deg); }
+  .stock-card-body { padding: 0 28px 28px; }
+
+  .ticker-row {
+    display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px;
+    padding-bottom: 14px;
+  }
+  .ticker { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; }
+  .ticker-name { font-size: 14px; color: var(--text-dim); font-weight: 500; }
+  .ticker-badge {
+    margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+    padding: 6px 16px; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase;
+    background: var(--bg); box-shadow: var(--shadow-sm-ext); transition: all .15s;
+  }
+  .ticker-badge:hover { box-shadow: var(--shadow-pressed); }
+  .ticker-badge.buy { color: var(--green); }
+  .ticker-badge.hold { color: var(--amber); }
+  .ticker-badge.sell { color: var(--red); }
+
+  /* ═══════════ METRICS ═══════════ */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .metric {
+    text-align: center; background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 18px 10px;
+    transition: box-shadow .2s;
+  }
+  .metric:hover { box-shadow: var(--shadow-md-ext); }
+  .metric-val { font-size: 24px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .metric-val.up { color: var(--green); }
+  .metric-val.down { color: var(--red); }
+  .metric-val.neutral { color: var(--amber); }
+  .metric-lbl { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-quiet); margin-bottom: 4px; }
+  .metric-sub { font-size: 10px; color: var(--text-dim); }
+
+  /* ═══════════ FUNDAMENTALS ═══════════ */
+  .fund-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 32px; }
+  .fund-item {
+    text-align: center; background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 14px 8px; transition: all .2s;
+  }
+  .fund-item:hover { box-shadow: var(--shadow-md-ext); }
+  .fund-item .val { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .fund-item .lbl { font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.10em; color: var(--text-quiet); }
+  .fund-item .sub { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ═══════════ THESIS ═══════════ */
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+  .thesis-block {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); padding: 24px; transition: all .2s;
+  }
+  .thesis-block:hover { box-shadow: var(--shadow-lg-ext); }
+  .thesis-block h4 { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; margin-bottom: 14px; text-transform: uppercase; }
+  .thesis-block.bull h4 { color: var(--green); }
+  .thesis-block.bear h4 { color: var(--red); }
+  .thesis-block p { font-size: 12px; color: var(--text-dim); line-height: 1.7; margin-bottom: 8px; }
+  .thesis-block p strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ CALLOUT / VERDICT ═══════════ */
+  .callout {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg-ext); padding: 22px 26px;
+  }
+  .callout-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+  }
+  .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); text-transform: uppercase; }
+  .callout-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    padding: 5px 16px; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase;
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .callout-badge.buy { color: var(--green); background: var(--green-bg); }
+  .callout-badge.hold { color: var(--amber); background: var(--amber-bg); }
+  .callout-badge.sell { color: var(--red); background: var(--red-bg); }
+  .callout p { font-size: 13px; color: var(--text-dim); line-height: 1.7; margin-top: 4px; }
+  .callout p strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ TIER DIVIDER ═══════════ */
+  .tier-divider {
+    display: flex; align-items: center; gap: 20px;
+    margin: 40px 0 20px;
+  }
+  .tier-divider .tier-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 18px;
+    border-radius: var(--radius-sm); white-space: nowrap;
+  }
+  .tier-divider .tier-label.tier-1 {
+    color: var(--green); background: var(--bg);
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .tier-divider .tier-label.tier-2 {
+    color: var(--accent); background: var(--bg);
+    box-shadow: var(--shadow-sm-ext);
+  }
+  .tier-divider .tier-label.tier-3 {
+    color: var(--text-quiet); background: var(--bg);
+    box-shadow: var(--shadow-sm-inset);
+  }
+  .tier-divider .tier-line {
+    flex: 1; height: 2px; background: var(--text); opacity: 0.12;
+  }
+  .tier-intro {
+    font-size: 12px; color: var(--text-dim); font-style: italic;
+    margin-bottom: 20px; padding-left: 4px;
+  }
+
+  /* ═══════════ SECTOR / THEMATIC HEADER ═══════════ */
+  .sector-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 20px; border-radius: var(--radius);
+    margin-bottom: 18px; flex-wrap: wrap;
+    background: var(--bg); box-shadow: var(--shadow-md-ext);
+  }
+  .sector-header .sector-icon { font-size: 22px; }
+  .sector-header .sector-name {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text);
+  }
+  .sector-header .sector-tag {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 30px; margin-left: auto;
+    background: var(--bg); box-shadow: var(--shadow-sm-inset);
+  }
+  .sector-header.robotics .sector-tag { color: var(--accent); }
+
+  /* ═══════════ COMPARISON TABLE ═══════════ */
+  .comparison-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    margin-bottom: 24px; font-size: 13px;
+  }
+  .comparison-table thead th {
+    background: var(--bg-alt);
+    box-shadow: var(--shadow-sm-ext);
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-dim);
+    text-align: left;
+    position: sticky; top: 0; z-index: 2;
+  }
+  .comparison-table thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+  .comparison-table thead th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+  .comparison-table tbody td {
+    background: var(--bg);
+    box-shadow: var(--shadow-sm-inset);
+    padding: 14px 16px;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .comparison-table tbody tr:last-child td:first-child { border-radius: 0 0 0 var(--radius-sm); }
+  .comparison-table tbody tr:last-child td:last-child { border-radius: 0 0 var(--radius-sm) 0; }
+  .comparison-table tbody tr:hover td {
+    background: var(--surface-alt);
+    color: var(--text);
+  }
+  .comparison-table td strong { color: var(--text); font-weight: 600; }
+  .comparison-table td .tag {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 3px 8px; border-radius: var(--radius-sm);
+    background: var(--bg); box-shadow: var(--shadow-sm-ext);
+    margin-top: 4px;
+  }
+  .comparison-table td .tag.buy { color: var(--green); }
+  .comparison-table td .tag.hold { color: var(--amber); }
+  .comparison-table td .tag.sell { color: var(--red); }
+
+  /* ═══════════ SUPPLY CHAIN MAP ═══════════ */
+  .chain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+  .chain-block {
+    background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md-ext); padding: 24px; transition: all .2s;
+  }
+  .chain-block:hover { box-shadow: var(--shadow-lg-ext); }
+  .chain-block h4 {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.04em; margin-bottom: 14px; text-transform: uppercase;
+  }
+  .chain-block.west h4 { color: var(--accent); }
+  .chain-block.china h4 { color: var(--red); }
+  .chain-block ul { list-style: none; padding: 0; }
+  .chain-block ul li {
+    font-size: 12px; color: var(--text-dim); padding: 6px 0;
+    border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px;
+  }
+  .chain-block ul li:last-child { border-bottom: none; }
+  .chain-block ul li strong { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ BUTTONS ═══════════ */
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  .btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    padding: 12px 24px; border-radius: var(--radius); cursor: pointer; transition: all .2s;
+    background: var(--bg); border: none; color: var(--text); box-shadow: var(--shadow-sm-ext);
+    letter-spacing: 0.02em; text-transform: uppercase;
+    touch-action: manipulation; user-select: none; -webkit-user-select: none;
+  }
+  .btn:hover { box-shadow: var(--shadow-md-ext); }
+  .btn:active { box-shadow: var(--shadow-pressed); }
+  .btn-primary { color: var(--accent); }
+
+  /* ═══════════ DISCLAIMER ═══════════ */
+  .disclaimer {
+    background: var(--bg); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm-inset); padding: 14px 20px;
+    margin-bottom: 24px; font-size: 12px; color: var(--text-dim);
+    font-style: italic;
+  }
+  .disclaimer strong { color: var(--text); font-weight: 600; font-style: normal; }
+
+  /* ═══════════ REFERENCES ═══════════ */
+  .ref-section { margin-top: 48px; }
+  .ref-section h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-quiet);
+    margin-bottom: 16px;
+  }
+  .ref-list { list-style: none; padding: 0; }
+  .ref-list li {
+    font-size: 11px; color: var(--text-dim); padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-list li a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .ref-list li a:hover { text-decoration: underline; }
+
+  /* ═══════════ RESPONSIVE ═══════════ */
+  @media (max-width: 768px) {
+    .toc-sidebar { display: none; }
+    .toc-sidebar.mobile-open {
+      display: block; position: fixed; inset: 0; z-index: 245;
+      width: 100%; height: 100vh; padding-top: 60px;
+    }
+    .page-content { margin-left: 0; padding: 24px 16px 60px; }
+    .hamburger-btn { display: flex; }
+    .hero h1 { font-size: 32px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .fund-strip { grid-template-columns: repeat(2, 1fr); }
+    .thesis-grid { grid-template-columns: 1fr; }
+    .stock-card summary { padding: 20px 20px 0; }
+    .stock-card-body { padding: 0 20px 20px; }
+    .ticker { font-size: 24px; }
+    .chain-grid { grid-template-columns: 1fr; }
+    .comparison-table { font-size: 11px; }
+    .comparison-table thead th, .comparison-table tbody td { padding: 10px 8px; }
+    .site-nav { font-size: 10px; padding: 8px 16px; gap: 16px; margin-left: 0; }
+  }
+
+  @media (max-width: 412px) {
+    .page-content { padding: 16px 12px 48px; }
+    .hero h1 { font-size: 28px; }
+    .metrics { gap: 8px; }
+    .metric-val { font-size: 20px; }
+    .fund-strip { gap: 6px; }
+    .fund-item { padding: 10px 4px; }
+    .fund-item .val { font-size: 11px; }
+    .ticker-row { flex-wrap: wrap; gap: 8px; }
+    .ticker { font-size: 22px; }
+    .neo-card, .stock-card summary { padding: 18px 16px 0; }
+    .stock-card-body { padding: 0 16px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ADA skip link -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ═══════════ SITE NAV ═══════════ -->
+<nav class="site-nav" aria-label="Site navigation">
+  <a href="index.html">← Research Home</a>
+  <a href="investment-deep-dive-v5.html">Deep-Dive v5</a>
+  <a href="#" class="nav-current">Humanoid Robotics</a>
+</nav>
+
+<!-- ═══════════ HAMBURGER BUTTON ═══════════ -->
+<button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation menu" onclick="document.getElementById('nav-overlay').classList.toggle('open');this.classList.toggle('open');">
+  <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
+</button>
+
+<!-- ═══════════ TOC SIDEBAR ═══════════ -->
+<nav class="toc-sidebar" id="toc-sidebar" aria-label="Table of contents">
+  <div class="toc-brand">
+    <a href="index.html">← Research Home</a>
+  </div>
+
+  <div class="toc-section-label" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+    <span class="toc-arrow">▼</span> Overview
+  </div>
+  <div class="toc-section-group">
+    <a class="toc-item active" href="#executive-summary">Executive Summary</a>
+    <a class="toc-item" href="#supply-chain">Supply Chain Analysis</a>
+    <a class="toc-item" href="#tesla-optimus">Tesla Optimus</a>
+    <a class="toc-item" href="#gs-research">Goldman Sachs Research</a>
+  </div>
+
+  <div class="toc-section-label" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+    <span class="toc-arrow">▼</span> Core Holdings
+  </div>
+  <div class="toc-section-group">
+    <a class="toc-item" href="#harmonic">Harmonic Drive (6324 / HSYDF)</a>
+    <a class="toc-item" href="#leader">Leader Drive</a>
+    <a class="toc-item" href="#sanhua">Sanhua Controls</a>
+    <a class="toc-item" href="#robo">$ROBO ETF</a>
+  </div>
+
+  <hr class="toc-divider">
+  <a class="toc-item" href="#comparison">Comparison Table</a>
+  <a class="toc-item" href="#thesis">Investment Thesis</a>
+  <a class="toc-item" href="#references">References</a>
+</nav>
+
+<!-- ═══════════ MOBILE NAV OVERLAY ═══════════ -->
+<div class="nav-overlay" id="nav-overlay">
+  <div class="toc-section-label" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+    <span class="toc-arrow">▼</span> Overview
+  </div>
+  <div class="toc-section-group">
+    <a class="toc-item" href="#executive-summary" onclick="closeNav()">Executive Summary</a>
+    <a class="toc-item" href="#supply-chain" onclick="closeNav()">Supply Chain Analysis</a>
+    <a class="toc-item" href="#tesla-optimus" onclick="closeNav()">Tesla Optimus</a>
+    <a class="toc-item" href="#gs-research" onclick="closeNav()">Goldman Sachs Research</a>
+  </div>
+  <div class="toc-section-label" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+    <span class="toc-arrow">▼</span> Core Holdings
+  </div>
+  <div class="toc-section-group">
+    <a class="toc-item" href="#harmonic" onclick="closeNav()">Harmonic Drive (6324 / HSYDF)</a>
+    <a class="toc-item" href="#leader" onclick="closeNav()">Leader Drive</a>
+    <a class="toc-item" href="#sanhua" onclick="closeNav()">Sanhua Controls</a>
+    <a class="toc-item" href="#robo" onclick="closeNav()">$ROBO ETF</a>
+  </div>
+  <a class="toc-item" href="#comparison" onclick="closeNav()">Comparison Table</a>
+  <a class="toc-item" href="#thesis" onclick="closeNav()">Investment Thesis</a>
+  <a class="toc-item" href="#references" onclick="closeNav()">References</a>
+</div>
+
+<!-- ═══════════ MAIN CONTENT ═══════════ -->
+<main class="page-content" id="main-content">
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">Research · May 15, 2026</div>
+  <h1>Humanoid Robotics.<br><span>The gear makers &amp; supply chain.</span></h1>
+  <p>Deep-dive on the precision gear manufacturers, thermal management suppliers, and ETFs powering the humanoid robotics revolution — from Harmonic Drive to Tesla Optimus.</p>
+</div>
+
+<div class="disclaimer">
+  <strong>Disclaimer:</strong> This document is for informational purposes only and does not constitute investment advice. Robotics and humanoid manufacturing are early-stage, high-volatility themes. Supply chain assumptions are based on public research and community verification, not confirmed vendor disclosures.
+</div>
+
+<!-- ═══════════════════════════════════════
+     EXECUTIVE SUMMARY
+     ═══════════════════════════════════════ -->
+<div class="sec-label" id="executive-summary">Executive Summary</div>
+
+<div class="neo-card">
+  <p style="font-size:14px;color:var(--text-dim);line-height:1.8;margin-bottom:14px;">
+    Humanoid robotics is moving from laboratory curiosity to commercial production. At the heart of every joint actuator lies a <strong>harmonic reduction gear</strong> — a precision-machined component that converts high-speed motor rotation into high-torque, low-speed motion. This single part represents a <strong>very large share of the bill-of-materials (BOM) value</strong> for humanoid robots, making the gear manufacturers a concentrated, high-leverage play on the theme.
+  </p>
+  <p style="font-size:14px;color:var(--text-dim);line-height:1.8;margin-bottom:14px;">
+    The supply chain is geographically concentrated: <strong>Japan</strong> dominates high-end harmonic gears via <strong>Harmonic Drive Systems</strong> (6324.T / HSYDF ADR), while <strong>China</strong> is rapidly scaling cost-competitive alternatives through <strong>Leader Drive</strong>. <strong>Sanhua Controls</strong> — already a Tesla EV thermal supplier — is widely rumoured to be supplying actuators and thermal components for <strong>Tesla Optimus</strong>. For diversified exposure, the <strong>$ROBO ETF</strong> holds Harmonic Drive as its largest position.
+  </p>
+  <p style="font-size:14px;color:var(--text-dim);line-height:1.8;">
+    Goldman Sachs research has validated the investment case, listing Harmonic Drive in their robotics coverage and highlighting the China-heavy nature of the supply chain. For investors seeking Western-facing exposure with less geopolitical risk, Harmonic Drive is considered one of the "cleaner ways" to access the theme.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SUPPLY CHAIN ANALYSIS
+     ═══════════════════════════════════════ -->
+<div class="rule"></div>
+<div class="sec-label" id="supply-chain">Supply Chain Analysis — China vs Western</div>
+
+<div class="sector-header robotics">
+  <span class="sector-icon">⚙️</span>
+  <span class="sector-name">Robotics Supply Chain Geography</span>
+  <span class="sector-tag">High Concentration Risk</span>
+</div>
+
+<div class="chain-grid">
+  <div class="chain-block west">
+    <h4>🇯🇵 🇺🇸 Western / Japan Axis</h4>
+    <ul>
+      <li><strong>Harmonic Drive Systems</strong> — Dominant in high-precision harmonic gears; $4.2B market cap; listed on TSE and US OTC (HSYDF).</li>
+      <li><strong>Nabtesco</strong> — Japanese leader in precision reducers (RV gears); strong industrial robotics base.</li>
+      <li><strong>US Semiconductor / AI Layer</strong> — NVIDIA, Qualcomm provide compute but not mechanical BOM.</li>
+      <li><strong>European Automation</strong> — Siemens, ABB have exposure but diluted across broader industrial portfolios.</li>
+      <li><span style="color:var(--green);font-weight:600;">Edge:</span> Higher precision, IP protection, lower geopolitical risk for Western investors.</li>
+      <li><span style="color:var(--red);font-weight:600;">Weakness:</span> Higher cost, slower mass-production scaling vs China.</li>
+    </ul>
+  </div>
+  <div class="chain-block china">
+    <h4>🇨🇳 China Axis</h4>
+    <ul>
+      <li><strong>Leader Drive</strong> — Cheaper harmonic/RV gear alternative; broader parts coverage; aggressively scaling for mass production.</li>
+      <li><strong>Sanhua Controls</strong> — HK-listed; Tesla EV thermal supplier; rumoured Optimus actuator supplier.</li>
+      <li><strong>BYD / Unitree / Fourier</strong> — Domestic humanoid robot OEMs building China-first supply chains.</li>
+      <li><strong>Local Motor &amp; Sensor Ecosystem</strong> — China is verticalising fast; reducing import dependency.</li>
+      <li><span style="color:var(--green);font-weight:600;">Edge:</span> Cost, scale, government support, integrated manufacturing.</li>
+      <li><span style="color:var(--red);font-weight:600;">Weakness:</span> Geopolitical risk, IP concerns, potential tariffs/export controls for Western end customers.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="neo-card-inset">
+  <p style="font-size:12px;color:var(--text-dim);line-height:1.7;">
+    <strong>Key tension:</strong> China and Japan hold the manufacturing edge in precision mechanical components. Western investors wanting pure-play exposure without China concentration risk have limited options. Harmonic Drive (Japan) is the most direct "Western-friendly" listed entity, though it is not immune to China competition on price.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     TESLA OPTIMUS
+     ═══════════════════════════════════════ -->
+<div class="rule"></div>
+<div class="sec-label" id="tesla-optimus">Tesla Optimus Connections</div>
+
+<div class="neo-card">
+  <p style="font-size:14px;color:var(--text-dim);line-height:1.8;margin-bottom:14px;">
+    <strong>Tesla Optimus</strong> is the most closely watched humanoid robot programme in the West. Elon Musk has guided for thousands of units in production by 2026-2027, with a long-term vision of millions of units. The supply chain is tightly held, but several connections have emerged from research and community verification:
+  </p>
+  <ul style="font-size:13px;color:var(--text-dim);line-height:1.8;padding-left:18px;margin-bottom:14px;">
+    <li><strong>Sanhua Controls</strong> — Already a Tesla EV thermal management supplier. Multiple Reddit research threads and Chinese supply chain sources have flagged Sanhua as a <strong>highly likely actuator and thermal component supplier</strong> for Optimus. The company has expanded capacity in servo motors and electromechanical actuators.</li>
+    <li><strong>Harmonic Drive Systems</strong> — Tesla's robot requires precision reducers at every major joint. While unconfirmed, Harmonic Drive is the default Tier-1 supplier for high-spec humanoid joints globally. Any Western humanoid scaling likely flows through them.</li>
+    <li><strong>Leader Drive</strong> — If Tesla sources cost-optimised components for lower-cost Optimus variants or for its Shanghai operations, Leader Drive is a logical second-source candidate.</li>
+  </ul>
+  <p style="font-size:12px;color:var(--text-quiet);font-style:italic;">
+    Source: Community research aggregation (@aleabitoreddit, May 2026); supply chain teardowns; company filings. No official Tesla supplier confirmation exists for Sanhua on Optimus.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     GOLDMAN SACHS RESEARCH
+     ═══════════════════════════════════════ -->
+<div class="rule"></div>
+<div class="sec-label" id="gs-research">Goldman Sachs Research Validation</div>
+
+<div class="neo-card">
+  <p style="font-size:14px;color:var(--text-dim);line-height:1.8;margin-bottom:14px;">
+    Goldman Sachs has published research covering the humanoid robotics investment landscape. Their analysis validates several core tenets of this deep-dive:
+  </p>
+  <ul style="font-size:13px;color:var(--text-dim);line-height:1.8;padding-left:18px;margin-bottom:14px;">
+    <li><strong>Harmanonic Drive Systems is explicitly listed</strong> in Goldman Sachs robotics coverage as a key precision gear manufacturer.</li>
+    <li><strong>Supply chain concentration in China</strong> is flagged as a structural risk — reinforcing the case for Japan/Western diversification.</li>
+    <li><strong>BOM analysis</strong> highlights actuators, gears, and sensors as the highest-value components, with reduction gears capturing outsized value per unit.</li>
+    <li><strong>Market sizing</strong> estimates a multi-billion dollar addressable market by 2030 if production scales to hundreds of thousands of units.</li>
+  </ul>
+  <p style="font-size:14px;color:var(--text-dim);line-height:1.8;">
+    GS research effectively confirms that <strong>Harmonic Drive is one of the cleaner ways</strong> to gain robotics exposure without full China supply-chain risk — though investors should note the premium valuation that comes with that positioning.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     CORE HOLDINGS
+     ═══════════════════════════════════════ -->
+<div class="rule"></div>
+<div class="sec-label">Core Holdings</div>
+
+<!-- ── HARMONIC DRIVE ── -->
+<details class="stock-card" id="harmonic" open>
+  <summary>
+    <div class="ticker-row" style="width:100%;">
+      <span class="ticker">6324.T</span>
+      <span class="ticker-name">Harmonic Drive Systems · HSYDF ADR</span>
+      <span class="ticker-badge buy">Core Holding</span>
+    </div>
+  </summary>
+  <div class="stock-card-body">
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-lbl">Market Cap</div>
+        <div class="metric-val">~$4.2B</div>
+        <div class="metric-sub">USD approx</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Listing</div>
+        <div class="metric-val">TSE + OTC</div>
+        <div class="metric-sub">HSYDF ADR</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Exposure</div>
+        <div class="metric-val neutral">Direct</div>
+        <div class="metric-sub">Precision gears</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Geo Risk</div>
+        <div class="metric-val up">Low</div>
+        <div class="metric-sub">Japan-listed</div>
+      </div>
+    </div>
+
+    <div class="fund-strip">
+      <div class="fund-item">
+        <div class="val">Reduction Gears</div>
+        <div class="lbl">Core Product</div>
+      </div>
+      <div class="fund-item">
+        <div class="val">Humanoid Joints</div>
+        <div class="lbl">Primary Use</div>
+      </div>
+      <div class="fund-item">
+        <div class="val">High</div>
+        <div class="lbl">BOM Share</div>
+      </div>
+      <div class="fund-item">
+        <div class="val">Global #1</div>
+        <div class="lbl">Market Position</div>
+      </div>
+      <div class="fund-item">
+        <div class="val">GS Covered</div>
+        <div class="lbl">Research</div>
+      </div>
+    </div>
+
+    <div class="thesis-grid">
+      <div class="thesis-block bull">
+        <h4>🟢 Bull Case</h4>
+        <p>Harmonic reduction gears are <strong>critical and high-value</strong> in every humanoid robot joint. Market leadership with deep IP moats.</p>
+        <p>Listed in Goldman Sachs research as a core robotics play. US ADR (HSYDF) provides Western access without China exposure.</p>
+        <p>Tesla Optimus and other Western humanoid programmes likely source from Harmonic Drive for high-spec joints.</p>
+      </div>
+      <div class="thesis-block bear">
+        <h4>🔴 Bear / Risk Case</h4>
+        <p><strong>Price competition</strong> from Chinese rivals (Leader Drive) could compress margins as humanoids move to mass production.</p>
+        <p>Japan-market listing can mean valuation discounts and FX risk for USD-based investors.</p>
+        <p>Humanoid production volumes remain uncertain — the TAM is hypothetical until OEMs prove unit economics.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-header">
+        <span class="callout-label">Verdict</span>
+        <span class="callout-badge buy">Core Long</span>
+      </div>
+      <p>Harmonic Drive is the <strong>highest-conviction single-stock pick</strong> in this theme for investors prioritising Western/Japan supply chains. It captures a large share of robot BOM value, is GS-validated, and offers ADR access. Main risk is Chinese cost competition at scale.</p>
+    </div>
+  </div>
+</details>
+
+<!-- ── LEADER DRIVE ── -->
+<details class="stock-card" id="leader">
+  <summary>
+    <div class="ticker-row" style="width:100%;">
+      <span class="ticker">Leader Drive</span>
+      <span class="ticker-name">China · Private / A-Share</span>
+      <span class="ticker-badge hold">Watchlist</span>
+    </div>
+  </summary>
+  <div class="stock-card-body">
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-lbl">Exposure</div>
+        <div class="metric-val neutral">Direct</div>
+        <div class="metric-sub">Gears + more</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Cost Position</div>
+        <div class="metric-val up">Cheaper</div>
+        <div class="metric-sub">vs Harmonic</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Scale</div>
+        <div class="metric-val up">Rapid</div>
+        <div class="metric-sub">Mass production</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Geo Risk</div>
+        <div class="metric-val down">High</div>
+        <div class="metric-sub">China-based</div>
+      </div>
+    </div>
+
+    <div class="thesis-grid">
+      <div class="thesis-block bull">
+        <h4>🟢 Bull Case</h4>
+        <p>Cheaper than Harmonic Drive, making it viable for <strong>mass-market humanoid production</strong> where cost per unit matters more than absolute precision.</p>
+        <p>Covers <strong>more parts</strong> than just harmonic gears — broader vertical integration in actuators and reducers.</p>
+        <p>Beneficiary of China government support for domestic robotics and automation self-sufficiency.</p>
+      </div>
+      <div class="thesis-block bear">
+        <h4>🔴 Bear / Risk Case</h4>
+        <p><strong>Chinese supply chain risk</strong> — potential tariffs, export controls, and geopolitical friction could limit access for Western OEMs.</p>
+        <p>Access for Western investors is limited or indirect (A-shares, private).</p>
+        <p>IP and quality perception gap vs Japanese incumbents may persist in high-spec applications.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-header">
+        <span class="callout-label">Verdict</span>
+        <span class="callout-badge hold">Watchlist / Indirect</span>
+      </div>
+      <p>Leader Drive is the <strong>China mass-production play</strong> on the same theme. Better for investors comfortable with China risk or seeking lower-cost supply chain exposure. Not easily accessible for most Western retail investors.</p>
+    </div>
+  </div>
+</details>
+
+<!-- ── SANHUA CONTROLS ── -->
+<details class="stock-card" id="sanhua">
+  <summary>
+    <div class="ticker-row" style="width:100%;">
+      <span class="ticker">Sanhua</span>
+      <span class="ticker-name">Sanhua Intelligent Controls · HK Listed</span>
+      <span class="ticker-badge hold">Rumoured</span>
+    </div>
+  </summary>
+  <div class="stock-card-body">
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-lbl">Exposure</div>
+        <div class="metric-val neutral">Thermal / Actuators</div>
+        <div class="metric-sub">Not pure-play</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Tesla Link</div>
+        <div class="metric-val up">EV Confirmed</div>
+        <div class="metric-sub">Optimus Rumoured</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Focus</div>
+        <div class="metric-val neutral">Actuators</div>
+        <div class="metric-sub">Electromechanical</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Geo Risk</div>
+        <div class="metric-val down">Medium</div>
+        <div class="metric-sub">HK-listed; China ops</div>
+      </div>
+    </div>
+
+    <div class="thesis-grid">
+      <div class="thesis-block bull">
+        <h4>🟢 Bull Case</h4>
+        <p>Already a <strong>Tesla EV thermal management supplier</strong> — established relationship and quality certification with Tesla.</p>
+        <p>Widely rumoured (via supply chain research) to be supplying <strong>actuators and thermal components</strong> for Tesla Optimus.</p>
+        <p>HK listing provides easier access than mainland A-shares for international investors.</p>
+      </div>
+      <div class="thesis-block bear">
+        <h4>🔴 Bear / Risk Case</h4>
+        <p><strong>No official confirmation</strong> of Optimus supply relationship — thesis is based on rumours and supply chain inference.</p>
+        <p>Robotics revenue would be a small share of total revenue initially; dilutes pure-play exposure.</p>
+        <p>China operational base creates geopolitical and tariff risk even via HK listing.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-header">
+        <span class="callout-label">Verdict</span>
+        <span class="callout-badge hold">Speculative</span>
+      </div>
+      <p>Sanhua is a <strong>speculative, relationship-driven bet</strong> on Tesla Optimus supply chain. The Tesla EV connection is real; the Optimus connection is unconfirmed but plausible. Best viewed as a partial hedge on Tesla's humanoid ambitions rather than a pure robotics play.</p>
+    </div>
+  </div>
+</details>
+
+<!-- ── ROBO ETF ── -->
+<details class="stock-card" id="robo">
+  <summary>
+    <div class="ticker-row" style="width:100%;">
+      <span class="ticker">$ROBO</span>
+      <span class="ticker-name">ROBO Global Robotics &amp; Automation ETF</span>
+      <span class="ticker-badge buy">Diversified</span>
+    </div>
+  </summary>
+  <div class="stock-card-body">
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-lbl">Type</div>
+        <div class="metric-val neutral">ETF</div>
+        <div class="metric-sub">Global robotics</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Top Holding</div>
+        <div class="metric-val up">Harmonic</div>
+        <div class="metric-sub">Drive Systems</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Exposure</div>
+        <div class="metric-val up">Broad</div>
+        <div class="metric-sub">Automation + AI</div>
+      </div>
+      <div class="metric">
+        <div class="metric-lbl">Geo Risk</div>
+        <div class="metric-val neutral">Mixed</div>
+        <div class="metric-sub">Diversified</div>
+      </div>
+    </div>
+
+    <div class="thesis-grid">
+      <div class="thesis-block bull">
+        <h4>🟢 Bull Case</h4>
+        <p><strong>Largest holding is Harmonic Drive Systems</strong> — provides direct exposure to the highest-conviction name in this note.</p>
+        <p>Diversified across robotics and automation, reducing single-stock risk while maintaining theme alignment.</p>
+        <p>Liquid, US-listed, easy access for retail and institutional investors.</p>
+      </div>
+      <div class="thesis-block bear">
+        <h4>🔴 Bear / Risk Case</h4>
+        <p>Exposure is <strong>not pure humanoid</strong> — includes industrial automation, medical robotics, and drone tech that may not correlate.</p>
+        <p>Expense ratio and diversification dilute upside if humanoid robotics outperforms the broader automation sector.</p>
+        <p>Some underlying holdings still carry China exposure despite Harmonic Drive being Japan-based.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-header">
+        <span class="callout-label">Verdict</span>
+        <span class="callout-badge buy">Diversified Core</span>
+      </div>
+      <p>$ROBO is the <strong>best diversified vehicle</strong> for investors who want robotics exposure without picking single stocks. Its top holding being Harmonic Drive validates the underlying thesis. Use as a core position; add single names for concentration.</p>
+    </div>
+  </div>
+</details>
+
+<!-- ═══════════════════════════════════════
+     COMPARISON TABLE
+     ═══════════════════════════════════════ -->
+<div class="rule"></div>
+<div class="sec-label" id="comparison">Comparison Table</div>
+
+<table class="comparison-table">
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Harmonic Drive (6324 / HSYDF)</th>
+      <th>Leader Drive</th>
+      <th>Sanhua Controls</th>
+      <th>$ROBO ETF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Ticker / Access</strong></td>
+      <td>6324.T / HSYDF (ADR)</td>
+      <td>Private / A-Share</td>
+      <td>HK-listed</td>
+      <td>$ROBO (NYSE)</td>
+    </tr>
+    <tr>
+      <td><strong>Market Cap</strong></td>
+      <td>~$4.2B</td>
+      <td>Not disclosed</td>
+      <td>Mid-cap</td>
+      <td>ETF (~$1B+ AUM)</td>
+    </tr>
+    <tr>
+      <td><strong>Core Product</strong></td>
+      <td>Harmonic reduction gears</td>
+      <td>Harmonic + RV gears, actuators</td>
+      <td>Thermal mgmt, actuators</td>
+      <td>Diversified robotics basket</td>
+    </tr>
+    <tr>
+      <td><strong>Humanoid Exposure</strong></td>
+      <td>Direct — joint gears</td>
+      <td>Direct — joint gears</td>
+      <td>Indirect — actuators (rumoured)</td>
+      <td>Broad — automation + humanoid</td>
+    </tr>
+    <tr>
+      <td><strong>BOM Value Share</strong></td>
+      <td>Very High</td>
+      <td>High</td>
+      <td>Medium</td>
+      <td>Varies by holding</td>
+    </tr>
+    <tr>
+      <td><strong>Geography</strong></td>
+      <td>Japan</td>
+      <td>China</td>
+      <td>China (HK-listed)</td>
+      <td>Global</td>
+    </tr>
+    <tr>
+      <td><strong>China Risk</strong></td>
+      <td>Low</td>
+      <td>High</td>
+      <td>Medium-High</td>
+      <td>Moderate</td>
+    </tr>
+    <tr>
+      <td><strong>Cost Position</strong></td>
+      <td>Premium</td>
+      <td>Cheaper / Mass market</td>
+      <td>Competitive</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td><strong>Tesla Optimus Link</strong></td>
+      <td>Likely (high-spec)</td>
+      <td>Possible (cost variant)</td>
+      <td>Rumoured</td>
+      <td>Indirect via holdings</td>
+    </tr>
+    <tr>
+      <td><strong>GS Research</strong></td>
+      <td>Listed / Validated</td>
+      <td>Not referenced</td>
+      <td>Not referenced</td>
+      <td>Not referenced</td>
+    </tr>
+    <tr>
+      <td><strong>Investor Accessibility</strong></td>
+      <td>High (ADR available)</td>
+      <td>Low</td>
+      <td>Medium (HK access)</td>
+      <td>Very High</td>
+    </tr>
+    <tr>
+      <td><strong>Rating</strong></td>
+      <td><span class="tag buy">Core Long</span></td>
+      <td><span class="tag hold">Watchlist</span></td>
+      <td><span class="tag hold">Speculative</span></td>
+      <td><span class="tag buy">Diversified Core</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════════════
+     INVESTMENT THESIS
+     ═══════════════════════════════════════ -->
+<div class="rule"></div>
+<div class="sec-label" id="thesis">Investment Thesis &amp; Key Tensions</div>
+
+<div class="neo-card">
+  <p style="font-size:14px;color:var(--text-dim);line-height:1.8;margin-bottom:14px;">
+    The humanoid robotics theme is at an inflection point: <strong>technology is converging</strong> (AI models, actuators, batteries), <strong>capital is flowing</strong> (Tesla, Figure AI, Boston Dynamics, China OEMs), and <strong>supply chains are forming</strong>. But the investment landscape is fraught with tension:
+  </p>
+
+  <div class="thesis-grid">
+    <div class="thesis-block bull">
+      <h4>🟢 Why Now</h4>
+      <p>Goldman Sachs and other sell-side firms have initiated coverage, validating the theme for institutional capital.</p>
+      <p>Tesla Optimus provides a Western "anchor tenant" with credible production targets and capital depth.</p>
+      <p>Harmonic Drive and $ROBO offer <strong>liquid, accessible exposure</strong> to a previously opaque supply chain.</p>
+    </div>
+    <div class="thesis-block bear">
+      <h4>🔴 Why Wait</h4>
+      <p>Unit economics remain unproven. A humanoid robot costing $100K+ has limited addressable market.</p>
+      <p>China supply chain dominance means Western investors face either high valuations (Japan) or geopolitical risk (China).</p>
+      <p>The "winner" gear supplier may not emerge until production scales — current leaders could be disrupted.</p>
+    </div>
+  </div>
+
+  <p style="font-size:14px;color:var(--text-dim);line-height:1.8;margin-top:14px;">
+    <strong>Portfolio construction recommendation:</strong> Use <strong>$ROBO as a diversified core</strong> (largest holding = Harmonic Drive). Add <strong>Harmonic Drive (HSYDF ADR)</strong> for direct, Western-friendly precision gear exposure. Keep <strong>Sanhua and Leader Drive on watchlist</strong> — the former for Tesla relationship confirmation, the latter if China-access improves or Western OEMs dual-source.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     REFERENCES
+     ═══════════════════════════════════════ -->
+<div class="rule"></div>
+<div class="ref-section" id="references">
+  <h3>References &amp; Sources</h3>
+  <ul class="ref-list">
+    <li>Goldman Sachs Research — Humanoid Robotics &amp; Automation coverage (2025-2026).</li>
+    <li>Reddit community research aggregation — @aleabitoreddit, May 13-14, 2026. Harmonic Drive (6324/HSYDF ADR), Leader Drive, Sanhua Controls, $ROBO ETF supply chain analysis.</li>
+    <li>Tesla Investor Day / Optimus update presentations (2024-2026).</li>
+    <li>Harmonic Drive Systems Inc. — Annual reports and investor relations (TSE: 6324).</li>
+    <li>ROBO Global — $ROBO ETF fact sheet and holdings disclosure (May 2026).</li>
+    <li>Sanhua Intelligent Controls — HKEX disclosures and Tesla EV supply chain coverage.</li>
+    <li>Industry teardowns and BOM estimates for humanoid robot actuators (public research, 2025-2026).</li>
+  </ul>
+</div>
+
+</main>
+
+<script>
+  function closeNav() {
+    document.getElementById('nav-overlay').classList.remove('open');
+    document.getElementById('hamburger-btn').classList.remove('open');
+  }
+
+  // Simple scroll spy for TOC highlighting
+  const sections = document.querySelectorAll('.sec-label[id], .stock-card[id]');
+  const tocItems = document.querySelectorAll('.toc-item');
+
+  function onScroll() {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if (top <= 120) current = sec.getAttribute('id');
+    });
+    tocItems.forEach(item => {
+      item.classList.remove('active');
+      const href = item.getAttribute('href');
+      if (href && href === '#' + current) item.classList.add('active');
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>
