@@ -27,12 +27,10 @@
   body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75 0.15' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,184,212,0.04) 3px,rgba(0,184,212,0.04) 6px)}
   .skip-link{position:absolute;top:-100px;left:12px;z-index:300;background:var(--accent);color:#1a1c14;padding:8px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:700;text-decoration:none}
   .skip-link:focus{top:12px}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  
   .site-nav{position:sticky;top:0;z-index:250;background:var(--surface-alt);box-shadow:var(--shadow-sm-ext);padding:10px 24px;display:flex;gap:24px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px}
   .site-nav a{color:var(--text-dim);text-decoration:none;font-weight:500;letter-spacing:.02em}
   .site-nav a:hover{color:var(--accent)}
   .site-nav .nav-current{color:var(--aqua);font-weight:600}
-
   .toc-sidebar{position:fixed;top:0;left:0;z-index:200;width:var(--toc-width);height:100vh;background:var(--surface-alt);box-shadow:var(--shadow-sm-inset);overflow-y:auto;padding:20px 0 40px}
   .toc-sidebar::-webkit-scrollbar{width:4px}
   .toc-sidebar::-webkit-scrollbar-track{background:transparent}
@@ -43,34 +41,27 @@
   .toc-item:hover{color:var(--text);background:rgba(255,255,255,.02);border-left-color:var(--aqua)}
   .toc-item.active{color:var(--aqua);font-weight:600;background:var(--aqua-bg);border-left-color:var(--aqua)}
   .toc-divider{border:none;height:1px;background:var(--border);margin:8px 14px}
-
   .hamburger-btn{display:none;position:fixed;top:10px;right:12px;z-index:260;width:44px;height:44px;cursor:pointer;border:none;background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-ext);flex-direction:column;align-items:center;justify-content:center;gap:5px;touch-action:manipulation;user-select:none}
   .hamburger-btn:hover{box-shadow:var(--shadow-md-ext)}
   .hamburger-btn:active{box-shadow:var(--shadow-pressed)}
   .ham-line{width:20px;height:2.5px;background:var(--text);border-radius:1px}
   .nav-overlay{display:none;position:fixed;inset:0;z-index:240;background:var(--bg);overflow-y:auto;padding:60px 24px 40px}
   .nav-overlay.open{display:block}
-
   .page-content{margin-left:var(--toc-width);padding:48px 48px 80px;max-width:1100px;position:relative;z-index:1}
-
   .hero{margin-bottom:40px}
   .hero-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:var(--aqua);margin-bottom:20px;padding:4px 0;border-bottom:2px solid var(--accent)}
   .hero h1{font-size:clamp(32px,5vw,48px);font-weight:900;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px}
   .hero h1 span{color:var(--aqua)}
-  .hero p{font-size:15px;color:var(--text-dim);max-width:520px;line-height:1.7}
-
+  .hero p{font-size:15px;color:var(--text-dim);max-width:560px;line-height:1.7}
   .disclaimer{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);border-left:3px solid var(--aqua);padding:14px 20px;margin-bottom:24px;font-size:12px;color:var(--text-dim);font-style:italic}
   .disclaimer strong{color:var(--text);font-weight:600;font-style:normal}
-
   .rule{height:2px;background:linear-gradient(90deg,var(--aqua),transparent);opacity:.30;margin:40px 0 28px}
   .sec-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.06em;color:var(--aqua);margin-bottom:20px;text-transform:uppercase}
   .section-title{font-size:20px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px;color:var(--text);border-bottom:2px solid var(--aqua);padding-bottom:8px;display:inline-block}
   .section-subtitle{font-size:13px;color:var(--text-dim);margin-bottom:20px;line-height:1.6}
-
   .neo-card{background:var(--bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-md-ext);padding:28px;margin-bottom:24px;transition:all .25s ease;border:none}
   .neo-card:hover{box-shadow:var(--shadow-lg-ext);border-left:2px solid var(--aqua)}
   .neo-card-inset{background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:20px;margin-bottom:16px}
-
   .keeper-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
   .keeper-table th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-quiet);padding:10px 10px;border-bottom:2px solid var(--aqua)}
   .keeper-table td{padding:9px 10px;color:var(--text-dim);border-bottom:1px solid var(--border);vertical-align:middle}
@@ -79,16 +70,43 @@
   .keeper-table .ticker-cell{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text)}
   .keeper-table .cost{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;width:60px}
   .keeper-table .cost.keep{color:var(--accent);font-weight:700}
-
   .key-insight{background:var(--aqua-bg);border-radius:var(--radius);box-shadow:var(--shadow-sm-inset);padding:16px 20px;margin:16px 0;font-size:12px;color:var(--text-dim);line-height:1.6}
   .key-insight strong{color:var(--aqua)}
-
+  .verdict-keep{color:var(--green);font-weight:700}
+  .verdict-maybe{color:var(--amber);font-weight:700}
+  .verdict-pass{color:var(--red);font-weight:700}
+  .conf-known{color:var(--green);font-size:9px;font-family:'JetBrains Mono',monospace}
+  .conf-inferred{color:var(--amber);font-size:9px;font-family:'JetBrains Mono',monospace}
+  /* Interactive Top 50 controls */
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+  .filter-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;padding:6px 12px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);background:var(--surface);color:var(--text-dim);cursor:pointer;transition:all .15s}
+  .filter-btn:hover{border-color:var(--aqua);color:var(--text)}
+  .filter-btn.active{background:var(--aqua);color:var(--bg);border-color:var(--aqua)}
+  .export-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:6px 14px;border-radius:var(--radius-sm);border:none;background:var(--accent);color:#1a1c14;cursor:pointer;margin-left:auto;transition:all .15s}
+  .export-btn:hover{background:var(--accent-light)}
+  th.sortable{cursor:pointer;user-select:none}
+  th.sortable:hover{color:var(--aqua)}
+  th.sortable::after{content:' \2195';opacity:.4;font-size:9px}
+  .blurb{font-size:11px;color:var(--text-dim);line-height:1.5;max-width:380px}
+  .pos-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;background:var(--surface-alt);color:var(--aqua)}
+  .tier-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px}
+  .tier-1{background:var(--accent-bg);color:var(--accent)}
+  .tier-2{background:rgba(0,184,212,.14);color:var(--aqua)}
+  .tier-3{background:var(--surface-alt);color:var(--text-dim)}
+  .tier-4{background:var(--bg);color:var(--text-quiet);border:1px solid var(--border)}
+  .data-note{font-size:11px;color:var(--text-quiet);font-style:italic;margin-top:12px;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);border-left:2px solid var(--accent)}
+  .decision-card{background:var(--bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-md-ext);padding:24px;margin-bottom:20px;border-top:3px solid var(--aqua)}
+  .decision-card.alt{border-top-color:var(--amber)}
+  .decision-card h3{font-size:16px;font-weight:800;margin-bottom:6px}
+  .decision-card .pair{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--aqua);margin-bottom:10px}
+  .decision-card .why{font-size:12px;color:var(--text-dim);line-height:1.7}
   @media(max-width:768px){
     .toc-sidebar{display:none}.page-content{margin-left:0;padding:24px 16px 60px}
     .hamburger-btn{display:flex}
     .hero h1{font-size:28px}
     .keeper-table{font-size:11px}
     .keeper-table th,.keeper-table td{padding:6px 6px}
+    .blurb{max-width:100%}
   }
 </style>
 </head>
@@ -108,20 +126,18 @@
 <nav class="toc-sidebar" id="toc-sidebar" aria-label="Table of contents">
   <div class="toc-brand"><a href="index.html">← Research Home</a></div>
   <a class="toc-item active" href="#overview">League Overview</a>
-  <a class="toc-item" href="#keeper-rankings">Keeper Rankings</a>
+  <a class="toc-item" href="#decision">Keeper Decision Engine</a>
+  <a class="toc-item" href="#keeper-rankings">Top 40 Keeper Rankings</a>
   <a class="toc-item" href="#value-keepers">Value Keeper Targets</a>
-  <a class="toc-item" href="#strategy">Keeper Strategy</a>
-  <hr class="toc-divider">
   <a class="toc-item" href="#your-team">Your Team — Manager 4</a>
   <hr class="toc-divider">
-  <a class="toc-item" href="#value-calc">Keeper Value Calculator</a>
-  <a class="toc-item" href="#underdog">Underdog Top 20</a>
-  <a class="toc-item" href="#fantasypros">FantasyPros Consensus</a>
-  <a class="toc-item" href="#scarcity">Positional Scarcity Map</a>
-  <a class="toc-item" href="#keeper-predictions">Keeper Predictions</a>
-  <a class="toc-item" href="#draft-kit">Draft Kit — Cheat Sheet</a>
+  <a class="toc-item" href="#predictions">Keeper Predictions</a>
+  <a class="toc-item" href="#top50">Top 50 Players</a>
+  <a class="toc-item" href="#auction">Auction Market</a>
+  <a class="toc-item" href="#scarcity">Positional Scarcity</a>
   <a class="toc-item" href="#draft-board">Draft Board</a>
-  <a class="toc-item" href="#sleepers">Sleepers &amp; Late Value</a>
+  <a class="toc-item" href="#sleepers">Sleepers & Diamonds</a>
+  <a class="toc-item" href="#inseason">In-Season (Separate Doc)</a>
 </nav>
 
 <div class="nav-overlay" id="nav-overlay"></div>
@@ -129,15 +145,13 @@
 <main class="page-content" id="main-content">
 
 <div class="hero">
-  <div class="hero-tag">Fantasy Football · July 2026</div>
+  <div class="hero-tag">Fantasy Football · Refreshed July 13, 2026</div>
   <h1>THE CINCO LEAGUE.<br><span>Keeper Analysis.</span></h1>
-  <p>10-team superflex auction keeper league. Up to 2 keepers per team. Keeper cost = 2025 draft price + $7. 2025 champion data pulled live from Yahoo.</p>
+  <p>10-team superflex auction keeper league. Up to 2 keepers per team. Keeper cost = 2025 draft price + $7. Built from a live July-13 roster database, Exa semantic search, 9 analyst video transcripts (Harmon/Boone/Norris/Winks), and your curated X fantasy list.</p>
 </div>
 
 <div class="disclaimer">
   <strong>🏈 Cinco League Rules:</strong> Superflex (Q/W/R/T slot), $200 auction budget, 2 keepers max, keeper cost = draft price + $7. Undrafted players cost $7 to keep. Roster: QB/WR/WR/RB/TE/WRT/WRT/QWRT/DEF/BNx5.
-
-
 </div>
 
 <div class="neo-card-inset" id="overview">
@@ -152,11 +166,61 @@
 
 <div class="rule"></div>
 
-<div class="section-title" id="keeper-rankings">Keeper Rankings — Top 40</div>
-<p class="section-subtitle">All 140 drafted players ranked by 2025 auction cost. Keeper cost = draft price + $7. 💰 = value keeper (cheap cost relative to production). 💰💰 = strong value. 💰💰💰 = elite value.</p>
+<!-- ============ KEEPER DECISION ENGINE ============ -->
+<div class="section-title" id="decision">Keeper Decision Engine</div>
+<p class="section-subtitle">The math, refreshed. ADP → projected auction value (superflex QB ×1.3), minus keeper cost = surplus. One recommendation, with the alternative shown honestly.</p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+  <div class="decision-card">
+    <h3>✅ Recommended — Puka + Dart</h3>
+    <div class="pair">Puka Nacua ($21) + Jaxson Dart ($8) = $29 locked · $171 to auction</div>
+    <div class="why">
+      Puka is a locked-in WR1 at <strong>$21</strong> — the single best value on the roster (+$29 surplus). Dart at <strong>$8</strong> is a starting superflex QB — in a format where any starting QB is worth $15+, that's league-winning value (+$10 surplus). Keeping a QB frees ~$50 to attack RBs/WRs at auction instead of overpaying for one. Dart is year-2 (not a rookie) and ran for 9 TDs in 14 starts — the Konami-code floor is real.
+      <br><br><span class="conf-known">SOURCED:</span> FantasyPros ECR (Puka WR4, Jul 11 2026); Josh Norris QB tiers (Dart QB10, 89th overall); Reddit r/fantasyfootball (Dart year-2, 400 rushing yds).
+    </div>
+  </div>
+  <div class="decision-card alt">
+    <h3>⚡ Alternative — Puka + Kyren</h3>
+    <div class="pair">Puka Nacua ($21) + Kyren Williams ($21) = $42 locked · $158 to auction</div>
+    <div class="why">
+      If you'd rather secure an RB1, Kyren at <strong>$21</strong> is a high-end RB2 with RB1 upside (+$11 surplus). The catch: Blake Corum ate into his workload late in 2025 (Kyren down to 68% snaps by Week 13), and the Rams added Davante Adams, thinning Kyren's target share. You'd enter the auction needing a QB1 — expensive in superflex. Keep Dart as the auction QB2 instead.
+      <br><br><span class="conf-known">SOURCED:</span> Footballguys snap counts; Rams Wire; keeper-value methodology (ADP 22 → $32 model value).
+    </div>
+  </div>
+</div>
 
 <div class="key-insight">
-  <strong>🔑 Key Insight:</strong> Superflex makes QBs premium keepers. Josh Allen ($56 keep), Lamar Jackson ($58), and Jalen Hurts ($55) are expensive but worth it — top QBs go for $50+ in redraft. The real steals are Ja'Marr Chase ($42 keep — drafted for $35 in Rd 14 as a prior-year keeper), Puka Nacua ($21 keep), and Nico Collins ($22 keep).
+  <strong>🔑 Verdict:</strong> Puka + Dart is the higher-ceiling play — it banks the league's best WR value AND a starting QB for $8, then lets you build the rest at auction. Puka + Kyren is safer at RB but leaves you QB-hungry. Either way, <strong>do not keep Burrow, Amon-Ra, or CMC</strong> — their keeper cost equals full auction price (zero surplus).
+</div>
+
+<table class="keeper-table">
+  <thead><tr><th>Player</th><th>Pos</th><th>NFL</th><th>Keep $</th><th>Model Val</th><th>Surplus</th><th>Call</th><th>Conf</th></tr></thead>
+  <tbody>
+    <tr><td class="ticker-cell">Puka Nacua</td><td>WR</td><td>LAR</td><td class="cost keep">$21</td><td class="cost">$50</td><td class="cost" style="color:var(--green);">+$29</td><td class="verdict-keep">KEEP</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Jaxson Dart</td><td>QB</td><td>NYG</td><td class="cost keep">$8</td><td class="cost">$18</td><td class="cost" style="color:var(--green);">+$10</td><td class="verdict-keep">KEEP</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Kyren Williams</td><td>RB</td><td>LAR</td><td class="cost keep">$21</td><td class="cost">$32</td><td class="cost" style="color:var(--green);">+$11</td><td class="verdict-maybe">ALT</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Travis Etienne Jr.</td><td>RB</td><td>NO</td><td class="cost keep">$19</td><td class="cost">$25</td><td class="cost" style="color:var(--green);">+$6</td><td class="verdict-maybe">CONSIDER</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Christian McCaffrey</td><td>RB</td><td>SF</td><td class="cost keep">$53</td><td class="cost">$50</td><td class="cost" style="color:var(--red);">-$3</td><td class="verdict-pass">PASS</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Amon-Ra St. Brown</td><td>WR</td><td>DET</td><td class="cost keep">$53</td><td class="cost">$50</td><td class="cost" style="color:var(--red);">-$3</td><td class="verdict-pass">PASS</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Joe Burrow</td><td>QB</td><td>CIN</td><td class="cost keep">$56</td><td class="cost">$54</td><td class="cost" style="color:var(--red);">-$2</td><td class="verdict-pass">PASS</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">James Cook III</td><td>RB</td><td>BUF</td><td class="cost keep">$30</td><td class="cost">$22</td><td class="cost" style="color:var(--red);">-$8</td><td class="verdict-pass">PASS</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Tee Higgins</td><td>WR</td><td>CIN</td><td class="cost keep">$33</td><td class="cost">$22</td><td class="cost" style="color:var(--red);">-$11</td><td class="verdict-pass">PASS</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Trey McBride</td><td>TE</td><td>ARI</td><td class="cost keep">$33</td><td class="cost">$22</td><td class="cost" style="color:var(--red);">-$11</td><td class="verdict-pass">PASS</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Brock Purdy</td><td>QB</td><td>SF</td><td class="cost keep">$35</td><td class="cost">$18</td><td class="cost" style="color:var(--red);">-$17</td><td class="verdict-pass">PASS</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Brian Robinson Jr.</td><td>RB</td><td>WAS</td><td class="cost keep">$15</td><td class="cost">$8</td><td class="cost" style="color:var(--red);">-$7</td><td class="verdict-pass">PASS</td><td><span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Blake Corum</td><td>RB</td><td>LAR</td><td class="cost keep">$8</td><td class="cost">$5</td><td class="cost" style="color:var(--red);">-$3</td><td class="verdict-pass">PASS</td><td><span class="conf-known">KNOWN</span></td></tr>
+  </tbody>
+</table>
+<p class="data-note">Model value = ADP→auction conversion (superflex QB ×1.3), tier-based. ADP inputs sourced where available (FantasyPros Jul 11 ECR; Norris QB tiers); remaining ADPs estimated by tier → marked INFERRED at row level only where the player's ADP wasn't directly sourced. Surplus = Model Val − Keep $.</p>
+
+<div class="rule"></div>
+
+<!-- ============ TOP 40 KEEPER RANKINGS ============ -->
+<div class="section-title" id="keeper-rankings">Top 40 Keeper Rankings</div>
+<p class="section-subtitle">All 140 drafted players ranked by 2025 auction cost. Keeper cost = draft price + $7. 💰 = value keeper (cheap cost vs production). Teams verified against the July-13 roster database.</p>
+
+<div class="key-insight">
+  <strong>🔑 Key Insight:</strong> Superflex makes QBs premium keepers. Josh Allen ($56), Lamar ($58), Hurts ($55) are expensive but worth it. The real steals are Puka ($21 keep — drafted $14), Jaxson Dart ($8 keep — drafted $1, starting QB), and Tetairoa McMillan ($27 keep — year-2 WR with WR1 upside in Carolina).
 </div>
 
 <table class="keeper-table">
@@ -182,7 +246,7 @@
 <tr><td class="rk">18</td><td class="ticker-cell">Brian Thomas Jr.</td><td>WR</td><td>Jax</td><td class="cost">$36</td><td class="cost keep">$43</td><td></td></tr>
 <tr><td class="rk">19</td><td class="ticker-cell">Ja'Marr Chase</td><td>WR</td><td>Cin</td><td class="cost">$35</td><td class="cost keep">$42</td><td>💰</td></tr>
 <tr><td class="rk">20</td><td class="ticker-cell">De'Von Achane</td><td>RB</td><td>Mia</td><td class="cost">$34</td><td class="cost keep">$41</td><td>💰</td></tr>
-<tr><td class="rk">21</td><td class="ticker-cell">A.J. Brown</td><td>WR</td><td>Phi</td><td class="cost">$34</td><td class="cost keep">$41</td><td>💰</td></tr>
+<tr><td class="rk">21</td><td class="ticker-cell">A.J. Brown</td><td>WR</td><td>NE</td><td class="cost">$34</td><td class="cost keep">$41</td><td>💰</td></tr>
 <tr><td class="rk">22</td><td class="ticker-cell">George Kittle</td><td>TE</td><td>SF</td><td class="cost">$33</td><td class="cost keep">$40</td><td>💰</td></tr>
 <tr><td class="rk">23</td><td class="ticker-cell">Malik Nabers</td><td>WR</td><td>NYG</td><td class="cost">$33</td><td class="cost keep">$40</td><td>💰</td></tr>
 <tr><td class="rk">24</td><td class="ticker-cell">Brock Purdy</td><td>QB</td><td>SF</td><td class="cost">$28</td><td class="cost keep">$35</td><td>💰</td></tr>
@@ -207,8 +271,9 @@
 
 <div class="rule"></div>
 
+<!-- ============ VALUE KEEPER TARGETS ============ -->
 <div class="section-title" id="value-keepers">Value Keeper Targets — Drafted Under $10</div>
-<p class="section-subtitle">Players who cost almost nothing in 2025 but could return starter-level production. At $7-17 to keep, these are the highest-ROI keeper decisions in the league.</p>
+<p class="section-subtitle">Players who cost almost nothing in 2025 but could return starter-level production. At $7-17 to keep, these are the highest-ROI keeper decisions in the league. Teams verified July 13.</p>
 
 <table class="keeper-table">
   <thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>2025 $</th><th>Keep $</th></tr></thead>
@@ -233,193 +298,79 @@
 
 <div class="rule"></div>
 
-<div class="section-title" id="strategy">Keeper Strategy — How to Decide</div>
-
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-  <div class="neo-card" style="margin-bottom:0;">
-    <div class="sec-label" style="color:var(--green);">Keep If...</div>
-    <ul style="font-size:12px;color:var(--text-dim);line-height:1.8;padding-left:16px;">
-      <li>Player is projected top-5 at their position and keeper cost is below market ADP</li>
-      <li>Player was drafted for $1-5 and is now a starter (free money)</li>
-      <li>You have a top-3 QB in superflex — the positional scarcity is real</li>
-      <li>Rookie RBs who broke out (Jeanty $53 keep, Hampton $30 keep)</li>
-    </ul>
-  </div>
-  <div class="neo-card" style="margin-bottom:0;">
-    <div class="sec-label" style="color:var(--red);">Don't Keep If...</div>
-    <ul style="font-size:12px;color:var(--text-dim);line-height:1.8;padding-left:16px;">
-      <li>Keeper cost exceeds projected auction value (you're overpaying)</li>
-      <li>Player is aging out (McCaffrey at $53 is risky at his age/injury history)</li>
-      <li>You can get similar production for less in the draft</li>
-      <li>You're keeping a player just because you like them — be ruthless</li>
-    </ul>
-  </div>
-</div>
-
-<div class="rule"></div>
-
-
-<div class="rule"></div>
-
-
-<div class="rule"></div>
-
+<!-- ============ YOUR TEAM ============ -->
 <div class="section-title" id="your-team">Your Team — Cross 4 Air Cross 4 Mayor</div>
-<p class="section-subtitle">Deep-dive keeper analysis on every rostered player, incorporating Underdog Fantasy (Josh Norris / Hayden Winks), Reddit, FantasyPros, and NFL beat reporters. Updated for post-draft, post-free agency 2026.</p>
+<p class="section-subtitle">Deep-dive keeper analysis on every rostered player. Sourced from FantasyPros (Jul 11 ECR), 9 analyst transcripts (Harmon/Boone/Norris/Winks), Exa, and your X list. Current teams verified July 13.</p>
 
 <table class="keeper-table">
-  <thead><tr><th>Player</th><th>Pos</th><th>NFL</th><th>2025 $</th><th>Keep $</th><th>Value</th><th>Analysis & Recommendation</th></tr></thead>
+  <thead><tr><th>Player</th><th>Pos</th><th>NFL</th><th>Keep $</th><th>Value</th><th>Analysis & Recommendation</th></tr></thead>
   <tbody>
     <tr>
-      <td class="ticker-cell">Puka Nacua</td><td>WR</td><td>LAR</td><td class="cost">$14</td><td class="cost keep">$21</td><td>💰💰</td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--green);">KEEP — Elite WR1 at WR3 price.</strong> Led the NFL in receptions (129) for 1,715 yards and 10 TDs in 2025. Rams offense is projected #1 overall entering 2026 with Stafford returning, Davante Adams added as WR2, and Sean McVay calling plays. Puka is the alpha in arguably the league best offense. At $21 keep cost, this is the single best value on your roster. <strong>Source:</strong> Sharp Football Analysis, Rams Wire, Underdog WR rankings.</td>
+      <td class="ticker-cell">Puka Nacua</td><td>WR</td><td>LAR</td><td class="cost keep">$21</td><td>💰💰</td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--green);">KEEP — Elite WR1 at WR3 price.</strong> WR4 in FantasyPros ECR. Rams offense is the league's best with Stafford, Davante Adams (added via free agency), and McVay. Puka is the alpha. At $21, the single best value on the roster. <span class="conf-known">KNOWN</span> — FantasyPros ECR Jul 11 2026.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Kyren Williams</td><td>RB</td><td>LAR</td><td class="cost">$14</td><td class="cost keep">$21</td><td>💰💰</td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--accent);">KEEP — But temper expectations. Blake Corum is a real threat.</strong> Kyren started 2025 as a workhorse (80%+ snaps) but Corum ate into his workload late in the season. By Week 13, Kyren was down to 68% snaps — his lowest of the year. Over the full season, Corum logged 332 snaps (29%) and the trendline was toward a 50-50 split by year end. Kyren is still the RB1 and the Rams offense is elite (Stafford, Nacua, Adams, McVay). At $21 keep, the value is good but not elite — you are paying for a high-end RB2 with RB1 upside, not a locked-in bell-cow. Monitor training camp reports on the snap split. If Corum continues gaining ground, Kyren becomes more of a volume-dependent RB2. <strong>Source:</strong> Footballguys snap counts, Rams Wire, Yahoo Sports, Pro Football Reference.</td>
+      <td class="ticker-cell">Jaxson Dart</td><td>QB</td><td>NYG</td><td class="cost keep">$8</td><td>💰💰💰</td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--green);">KEEP — Starting QB for $8 in superflex is a steal.</strong> Year-2 starter (NOT a rookie — ran for 9 TDs in 14 starts as a "rookie"). Norris ranks him QB10 (89th overall). Giants added weapons. At $8 in superflex, where any starting QB is worth $15+, this is league-winning value. <span class="conf-known">KNOWN</span> — Norris QB tiers; r/fantasyfootball (year-2, 400 rush yds).</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Tee Higgins</td><td>WR</td><td>CIN</td><td class="cost">$26</td><td class="cost keep">$33</td><td>💰</td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--accent);">CONSIDER — WR2 with WR1 upside when healthy.</strong> Higgins is the clear #2 in Cincinnati behind Ja'Marr Chase, but Joe Burrow supports two fantasy-relevant WRs. The concern is durability — Higgins has missed games in back-to-back seasons. At $33 keep, you are paying close to market price. Better to draft him back at auction for similar cost than lock in the injury risk. If you LOVE the Burrow-Higgins stack, it is defensible but not optimal. <strong>Source:</strong> FantasyPros, Bengals beat writers.</td>
+      <td class="ticker-cell">Kyren Williams</td><td>RB</td><td>LAR</td><td class="cost keep">$21</td><td>💰💰</td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--accent);">ALT KEEPER — High-end RB2, not locked-in bell-cow.</strong> Blake Corum ate into workload late 2025 (Kyren down to 68% snaps by Week 13). Rams added Adams, thinning target share. At $21, good but not elite value. Draft him back at auction if you prefer the RB anchor. <span class="conf-known">KNOWN</span> — Footballguys snap counts.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">James Cook III</td><td>RB</td><td>BUF</td><td class="cost">$23</td><td class="cost keep">$30</td><td>💰</td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--accent);">CONSIDER — Top-15 RB but $30 is near market.</strong> Cook was an RB1 in 2025 with Josh Allen drawing defensive attention. Buffalo offense is elite and Cook is the clear lead back. However, $30 is close to his projected 2026 auction value. The value proposition is marginal — you would likely pay $25-32 for him in the draft anyway. Only keep if you are thin at RB and want the certainty. <strong>Source:</strong> Underdog Fantasy RB rankings, FantasyPros ADP.</td>
+      <td class="ticker-cell">Travis Etienne Jr.</td><td>RB</td><td>NO</td><td class="cost keep">$19</td><td>💰💰</td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--accent);">CONSIDER — Primary RB in New Orleans.</strong> 4-yr $52M deal; 1,107 rush yds, 7 rush TD, 13 total TDs in 2025. Alvin Kamara (age 31, career-low 471 yds) is the clear #2. Tyler Shough (rookie) at QB. Volume is guaranteed; ceiling depends on Saints offensive efficiency. At $19, solid value. <span class="conf-known">KNOWN</span> — SportingNews; Saints.com.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Trey McBride</td><td>TE</td><td>ARI</td><td class="cost">$26</td><td class="cost keep">$33</td><td>💰</td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--accent);">CONSIDER — Top-3 TE but TE is deep.</strong> McBride was TE2 in 2025 behind only Bowers. Kyler Murray loves him and the volume is elite. But in a non-TE-premium league with only 1 TE slot, the position is replaceable. $33 for a TE when you can get 80% of the production for $5-10 in the draft is poor roster allocation. Only keep if you believe he is the TE1 overall in 2026. <strong>Source:</strong> Underdog Fantasy TE rankings, Josh & Hayden podcast.</td>
+      <td class="ticker-cell">Tee Higgins</td><td>WR</td><td>CIN</td><td class="cost keep">$33</td><td>💰</td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — WR2 at full retail.</strong> Clear #2 behind Ja'Marr Chase. Durability concerns (missed games back-to-back seasons). At $33, you're paying market. Draft back at auction for similar cost. <span class="conf-known">KNOWN</span> — FantasyPros.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Jaxson Dart</td><td>QB</td><td>NYG</td><td class="cost">$1</td><td class="cost keep">$8</td><td>💰💰💰</td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--green);">INTRIGUING — Starting QB for $8 in superflex is a steal.</strong> Dart is the unquestioned starter for the Giants entering his second year. Matthew Berry calls him a top-10 fantasy QB for 2026. FantasyLife has him as a "league winner" pick. The Giants added offensive weapons in the draft and Dart has rushing ability that gives him a Konami-code floor. At $8 in superflex — where any starting QB is worth $15+ — this is one of the highest-ROI keeper decisions on the entire roster. <strong>Source:</strong> Matthew Berry (NBC Sports), FantasyLife (Kendall Valenzuela), r/fantasyfootball.</td>
+      <td class="ticker-cell">James Cook III</td><td>RB</td><td>BUF</td><td class="cost keep">$30</td><td>💰</td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — Top-15 RB at near-market.</strong> Lead back in elite Buffalo offense (now with DJ Moore drawing coverage). But $30 ≈ projected 2026 value. No surplus. <span class="conf-known">KNOWN</span> — FantasyPros ADP.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Travis Etienne Jr.</td><td>RB</td><td>FA</td><td class="cost">$12</td><td class="cost keep">$19</td><td>💰💰</td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--accent);">CONSIDER — Signed with Saints on 4-year, $52M deal.</strong> Etienne had a bounce-back 2025: 1,399 scrimmage yards and 13 TDs with Jacksonville, then signed a major free agent contract with New Orleans ($24M guaranteed). He returns to his home state of Louisiana as the Saints clear RB1. The Saints offense is a question mark — Derek Carr is aging, the WR corps is thin, and the offensive line has been inconsistent. But volume should be there: Etienne is being paid like a bell-cow and will get 15-20 touches per game. At $19 keep, the value is solid if the Saints offense is even league-average. The risk: a bad offense caps his touchdown ceiling, and Alvin Kamara (if still on the roster) could siphon passing-down work. <strong>Source:</strong> NewOrleansSaints.com, Yahoo Sports, Saints Wire, r/Saints.</td>
+      <td class="ticker-cell">Trey McBride</td><td>TE</td><td>ARI</td><td class="cost keep">$33</td><td>💰</td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — Top-3 TE, but TE is deep.</strong> TE2 in 2025 behind Bowers. In a non-TE-premium league, $33 for a TE when 80% of production is available for $5-10 is poor allocation. <span class="conf-known">KNOWN</span> — Norris/Winks TE tiers.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Joe Burrow</td><td>QB</td><td>CIN</td><td class="cost">$49</td><td class="cost keep">$56</td><td></td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS AT THIS PRICE — Elite QB, but $56 is full retail.</strong> Burrow is a top-5 NFL QB with the best WR duo in football (Chase + Higgins). In superflex, he is worth every penny. But $56 is essentially what he would cost in a 2026 auction. There is no keeper surplus value here — you are just pre-paying market price. If you want Burrow, draft him. Do not burn a keeper slot on a player with zero keeper discount. <strong>Source:</strong> FantasyPros QB rankings, Underdog superflex ADP.</td>
+      <td class="ticker-cell">Joe Burrow</td><td>QB</td><td>CIN</td><td class="cost keep">$56</td><td></td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — Elite QB, zero surplus.</strong> Top-5 NFL QB, best WR duo. But $56 = full auction price. No keeper discount. Draft him if you want him. <span class="conf-known">KNOWN</span> — FantasyPros QB ranks.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Amon-Ra St. Brown</td><td>WR</td><td>DET</td><td class="cost">$46</td><td class="cost keep">$53</td><td></td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — Elite player, zero keeper surplus.</strong> ARSB is as consistent as they come — top-5 WR in targets, receptions, and red zone usage every year. Lions offense is a juggernaut. But at $53 keep, you are paying full auction price for him. No discount = no reason to keep. Draft him back if you want him. <strong>Source:</strong> Underdog Fantasy WR rankings, FantasyPros.</td>
+      <td class="ticker-cell">Amon-Ra St. Brown</td><td>WR</td><td>DET</td><td class="cost keep">$53</td><td></td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — Elite, zero surplus.</strong> Top-5 WR every year. At $53, full price. No discount = no reason to keep. <span class="conf-known">KNOWN</span> — FantasyPros WR ranks.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Christian McCaffrey</td><td>RB</td><td>SF</td><td class="cost">$46</td><td class="cost keep">$53</td><td></td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">AVOID — Age 30, workload being reduced, injury risk.</strong> Shanahan explicitly stated CMC will get "more rest" in 2026. He played only 4 games in 2024 due to Achilles and knee issues. Analysts including Matthew Berry prefer Bijan Robinson over CMC. At $53, you are paying for his 2019-2023 prime — not the 2026 version. The 49ers are actively managing his workload down. This is the trap keeper. Let someone else pay $50+ for him at auction. <strong>Source:</strong> CBS Sports, The Fantasy Footballers, Matthew Berry (NBC), r/DynastyFF.</td>
+      <td class="ticker-cell">Christian McCaffrey</td><td>RB</td><td>SF</td><td class="cost keep">$53</td><td></td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">AVOID — Age 30, workload reduced.</strong> Shanahan explicitly managing his snaps down. At $53, paying for his prime. Let someone else overpay. <span class="conf-known">KNOWN</span> — FantasyLife; CBS.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Brock Purdy</td><td>QB</td><td>SF</td><td class="cost">$28</td><td class="cost keep">$35</td><td></td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — Fine QB, not a keeper at $35.</strong> Purdy is a solid NFL quarterback in a great system, but his fantasy ceiling is capped by the 49ers run-heavy approach and CMC goal-line usage. In superflex, he is a QB2 — and you can draft a QB2 for under $10 (Baker, Geno, Dart). $35 is an overpay for what he provides. <strong>Source:</strong> FantasyPros, 49ers beat reporters.</td>
+      <td class="ticker-cell">Brock Purdy</td><td>QB</td><td>SF</td><td class="cost keep">$35</td><td></td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — QB2 at $35.</strong> Solid system QB, capped ceiling. In superflex you can draft a QB2 for under $10. <span class="conf-known">KNOWN</span> — FantasyPros.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Brian Robinson Jr.</td><td>RB</td><td>WAS</td><td class="cost">$8</td><td class="cost keep">$15</td><td>💰💰</td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--accent);">CONSIDER — Solid floor RB2 at $15.</strong> Robinson is the lead back in Washington with Jayden Daniels at QB. He is not flashy but he gets volume and goal-line work. At $15, he is a reasonable keep if you want a safe RB2. But he lacks the ceiling to be a league-winner. If you keep Puka and Kyren, you do not need to tie up a third spot on a floor play. <strong>Source:</strong> FantasyPros, Commanders beat writers.</td>
+      <td class="ticker-cell">Brian Robinson Jr.</td><td>RB</td><td>WAS</td><td class="cost keep">$15</td><td>💰💰</td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--accent);">CONSIDER — Safe RB2 floor at $15.</strong> Lead back in Washington with Jayden Daniels. Lacks ceiling. If you keep Puka+Dart, don't tie up a third slot here. <span class="conf-known">KNOWN</span> — FantasyPros.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Blake Corum</td><td>RB</td><td>LAR</td><td class="cost">$1</td><td class="cost keep">$8</td><td>💰💰</td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — Pure handcuff behind Kyren.</strong> Corum is Kyren Williams backup. He has zero standalone value unless Kyren gets hurt. At $8, you are paying for an insurance policy. If you are keeping Kyren, drafting Corum for $1-3 at auction makes more sense than burning a keeper slot on a handcuff. <strong>Source:</strong> Rams depth chart, FantasyPros.</td>
+      <td class="ticker-cell">Blake Corum</td><td>RB</td><td>LAR</td><td class="cost keep">$8</td><td>💰💰</td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — Handcuff.</strong> Zero standalone value unless Kyren hurt. At $8, an insurance policy. Draft for $1-3 if you want the handcuff. <span class="conf-known">KNOWN</span> — Rams depth chart.</td>
     </tr>
     <tr>
-      <td class="ticker-cell">Kyle Monangai</td><td>RB</td><td>FA</td><td class="cost">$0</td><td class="cost keep">$7</td><td>💰💰💰</td>
-      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — Late-round rookie, no clear path to touches.</strong> Monangai was a Day 3 NFL draft pick and is buried on the depth chart. At $7, you are paying for a name with no projected role. These are the types of players you grab for $1 at the end of the auction, not burn a keeper slot on. <strong>Source:</strong> NFL Draft profiles, depth chart projections.</td>
+      <td class="ticker-cell">Kyle Monangai</td><td>RB</td><td>Chi</td><td class="cost keep">$7</td><td>💰💰💰</td>
+      <td style="font-size:11px;color:var(--text-dim);line-height:1.5;"><strong style="color:var(--red);">PASS — 2025 Bears 7th-rd pick, buried.</strong> At $7, paying for a name with no role. Grab for $1 at auction. <span class="conf-inferred">INFERRED</span> — draft status.</td>
     </tr>
   </tbody>
 </table>
 
-<div class="key-insight"><strong>Recommended Keepers:</strong> <span style="color:var(--green);">Puka Nacua ($21) + Kyren Williams ($21)</span> — two locked-in starters from the NFL best offense for $42 total. That leaves $158 for the auction. <strong>Close third option:</strong> Jaxson Dart at $8 — a starting QB in superflex for $8 is absurd value. If you want to keep 3 (if your league allows trading for extra keeper slots), Dart is the one. Otherwise, Puka + Kyren is the optimal pair.</div>
-
-
-<div class="rule"></div>
-
-<div class="section-title" id="value-calc">Keeper Value Calculator</div>
-<p class="section-subtitle">Estimated 2026 auction value (based on Underdog ADP tiers) minus keeper cost. Positive = keeper surplus. Superflex-adjusted QB values. <strong>Sources:</strong> Underdog Fantasy 2026 Rankings, Yahoo API draft costs.</p>
-
-<table class="keeper-table">
-  <thead><tr><th>Player</th><th>Pos</th><th>Draft $</th><th>Keep $</th><th>ADP</th><th>Est 2026 $</th><th>Surplus</th><th>Verdict</th></tr></thead>
-  <tbody>
-<tr><td class="ticker-cell">Puka Nacua</td><td>WR</td><td class="cost">$14</td><td class="cost keep">$21</td><td>4</td><td class="cost">$50</td><td class="cost" style="color:var(--green);">+$29</td><td style="font-weight:700;">✅ KEEP</td></tr>
-<tr><td class="ticker-cell">Jaxson Dart</td><td>QB</td><td class="cost">$1</td><td class="cost keep">$8</td><td>50</td><td class="cost">$18</td><td class="cost" style="color:var(--green);">+$10</td><td style="font-weight:700;">✅ KEEP</td></tr>
-<tr><td class="ticker-cell">Kyren Williams</td><td>RB</td><td class="cost">$14</td><td class="cost keep">$21</td><td>22</td><td class="cost">$32</td><td class="cost" style="color:var(--green);">+$11</td><td style="font-weight:700;">✅ KEEP</td></tr>
-<tr><td class="ticker-cell">Travis Etienne Jr.</td><td>RB</td><td class="cost">$12</td><td class="cost keep">$19</td><td>45</td><td class="cost">$14</td><td class="cost" style="color:var(--green);">+$6</td><td style="font-weight:700;">⚡ MAYBE</td></tr>
-<tr><td class="ticker-cell">Christian McCaffrey</td><td>RB</td><td class="cost">$46</td><td class="cost keep">$53</td><td>7</td><td class="cost">$50</td><td class="cost" style="color:var(--red);">-$3</td><td style="font-weight:700;">❌ PASS</td></tr>
-<tr><td class="ticker-cell">Amon-Ra St. Brown</td><td>WR</td><td class="cost">$46</td><td class="cost keep">$53</td><td>8</td><td class="cost">$50</td><td class="cost" style="color:var(--red);">-$3</td><td style="font-weight:700;">❌ PASS</td></tr>
-<tr><td class="ticker-cell">Joe Burrow</td><td>QB</td><td class="cost">$49</td><td class="cost keep">$56</td><td>14</td><td class="cost">$54</td><td class="cost" style="color:var(--red);">-$2</td><td style="font-weight:700;">❌ PASS</td></tr>
-<tr><td class="ticker-cell">Blake Corum</td><td>RB</td><td class="cost">$0</td><td class="cost keep">$7</td><td>90</td><td class="cost">$5</td><td class="cost" style="color:var(--red);">-$2</td><td style="font-weight:700;">❌ PASS</td></tr>
-<tr><td class="ticker-cell">Brian Robinson Jr.</td><td>RB</td><td class="cost">$8</td><td class="cost keep">$15</td><td>65</td><td class="cost">$8</td><td class="cost" style="color:var(--red);">-$7</td><td style="font-weight:700;">❌ PASS</td></tr>
-<tr><td class="ticker-cell">James Cook III</td><td>RB</td><td class="cost">$23</td><td class="cost keep">$30</td><td>30</td><td class="cost">$22</td><td class="cost" style="color:var(--red);">-$8</td><td style="font-weight:700;">❌ PASS</td></tr>
-<tr><td class="ticker-cell">Tee Higgins</td><td>WR</td><td class="cost">$26</td><td class="cost keep">$33</td><td>32</td><td class="cost">$22</td><td class="cost" style="color:var(--red);">-$11</td><td style="font-weight:700;">❌ PASS</td></tr>
-<tr><td class="ticker-cell">Trey McBride</td><td>TE</td><td class="cost">$26</td><td class="cost keep">$33</td><td>38</td><td class="cost">$22</td><td class="cost" style="color:var(--red);">-$11</td><td style="font-weight:700;">❌ PASS</td></tr>
-<tr><td class="ticker-cell">Kyle Monangai</td><td>RB</td><td class="cost">$0</td><td class="cost keep">$7</td><td>130</td><td class="cost">$3</td><td class="cost" style="color:var(--red);">-$4</td><td style="font-weight:700;">❌ PASS</td></tr>
-<tr><td class="ticker-cell">Brock Purdy</td><td>QB</td><td class="cost">$28</td><td class="cost keep">$35</td><td>55</td><td class="cost">$18</td><td class="cost" style="color:var(--red);">-$17</td><td style="font-weight:700;">❌ PASS</td></tr>
-
-  </tbody>
-</table>
-
-<div class="key-insight"><strong>🏆 Optimal Keepers:</strong> Puka Nacua (+$29 surplus) and Jaxson Dart (+$10). Puka is a locked-in WR1 at $21 — the single best value on the roster. Dart at $8 is a starting QB in superflex for pocket change. Kyren is close behind at +$11 but the Corum workload split adds risk. <strong>Decision:</strong> Keep Puka + Dart. Draft a top RB in the auction with your $171 remaining.</div>
+<div class="key-insight"><strong>Recommended Keepers:</strong> <span style="color:var(--green);">Puka Nacua ($21) + Jaxson Dart ($8)</span> — best WR value + a starting superflex QB for pocket change. $171 remains for the auction. <strong>Close third:</strong> Kyren Williams at $21 — draft him back at auction if you want the RB anchor instead of banking the QB discount.</div>
 
 <div class="rule"></div>
 
-
-<div class="rule"></div>
-
-<div class="section-title" id="underdog">Underdog Fantasy — Top 20 Rankings</div>
-<p class="section-subtitle">Post-NFL Draft 2026 rankings from Underdog Fantasy. 🏈 = on your roster. <strong>Source:</strong> <a href="https://underdognetwork.com/football/fantasy-rankings/2026-fantasy-football-rankings" target="_blank" rel="noopener" style="color:var(--aqua);">Underdog Network 2026 Rankings</a></p>
-
-<table class="keeper-table">
-  <thead><tr><th>Pos</th><th>Player</th><th>Team</th><th>Rank</th><th>ADP</th><th>Best</th><th>Worst</th></tr></thead>
-  <tbody>
-<tr><td>RB</td><td class="ticker-cell">Jahmyr Gibbs </td><td>DET</td><td>1</td><td>1.7</td><td>4</td><td>5</td></tr>
-<tr><td>RB</td><td class="ticker-cell">Bijan Robinson </td><td>ATL</td><td>2</td><td>1.5</td><td>2</td><td>2</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Ja'Marr Chase </td><td>CIN</td><td>3</td><td>3.1</td><td>10</td><td>13</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Puka Nacua 🏈</td><td>LAR</td><td>4</td><td>4.1</td><td>5</td><td>4</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Jaxon Smith-Njigba </td><td>SEA</td><td>5</td><td>5.2</td><td>8</td><td>7</td></tr>
-<tr><td>RB</td><td class="ticker-cell">Jonathan Taylor </td><td>IND</td><td>6</td><td>6.6</td><td>3</td><td>3</td></tr>
-<tr><td>RB</td><td class="ticker-cell">Christian McCaffrey 🏈</td><td>SF</td><td>7</td><td>7.0</td><td>1</td><td>1</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Amon-Ra St. Brown 🏈</td><td>DET</td><td>8</td><td>9.0</td><td>11</td><td>12</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Marvin Harrison Jr. 🏈</td><td>ARI</td><td>9</td><td>10.5</td><td>14</td><td>16</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Nico Collins </td><td>HOU</td><td>10</td><td>11.2</td><td>6</td><td>8</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Malik Nabers 🏈</td><td>NYG</td><td>11</td><td>12.1</td><td>9</td><td>11</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Brian Thomas Jr. 🏈</td><td>JAX</td><td>12</td><td>13.5</td><td>15</td><td>18</td></tr>
-<tr><td>RB</td><td class="ticker-cell">Breece Hall </td><td>NYJ</td><td>13</td><td>14.0</td><td>7</td><td>6</td></tr>
-<tr><td>RB</td><td class="ticker-cell">Kyren Williams 🏈</td><td>LAR</td><td>14</td><td>15.2</td><td>13</td><td>14</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Garrett Wilson 🏈</td><td>NYJ</td><td>15</td><td>16.0</td><td>12</td><td>10</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Drake London 🏈</td><td>ATL</td><td>16</td><td>17.1</td><td>18</td><td>20</td></tr>
-<tr><td>RB</td><td class="ticker-cell">De'Von Achane 🏈</td><td>MIA</td><td>17</td><td>18.3</td><td>16</td><td>15</td></tr>
-<tr><td>WR</td><td class="ticker-cell">Tee Higgins 🏈</td><td>CIN</td><td>18</td><td>19.0</td><td>17</td><td>17</td></tr>
-<tr><td>RB</td><td class="ticker-cell">James Cook III 🏈</td><td>BUF</td><td>19</td><td>20.2</td><td>19</td><td>22</td></tr>
-<tr><td>TE</td><td class="ticker-cell">Trey McBride 🏈</td><td>ARI</td><td>20</td><td>21.5</td><td>20</td><td>19</td></tr>
-
-  </tbody>
-</table>
-
-
-<div class="rule"></div>
-
-<div class="section-title" id="scarcity">Positional Scarcity Map</div>
-<p class="section-subtitle">How the 20 keeper slots (~2 per team) affect the draft pool. In superflex, QBs are the scarcest resource — plan accordingly.</p>
-
-<table class="keeper-table">
-  <thead><tr><th>Position</th><th>Status</th><th>Draft Pool</th><th>Kept</th><th>Available</th><th>Needed</th><th>Surplus</th><th>Strategy</th></tr></thead>
-  <tbody>
-<tr><td class="ticker-cell">QB</td><td>⚠️ CRITICAL</td><td>24</td><td>~7</td><td>17</td><td>20</td><td style="color:var(--red);">-3</td><td style="font-size:11px;color:var(--text-dim);">Top QBs gone by Rd 3. Draft your QB1 early or start a bottom-5 QB in superflex.</td></tr>
-<tr><td class="ticker-cell">RB</td><td>✅ Deep</td><td>48</td><td>~6</td><td>42</td><td>20</td><td style="color:var(--green);">+22</td><td style="font-size:11px;color:var(--text-dim);">Plenty of RB2/RB3 value late. Wait on RB after getting your anchors.</td></tr>
-<tr><td class="ticker-cell">WR</td><td>✅ Deep</td><td>52</td><td>~5</td><td>47</td><td>30</td><td style="color:var(--green);">+17</td><td style="font-size:11px;color:var(--text-dim);">WR is the deepest position. You can find starters in rounds 8-12.</td></tr>
-<tr><td class="ticker-cell">TE</td><td>⚡ Tight</td><td>14</td><td>~1</td><td>13</td><td>10</td><td style="color:var(--green);">+3</td><td style="font-size:11px;color:var(--text-dim);">After the top 3-4 TEs, there is a cliff. Get your TE early or punt the position.</td></tr>
-<tr><td class="ticker-cell">DEF</td><td>⚠️ Thin</td><td>10</td><td>~1</td><td>9</td><td>10</td><td style="color:var(--red);">-1</td><td style="font-size:11px;color:var(--text-dim);">Stream defenses weekly. Do not draft one before the last 2 rounds.</td></tr>
-
-  </tbody>
-</table>
-
-<div class="key-insight"><strong>🔑 Draft Strategy:</strong> QB is the scarcest position — draft your QB1 in the first 3 rounds. WR is deep enough to wait. RB has plenty of RB2 value late. TE has a cliff after the top tier. DEF should be your last 2 picks. With Puka ($21) and Dart ($8) kept, you have $171 to spend — prioritize a top-5 QB ($50-55), then fill WR/RB with mid-round value.</div>
-
-
-<div class="rule"></div>
-
-<div class="section-title" id="keeper-predictions">Keeper Predictions — All 10 Teams</div>
-<p class="section-subtitle">Best-guess keeper selections using the same value calculator framework. Based on Underdog ADP, Yahoo auction costs, and the +$7 keeper tax. 🏈 = your team.</p>
+<!-- ============ KEEPER PREDICTIONS ============ -->
+<div class="section-title" id="predictions">Keeper Predictions — All 10 Teams</div>
+<p class="section-subtitle">Best-guess keeper selections using the same value framework. 🏈 = your team. Note: your row reflects the Puka + Dart decision.</p>
 
 <table class="keeper-table">
   <thead><tr><th>Team</th><th>Manager</th><th>Keeper 1</th><th>Cost</th><th>Value</th><th>Keeper 2</th><th>Cost</th><th>Value</th></tr></thead>
@@ -427,7 +378,7 @@
     <tr><td>AI Wooden Shiv Cock</td><td>Tim W.</td><td class="ticker-cell">Cam Skattebo</td><td class="cost">$8</td><td>+$0</td><td class="ticker-cell">C.J. Stroud</td><td class="cost">$21</td><td>+$5</td></tr>
     <tr><td>No Punt Intended</td><td>Nick</td><td class="ticker-cell">Jaxon Smith-Njigba</td><td class="cost">$21</td><td style="color:var(--green);">+$29</td><td class="ticker-cell">Josh Jacobs</td><td class="cost">$51</td><td>-$9</td></tr>
     <tr><td>Beef Gravy</td><td>D48reu</td><td class="ticker-cell">Jahmyr Gibbs</td><td class="cost">$47</td><td style="color:var(--green);">+$11</td><td class="ticker-cell">Bryce Young</td><td class="cost">$9</td><td>+$1</td></tr>
-    <tr style="background:var(--accent-bg);"><td>🏈 Cross 4 Air Cross 4 Mayor</td><td>Manager 4</td><td class="ticker-cell">Puka Nacua</td><td class="cost">$21</td><td style="color:var(--green);">+$29</td><td class="ticker-cell">Kyren Williams</td><td class="cost">$21</td><td style="color:var(--green);">+$21</td></tr>
+    <tr style="background:var(--accent-bg);"><td>🏈 Cross 4 Air Cross 4 Mayor</td><td>Manager 4</td><td class="ticker-cell">Puka Nacua</td><td class="cost">$21</td><td style="color:var(--green);">+$29</td><td class="ticker-cell">Jaxson Dart</td><td class="cost">$8</td><td style="color:var(--green);">+$10</td></tr>
     <tr><td>I Shit My Ass</td><td>Chris</td><td class="ticker-cell">Nico Collins</td><td class="cost">$22</td><td style="color:var(--green);">+$20</td><td class="ticker-cell">Caleb Williams</td><td class="cost">$10</td><td>+$0</td></tr>
     <tr><td>Lisa Needs Braces</td><td>Manager 6</td><td class="ticker-cell">Ja'Marr Chase</td><td class="cost">$42</td><td style="color:var(--green);">+$16</td><td class="ticker-cell">Bo Nix</td><td class="cost">$32</td><td>+$10</td></tr>
     <tr><td>Ok Twin</td><td>—</td><td class="ticker-cell">Jonathan Taylor</td><td class="cost">$44</td><td>+$6</td><td class="ticker-cell">Jordan Love</td><td class="cost">$7</td><td>+$5</td></tr>
@@ -437,194 +388,292 @@
   </tbody>
 </table>
 
-<div class="key-insight"><strong>🔑 Elite talent going BACK into the draft pool:</strong> Because the $7 keeper tax makes expensive players poor value, these stars are likely available at auction: <strong>Josh Allen, Justin Jefferson, Bijan Robinson, CeeDee Lamb, Christian McCaffrey, Amon-Ra St. Brown, Joe Burrow, Lamar Jackson, Jalen Hurts, Derrick Henry.</strong> The draft will be STACKED at the top. Your strategy: let others overpay for these names while you scoop up value in the $10-30 range.</div>
-
-
-<div class="rule"></div>
-
+<div class="key-insight"><strong>🔑 Elite talent going BACK into the draft pool:</strong> Because the $7 keeper tax makes expensive players poor value, these stars are likely available at auction: <strong>Josh Allen, Justin Jefferson, Bijan Robinson, CeeDee Lamb, Christian McCaffrey, Amon-Ra St. Brown, Joe Burrow, Lamar Jackson, Jalen Hurts, Derrick Henry.</strong> Let others overpay for names while you scoop value in the $10-30 range — especially RBs (Hampton, Chase Brown, KW3) and a QB1.</div>
 
 <div class="rule"></div>
 
-<div class="section-title" id="fantasypros">FantasyPros Consensus Rankings — May 9, 2026</div>
-<p class="section-subtitle">Consensus of 31 experts. Fresh post-NFL Draft, post-free agency data. Key changes highlighted.</p>
+<!-- ============ TOP 50 INTERACTIVE ============ -->
+<div class="section-title" id="top50">Top 50 Players — 2026</div>
+<p class="section-subtitle">Blurbs + sortable, filterable table. Click any column header to sort. Filter by position. Export to CSV/Excel via the button. ECR tiers sourced (FantasyPros Jul 11 + analyst transcripts); projected $ are tier-model estimates.</p>
+
+<div class="controls">
+  <button class="filter-btn active" onclick="filterPos('ALL',this)">ALL</button>
+  <button class="filter-btn" onclick="filterPos('QB',this)">QB</button>
+  <button class="filter-btn" onclick="filterPos('RB',this)">RB</button>
+  <button class="filter-btn" onclick="filterPos('WR',this)">WR</button>
+  <button class="filter-btn" onclick="filterPos('TE',this)">TE</button>
+  <button class="export-btn" onclick="exportCSV()">⬇ Export CSV</button>
+</div>
+
+<table class="keeper-table" id="top50">
+  <thead><tr>
+    <th class="sortable" onclick="sortTable(0)">#</th>
+    <th class="sortable" onclick="sortTable(1)">Player</th>
+    <th class="sortable" onclick="sortTable(2)">Pos</th>
+    <th class="sortable" onclick="sortTable(3)">Team</th>
+    <th class="sortable" onclick="sortTable(4)">ECR Tier</th>
+    <th class="sortable" onclick="sortTable(5)">Proj $</th>
+    <th>2025 Highlight</th>
+    <th>Blurb (sourced)</th>
+    <th class="sortable" onclick="sortTable(8)">Conf</th>
+  </tr></thead>
+  <tbody>
+<tr data-pos="RB"><td>1</td><td class="ticker-cell">Bijan Robinson</td><td><span class="pos-tag">RB</span></td><td>ATL</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$75</td><td>RB1, 1,400+ yds</td><td class="blurb">FantasyPros #1 overall (Half-PPR, Jul 11). Locked workhorse in best offense. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>2</td><td class="ticker-cell">Jahmyr Gibbs</td><td><span class="pos-tag">RB</span></td><td>DET</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$70</td><td>RB2, 1,300+ yds</td><td class="blurb">FantasyPros #2. Lions juggernaut; pass-catching bell-cow. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>3</td><td class="ticker-cell">Ja'Marr Chase</td><td><span class="pos-tag">WR</span></td><td>CIN</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$65</td><td>WR1, 1,700 yds</td><td class="blurb">FantasyPros #3. Clear WR1 with Burrow. Available at auction (keeper too expensive). <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>4</td><td class="ticker-cell">Puka Nacua</td><td><span class="pos-tag">WR</span></td><td>LAR</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$50</td><td>WR4 ECR, 1,500 yds</td><td class="blurb">YOUR KEEPER ($21). Best value on roster. Rams alpha with Adams added. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>5</td><td class="ticker-cell">Jaxon Smith-Njigba</td><td><span class="pos-tag">WR</span></td><td>SEA</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$50</td><td>WR5, led NFL rec 2025</td><td class="blurb">Super Bowl champ, led NFL in receiving 2025, signed extension. Clear alpha. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>6</td><td class="ticker-cell">Amon-Ra St. Brown</td><td><span class="pos-tag">WR</span></td><td>DET</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$50</td><td>WR1, 1,500 yds</td><td class="blurb">Top-5 WR every year. At $53 keeper cost, you pass — draft at auction. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>7</td><td class="ticker-cell">Saquon Barkley</td><td><span class="pos-tag">RB</span></td><td>PHI</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$65</td><td>RB3, 2,000 yds</td><td class="blurb">Coming off 400+ touches. Regression candidate but elite talent. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="QB"><td>8</td><td class="ticker-cell">Josh Allen</td><td><span class="pos-tag">QB</span></td><td>BUF</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$70</td><td>QB1, 40 TD</td><td class="blurb">Only QB in top-4 rounds (Norris). Rushing floor + elite passing. Worth every dollar in superflex. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>9</td><td class="ticker-cell">CeeDee Lamb</td><td><span class="pos-tag">WR</span></td><td>DAL</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$60</td><td>WR5, 1,600 yds</td><td class="blurb">Now with George Pickens alongside. Available at auction (keeper $64 too pricey). <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>10</td><td class="ticker-cell">Justin Jefferson</td><td><span class="pos-tag">WR</span></td><td>MIN</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$60</td><td>WR1, 1,600 yds</td><td class="blurb">Elite WR1. Available at auction (keeper $59 too pricey). <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>11</td><td class="ticker-cell">Drake London</td><td><span class="pos-tag">WR</span></td><td>ATL</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$48</td><td>WR1, 1,300 yds</td><td class="blurb">Best early-round value per FantasyPros. Tua/Penix QB uncertainty but talent undeniable. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>12</td><td class="ticker-cell">Nico Collins</td><td><span class="pos-tag">WR</span></td><td>HOU</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$45</td><td>WR1, 1,200 yds</td><td class="blurb">Staccato health but elite WR1 when on field. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>13</td><td class="ticker-cell">A.J. Brown</td><td><span class="pos-tag">WR</span></td><td>NE</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$45</td><td>WR1, 1,300 yds</td><td class="blurb">Traded to Patriots (Jun 2026). Now the clear alpha in NE. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>14</td><td class="ticker-cell">George Pickens</td><td><span class="pos-tag">WR</span></td><td>DAL</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$40</td><td>WR6, 1,409 yds</td><td class="blurb">137 targets, 93 catches, 14.4 PPG in 2025. WR1 with Dak. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="QB"><td>15</td><td class="ticker-cell">Lamar Jackson</td><td><span class="pos-tag">QB</span></td><td>BAL</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$65</td><td>QB2, 35 TD</td><td class="blurb">Rushing upside unmatched. Health only risk. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="QB"><td>16</td><td class="ticker-cell">Joe Burrow</td><td><span class="pos-tag">QB</span></td><td>CIN</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$55</td><td>QB3, 4,500 yds</td><td class="blurb">5 of final 6 starts QB11+. Best roster he's had. Full price at $56 keeper. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>17</td><td class="ticker-cell">Ashton Jeanty</td><td><span class="pos-tag">RB</span></td><td>LV</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$55</td><td>RB4, 1,200 yds</td><td class="blurb">Year-2 in LV. Inconsistent rookie year but elite talent. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>18</td><td class="ticker-cell">De'Von Achane</td><td><span class="pos-tag">RB</span></td><td>MIA</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$52</td><td>RB5, 1,000+ yds</td><td class="blurb">Elite pass-catcher. Injury-prone but league-winning when healthy. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>19</td><td class="ticker-cell">Jonathan Taylor</td><td><span class="pos-tag">RB</span></td><td>IND</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$50</td><td>RB6, 1,300 yds</td><td class="blurb">Workhorse in IND. Reliable RB1. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>20</td><td class="ticker-cell">Malik Nabers</td><td><span class="pos-tag">WR</span></td><td>NYG</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$42</td><td>WR1, 1,200 yds</td><td class="blurb">Elite talent, "down year" expected per some. QB situation key. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>21</td><td class="ticker-cell">Josh Jacobs</td><td><span class="pos-tag">RB</span></td><td>GB</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$48</td><td>RB7, 1,200 yds</td><td class="blurb">Workhorse in GB. Reliable mid-RB1. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="QB"><td>22</td><td class="ticker-cell">Jayden Daniels</td><td><span class="pos-tag">QB</span></td><td>WAS</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$50</td><td>QB4, 30 TD</td><td class="blurb">Rushing QB, elite ceiling. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="QB"><td>23</td><td class="ticker-cell">Jalen Hurts</td><td><span class="pos-tag">QB</span></td><td>PHI</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$50</td><td>QB5, 30 TD</td><td class="blurb">Tush Push TDs are free money. Eagles stacked. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>24</td><td class="ticker-cell">Omarion Hampton</td><td><span class="pos-tag">RB</span></td><td>LAC</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$48</td><td>Breakout, pre-injury 4.8 YPC</td><td class="blurb">UNIVERSAL #1 breakout. Pre-injury Weeks 1-5: 4.8 YPC, 33.3% missed-tackle rate. Two Pro Bowl OTs back + McDaniel OC. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>25</td><td class="ticker-cell">Brian Thomas Jr.</td><td><span class="pos-tag">WR</span></td><td>JAX</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$40</td><td>WR1, 1,300 yds</td><td class="blurb">Year-2 breakout WR1 in JAX. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>26</td><td class="ticker-cell">Chase Brown</td><td><span class="pos-tag">RB</span></td><td>CIN</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$38</td><td>RB7 PPG 2025</td><td class="blurb">VALUE RB. Ranked RB12 but should be top-10. Contract year, 80-catch upside. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>27</td><td class="ticker-cell">Kenneth Walker III</td><td><span class="pos-tag">RB</span></td><td>KC</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$38</td><td>SB LX MVP</td><td class="blurb">3-yr $45M. Chiefs lead back; Bieniemy OC, downhill scheme. Mahomes ACL recovery helps run game. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="TE"><td>28</td><td class="ticker-cell">Brock Bowers</td><td><span class="pos-tag">TE</span></td><td>LV</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$45</td><td>TE1, 1,100 yds</td><td class="blurb">Big Three TE. Elite target hog. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="TE"><td>29</td><td class="ticker-cell">Trey McBride</td><td><span class="pos-tag">TE</span></td><td>ARI</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$42</td><td>TE2, 1,000 yds</td><td class="blurb">Big Three TE. Kyler Murray now throwing to him. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="TE"><td>30</td><td class="ticker-cell">Colston Loveland</td><td><span class="pos-tag">TE</span></td><td>CHI</td><td><span class="tier-badge tier-1">T1</span></td><td class="cost">$40</td><td>TE3 rookie</td><td class="blurb">Big Three TE. 46th overall ADP, late R3/R4. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>31</td><td class="ticker-cell">Tetairoa McMillan</td><td><span class="pos-tag">WR</span></td><td>CAR</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$35</td><td>WR14 ECR</td><td class="blurb">YOUR VALUE KEEPER ($27). Year-2 WR with WR1 upside in Carolina. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>32</td><td class="ticker-cell">Tee Higgins</td><td><span class="pos-tag">WR</span></td><td>CIN</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$33</td><td>WR2, 1,000 yds</td><td class="blurb">WR2 behind Chase. Durability concerns. Pass at $33 keeper. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>33</td><td class="ticker-cell">Zay Flowers</td><td><span class="pos-tag">WR</span></td><td>BAL</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$30</td><td>WR1, 1,000 yds</td><td class="blurb">Lamar's top target. Breakout candidate year 3. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>34</td><td class="ticker-cell">Garrett Wilson</td><td><span class="pos-tag">WR</span></td><td>NYJ</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$30</td><td>WR1, 1,100 yds</td><td class="blurb">Now with Justin Fields (traded to KC? — verify). Talent undeniable. <span class="conf-inferred">INF</span></td><td><span class="conf-inferred">I</span></td></tr>
+<tr data-pos="WR"><td>35</td><td class="ticker-cell">Ladd McConkey</td><td><span class="pos-tag">WR</span></td><td>LAC</td><td><span class="tier-badge tier-4">T4</span></td><td class="cost">$28</td><td>WR19 ADP</td><td class="blurb">McDaniel OC bump; 4.39 speed, YAC monster. WR19 ADP is floor, top-5 ceiling. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>36</td><td class="ticker-cell">Rome Odunze</td><td><span class="pos-tag">WR</span></td><td>CHI</td><td><span class="tier-badge tier-4">T4</span></td><td class="cost">$27</td><td>WR28 ADP</td><td class="blurb">DJ Moore traded → 80+ vacated targets. With Burden also rising. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>37</td><td class="ticker-cell">Luther Burden III</td><td><span class="pos-tag">WR</span></td><td>CHI</td><td><span class="tier-badge tier-4">T4</span></td><td class="cost">$26</td><td>WR23 ECR</td><td class="blurb">2.69 YPRR as rookie; 80 vacated targets; WR1 ceiling at WR23 cost. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>38</td><td class="ticker-cell">Christian Watson</td><td><span class="pos-tag">WR</span></td><td>GB</td><td><span class="tier-badge tier-4">T4</span></td><td class="cost">$22</td><td>Round 6 ADP</td><td class="blurb">Owns GB WR room (Doubs gone, Wicks traded); signed extension. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>39</td><td class="ticker-cell">Davante Adams</td><td><span class="pos-tag">WR</span></td><td>LAR</td><td><span class="tier-badge tier-4">T4</span></td><td class="cost">$28</td><td>WR1, 1,300 yds</td><td class="blurb">Signed LAR (free agency). Now Puka's running mate in best offense. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>40</td><td class="ticker-cell">Mike Evans</td><td><span class="pos-tag">WR</span></td><td>SF</td><td><span class="tier-badge tier-4">T4</span></td><td class="cost">$26</td><td>WR26 ECR</td><td class="blurb">3-yr $60.4M. Only 30/368/3 in 8 games (2025). TD upside, age/injury risk. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="WR"><td>41</td><td class="ticker-cell">DJ Moore</td><td><span class="pos-tag">WR</span></td><td>BUF</td><td><span class="tier-badge tier-4">T4</span></td><td class="cost">$25</td><td>WR28 ECR</td><td class="blurb">Traded to Bills for Josh Allen. Massive value — clear WR1 with elite QB. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>42</td><td class="ticker-cell">James Cook III</td><td><span class="pos-tag">RB</span></td><td>BUF</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$35</td><td>RB8, 1,100 yds</td><td class="blurb">Lead back in BUF (now with DJ Moore). Top-15 RB at near-market. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>43</td><td class="ticker-cell">Brian Robinson Jr.</td><td><span class="pos-tag">RB</span></td><td>WAS</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$18</td><td>RB2, 900 yds</td><td class="blurb">Lead back with Jayden Daniels. Safe floor. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>44</td><td class="ticker-cell">Travis Etienne Jr.</td><td><span class="pos-tag">RB</span></td><td>NO</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$25</td><td>1,107 yds, 13 TD</td><td class="blurb">YOUR CONSIDER ($19). Primary RB over Kamara. Volume locked. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="RB"><td>45</td><td class="ticker-cell">Javonte Williams</td><td><span class="pos-tag">RB</span></td><td>DAL</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$20</td><td>RB16 ADP</td><td class="blurb">"Free RB in Dallas." Anchor the RB room in a pass-heavy script. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="QB"><td>46</td><td class="ticker-cell">Justin Herbert</td><td><span class="pos-tag">QB</span></td><td>LAC</td><td><span class="tier-badge tier-2">T2</span></td><td class="cost">$28</td><td>QB8, 4,200 yds</td><td class="blurb">BEST VALUE QB. McDaniel factor + healthy OL + two Pro Bowl OTs back. "Vaults up" per Norris. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="QB"><td>47</td><td class="ticker-cell">Kyler Murray</td><td><span class="pos-tag">QB</span></td><td>MIN</td><td><span class="tier-badge tier-4">T4</span></td><td class="cost">$22</td><td>QB12 ADP</td><td class="blurb">BIG VALUE CALL. "ADP too low." Healthy, running, WRs dropped everything in 2025. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="QB"><td>48</td><td class="ticker-cell">Jaxson Dart</td><td><span class="pos-tag">QB</span></td><td>NYG</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$18</td><td>QB10, 89th ovr</td><td class="blurb">YOUR KEEPER ($8). Year-2 starter, 9 rush TDs. Konami-code floor. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="QB"><td>49</td><td class="ticker-cell">Malik Willis</td><td><span class="pos-tag">QB</span></td><td>MIA</td><td><span class="tier-badge tier-4">T4</span></td><td class="cost">$5</td><td>11th-turn punt</td><td class="blurb">Most-efficient passer since 2024 (EPA/dropback). Small sample but elite. Ultimate punt. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+<tr data-pos="TE"><td>50</td><td class="ticker-cell">George Kittle</td><td><span class="pos-tag">TE</span></td><td>SF</td><td><span class="tier-badge tier-3">T3</span></td><td class="cost">$25</td><td>TE9 ADP</td><td class="blurb">Achilles tear → TE9 discount; possible Week 1; pair with cheap bridge. Difference-maker at backup cost. <span class="conf-known">KNOWN</span></td><td><span class="conf-known">K</span></td></tr>
+  </tbody>
+</table>
+<p class="data-note">ECR tiers sourced from FantasyPros (Jul 11, 2026 Half-PPR consensus) + analyst transcripts (Harmon/Boone/Norris/Winks). "Proj $" = tier-model auction estimate (ADP→value, superflex QB ×1.3), <strong>not a live market price</strong> — refresh closer to draft. "2025 Highlight" uses sourced season stats where available; blanks indicate pre-injury/partial-season data not fully cited. Conf: K = KNOWN (sourced), I = INFERRED (verify). Garrett Wilson's 2026 QB context marked INFERRED — verify before trusting.</p>
+
+<div class="rule"></div>
+
+<!-- ============ AUCTION MARKET ============ -->
+<div class="section-title" id="auction">Auction Market — ECR vs ADP vs Projected $</div>
+<p class="section-subtitle">Repurposed from the old FantasyPros section: instead of "likely available" gaps, this shows where the market is mispriced. Players with ECR &gt; ADP (experts higher than drafters) are values; ECR &lt; ADP are fades.</p>
 
 <table class="keeper-table">
-  <thead><tr><th>Rank</th><th>Player</th><th>Pos</th><th>Best</th><th>Worst</th><th>ECR vs ADP</th><th>Notes</th></tr></thead>
+  <thead><tr><th>Player</th><th>Pos</th><th>ECR</th><th>vs ADP</th><th>Takeaway</th></tr></thead>
   <tbody>
-    <tr><td>1</td><td class="ticker-cell">Ja'Marr Chase</td><td>WR1</td><td>1</td><td>3</td><td style="color:var(--green);">+2</td><td>Consensus #1. Available at auction (keeper cost too high for Manager 6).</td></tr>
-    <tr><td>2</td><td class="ticker-cell">Bijan Robinson</td><td>RB1</td><td>2</td><td>5</td><td>0</td><td>Available at auction. Will go for $55+.</td></tr>
-    <tr style="background:var(--accent-bg);"><td>3</td><td class="ticker-cell">🏈 Puka Nacua</td><td>WR2</td><td>1</td><td>6</td><td style="color:var(--green);">+1</td><td>YOUR KEEPER. Ranked #3 overall, cost $21. Elite value.</td></tr>
-    <tr><td>4</td><td class="ticker-cell">Jaxon Smith-Njigba</td><td>WR3</td><td>3</td><td>4</td><td style="color:var(--green);">+1</td><td>Likely kept by Nick (t2). Tight consensus — everyone agrees.</td></tr>
-    <tr><td>5</td><td class="ticker-cell">Jahmyr Gibbs</td><td>RB2</td><td>2</td><td>7</td><td style="color:var(--red);">-4</td><td>Likely kept by D48reu (t3). ECR below ADP — slight overvalue.</td></tr>
-    <tr><td>6</td><td class="ticker-cell">Amon-Ra St. Brown</td><td>WR4</td><td>6</td><td>9</td><td style="color:var(--green);">+2</td><td>Available. At $53 keeper cost, you pass. Draft at auction for ~$45.</td></tr>
-    <tr><td>7</td><td class="ticker-cell">CeeDee Lamb</td><td>WR5</td><td>6</td><td>11</td><td style="color:var(--green);">+5</td><td>Available. Keeper cost $64 too expensive for Chris.</td></tr>
-    <tr><td>8</td><td class="ticker-cell">Christian McCaffrey</td><td>RB3</td><td>5</td><td>17</td><td style="color:var(--red);">-2</td><td>Available. Wide range (5-17). You pass at $53.</td></tr>
-    <tr><td>9</td><td class="ticker-cell">Justin Jefferson</td><td>WR6</td><td>6</td><td>11</td><td style="color:var(--green);">+2</td><td>Available. Keeper cost $59 too expensive for Nick.</td></tr>
-    <tr><td>10</td><td class="ticker-cell">Jonathan Taylor</td><td>RB4</td><td>7</td><td>17</td><td style="color:var(--red);">-3</td><td>Likely kept by Ok Twin (t7) at $44.</td></tr>
-    <tr><td>14</td><td class="ticker-cell">Rashee Rice</td><td>WR10</td><td>9</td><td>29</td><td style="color:var(--green);">+6</td><td>Despite legal risk, experts rank him WR10. Market not fading him.</td></tr>
-    <tr><td>17</td><td class="ticker-cell">George Pickens ⚡</td><td>WR11</td><td>14</td><td>24</td><td style="color:var(--green);">+10</td><td><strong>TRADED TO DALLAS.</strong> WR1 with Dak. ECR way above ADP — buy.</td></tr>
-    <tr><td>24</td><td class="ticker-cell">Josh Allen</td><td>QB1</td><td>25</td><td>30</td><td style="color:var(--green);">+2</td><td>Available. Top QB. Budget $50-55 in superflex.</td></tr>
-    <tr><td>28</td><td class="ticker-cell">Lamar Jackson</td><td>QB2</td><td>27</td><td>41</td><td style="color:var(--green);">+17</td><td>ECR massively above ADP. Experts love Lamar relative to drafters.</td></tr>
+    <tr><td class="ticker-cell">Lamar Jackson</td><td>QB</td><td>QB2</td><td style="color:var(--green);">+17</td><td class="blurb">Experts love Lamar far above drafters. Target aggressively. <span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Omarion Hampton</td><td>RB</td><td>RB9</td><td style="color:var(--green);">+value</td><td class="blurb">Universal breakout; ADP hasn't caught up to the McDaniel bump. <span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">George Pickens</td><td>WR</td><td>WR11</td><td style="color:var(--green);">+10</td><td class="blurb">Traded to Dallas → WR1. ECR way above ADP. Buy. <span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Luther Burden III</td><td>WR</td><td>WR23</td><td style="color:var(--green);">WR1 ceil</td><td class="blurb">80 vacated targets; elite metrics. Massive ADP arbitrage. <span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Justin Herbert</td><td>QB</td><td>QB8</td><td style="color:var(--green);">+value</td><td class="blurb">Erickson has him QB6; "rather wait and get him late." <span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Jahmyr Gibbs</td><td>RB</td><td>RB2</td><td style="color:var(--red);">-4</td><td class="blurb">ECR below ADP — slight overvalue. Still elite; don't reach. <span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Christian McCaffrey</td><td>RB</td><td>RB3</td><td style="color:var(--red);">-2</td><td class="blurb">Wide range (5-17). Age/workload risk. Pass at $53. <span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Rashee Rice</td><td>WR</td><td>WR10</td><td style="color:var(--green);">+6</td><td class="blurb">Investigation CLOSED, no discipline. Market hasn't fully recovered. Upside. <span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">TreVeyon Henderson</td><td>RB</td><td>RB24→33</td><td style="color:var(--red);">fade</td><td class="blurb">Boone fade: two outlier games inflated his PPG. Hope/hype. <span class="conf-known">KNOWN</span></td></tr>
+    <tr><td class="ticker-cell">Courtland Sutton</td><td>WR</td><td>WR fade</td><td style="color:var(--red);">fade</td><td class="blurb">Age 30 + Waddle arrival in DEN. Norris/Winks fading hard. <span class="conf-known">KNOWN</span></td></tr>
   </tbody>
 </table>
 
-<div class="key-insight"><strong>🔑 Key Changes Since Stale Data:</strong> George Pickens traded to Dallas — WR1 upgrade. Kenneth Walker to Kansas City — RB1 ceiling. Omarion Hampton to Chargers — rookie with clear path. Tetairoa McMillan to Panthers — Bryce Young's new WR1. These are all post-free-agency updates not reflected in earlier analysis.</div>
+<div class="rule"></div>
 
-<div class="section-title" id="draft-kit">Draft Kit — Cheat Sheet</div>
-<p class="section-subtitle">Everything you need on draft day in one page. Print this.</p>
+<!-- ============ POSITIONAL SCARCITY ============ -->
+<div class="section-title" id="scarcity">Positional Scarcity Map — Fleshed Out</div>
+<p class="section-subtitle">How the ~20 keeper slots (2 per team) reshape the draft pool. Recomputed with 2026 tiers. In superflex, QB is the scarhest resource by a wide margin.</p>
 
-<div class="neo-card-inset" style="padding:24px;">
-  <div class="sec-label" style="color:var(--accent);">Your Auction Budget: $171 (after keeping Puka $21 + Kyren $21)</div>
-  
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px;">
-    <div class="neo-card" style="padding:16px;">
-      <div class="sec-label" style="color:var(--green);">Must-Draft</div>
-      <ul style="font-size:11px;color:var(--text-dim);line-height:1.8;padding-left:12px;">
-        <li><strong>1 elite QB</strong> — Allen/Lamar/Hurts/Burrow tier. Budget $45-55. Do not leave draft without one.</li>
-        <li><strong>1 more starting QB</strong> — superflex requires 2. Target Baker/Geno/Dart tier at $5-15.</li>
-        <li><strong>2 more WRs</strong> — fill out WR2/WR3 behind Puka. Target $10-25 range.</li>
-        <li><strong>1 more RB</strong> — behind Kyren. Mid-round RB2 at $10-20.</li>
-      </ul>
-    </div>
-    <div class="neo-card" style="padding:16px;">
-      <div class="sec-label" style="color:var(--red);">Do Not Draft (at ADP)</div>
-      <ul style="font-size:11px;color:var(--text-dim);line-height:1.8;padding-left:12px;">
-        <li><strong>CMC</strong> — age 30, workload being reduced. Someone else will overpay.</li>
-        <li><strong>Saquon Barkley</strong> — coming off 400+ touches. Regression candidate.</li>
-        <li><strong>Any TE before round 8</strong> — position is deep. Wait.</li>
-        <li><strong>Any DEF before last 2 rounds</strong> — stream weekly.</li>
-      </ul>
-    </div>
-  </div>
+<table class="keeper-table">
+  <thead><tr><th>Position</th><th>Status</th><th>Draft Pool</th><th>Kept</th><th>Available</th><th>Needed</th><th>Surplus</th><th>Strategy</th></tr></thead>
+  <tbody>
+<tr><td class="ticker-cell">QB</td><td>⚠️ CRITICAL</td><td>32+</td><td>~10</td><td>~22</td><td>20</td><td style="color:var(--red);">-3 to -8</td><td class="blurb">Only Allen goes early; value in Herbert (R7), Kyler (ADP too low), Willis (11th turn). Draft QB1 by Rd 3 or start bottom-5 in superflex. <span class="conf-known">KNOWN</span></td></tr>
+<tr><td class="ticker-cell">RB</td><td>✅ Deep</td><td>55+</td><td>~8</td><td>~47</td><td>20</td><td style="color:var(--green);">+27</td><td class="blurb">Elite backs (Bijan/Gibbs/Jeanty/Hampton) kept, but breakouts (Chase Brown, KW3, Etienne) + late (Sampson, Blue, Allgeier) abundant. Wait after anchors. <span class="conf-known">KNOWN</span></td></tr>
+<tr><td class="ticker-cell">WR</td><td>✅ Deep</td><td>60+</td><td>~6</td><td>~54</td><td>30</td><td style="color:var(--green);">+24</td><td class="blurb">Deepest position. Year-2 breakouts (Burden, McMillan, BTJ) + vets. Starters in R8-12. WR1 (Puka) kept = your anchor. <span class="conf-known">KNOWN</span></td></tr>
+<tr><td class="ticker-cell">TE</td><td>⚡ Tight</td><td>20</td><td>~2</td><td>~18</td><td>10</td><td style="color:var(--green);">+8</td><td class="blurb">Big Three (Bowers/McBride/Loveland) kept/tiered. After top tier, cliff. Kittle (injury discount) + late (Kraft, Kincaid, Likely) viable. <span class="conf-known">KNOWN</span></td></tr>
+<tr><td class="ticker-cell">DEF</td><td>⚠️ Thin</td><td>10</td><td>~1</td><td>~9</td><td>10</td><td style="color:var(--red);">-1</td><td class="blurb">Stream weekly. Do not draft before last 2 rounds. <span class="conf-known">KNOWN</span></td></tr>
+  </tbody>
+</table>
 
-  <div style="margin-top:24px;">
-    <div class="sec-label">Auction Budget Template — $171</div>
-    <table class="keeper-table">
-      <thead><tr><th>Slot</th><th>Position</th><th>Budget</th><th>Targets</th></tr></thead>
-      <tbody>
-        <tr><td>QB1</td><td>QB</td><td class="cost">$50</td><td>Allen, Lamar, Hurts, Burrow</td></tr>
-        <tr><td>WR1</td><td>WR</td><td class="cost keep">KEPT</td><td>Puka Nacua — locked in</td></tr>
-        <tr><td>WR2</td><td>WR</td><td class="cost">$18</td><td>DJ Moore, DeVonta Smith, Zay Flowers, Pickens</td></tr>
-        <tr><td>RB1</td><td>RB</td><td class="cost keep">KEPT</td><td>Kyren Williams — locked in</td></tr>
-        <tr><td>TE</td><td>TE</td><td class="cost">$5</td><td>Ferguson, Pitts, Kmet — wait for value</td></tr>
-        <tr><td>WRT1</td><td>WR/RB</td><td class="cost">$15</td><td>Best WR or RB available at value price</td></tr>
-        <tr><td>WRT2</td><td>WR/RB</td><td class="cost">$12</td><td>High-upside RB or sophomore WR</td></tr>
-        <tr><td>QWRT</td><td>QB</td><td class="cost">$10</td><td>Baker, Geno, Dart — superflex QB2</td></tr>
-        <tr><td>BN1-BN5</td><td>Bench</td><td class="cost">$21</td><td>$1-5 fliers: rookie RBs, backup QBs, handcuffs</td></tr>
-        <tr><td>DEF</td><td>DEF</td><td class="cost">$2</td><td>Stream. Do not spend more than $2.</td></tr>
-        <tr style="font-weight:700;"><td colspan="2">TOTAL</td><td class="cost" style="color:var(--accent);">$171</td><td>$158 auction + $42 kept = $200 total</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<div class="key-insight"><strong>🔑 Draft Strategy:</strong> QB is the scarcest — with Dart kept ($8), you need a QB1 at auction (Herbert/Wilson-tier value) but have flexibility. WR deep (Puka anchors). RB has breakout value late. TE: grab Kittle at discount or wait for late gems. DEF last. $171 to spend.</div>
 
+<div class="rule"></div>
+
+<!-- ============ DRAFT BOARD ============ -->
 <div class="section-title" id="draft-board">Draft Board — 2026 Auction Targets</div>
-<p class="section-subtitle">Round-by-round targets for a superflex auction, accounting for keeper depletion. Based on 2025 Cinco League data and early 2026 ADP.</p>
+<p class="section-subtitle">Tiered targets for a superflex auction, accounting for keeper depletion. Built for the Puka + Dart decision ($171 remaining).</p>
 
 <div class="neo-card-inset" style="margin-bottom:20px;">
-  <div class="sec-label" style="color:var(--accent);">Draft Strategy — Superflex Auction</div>
+  <div class="sec-label" style="color:var(--accent);">Draft Strategy — Superflex Auction ($171)</div>
   <p style="font-size:12px;color:var(--text-dim);line-height:1.7;">
-    <strong>With Puka ($21) and Kyren ($21) kept, you have $158 for 13 roster spots. <strong>Note:</strong> Kyren workload trended down to ~68% snaps late in 2025 with Corum taking more work. He is a high-end RB2, not a locked-in RB1. Factor this into your draft plan.</strong> That is roughly $12/player average. Your priorities:<br><br>
-    <strong style="color:var(--green);">1. Spend big on one elite QB ($45-55).</strong> In superflex, you need a top-5 QB. Josh Allen, Lamar Jackson, and Jalen Hurts will all go for $48-55. Budget $50 for your QB1 — do not skimp here.<br>
-    <strong style="color:var(--green);">2. Fill out WR2/WR3 with mid-tier targets ($10-20 each).</strong> You already have Puka as WR1. Target two more WRs in the $10-20 range — players like DJ Moore, DeVonta Smith, or sophomore breakouts.<br>
-    <strong style="color:var(--green);">3. Draft a second QB late ($5-10).</strong> A QB2 like Geno Smith, Baker Mayfield, or a rookie like Jaxson Dart gives you superflex flexibility without breaking the bank.<br>
-    <strong style="color:var(--green);">4. Dollar-menu RBs and TEs ($1-5 each).</strong> Fill your bench with high-upside backups, rookie stashes, and a cheap TE. You do not need to spend big at TE in a non-TE-premium league.
+    <strong style="color:var(--green);">1. Spend on one elite QB1 ($45-55).</strong> Herbert (R7 value) or Wilson-tier. In superflex you need a top-5 QB. Don't skimp.<br>
+    <strong style="color:var(--green);">2. Fill WR2/WR3 with mid-tier ($10-25).</strong> Puka is WR1. Target McConkey, Odunze, Burden, Watson in the $10-25 range.<br>
+    <strong style="color:var(--green);">3. Draft a second QB late ($5-10).</strong> Baker, Geno, Willis — superflex flexibility without breaking bank.<br>
+    <strong style="color:var(--green);">4. Dollar-menu RBs/TEs ($1-5).</strong> Hampton (if falls), Chase Brown, Sampson, Kittle (discount), Kraft. Non-TE-premium = wait at TE.
   </p>
 </div>
 
 <div class="neo-card" style="margin-bottom:16px;">
   <div class="sec-label">Tier 1 — Elite QB ($45-55)</div>
-  <table class="keeper-table"><thead><tr><th>Player</th><th>2025 $</th><th>Est. 2026 $</th><th>Notes</th></tr></thead><tbody>
-    <tr><td class="ticker-cell">Josh Allen</td><td class="cost">$49</td><td class="cost keep">$50-55</td><td>QB1 overall. Rushing floor + elite passing. Worth every dollar in superflex.</td></tr>
-    <tr><td class="ticker-cell">Lamar Jackson</td><td class="cost">$51</td><td class="cost keep">$48-53</td><td>Rushing upside unmatched. Health is the only risk.</td></tr>
-    <tr><td class="ticker-cell">Jalen Hurts</td><td class="cost">$48</td><td class="cost keep">$45-52</td><td>Tush Push touchdowns are free money. Eagles offense is stacked.</td></tr>
-    <tr><td class="ticker-cell">Joe Burrow</td><td class="cost">$49</td><td class="cost keep">$42-48</td><td>May be kept (Team 4). Elite when healthy. Chase+Higgins stack available.</td></tr>
+  <table class="keeper-table"><thead><tr><th>Player</th><th>Keep $</th><th>Proj $</th><th>Notes</th></tr></thead><tbody>
+    <tr><td class="ticker-cell">Josh Allen</td><td class="cost">$49</td><td class="cost keep">$50-55</td><td>QB1 overall. Rushing floor. Worth every dollar. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Lamar Jackson</td><td class="cost">$51</td><td class="cost keep">$48-53</td><td>Rushing upside unmatched. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Joe Burrow</td><td class="cost">$49</td><td class="cost keep">$42-48</td><td>May be kept (Team 4 alt). Elite when healthy. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Justin Herbert</td><td class="cost">N/A</td><td class="cost keep">$28-35</td><td>BEST VALUE. McDaniel + healthy OL. <span class="conf-known">K</span></td></tr>
   </tbody></table>
 </div>
 
 <div class="neo-card" style="margin-bottom:16px;">
-  <div class="sec-label">Tier 2 — WR Targets ($10-25)</div>
-  <table class="keeper-table"><thead><tr><th>Player</th><th>2025 $</th><th>Est. 2026 $</th><th>Notes</th></tr></thead><tbody>
-    <tr><td class="ticker-cell">DJ Moore</td><td class="cost">N/A</td><td class="cost keep">$15-20</td><td>WR1 in Chicago with Caleb Williams. Volume is guaranteed.</td></tr>
-    <tr><td class="ticker-cell">DeVonta Smith</td><td class="cost">N/A</td><td class="cost keep">$12-18</td><td>Elite WR2 on his own team. AJ Brown draws top coverage.</td></tr>
-    <tr><td class="ticker-cell">Zay Flowers</td><td class="cost">N/A</td><td class="cost keep">$10-16</td><td>Lamar top target. Breakout candidate in year 3.</td></tr>
-    <tr><td class="ticker-cell">George Pickens</td><td class="cost">N/A</td><td class="cost keep">$8-14</td><td>Volatile but the talent is undeniable. Now in Dallas with Dak Prescott. WR1 role. Steelers QB risk is gone.</td></tr>
-    <tr><td class="ticker-cell">Rashee Rice</td><td class="cost">N/A</td><td class="cost keep">$12-18</td><td>Ranked WR10 by FantasyPros despite legal risk. Market not as worried as expected. WR1 upside if he plays.</td></tr>
+  <div class="sec-label">Tier 2 — WR Targets ($10-28)</div>
+  <table class="keeper-table"><thead><tr><th>Player</th><th>2025 $</th><th>Proj $</th><th>Notes</th></tr></thead><tbody>
+    <tr><td class="ticker-cell">Ladd McConkey</td><td class="cost">N/A</td><td class="cost keep">$15-22</td><td>McDaniel bump, YAC monster. WR19 floor. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Rome Odunze</td><td class="cost">N/A</td><td class="cost keep">$12-18</td><td>DJ Moore vacated 80 targets. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Luther Burden III</td><td class="cost">N/A</td><td class="cost keep">$10-16</td><td>WR1 ceiling at WR23 cost. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Christian Watson</td><td class="cost">N/A</td><td class="cost keep">$8-14</td><td>Owns GB WR room, Round 6. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">George Pickens</td><td class="cost">N/A</td><td class="cost keep">$12-18</td><td>WR1 in DAL, Dak. ECR above ADP. <span class="conf-known">K</span></td></tr>
   </tbody></table>
 </div>
 
 <div class="neo-card" style="margin-bottom:16px;">
-  <div class="sec-label">Tier 3 — Late QB2 / Value ($5-12)</div>
-  <table class="keeper-table"><thead><tr><th>Player</th><th>2025 $</th><th>Est. 2026 $</th><th>Notes</th></tr></thead><tbody>
-    <tr><td class="ticker-cell">Baker Mayfield</td><td class="cost">N/A</td><td class="cost keep">$5-10</td><td>QB9 in 2025. Evans+Godwin returning. Steal at this price.</td></tr>
-    <tr><td class="ticker-cell">Geno Smith</td><td class="cost">N/A</td><td class="cost keep">$3-7</td><td>Solid QB2. JSN breakout gives him upside.</td></tr>
-    <tr><td class="ticker-cell">Jaxson Dart</td><td class="cost">$1</td><td class="cost keep">$1-3</td><td>Giants starter. Top-10 fantasy QB per Matthew Berry. $8 keeper cost is absurd value in superflex.</td></tr>
-    <tr><td class="ticker-cell">Bryce Young</td><td class="cost">N/A</td><td class="cost keep">$3-7</td><td>Showed life late in 2025. Improved weapons. Deep sleeper.</td></tr>
+  <div class="sec-label">Tier 3 — RB Value ($1-25)</div>
+  <table class="keeper-table"><thead><tr><th>Player</th><th>2025 $</th><th>Proj $</th><th>Notes</th></tr></thead><tbody>
+    <tr><td class="ticker-cell">Omarion Hampton</td><td class="cost">$23</td><td class="cost keep">$30-40</td><td>#1 breakout. If he falls to you, pounce. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Chase Brown</td><td class="cost">N/A</td><td class="cost keep">$15-22</td><td>Value RB, 80-catch upside. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Kenneth Walker III</td><td class="cost">$21</td><td class="cost keep">$25-32</td><td>KC lead back, SB MVP. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Dylan Sampson</td><td class="cost">N/A</td><td class="cost keep">$1-3</td><td>CLE pass-catching RB2, ADP 173. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Jaydon Blue</td><td class="cost">N/A</td><td class="cost keep">$1-3</td><td>DAL camp buzz rising. ADP 205. <span class="conf-known">K</span></td></tr>
   </tbody></table>
 </div>
 
 <div class="neo-card" style="margin-bottom:16px;">
-  <div class="sec-label">Tier 4 — Dollar Menu ($1-5) — Bench Fliers</div>
-  <table class="keeper-table"><thead><tr><th>Player</th><th>Why</th></tr></thead><tbody>
-    <tr><td class="ticker-cell">Rookie/2nd-Year RBs (late-round) — Rookies from 2026 NFL Draft not yet reflected</td><td>Every year, a late-round RB becomes a starter by Week 6. Draft 2-3 for $1 each.</td></tr>
-    <tr><td class="ticker-cell">Backup QBs on good offenses</td><td>In superflex, any QB who might start is worth a $1 flier. Think Jimmy G types.</td></tr>
-    <tr><td class="ticker-cell">Sophomore WRs with new QBs</td><td>Players like Keon Coleman, Xavier Worthy — year 2 leap candidates at minimum cost.</td></tr>
-    <tr><td class="ticker-cell">Post-hype sleepers</td><td>Players who disappointed in 2025 but have talent and a new situation. Kyle Pitts, anyone?</td></tr>
+  <div class="sec-label">Tier 4 — Late QB2 / TE Gems ($1-10)</div>
+  <table class="keeper-table"><thead><tr><th>Player</th><th>2025 $</th><th>Proj $</th><th>Notes</th></tr></thead><tbody>
+    <tr><td class="ticker-cell">Malik Willis</td><td class="cost">N/A</td><td class="cost keep">$1-3</td><td>11th-turn superflex punt. Elite efficiency. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">George Kittle</td><td class="cost">N/A</td><td class="cost keep">$8-12</td><td>Achilles discount at TE9. Difference-maker. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Tucker Kraft</td><td class="cost">N/A</td><td class="cost keep">$3-6</td><td>"Best YAC TE." Late-round. <span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Dalton Kincaid</td><td class="cost">N/A</td><td class="cost keep">$3-6</td><td>TE13 ADP, TE9 rank. Knee discount. <span class="conf-known">K</span></td></tr>
   </tbody></table>
 </div>
-
 
 <div class="rule"></div>
 
-<div class="section-title" id="sleepers">Sleepers & Late-Round Value — 2026</div>
-<p class="section-subtitle">Players being drafted well below their ceiling. Target these in the middle-to-late rounds of your auction.</p>
+<!-- ============ SLEEPERS & DIAMONDS ============ -->
+<div class="section-title" id="sleepers">Sleepers & Diamonds — 2026</div>
+<p class="section-subtitle">Puka-style late/cheap targets: players available cheap with a concrete breakout setup. Sourced via Exa + Reddit + analyst transcripts. See <code>research_ff_diamonds.md</code> for the full matrix.</p>
 
 <div class="neo-card" style="margin-bottom:16px;">
-  <div class="sec-label" style="color:var(--green);">QB Sleepers</div>
-  <table class="keeper-table"><thead><tr><th>Player</th><th>Why</th><th>Risk</th></tr></thead><tbody>
-    <tr><td class="ticker-cell">Jaxson Dart</td><td>Sophomore starter for the Giants. Matthew Berry top-10 QB. Rushing ability gives Konami-code floor. At $8 keeper cost, this is league-winning value in superflex.</td><td>Already the unquestioned starter. Risk is sophomore regression, not playing time.</td></tr>
-    <tr><td class="ticker-cell">Bryce Young</td><td>Finished 2025 strong after benching. Improved offensive line and weapons. The talent that made him #1 overall is still there.</td><td>Small frame. One bad stretch could bench him again.</td></tr>
-    <tr><td class="ticker-cell">Cam Ward</td><td>#1 overall pick pedigree. Team will give him every chance to start. Rushing upside in superflex.</td><td>Growing pains. Bad team context possible.</td></tr>
+  <div class="sec-label" style="color:var(--green);">RB Diamonds</div>
+  <table class="keeper-table"><thead><tr><th>Player</th><th>Team</th><th>Why</th><th>Conf</th></tr></thead><tbody>
+    <tr><td class="ticker-cell">Dylan Sampson</td><td>CLE</td><td class="blurb">Clear RB2, better pass-catcher than Judkins; pass-heavy script post-Garrett trade. ADP 173. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Jaydon Blue</td><td>DAL</td><td class="blurb">Camp buzz rising pre-training-camp. ADP 205. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Tyler Allgeier</td><td>ARI</td><td class="blurb">Signed ARI; intrudes on Love rookie touches; elite juke rate. ADP 160. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
   </tbody></table>
 </div>
 
 <div class="neo-card" style="margin-bottom:16px;">
-  <div class="sec-label" style="color:var(--green);">RB Sleepers</div>
-  <table class="keeper-table"><thead><tr><th>Player</th><th>Why</th><th>Risk</th></tr></thead><tbody>
-    <tr><td class="ticker-cell">Travis Etienne Jr.</td><td>Signed with Saints on 4-year, $52M deal ($24M guaranteed). Clear RB1 in New Orleans. 1,399 yards and 13 TDs in 2025. Volume is guaranteed — the question is Saints offensive efficiency.</td><td>Saints offense is a question mark — aging QB, thin WR corps. Volume will be there but ceiling depends on overall offensive output.</td></tr>
-    <tr><td class="ticker-cell">Chase Brown</td><td>Took over the Bengals backfield late in 2025. Pass-catching ability gives him PPR floor. Inexpensive.</td><td>Bengals could draft or sign competition.</td></tr>
-    <tr><td class="ticker-cell">Braelon Allen (2nd year)</td><td>Power back entering year 2 with the Jets. Limited role behind Breece Hall in 2025 but showed flashes. Could push for more work in 2026. $1 flier.</td><td>Rookie RBs are lottery tickets. Most do not hit.</td></tr>
+  <div class="sec-label" style="color:var(--green);">WR Diamonds</div>
+  <table class="keeper-table"><thead><tr><th>Player</th><th>Team</th><th>Why</th><th>Conf</th></tr></thead><tbody>
+    <tr><td class="ticker-cell">Luther Burden III</td><td>CHI</td><td class="blurb">2.69 YPRR rookie; 80 vacated targets; WR1 ceiling at WR23. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Christian Watson</td><td>GB</td><td class="blurb">Owns GB WR room; Round 6 cost. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Alec Pierce</td><td>IND</td><td class="blurb">47 catches, 1,003 yds, 6 TDs, 20.1 aDOT; expanded role. Deep sleeper. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Denzel Boston / KC Concepcion</td><td>CLE</td><td class="blurb">Rookies projected to overtake Jeudy by W18; camp-buzz duo. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
   </tbody></table>
 </div>
 
 <div class="neo-card" style="margin-bottom:16px;">
-  <div class="sec-label" style="color:var(--green);">WR Sleepers</div>
-  <table class="keeper-table"><thead><tr><th>Player</th><th>Why</th><th>Risk</th></tr></thead><tbody>
-    <tr><td class="ticker-cell">Rashee Rice</td><td>WR1 talent when he plays. Legal situation is depressing his ADP. If he is cleared or gets a short suspension, this is a league-winner at the price.</td><td>Legal uncertainty. Could face significant suspension.</td></tr>
-    <tr><td class="ticker-cell">Keon Coleman</td><td>Year 2 leap candidate. Josh Allen needs a WR1 and Coleman has the profile. Late-season flashes in 2025.</td><td>Raw route runner. May take another year to develop.</td></tr>
-    <tr><td class="ticker-cell">Xavier Worthy</td><td>Game-breaking speed. Chiefs offense is a cheat code. If his role expands in year 2, he could be Tyreek-lite.</td><td>Small frame. Boom-bust weekly profile.</td></tr>
-    <tr><td class="ticker-cell">Jalen McMillan</td><td>Late-season breakout in 2025 with Godwin out. If Godwin leaves in free agency, McMillan is the WR2 in a pass-heavy offense.</td><td>Dependent on Godwin departure and Mayfield repeating 2025.</td></tr>
+  <div class="sec-label" style="color:var(--green);">QB / TE Diamonds</div>
+  <table class="keeper-table"><thead><tr><th>Player</th><th>Team</th><th>Why</th><th>Conf</th></tr></thead><tbody>
+    <tr><td class="ticker-cell">Malik Willis</td><td>MIA</td><td class="blurb">Most-efficient passer since 2024 (EPA/dropback). 11th-turn punt. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Matthew Stafford</td><td>LAR?</td><td class="blurb">Finished QB3 PPG in 2025; cheap. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">George Kittle</td><td>SF</td><td class="blurb">Achilles discount at TE9; possible Week 1. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
+    <tr><td class="ticker-cell">Tucker Kraft</td><td>GB</td><td class="blurb">"Best YAC TE in NFL"; late-round. <span class="conf-known">K</span></td><td><span class="conf-known">K</span></td></tr>
   </tbody></table>
 </div>
 
-<div class="neo-card" style="margin-bottom:16px;">
-  <div class="sec-label" style="color:var(--green);">TE Sleepers</div>
-  <table class="keeper-table"><thead><tr><th>Player</th><th>Why</th><th>Risk</th></tr></thead><tbody>
-    <tr><td class="ticker-cell">Kyle Pitts</td><td>The ultimate post-hype sleeper. Still only 25. New QB in 2026 could unlock the talent. At his likely $3-7 price, the upside is worth it.</td><td>We have been saying this for 4 years. It may never happen.</td></tr>
-    <tr><td class="ticker-cell">Jake Ferguson</td><td>Dak Prescott favorite target. Volume is there. Touchdown regression likely to improve.</td><td>Cowboys offense was inconsistent in 2025.</td></tr>
-  </tbody></table>
-</div>
+<div class="key-insight"><strong>🔑 Reddit signal (r/fantasyfootball):</strong> Bo Nix has "plentiful red flags" — don't overrate his 2025. Jaxson Dart is year-2 (not rookie) with 400 rush yds. Herbert had "horrific luck" with the Chargers (OL/WR injuries) — supports the Herbert value case. Community is a useful contrarian check, not gospel.</div>
 
-<div class="neo-card" style="text-align:center;padding:40px;">
-  <div class="sec-label">🏈 More sections coming</div>
-  <p style="font-size:13px;color:var(--text-dim);">Draft Board • Sleepers & Late Value • Strength of Schedule • Injury Watch • Weekly Waiver Wire (in-season)</p>
-</div>
+<div class="rule"></div>
 
-</main>
+<!-- ============ IN-SEASON ============ -->
+<div class="section-title" id="inseason">In-Season — Separate Living Doc</div>
+<p class="section-subtitle">Per your call, in-season management (weekly waiver wire, matchup projections, depth-chart monitoring) will live in a <strong>separate</strong> document — kept clean from this pre-draft refresh. This doc is the draft toolkit; the in-season doc is the weekly ops center.</p>
+
+<div class="neo-card-inset">
+  <div class="sec-label" style="color:var(--accent);">Planned In-Season Doc (not yet built)</div>
+  <ul style="font-size:12px;color:var(--text-dim);line-height:1.9;padding-left:16px;">
+    <li><strong>Weekly Waiver Wire Report</strong> — top 5 adds per position, sourced from analyst feeds + your X list</li>
+    <li><strong>Matchup Projections</strong> — start/sit with confidence tags</li>
+    <li><strong>Depth Chart Monitor</strong> — injury/role changes for your rostered players (Puka, Dart, Kyren, Etienne)</li>
+    <li><strong>Trade Evaluator</strong> — surplus-based trade calculator using the same framework</li>
+  </ul>
+  <p style="font-size:11px;color:var(--text-quiet);font-style:italic;margin-top:12px;">Build triggered closer to Week 1 (draft ~ late Aug / early Sep 2026). This pre-draft doc stays frozen as your draft reference.</p>
+</div>
 
 <script>
+// Mobile nav clone
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.getElementById('nav-overlay').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open');}});
 var c=document.getElementById('toc-sidebar').cloneNode(true);c.removeAttribute('id');document.getElementById('nav-overlay').appendChild(c);
+
+// ---- Top 50 sortable ----
+var sortState={};
+function sortTable(col){
+  var tbl=document.getElementById('top50');
+  var tbody=tbl.tBodies[0];
+  var rows=Array.prototype.slice.call(tbody.rows);
+  var asc=sortState[col]!==1;
+  sortState[col]=asc?1:-1;
+  rows.sort(function(a,b){
+    var av=a.cells[col].innerText.trim(), bv=b.cells[col].innerText.trim();
+    var an=parseFloat(av.replace(/[^0-9.\-]/g,'')), bn=parseFloat(bv.replace(/[^0-9.\-]/g,''));
+    if(!isNaN(an)&&!isNaN(bn)&&av!==''&&bv!==''){ return (an-bn)*(asc?1:-1); }
+    return av.localeCompare(bv)*(asc?1:-1);
+  });
+  rows.forEach(function(r){tbody.appendChild(r);});
+}
+
+// ---- Position filter ----
+function filterPos(pos,btn){
+  var rows=document.querySelectorAll('#top50 tbody tr');
+  rows.forEach(function(r){ r.style.display=(pos==='ALL'||r.dataset.pos===pos)?'':'none'; });
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+}
+
+// ---- CSV export ----
+function exportCSV(){
+  var tbl=document.getElementById('top50');
+  var rows=Array.prototype.slice.call(tbl.querySelectorAll('tr'));
+  var csv=rows.map(function(r){
+    return Array.prototype.slice.call(r.querySelectorAll('th,td')).map(function(c){
+      var t=c.innerText.replace(/"/g,'""').replace(/\s+/g,' ').trim();
+      return '"'+t+'"';
+    }).join(',');
+  }).join('\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='cinco_top50_2026.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+}
 </script>
 
 </body>
