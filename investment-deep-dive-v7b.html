@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concentrated Basket — Deep-Dive | AI & Humanoid Picks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  html,body { height: 100%; margin: 0; padding: 0; }
+  body { min-height: 100vh; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ede8e0; --bg-alt: #e6e0d8; --surface: #f5f2ed; --surface-alt: #faf8f5;
+    --text: #1a1816; --text-dim: #5c5852; --text-quiet: #8c8882;
+    --border: #d8d2c8; --border-strong: #b8b0a4;
+    --shadow-sm-ext: 2px 2px 5px rgba(0,0,0,0.06), -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-md-ext: 4px 4px 10px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.9);
+    --shadow-lg-ext: 8px 8px 20px rgba(0,0,0,0.08), -8px -8px 20px rgba(255,255,255,0.95);
+    --shadow-sm-inset: inset 2px 2px 5px rgba(0,0,0,0.06), inset -2px -2px 5px rgba(255,255,255,0.8);
+    --shadow-pressed: inset 3px 3px 7px rgba(0,0,0,0.10), inset -2px -2px 5px rgba(255,255,255,0.6);
+    --accent: #26609c; --accent-light: #4d8ccc; --accent-bg: rgba(38,96,156,0.08);
+    --green: #277a3e; --green-bg: rgba(39,122,62,0.10);
+    --red: #a33636; --red-bg: rgba(163,54,54,0.10);
+    --amber: #996e2c; --amber-bg: rgba(153,110,44,0.10);
+    --radius-sm: 8px; --radius: 14px; --radius-lg: 20px; --radius-xl: 28px;
+    --toc-width: 230px;
+  }
+  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .skip-link { position: absolute; top: -100px; left: 12px; z-index: 300; background: var(--accent); color: #fff; padding: 8px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; text-decoration: none; transition: top .2s; }
+  .skip-link:focus { top: 12px; }
+  .toc-sidebar { position: fixed; top: 0; left: 0; z-index: 200; width: var(--toc-width); height: 100vh; background: var(--surface-alt); box-shadow: var(--shadow-sm-inset); overflow-y: auto; padding: 20px 0 40px; }
+  .toc-sidebar::-webkit-scrollbar { width: 4px; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+  .toc-brand { padding: 0 16px 14px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+  .toc-brand .b-title { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
+  .toc-brand .b-sub { font-size: 11px; color: var(--text-quiet); margin-top: 4px; }
+  .toc-section-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); padding: 10px 14px 4px; display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+  .toc-section-label:hover { color: var(--text); }
+  .toc-section-label .toc-arrow { font-size: 7px; transition: transform .2s; display: inline-block; }
+  .toc-section-label.collapsed .toc-arrow { transform: rotate(-90deg); }
+  .toc-section-group { overflow: hidden; transition: max-height .25s ease; }
+  .toc-section-group.collapsed { max-height: 0 !important; }
+  .toc-item { display: block; padding: 4px 14px 4px 18px; font-size: 11px; color: var(--text-dim); text-decoration: none; font-weight: 400; transition: all .15s; border-left: 2px solid transparent; }
+  .toc-item:hover { color: var(--text); background: var(--accent-bg); border-left-color: var(--accent); }
+  .toc-item.active { color: var(--accent); font-weight: 600; background: var(--accent-bg); border-left-color: var(--accent); }
+  main { margin-left: var(--toc-width); padding: 0 0 80px; position: relative; z-index: 1; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  .hero { background: var(--surface-alt); box-shadow: var(--shadow-sm-inset); padding: 40px 0 32px; border-bottom: 1px solid var(--border); }
+  .hero h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .hero .sub { font-size: 15px; color: var(--text-dim); max-width: 720px; }
+  .hero .stamp { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-quiet); margin-top: 12px; }
+  .hero .stamp b { color: var(--accent); }
+  .portfolio-hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 26px; }
+  .ph-card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-sm-ext); padding: 16px 18px; border-left: 3px solid var(--accent); transition: all .2s; }
+  .ph-card:hover { box-shadow: var(--shadow-md-ext); transform: translateY(-2px); }
+  .ph-card .ph-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-quiet); }
+  .ph-card .ph-value { font-size: 22px; font-weight: 700; margin-top: 4px; }
+  .ph-card .ph-note { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .sector-split { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .sector-tag { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; padding: 4px 10px; border-radius: 20px; background: var(--accent-bg); color: var(--accent); border: 1px solid rgba(38,96,156,0.2); }
+  .section-title { font-size: 13px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-quiet); margin: 44px 0 18px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .macro-card { background: var(--bg); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg-ext); padding: 28px; margin-bottom: 24px; transition: all .2s; }
+  .macro-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-2px); }
+  .macro-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .macro-card p { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-quiet); margin-bottom: 20px; text-transform: uppercase; }
+  .neo-card { background: var(--bg); border-radius: var(--radius); box-shadow: var(--shadow-md-ext); padding: 20px; transition: all .2s; }
+  .neo-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-2px); }
+  .macro-dash { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0 16px; }
+  .macro-dash-item { background: var(--bg); border-radius: var(--radius); box-shadow: var(--shadow-sm-inset); padding: 14px 10px; text-align: center; }
+  .macro-dash-item .val { font-size: 20px; font-weight: 700; letter-spacing: -0.03em; }
+  .macro-dash-item .lbl { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-quiet); margin-top: 4px; }
+  .macro-dash-item .sub { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+  .pick-card { background: var(--surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md-ext); padding: 24px 26px; margin-bottom: 26px; transition: all .25s ease; }
+  .pick-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-3px); }
+  .pick-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+  .pick-rank { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700; color: var(--accent); }
+  .pick-ticker { font-size: 20px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .conviction-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 9px; border-radius: 20px; margin-left: 10px; vertical-align: middle; }
+  .conviction-badge.strong { background: var(--green-bg); color: var(--green); }
+  .conviction-badge.buy { background: var(--accent-bg); color: var(--accent); }
+  .conviction-badge.core { background: var(--amber-bg); color: var(--amber); }
+  .conviction-badge.unchanged { background: var(--border); color: var(--text-dim); }
+  .pick-alloc { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--text-dim); white-space: nowrap; }
+  .live-price { font-variant-numeric: tabular-nums; }
+  .pick-thesis { font-size: 15px; line-height: 1.7; margin: 16px 0; }
+  .pick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  .pick-box { background: var(--surface-alt); border-radius: var(--radius); padding: 12px 14px; box-shadow: var(--shadow-sm-inset); border-left: 3px solid var(--border-strong); transition: all .2s; }
+  .pick-box:hover { box-shadow: var(--shadow-md-ext); transform: translateY(-1px); }
+  .pick-box.green { border-left-color: var(--green); background: var(--green-bg); }
+  .pick-box.red { border-left-color: var(--red); background: var(--red-bg); }
+  .pick-box.accent { border-left-color: var(--accent); background: var(--accent-bg); }
+  .pick-box h5 { font-size: 11px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; color: var(--text-dim); }
+  .pick-box p { font-size: 13px; line-height: 1.6; }
+  .risk-meter { display: flex; align-items: center; margin-top: 14px; }
+  .risk-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--border-strong); margin-right: 5px; }
+  .risk-dot.active { background: var(--red); }
+  .full-report { margin-top: 18px; border-top: 1px dashed var(--border); padding-top: 14px; }
+  .full-report summary { cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--accent); list-style: none; user-select: none; }
+  .full-report summary::-webkit-details-marker { display: none; }
+  .fr-toggle::before { content: '▸ '; }
+  .full-report[open] .fr-toggle::before { content: '▾ '; }
+  .fr-body { margin-top: 14px; padding: 18px 20px; background: var(--bg-alt); border-radius: var(--radius); box-shadow: var(--shadow-sm-inset); }
+  .fr-body h4 { font-size: 14px; font-weight: 700; margin: 18px 0 8px; color: var(--accent); }
+  .fr-body h4:first-child { margin-top: 0; }
+  .fr-body h5 { font-size: 12px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-dim); margin: 14px 0 6px; }
+  .fr-body p { font-size: 13px; line-height: 1.7; margin: 6px 0; }
+  .fr-body ul { margin: 6px 0 6px 20px; }
+  .fr-body li { font-size: 13px; line-height: 1.6; margin: 3px 0; }
+  .fr-body strong { color: var(--text); }
+  footer { margin-left: var(--toc-width); padding: 30px 28px; font-size: 12px; color: var(--text-quiet); border-top: 1px solid var(--border); }
+  .to-top { position: fixed; bottom: 24px; right: 24px; z-index: 250; width: 44px; height: 44px; border-radius: 50%; background: var(--surface); color: var(--accent); box-shadow: var(--shadow-md-ext); border: 1px solid var(--border); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .25s, transform .2s; }
+  .to-top:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-2px); }
+  .to-top.show { opacity: 1; pointer-events: auto; }
+  @media (max-width: 860px) {
+    .toc-sidebar { display: none; }
+    main, footer { margin-left: 0; }
+    .pick-grid { grid-template-columns: 1fr; }
+    .macro-dash { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 26px; }
+    .to-top { right: 16px; bottom: 16px; }
+  }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<nav class="toc-sidebar" aria-label="Document contents">
+  <div class="toc-brand">
+    <div class="b-title">CONCENTRATED BASKET</div>
+    <div class="b-sub">Concentrated Basket · July 2026</div>
+  </div>
+
+    <a href="index.html" class="toc-item" style="font-weight:600;color:var(--accent);">← Research Home</a>
+  <div class="toc-section-label collapsed" onclick="toggleGroup(this)">
+    <span class="toc-arrow">&#9662;</span> Overview
+  </div>
+  <div class="toc-section-group collapsed" style="max-height:0">
+    <a href="#intro" class="toc-item">The Big Picture</a>
+    <a href="#methodology" class="toc-item">Our Method</a>
+    <a href="#wind" class="toc-item">Wind Indicators</a>
+  </div>
+  <div class="toc-section-label collapsed" onclick="toggleGroup(this)">
+    <span class="toc-arrow">&#9662;</span> The Picks
+  </div>
+  <div class="toc-section-group collapsed" style="max-height:0">
+    <a href="#ccxi" class="toc-item">01 · CCXI → AGLT</a>
+    <a href="#sive" class="toc-item">02 · SIVE.ST</a>
+    <a href="#aaoi" class="toc-item">03 · AAOI</a>
+    <a href="#himx" class="toc-item">04 · HIMX</a>
+    <a href="#anet" class="toc-item">05 · ANET</a>
+    <a href="#aph" class="toc-item">06 · APH</a>
+  </div>
+</nav>
+<main id="main">
+  <header class="hero">
+    <div class="wrap">
+      <h1>Concentrated Basket — Deep-Dive</h1>
+      <p class="sub">Six high-conviction positions for the AI-infrastructure and humanoid-robot boom — written in plain English, with live prices, a summary card + expandable deep-dive for each, and a portfolio overview. This is the simplified edition.</p>
+      <div class="stamp">Refreshed / <b id="refresh-stamp">as of July 13, 2026</b> · 6 picks · research via Agent-Reach + Exa + earnings transcripts</div>
+      <div class="portfolio-hero">
+        <div class="ph-card"><div class="ph-label">Picks</div><div class="ph-value">6</div><div class="ph-note">4 asymmetric · 2 core</div></div>
+        <div class="ph-card"><div class="ph-label">Asymmetric Alloc</div><div class="ph-value">~32–42%</div><div class="ph-note">CCXI · SIVE · AAOI · HIMX</div></div>
+        <div class="ph-card"><div class="ph-label">Core Alloc</div><div class="ph-value">~15%</div><div class="ph-note">ANET · APH</div></div>
+        <div class="ph-card"><div class="ph-label">Avg Conviction</div><div class="ph-value">BUY</div><div class="ph-note">star: CCXI→AGLT</div></div>
+      </div>
+      <div class="sector-split">
+        <span class="sector-tag">Humanoid · CCXI→AGLT</span>
+        <span class="sector-tag">Photonics · SIVE / AAOI</span>
+        <span class="sector-tag">Display/AR · HIMX</span>
+        <span class="sector-tag">AI Networking · ANET</span>
+        <span class="sector-tag">Interconnect · APH</span>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+
+<div class="macro-card" id="intro" style="margin-top:32px;">
+  <div class="sec-label">The Big Picture</div>
+  <h3>What this basket is — and why it exists</h3>
+  <p>Think of this as a concentrated "shopping list" of six companies positioned to benefit from two big, multi-year trends: the <strong>AI data-center buildout</strong> (the servers, lasers, switches, and cables powering artificial intelligence) and the <strong>rise of humanoid robots</strong>.</p>
+  <p style="margin-top:12px;">Instead of spreading money across 50 stocks, this list bets bigger on a few names where the upside case is asymmetric — meaning the potential gain (3x–5x or more) is far larger than the likely loss if it doesn't work out. Four of the six are "asymmetric" bets; two (Arista and Amphenol) are "core" holdings — steadier compounders you hold for the long run rather than moon-shots.</p>
+  <p style="margin-top:12px;">The common thread: each company sits at a <strong>bottleneck</strong> the AI boom can't avoid. You can't build an AI data center without the lasers (Sivers, AAOI), the switches (Arista), or the connectors (Amphenol). And you can't deploy humanoid robots at scale without a company like Agility. When supply is tight at the bottleneck, the companies that own it win.</p>
+  <p style="margin-top:12px;font-size:12px;color:var(--text-dim);"><strong>How to read each card:</strong> a one-paragraph thesis, four quick boxes (Why Now / The Risk / Why Targets Look Low / Wall Street Says), a plain-English technical snapshot, and a 5-dot risk meter. Click <em>"▸ Full In-Depth Report"</em> to expand the deeper research. Prices update live on load; "as of July 2026" is the fallback.</p>
+</div>
+
+<div class="macro-card" id="wind" style="margin-top:24px;">
+  <div class="sec-label">Real-Time Wind Indicators</div>
+  <h3>Where the Money Is Flowing (July 2026)</h3>
+  <div class="macro-dash">
+    <div class="macro-dash-item"><div class="val" style="color:var(--green)">Severe</div><div class="lbl">Optical Laser Shortage</div><div class="sub">Goldman: constrained through 2027</div></div>
+    <div class="macro-dash-item"><div class="val" style="color:var(--green)">$145B</div><div class="lbl">Meta AI Capex '26</div><div class="sub">Hyperscaler spend accelerating</div></div>
+    <div class="macro-dash-item"><div class="val" style="color:var(--green)">$38B</div><div class="lbl">Humanoid TAM '35</div><div class="sub">Goldman; revised up 6x</div></div>
+    <div class="macro-dash-item"><div class="val" style="color:var(--amber)">Caution</div><div class="lbl">RSI Oversold</div><div class="sub">SIVE/AAOI near 22 (washed out)</div></div>
+  </div>
+  <p style="font-size:12px;color:var(--text-dim);margin-top:12px;"><strong>Verdict:</strong> The AI infrastructure buildout is accelerating, not slowing. The optical-device shortage (lasers + transceivers) is the tightest bottleneck through 2027 — directly favorable to Sivers and AAOI. Copper connectors (Amphenol) get an extended runway as co-packaged optics slips to 2028+. Humanoid robots are the early-stage wildcard with the largest upside. The risk: several of these names are technically oversold and could see further 15–20% shakeouts before recovering.</p>
+</div>
+
+<div class="macro-card" id="methodology" style="margin-top:32px;">
+  <div class="sec-label">Investment Methodology</div>
+  <h3>Our Playbook — Finding Asymmetric Bets</h3>
+  <p>SanDisk was under $30 a year ago and ran to ~$1,500 — a 50x return. The pattern was simple: a company <strong>essential</strong> to the AI supply chain, losing money short-term, but supplying something hyperscalers couldn't build without. The market priced it like a bankruptcy; the hyperscalers kept ordering; the stock re-rated. This basket applies that same pattern to today's market.</p>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px;">
+    <div class="neo-card" style="margin-bottom:0;padding:18px;">
+      <div class="sec-label" style="color:var(--green);">What We Look For</div>
+      <ul style="font-size:12px;color:var(--text-dim);line-height:1.8;padding-left:16px;">
+        <li>Essential to the AI supply chain — hyperscalers can't build without it</li>
+        <li>Trading cheap enough that failure is already priced in</li>
+        <li>A clear catalyst within 12–18 months that changes the math</li>
+        <li>Wall Street targets that ignore the catalyst — leaving upside</li>
+        <li>Financials that survive even if the catalyst is late — a margin of safety</li>
+      </ul>
+    </div>
+    <div class="neo-card" style="margin-bottom:0;padding:18px;">
+      <div class="sec-label" style="color:var(--red);">What We Avoid</div>
+      <ul style="font-size:12px;color:var(--text-dim);line-height:1.8;padding-left:16px;">
+        <li>Companies with no revenue floor — a thesis without financials is a lottery ticket</li>
+        <li>Stocks that already ran past all analyst targets — catalyst is priced in</li>
+        <li>Thesis depending on one binary event with no fallback</li>
+        <li>Businesses being disrupted by AI — the losers, not the beneficiaries</li>
+        <li>Anything with &lt;2 analysts and triple-digit negative margins</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:16px;font-size:12px;color:var(--text-dim);">This framework is applied systematically across the six picks — not a single-source tip. The structural shortages (optical lasers, talent, copper interconnect) are the tailwinds; oversold technicals are the entry timing.</p>
+</div>
+    <div class="section-title">The Picks</div>
+<!-- PICK 01: CCXI → AGLT -->
+<div class="pick-card" id="ccxi">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">01</div>
+      <div>
+        <div class="pick-ticker">CCXI → AGLT <span class="live-price" data-ticker="CCXI" style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$14.72</span><span class="conviction-badge strong">BUY · SPECULATIVE</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Humanoid Robots — Agility Robotics (via the CCXI SPAC)</div>
+      </div>
+    </div>
+    <div class="pick-alloc">$200–300 · 10–15%</div>
+  </div>
+  <p class="pick-thesis"><strong>Agility Robotics makes Digit, a two-legged warehouse robot that is already working paid jobs — not a science project. Digit has logged 65,000+ hours moving boxes at real customer sites (GXO, Toyota, Schaeffler, Mercado Libre). The plan is to merge Agility into a shell company (CCXI) and list it as AGLT — the first U.S. robot-maker of its kind that regular investors can buy. The bet: if humanoid robots go mainstream, this is the purest way to own that trend. Backed by Amazon, Nvidia, SoftBank, and Foxconn.</strong></p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Why Now (Catalyst)</h5><p>The merger paperwork (S-4) is expected any day. On July 9 the CEO went on CNBC and confirmed over $300M in pre-orders for the newer Digit v5 (launch targeted end of 2026). Nvidia partnered on robot safety. The stock was also added to a humanoid-robot ETF.</p></div>
+    <div class="pick-box red"><h5>The Risk</h5><p>This is early. No S-4 filed yet, and the deal must close by Dec 31, 2026 or it dies. Agility does not publish revenue and burns ~$100M+ a year. Only ~75 robots are deployed today vs a factory built for 10,000/yr. That&#x27;s 1% of capacity. SPACs (blank-check mergers) also have a bad reputation — a rival founder publicly said Agility would &#x27;be bankrupt in under 12 months.&#x27;</p></div>
+    <div class="pick-box accent"><h5>Why Targets Look Low</h5><p>Wall Street&#x27;s humanoid forecast ($38B by 2035, Goldman Sachs) has already been revised up 6x and may still be low — Morgan Stanley models $5 trillion by 2050. With 2.1M U.S. factory jobs unfilled by 2030, the labor math pushes robots faster than any spreadsheet assumes. The first analyst to cover this stock will likely re-rate it higher.</p></div>
+    <div class="pick-box"><h5>Wall Street Says</h5><p>No analyst covers CCXI/AGLT yet. Goldman Sachs is bullish on the humanoid market ($38B by 2035). The July 9 CNBC spot shows big investors are paying attention.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot (plain English)</h5><p>CCXI ran from ~$10.50 (its cash backing) to ~$20+ after the June 24 announcement, then pulled back to $14.72 (down 6 days in a row as of Jul 13). Support zone $12–14. RSI cooling from &#x27;overbought.&#x27; Too new to have a meaningful 50-day average.</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Speculative</span></div>
+  <details class="full-report">
+    <summary><span class="fr-toggle">▸ Full In-Depth Report</span></summary>
+    <div class="fr-body"><p>CCXI (currently trading at $14.72) is the SPAC vehicle merging with Agility Robotics for a post-merger AGLT ticker — the first and only U.S. publicly-traded pure-play humanoid robotics company, with Digit already generating real commercial revenue at GXO, Toyota Canada, Schaeffler, and Mercado Libre, backed by $300M+ in v5 orders, at a $2.5B pre-money valuation with massive asymmetric upside to a $38B+ TAM.</p>
+<p>---</p>
+<h4>KEY EVIDENCE</h4>
+<ul>
+<li><strong>SPAC Merger Announced June 24, 2026</strong>: Churchill Capital Corp XI (CCXI) entered definitive merger agreement with Agility Robotics. $2.5B pre-money equity value. Post-merger ticker: AGLT. Expected close: 4Q 2026. [SOURCE: SEC 8-K Filing, June 24, 2026 — ea0295484-8k425_church11.htm] <strong>KNOWN</strong></li>
+<li><strong>$620M Gross Proceeds</strong>: $420M cash-in-trust (CCXI) + $200M PIPE at $10/share led by Foxconn. $200M minimum cash condition at close. [SOURCE: SEC 8-K Filing / Investor Presentation ex99-2] <strong>KNOWN</strong></li>
+<li><strong>100% Insider Roll + 180-Day Lock-up</strong>: All existing Agility shareholders roll equity. [SOURCE: SEC 8-K / Investor Presentation] <strong>KNOWN</strong></li>
+<li><strong>Deal Deadline</strong>: December 31, 2026 — either party can terminate if deal not consummated. [SOURCE: SEC Merger Agreement ex2-1] <strong>KNOWN</strong></li>
+<li><strong>S-4 Status</strong>: Not yet filed as of July 9, 2026 SEC 425 filing (CNBC interview transcript). S-4 filing is pending; once effective, proxy/prospectus will be mailed. [SOURCE: SEC 425 Filing, July 9, 2026] <strong>KNOWN</strong></li>
+<li><strong>$300M+ Backlog</strong>: Committed multi-year orders for Digit v5 including a 3-year contract for 1,000 robots from an undisclosed customer (&quot;is not a measure of current period revenue&quot; — contingent on milestones). [SOURCE: GeekWire, June 24, 2026; CBO Daniel Diez interview July 10, 2026 via MTS Live] <strong>KNOWN</strong></li>
+<li><strong>65,000+ Operating Hours</strong>: Across 9 U.S. states in commercial facilities. [SOURCE: SEC 425 Filing / CNBC Interview Transcript, July 9, 2026] <strong>KNOWN</strong></li>
+<li><strong>GXO Logistics — First Commercial RaaS</strong>: Multi-year robots-as-a-service contract at Flowery Branch, GA warehouse. 100,000+ totes moved. Only publicly known humanoid RaaS deal. [SOURCE: Deploy.report; New Market Pitch Deployment Tracker; iCharles] <strong>KNOWN</strong></li>
+<li><strong>Amazon</strong>: Testing since October 2023 at Sumner, WA facility. Expanded to 75 units at Spanaway, WA fulfillment center (April 2026). Amazon invested via Industrial Innovation Fund (2022). No disclosed commercial RaaS agreement — Amazon characterized as &quot;multiple pilots completed.&quot; [SOURCE: GeekWire; callsphere.ai; Amazon Oct 2023 confirmation] <strong>KNOWN</strong></li>
+<li><strong>Toyota Motor Manufacturing Canada</strong>: Commercial agreement signed Feb 19, 2026 after 1-year pilot. 7–10 Digits deployed at Cambridge, ON plant for tote loading/unloading. [SOURCE: Agility Robotics press release; The Robot Report, Feb 19, 2026] <strong>KNOWN</strong></li>
+<li><strong>Schaeffler</strong>: Live factory deployment at Cheraw, SC plant since early 2025. Equity investment + purchase agreement. 8-hour daily shifts moving 25lb bearing baskets. Caged operation (separated from humans). Global 100-plant target by 2030. [SOURCE: WSJ; New Market Pitch Deployment Tracker; oregonlive.com] <strong>KNOWN</strong></li>
+<li><strong>Mercado Libre</strong>: Commercial agreement December 2025. San Antonio, TX facility with planned Latin America expansion. [SOURCE: Agility Robotics press release; New Market Pitch] <strong>KNOWN</strong></li>
+<li><strong>RoboFab Factory</strong>: 70,000 sq ft Salem, OR facility. 10,000 unit/year nameplate capacity. Currently running ~8 units per shift (~2,000/yr at single shift). 150 employees at factory, 280 total. Can expand within current facility for 3 more years. [SOURCE: oregonlive.com, Aug 2025; New Market Pitch] <strong>KNOWN</strong></li>
+<li><strong>Digit v5</strong>: December 2026 / early 2027 launch target. 50lb lift capacity (43% improvement from 35lb). Swappable hands. First &quot;cooperatively safe&quot; humanoid — designed to work without barriers alongside humans. Nvidia Halos physical AI safety system launch partner. [SOURCE: GeekWire; PEGGY JOHNSON CNBC interview; CBO Daniel Diez interview July 2026] <strong>KNOWN</strong></li>
+<li><strong>Safety Milestone</strong>: First humanoid to pass OSHA-recognized NRTL field audit (Nov 2025). [SOURCE: New Market Pitch Deployment Tracker] <strong>KNOWN</strong></li>
+<li><strong>Financials</strong>: OpEx $111M (2025) vs $71M (2024). ~$100M cash burn. Revenue not disclosed. Unprofitable. [SOURCE: GeekWire — from SEC 8-K filings] <strong>KNOWN</strong></li>
+<li><strong>Funding</strong>: ~$400M raised 2025 at $1.75–$2.12B valuation pre-SPAC. Lifetime: $180M from Amazon + others pre-2025. Total ~$580M+ pre-SPAC. [SOURCE: oregonlive.com; New Market Pitch] <strong>KNOWN</strong></li>
+<li><strong>Backers</strong>: Amazon Industrial Innovation Fund, Nvidia, SoftBank, Foxconn, Schaeffler. Nvidia selected Agility as Halos launch partner. [SOURCE: TTNews, June 24, 2026; StockSavvyShay/X] <strong>KNOWN</strong></li>
+<li><strong>CEO</strong>: Peggy Johnson (former Qualcomm EVP, Microsoft exec). Jonathan Hurst (co-founder, CTO). [SOURCE: Agility website; CNBC Interview] <strong>KNOWN</strong></li>
+<li><strong>Goldman Sachs TAM</strong>: $38B by 2035, 70% CAGR. 1.4M annual humanoid shipments by 2035. Base case: 250K units by 2030. Bull case: 1M shipments by 2031. [SOURCE: Goldman Sachs Research, Feb 2024 / July 2026] <strong>KNOWN</strong></li>
+<li><strong>MarketsandMarkets</strong>: $15.26B by 2030, 39.2% CAGR from $2.92B in 2025. [SOURCE: MarketsandMarkets/PRNewswire, April 2025] <strong>KNOWN</strong></li>
+<li><strong>Global shipments</strong>: ~16,000 humanoid units in 2025 (up from 2,000 in 2024). China accounts for ~90% of unit volume. [SOURCE: SVRC Research / Next Financial / Deploy.report] <strong>KNOWN</strong></li>
+<li><strong>Manufacturing cost drop</strong>: 40% reduction 2022–2025 ($50–250K down to $30–150K). GS had projected 15–20% annual; actual was double. [SOURCE: Next Financial, April 2026] <strong>KNOWN</strong></li>
+</ul>
+<p>---</p>
+<h4>SENTIMENT SYNTHESIS</h4>
+<p><strong>X/Twitter Sentiment (July 2026):</strong></p>
+<p>| Sentiment | Count | Representative Voices | Classification |</p>
+<p>|-----------|-------|----------------------|----------------|</p>
+<p>| Strong Bullish | 8 | @aleabitoreddit (Serenity) — &quot;personally trying to own as much % of Agility Robotics as possible&quot; | OPINION/SPEC |</p>
+<p>| Bullish | 5 | @PepInvestStocks, @saso_capital, @HumanoidInvest | FACT+OPINION |</p>
+<p>| Neutral/Cautious | 3 | @RKLBMan — &quot;way too soon to have tons of conviction&quot;, @TW_trades_ — &quot;playing as momentum trade&quot; | OPINION |</p>
+<p>| Bearish/Skeptical | 2 | @joinyellowbrick — &quot;high quality startups don&#x27;t go public via SPAC&quot;; Brett Adcock tweet &quot;you&#x27;ll be bankrupt&quot; | OPINION |</p>
+<p>| Technical/Price | 3 | @tradelikespades — 6th red day, gap-filling; @R1chardMaur1ce — stop-loss question | FACT |</p>
+<p><strong>Notable influencers</strong>:</p>
+<ul>
+<li><strong>@aleabitoreddit (Serenity)</strong>: Most vocal bull. 1,346 likes on $CCXI thesis post (July 2). Owns position, runs active research thread. Repeatedly frames Agility as &quot;#1 US humanoid by commercialization&quot;. Followed by 100K+. <strong>OPINION/FACT mix</strong></li>
+<li><strong>@StockSavvyShay (Shay Boloor)</strong>: 644 likes, 4.1M views on announcement post. Robotics/SPAC focused. <strong>OPINION</strong></li>
+<li><strong>@HumanoidInvest</strong>: Dedicated humanoid investing account. Daily $CCXI/$AGLT content. Videos of Jensen Huang with Digit. <strong>OPINION/SPEC</strong></li>
+<li><strong>@joinyellowbrick (Yellowbrick Investing)</strong>: 185 likes on bearish SPAC take. &quot;High-quality startups don&#x27;t go public via SPAC.&quot; Representative skepticism. <strong>OPINION</strong></li>
+<li><strong>Brett Adcock (Figure AI CEO)</strong>: Posted &quot;you&#x27;ll be bankrupt in &lt;12 months&quot; at Agility. Viewed in context of direct competitor trash talk but carries weight given his credibility. <strong>OPINION/bias flagged</strong></li>
+</ul>
+<p><strong>Reddit (via Exa search)</strong>: Limited. Most discussion on r/SPACs and r/robotics limited — subreddits not fully picked up by search. Sentiment mix similar to X.</p>
+<p><strong>Sentiment Mix</strong>: ~65% bullish-to-very-bullish, ~20% neutral/cautious, ~15% bearish/skeptical. Bulls emphasize first-mover commercialization, $300M backlog, blue-chip backers. Bears emphasize SPAC stigma, pre-revenue status, 1% factory utilization, and Figure/Tesla competition.</p>
+<p>---</p>
+<h4>COMPETITIVE LANDSCAPE</h4>
+<p>| Company | Robot | Commercial Deployment | Valuation | Key Advantage | Key Weakness |</p>
+<p>|---------|-------|----------------------|-----------|---------------|-------------|</p>
+<p>| <strong>Agility Robotics (CCXI/AGLT)</strong> | Digit | GXO, Schaeffler, Toyota, Mercado Libre (4 paid, 1 test) | $2.5B pre-money | First paid RaaS revenue; only pure-play US public | ~75 units; v5 not shipping; $100M burn |</p>
+<p>| <strong>Tesla</strong> | Optimus Gen 3 | Internal only (zero external customers) | Inside $1T+ Tesla | Vertical integration; $20-30K target cost; 5K+ units 2026 target | No external customers; Musk said &quot;not doing useful work&quot; |</p>
+<p>| <strong>Figure AI</strong> | Figure 03 | BMW Spartanburg (~150 units); 1 undisclosed F500 | $39B Series C (Sept 2025) | BotQ factory (1/hr production); Helix VLA model | $39B valuation extreme; single BMW customer |</p>
+<p>| <strong>Apptronik</strong> | Apollo | Mercedes-Benz, Jabil pilots | ~$5B | Google/Nvidia AI partners | Earlier stage than Agility/Figure |</p>
+<p>| <strong>Unitree (China)</strong> | G1 / H2 | 5,500+ units shipped 2025 | Private (est. $2-5B) | Volume leader; G1 from $13,500 | Quality/software concerns; China regulatory risk |</p>
+<p>| <strong>Boston Dynamics (Hyundai)</strong> | Atlas | Hyundai facility demos | Inside Hyundai | Best dynamic locomotion | No commercial humanoid revenue |</p>
+<p>| <strong>AgiBot (China)</strong> | A2 | 1,000+ units 2024 | Private | China gov&#x27;t backing; massive scale plans | No Western deployments |</p>
+<p>| <strong>1X Technologies</strong> | NEO | Retail pilots, Norway | $1.5B (OpenAI-backed) | Consumer home focus | Early stage; limited production |</p>
+<p><strong>Agility&#x27;s competitive advantage</strong>: First-mover in paid commercial deployments. Pragmatic specialization (warehouse logistics) over general-purpose ambition. RaaS model aligns customer incentives. Safety certification first-mover (NRTL audit pass, Nvidia Halos). Strongest blue-chip investor syndicate (AMZN, NVDA, SoftBank, Foxconn).</p>
+<p><strong>Agility&#x27;s competitive disadvantage</strong>: Smallest deployed fleet among top-tier (dozens vs hundreds to thousands). Figure and Tesla have superior manufacturing scale. Tesla has unmatched cost target ($20-30K vs Digit&#x27;s $100-150K est.). Chinese rivals ship 90% of volume at fraction of cost. Digit&#x27;s tote-optimized grippers limit use-case expansion vs Figure 03&#x27;s 22-DoF hands.</p>
+<p>---</p>
+<h4>KEY RISKS / CONTRARIAN VIEW</h4>
+<h5>Structural Risks:</h5>
+<p>1. <strong>SPAC Break Risk</strong>: Deal must close by Dec 31, 2026 or terminates. S-4 not yet filed as of July 13. Any delay (SEC review, shareholder vote failure, HSR antitrust) kills the deal. SPACs historically have ~20-30% break rate.</p>
+<p>2. <strong>Zero Revenue Visibility</strong>: Revenue not disclosed even at high level in initial filings. GeekWire specifically noted &quot;initial filings… do not disclose Agility&#x27;s revenue.&quot; The $300M backlog is non-binding — &quot;contingent on milestones&quot; and &quot;not a measure of current period revenue.&quot;</p>
+<p>3. <strong>Cash Burn / No Profitability</strong>: OpEx $111M (2025), ~$100M cash burn. Pro-forma $620M proceeds should fund 4-6 years of runway at current burn, but Digit v5 R&amp;D will accelerate burn. No path to profitability disclosed.</p>
+<p>4. <strong>Factory at 1% Utilization</strong>: RoboFab rated for 10K/yr, running ~8/shift (~2K/yr single-shift, but that&#x27;s theoretical — actual output is ~dozens all time). Extreme overhead drag until volume scales.</p>
+<p>5. <strong>Customer Concentration</strong>: GXO is demonstrated high-volume. Schaeffler and Toyota are 1-10 unit sites. Amazon is still testing after 30+ months. The 1,000-unit order is from an undisclosed customer — could be an early-stage/milestone-contingent LOI.</p>
+<p>6. <strong>Digit v5 Execution Risk</strong>: The entire growth thesis hinges on Digit v5 shipping in Dec 2026 / early 2027 with cooperative safety certification. If v5 slips — as Agility&#x27;s own CEO pushed the &quot;cooperatively safe&quot; target from &quot;within 18 months&quot; (late 2024) to &quot;early 2027&quot; — the bull case collapses.</p>
+<p>7. <strong>SPAC Stigma / Dumping Risk</strong>: 17% public float is small. The $420M trust creates mechanical floor at ~$10/share during redemptions — but if large redemptions occur, the deal&#x27;s Minimum Cash Condition ($200M) could be triggered and the deal could fall apart.</p>
+<p>8. <strong>Competition from Tesla Optimus</strong>: If Optimus Gen 3 ships 5,000+ units in 2026 (Tesla target) at $20-30K (vs Digit&#x27;s est. $100-150K), the economic case for Digit at warehouse-logistics tasks gets crushed. Musk has the balance sheet to subsidize Optimus pricing.</p>
+<p>9. <strong>China Volume Threat</strong>: Unitree (5,500 shipped in 2025), AgiBot (1,000+), and others control ~90% of unit shipments. If they enter Western RaaS contracts at $5-15/hr, Agility&#x27;s margin model breaks.</p>
+<p>10. <strong>180-Day Lock-Up Cliff</strong>: All insider shares (78% of float) locked for 180 days post-close. When that lock-up expires, massive supply could hit the market.</p>
+<h5>Contrarian View / Bear Case:</h5>
+<p>Every Digit deployment today is essentially a subsidized pilot. Agility is selling Digits at a massive loss on hardware, hoping to demonstrate ROI to win multi-hundred-unit RaaS orders later. The $300M &quot;backlog&quot; is mostly an LOI from one customer with milestone contingencies. Brett Adcock (Figure CEO) saying they&#x27;ll be bankrupt in 12 months is competitor trash talk but also a real read on cash-burn vs. revenue trajectory. Figure is building 1/hr; Agility is building ~1/week. If v5 is late or underwhelming, there may not be a Series D at a better price than $2.5B. This is a binary bet on Digit v5 shipping on time and getting anchor orders.</p>
+<p>---</p>
+<h4>CONFIDENCE</h4>
+<p><strong>Medium</strong> (62/100 — speculative, for v7 asymmetric basket sizing)</p>
+<ul>
+<li><strong>High conviction on</strong>: Humanoid robotics being a $38B–$5T industry over 10–20 years. Agility being the first to paid commercial revenue. Blue-chip backer quality.</li>
+<li><strong>Medium conviction on</strong>: Digit v5 shipping on schedule with cooperative safety. The 1,000-unit order materializing. The SPAC closing by Dec 31, 2026.</li>
+<li><strong>Low conviction on</strong>: Financial projections — no revenue disclosed, $100M burn with no P&amp;L visibility. Competitive moat durability against Tesla&#x27;s $20-30K target.</li>
+<li><strong>Why still buy for v7</strong>: The asymmetry is extreme even at Medium confidence. At $14.72 / ~$4.95B fully diluted post-merger, this prices Agility at 2x pre-money / 12.5% of Figure AI&#x27;s $39B valuation — despite Agility having more commercial customers and 65K vs ~0 paid hours. If the humanoid thesis plays out, a $4.95B entry can 5-10x. If it fails, downside to trust NAV ($10) is ~32%.</li>
+</ul>
+<p>---</p>
+<h4>RE-RATE TRIGGERS / NEXT STEPS</h4>
+<p>1. <strong>S-4 Filing</strong>: The single most important catalyst. Will disclose (a) actual revenue, (b) detailed financials, (c) customer unit counts, (d) pro-forma valuation table. Expected any day — watch SEC EDGAR for CCXI filings under Form S-4.</p>
+<p>2. <strong>Digit v5 Launch (Dec 2026)</strong>: Product reveal with cooperative safety certification. If real, opens fenceless warehouse deployment and massive addressable market expansion.</p>
+<p>3. <strong>Amazon Commercial Agreement</strong>: If Amazon converts from &quot;testing&quot; to &quot;RaaS customer&quot; — even at 100-500 units — it validates the thesis.</p>
+<p>4. <strong>Sell-Side Initiation</strong>: No analyst covers CCXI/AGLT. First initiation will draw institutional attention and likely set price targets.</p>
+<p>5. <strong>Index Inclusion</strong>: Already added to HUMN ETF. Potential S&amp;P or Nasdaq index inclusion post-merger.</p>
+<p>6. <strong>HSR Clearance</strong>: Hart-Scott-Rodino antitrust waiting period expiration — one of the closing conditions.</p>
+<p>7. <strong>Lock-Up Expiration</strong> (180 days post-close): Could be dumping event or, if stock is performing, a signal that insiders hold.</p>
+<p>8. <strong>Competitor Dynamics</strong>: Figure AI&#x27;s manufacturing ramp (1/hr), Tesla&#x27;s external customer announcement, or a Chinese Western RaaS contract would each impact the thesis.</p>
+<p>---</p></div>
+  </details>
+</div>
+<!-- PICK 02: SIVE.ST -->
+<div class="pick-card" id="sive">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">02</div>
+      <div>
+        <div class="pick-ticker">SIVE.ST <span class="live-price" data-ticker="SIVE" style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">SEK 42.80</span><span class="conviction-badge strong">BUY · ASYMMETRIC</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Photonics / Laser Chips — Sivers Semiconductors (Sweden)</div>
+      </div>
+    </div>
+    <div class="pick-alloc">~$100–160 · 5–8%</div>
+  </div>
+  <p class="pick-thesis"><strong>Sivers makes a tiny but critical part for the AI boom: the laser chips (made from indium phosphide, &#x27;InP&#x27;) that shoot data through fiber-optic lines inside AI data centers. It was named by Morgan Stanley and Goldman Sachs alongside the two giants (Lumentum, Coherent) as a supplier. Sivers has an $800M+ pipeline of opportunities (+77% this year) and is set for several product launches in 2027. The stock crashed ~80% from its June high on a big share sale / dilution, creating a possible bargain — if the 2027 launches happen. (SEK 42.80 ≈ $4.41 at ~9.71 SEK/USD.)</strong></p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Why Now (Catalyst)</h5><p>Nasdaq U.S. listing is in progress (late 2026–early 2027) — that opens the stock to American institutions and usually lifts the price. Morgan Stanley&#x27;s July 13 note named Sivers as a laser supplier. Crashing-low level: SEK 34.00 ≈ $3.50.</p></div>
+    <div class="pick-box red"><h5>The Risk</h5><p>Zero AI-laser revenue today — it&#x27;s all promised for 2027. The 2026 fundraise added ~28% more shares (dilution), and the photonics chief sold his whole stake on July 9. Getting the new factory to yield good chips on time is the real risk.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Look Low</h5><p>No Wall Street analyst even covers this tiny Swedish stock, so there&#x27;s a &#x27;coverage vacuum.&#x27; When the U.S. listing lands, American analysts will start covering a $1.4B company with an $800M pipeline — that tends to bring institutional buyers.</p></div>
+    <div class="pick-box"><h5>Wall Street Says</h5><p>No active coverage on SIVE.ST. Morgan Stanley and Goldman Sachs cite it in supply-chain maps but haven&#x27;t initiated. Trades like an undiscovered micro-cap despite the AI theme.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot (plain English)</h5><p>Support SEK 39.36 (20-day low) / SEK 34.00 (crash low ≈ $3.50). Resistance SEK 47.28 / SEK 65.55 (pre-crash). RSI(14) 21.9 — deeply oversold (the stock has fallen too far, too fast). 50-day avg SEK 66.44. Setup looks like a bounce candidate, but momentum is broken.</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">High</span></div>
+  <details class="full-report">
+    <summary><span class="fr-toggle">▸ Full In-Depth Report</span></summary>
+    <div class="fr-body"><p><strong>Sivers Semiconductors is the most asymmetric, highest-upside InP CW DFB laser pure-play in the AI optical interconnect theme, trading at ~$1.4B market cap with an $800M+ pipeline and zero sell-side coverage — but carries extreme execution risk, recent insider selling, and a shattered technical setup.</strong></p>
+<p>---</p>
+<h4>KEY EVIDENCE</h4>
+<p>| Evidence | Source | Date | Classification |</p>
+<p>|---|---|---|---|</p>
+<p>| Live price SEK 42.80, mcap ~SEK 15.2B, RSI 21.9 | Yahoo Finance (live fetch SIVE.ST) | 2026-07-13 | <strong>KNOWN</strong> — live API data |</p>
+<p>| Q1 2026 revenue SEK 61.9M (-22% YoY), guided FY intact | Sivers Q1 2026 Earnings Call (Seeking Alpha transcript via Exa) | 2026-05-29 | <strong>KNOWN</strong> — transcript |</p>
+<p>| Opportunity pipeline expanded to ~$800M (77% from $453M YE2025) | Sivers Q1 2026 Earnings Call | 2026-05-29 | <strong>KNOWN</strong> — CEO statement |</p>
+<p>| Nasdaq US dual listing: &quot;substantial readiness work done, timing dependent on market conditions&quot; | Sivers Q1 2026 Earnings Call / Directed Share Issue PR | May–June 2026 | <strong>KNOWN</strong> — management confirmed |</p>
+<p>| SEK 700M directed share issue at SEK 57 (multiple times oversubscribed by institutions) | Sivers PR / Pareto Securities | 2026-06-30 | <strong>KNOWN</strong> — press release |</p>
+<p>| Bootstrap Europe IV converted $12M note into 22.8M new shares (6.4% dilution) | NewsCase / company filing | 2026-07-03 | <strong>KNOWN</strong> — filing |</p>
+<p>| Andrew McKee (Photonics CTO) sold entire ~515,000 shareholding | MarketScreener / Finwire | 2026-07-09 | <strong>KNOWN</strong> — regulatory filing |</p>
+<p>| Sivers Board + CEO purchased shares (SEK 2.3M+ total, 12-month lockup) | Sivers PR / Twitter @2iqresearch | 2026-07-13 | <strong>KNOWN</strong> — company announcement |</p>
+<p>| Morgan Stanley CPO Note: Sivers listed alongside Lumentum &amp; Coherent in &quot;laser supply&quot; | P Equity Research tweet quoting MS note | 2026-07-13 | <strong>KNOWN</strong> — institutional research |</p>
+<p>| Goldman Sachs June 2026 supply/demand: InP substrates from &#x27;very tight&#x27; → &#x27;tight&#x27;; Optical Devices &#x27;severely constrained through 2027&#x27; | @pequityresearch / @crux_capital_ quoting GS update | 2026-07-08 | <strong>KNOWN</strong> — GS industry note |</p>
+<p>| InP export permits from China: limited relief, suppliers racing to secure 2027 supply | Digitimes | 2026-06-22 | <strong>KNOWN</strong> — trade press |</p>
+<p>| LiDAR ramp from Q4 2026 ($53M–$138M lifecycle revenue potential) | Sivers Q1 Call / Street Alpha Substack | Q1 2026 | <strong>KNOWN</strong> — management disclosed |</p>
+<p>| International nominee holdings surged 1.11% → 52.14% (Dec 2025 → June 2026) | @StormDirac tweet citing shareholder registry data | 2026-07-11 | <strong>KNOWN</strong> — shareholder data |</p>
+<p>| Rosenblatt: Even after 12x InP laser capacity build (2025→2030), demand still ~50% ahead of supply | SNMart Substack citing Rosenblatt | 2026-05-31 | <strong>INFERRED</strong> — sell-side model (85% confidence) |</p>
+<p>| NVIDIA asked supply chain for 20x InP capacity; vendors committed ~12x — structural gap remains | Tessara.tech / Chokepoint #2 | 2026-05-12 | <strong>INFERRED</strong> — industry sourcing (80% confidence) |</p>
+<p>| Stock down ~80% from June 2026 high of SEK ~110; selloff driven by dilution + McKee sale + macro | Yahoo Finance chart data | 2026-07-13 | <strong>KNOWN</strong> — price action |</p>
+<p>| Sivers is laser supplier for POET optical engines ($500M Lumilens pipeline flows to SIVE) | @PepInvestStocks tweet + POET supply chain mapping | 2026-07-13 | <strong>INFERRED</strong> — supply chain mapping (75% confidence) |</p>
+<p>| Ayar Labs partnership: Sivers lasers designed into SuperNova ELS module | Street Alpha Substack / Q1 call | Q1 2026 | <strong>KNOWN</strong> — partnership announced |</p>
+<p>---</p>
+<h4>SENTIMENT SYNTHESIS</h4>
+<h5>X/Twitter Sentiment (live fetch, July 13, 2026)</h5>
+<p><strong>BULLS (dominant voice, high engagement):</strong></p>
+<ul>
+<li><strong>@crux_capital_ (Gaetano):</strong> Most influential photonics analyst on X. Recent $SIVE coverage focused on oversupply debate — but treats Sivers as a structural InP laser supplier in the Goldman Sachs supply/demand framework. Doesn&#x27;t own $SIVE explicitly (his Physical AI portfolio is $OUST $AMBA $QCOM $U). Neutral-to-positive on Sivers&#x27; position but hasn&#x27;t committed capital publicly. <strong>OPINION/SECTOR ANALYSIS</strong> — trusted.</li>
+<li><strong>@StormDirac (Anders Storm — former CEO, current investor):</strong> 450 likes on &quot;international nominee holders surged 1.11% → 52.14%&quot; — institutions buying the dip. <strong>FACT</strong> — data-driven.</li>
+<li><strong>@unknownbankerL (verified):</strong> &quot;Morgan Stanley is keeping an eye on Sivers&#x27; laser supply to the whole CPO concept&quot; (142 likes). <strong>OPINION</strong> citing MS research.</li>
+<li><strong>@rmzerozero (Rui Miguel, verified):</strong> Detailed thread on Sivers in MS/CPO context (5 likes, but high-quality). <strong>OPINION/ANALYSIS.</strong></li>
+<li><strong>@ren_stocks (verified):</strong> Massive engagement (1,123 likes, 1,487 bookmarks) on &quot;Sivers not on GS map yet — but will be after Nasdaq listing.&quot; <strong>OPINION</strong> — early May 2026.</li>
+<li><strong>@athuinvests (Athu, verified):</strong> Detailed customer mapping (POET, Ayar, JBL, GFS, O-Net). 142 likes, 18 bookmarks. <strong>OPINION/RESEARCH.</strong></li>
+<li><strong>@revoAIution (verified):</strong> Bullish near $1.3B mcap, highlighting SEK 700M raise being oversubscribed by institutions. <strong>OPINION.</strong></li>
+</ul>
+<p><strong>BEARS / SKEPTICS:</strong></p>
+<ul>
+<li><strong>@Marre9278 (Marcus, verified):</strong> Cynical about insider pump-and-dump pattern. Photonics CTO sold all shares = &quot;they will dump it whenever they can.&quot; <strong>OPINION/SPECULATION</strong> — low confidence, emotionally charged.</li>
+<li><strong>@2147mill (Tom, verified):</strong> Photonics CTO sale = &quot;could be positive, removes concentrated seller risk.&quot; Neutral framing. <strong>OPINION.</strong></li>
+</ul>
+<p><strong>INFLUENCER SUMMARY:</strong></p>
+<ul>
+<li><strong>@aleabitoreddit (Serenity):</strong> Not findable in recent tweets but massive prior thread (686 likes, 1M+ views, March 2026) calling Sivers &quot;the next mini-LITE at $200M MC.&quot; No recent posts found — appears to have gone quiet.</li>
+<li><strong>@2iqresearch (2iQ, verified):</strong> Detailed insider buying breakdown (CEO + 4 directors bought $297K combined). <strong>FACT/OPINION.</strong></li>
+<li><strong>@gabz_investing, @gulVasikova (GUL), @crweworld:</strong> All reposting Sivers PR, no independent analysis.</li>
+</ul>
+<p><strong>SENTIMENT MIX:</strong> ~70% bullish-to-neutral (institutional interest, MS/GS validation, Nasdaq listing), ~15% bearish (dilution, McKee sale, execution risk), ~15% noise/pumping. The dip has attracted serious attention from professional photonics analysts (crux_capital_, ren_stocks, athuinvests). Retail fear is concentrated on dilution and insider sales, while sophisticated accounts see the structural InP laser bottleneck thesis intact.</p>
+<h5>Reddit / Forum Sentiment</h5>
+<p>No systematic Reddit search results — limited evidence. Generally positive but retail-dominated on r/pennystocks and Swedish stock forums. Low signal-to-noise.</p>
+<p>---</p>
+<h4>COMPETITIVE LANDSCAPE</h4>
+<p><strong>Direct InP/CW DFB Laser Competitors:</strong></p>
+<p>| Company | Market Cap | Position vs. Sivers | Notes |</p>
+<p>|---|---|---|---|</p>
+<p>| <strong>Lumentum (LITE)</strong> | ~$6–8B | Goliath. 2x laser chip YoY, sold out through 2028. Goldman Sachs/GS maps them as the #1 laser supplier. Supply-demand gap &gt;30%. | Sivers is the &quot;mini-LITE&quot; — 1/10th the mcap, same technology layer |</p>
+<p>| <strong>Coherent (COHR)</strong> | ~$12–15B | Vertically integrated (InP wafers → lasers → modules). 6-inch InP ramp underway. Book-to-bill &gt;4x. NVIDIA $4B stake. | COHR&#x27;s own InP capacity build signals scarcity — good read-through for Sivers |</p>
+<p>| <strong>Applied Optoelectronics (AAOI)</strong> | ~$4–6B | 800G/1.6T transceivers for Amazon/Oracle. InP laser capacity = primary growth constraint. | AAOI sources InP lasers externally — potential Sivers customer |</p>
+<p>| <strong>POET Technologies</strong> | ~$1–2B | Optical interposer platform. Uses Sivers&#x27; lasers. $500M Lumilens pipeline. | Complement, not competitor — Sivers supplies POET |</p>
+<p>| <strong>MACOM (MTSI)</strong> | ~$8–10B | Competes with Sivers in some laser/sub-assembly slots but not pure-play CW DFB for CPO | Indirect competitive overlap |</p>
+<p>| <strong>IQE (IQE.L)</strong> | ~$0.5–1B | Upstream InP epitaxial wafer supplier. Sells to Sivers. | Complement (Sivers buys IQE wafers) |</p>
+<p><strong>Sivers&#x27; Structural Advantage:</strong> Sivers is the *only* independent merchant supplier of InP CW DFB lasers outside the vertically integrated LITE/COHR duopoly. Every CPO ecosystem diagram (Morgan Stanley, IEEE, Goldman Sachs) names 3 laser suppliers: Lumentum, Coherent, and Sivers. This triopoly position in a &quot;severely constrained through 2027&quot; market is the core of the asymmetric thesis.</p>
+<p>---</p>
+<h4>KEY RISKS / CONTRARIAN VIEW</h4>
+<p>1. <strong>Zero AI Datacenter Laser Revenue Today:</strong> Sivers&#x27; photonics revenue is still dominated by LiDAR NRE and defense contracts ($61.9M SEK Q1 revenue, -22% YoY). No commercial CW DFB laser revenue from AI data centers has been recognized as of Q1 2026. The $800M pipeline is opportunity, not backlog.</p>
+<p>2. <strong>Dilution Overhang:</strong> The stock has been diluted ~28% in 2026 via the April directed issue, June SEK 700M raise (12.3M new shares), and Bootstrap $12M note conversion (22.8M shares). 355M shares now outstanding vs ~277M at YE2025. More dilution possible for Nasdaq listing.</p>
+<p>3. <strong>Photonics CTO Sold Entire Stake:</strong> Andrew McKee sold ~515,000 shares on July 9 — a significant vote of no-confidence from the person running the photonics division that underpins the whole thesis. Management claims it&#x27;s unrelated to company prospects, but the optics are terrible.</p>
+<p>4. <strong>WIN Semi Qualification Risk:</strong> Sivers&#x27; entire volume-scaling strategy depends on qualifying WIN Semiconductor (Taiwan) as a high-volume foundry partner. Qualification timelines are opaque. If WIN yields disappoint, 2027 production ramp collapses.</p>
+<p>5. <strong>China InP Export Controls:</strong> The entire InP supply chain is geopolitically exposed. China controls ~60%+ of InP substrate manufacturing. Even as permits ease, the bottleneck constrains everyone — including Sivers&#x27; ability to source substrates for its own fab.</p>
+<p>6. <strong>Nasdaq Listing Could Be Priced In:</strong> Institutional accumulation (nominee holders 1.11% → 52.14%) suggests the Nasdaq listing is partially discounted. If the listing is delayed beyond H1 2027, the stock could trade back to SEK 20–30.</p>
+<p>7. <strong>Contrarian: Oversupply Risk by 2028-2029:</strong> While GS says &quot;severely constrained through 2027,&quot; the combined capacity expansions from LITE (4x output), COHR (6-inch ramp), AXT (4x by 2027), and Chinese suppliers could flip the market from scarcity to glut by 2029. Sivers would face margin compression as a high-cost merchant fab.</p>
+<p>---</p>
+<h4>CONFIDENCE</h4>
+<p><strong>MEDIUM</strong> (6.5/10)</p>
+<ul>
+<li><strong>Bull case confidence (pipelines convert, ramp succeeds): 40%</strong> — If even 30% of the $800M pipeline converts, Sivers is a multi-bagger from here.</li>
+<li><strong>Base case confidence (some revenue, delays, dilution): 35%</strong> — 2027 ramps partially deliver, stock ranges SEK 40–70.</li>
+<li><strong>Bear case confidence (execution fails, Nasdaq stalls, capital needs more equity): 25%</strong> — Stock revisits SEK 15–20.</li>
+</ul>
+<p>The thesis is structurally sound (InP laser bottleneck is real, validated by GS/MS/LITE/COHR) but execution-dependent for a company with negative EBITDA and no AI datacenter revenue. The risk/reward is attractive *only* if the Nasdaq listing and at least one 2027 product ramp materialize.</p>
+<p>---</p>
+<h4>RE-RATE TRIGGERS / NEXT STEPS</h4>
+<p><strong>Near-term (Q3 2026):</strong></p>
+<p>1. Q2 2026 earnings (August 2026) — watch for pipeline conversion to backlog/revenue</p>
+<p>2. WIN Semi qualification completion announcement</p>
+<p>3. Jabil 1.6T pluggable follow-on order from hyperscaler customer</p>
+<p>4. Nasdaq listing timeline formalized (F-1 filing)</p>
+<p><strong>Medium-term (H2 2026 – H1 2027):</strong></p>
+<p>5. First AI datacenter laser revenue recognition (any quarter)</p>
+<p>6. LiDAR production ramp starting Q4 2026 ($53M–$138M lifecycle)</p>
+<p>7. POET Lumilens program flowing to Sivers laser orders</p>
+<p>8. US institutional initiation coverage after Nasdaq dual listing</p>
+<p><strong>What to watch for pipeline validation:</strong></p>
+<ul>
+<li>Opportunity pipeline growing from $800M toward $1B+</li>
+<li>Any disclosed PoP (purchase order) from a named hyperscaler or OEM</li>
+<li>CFO Heine Thorsgaard&#x27;s cash guidance / capex plans</li>
+<li>Bootstrap Europe&#x27;s stake — are they distributing shares or holding?</li>
+</ul>
+<p>---</p></div>
+  </details>
+</div>
+<!-- PICK 03: AAOI -->
+<div class="pick-card" id="aaoi">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">03</div>
+      <div>
+        <div class="pick-ticker">AAOI <span class="live-price" data-ticker="AAOI" style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$110.60</span><span class="conviction-badge buy">BUY</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Optical Transceivers — Applied Optoelectronics</div>
+      </div>
+    </div>
+    <div class="pick-alloc">~$100–140 · 5–7%</div>
+  </div>
+  <p class="pick-thesis"><strong>AAOI makes the plug-in modules (transceivers) that move data at 800G/1.6T speeds inside AI data centers — and uniquely, it makes its own InP laser chips in-house. The whole industry is short on those lasers through 2027, which is a structural advantage. Management guided revenue from $456M (2025) to $1.1B+ (2026) and a 9x factory expansion by end-2027. Yet the stock is down 50% from its $223 high — the market is pricing in a execution failure that hasn&#x27;t happened. Goldman Sachs and others confirm optical parts are &#x27;severely constrained through 2027&#x27; — a $3.6B shortage in 2026 alone. That gap is the upside.</strong></p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Why Now (Catalyst)</h5><p>Q2 2026 earnings (early August) is the next checkpoint. Any beat or update on 800G/1.6T shipments re-rates the stock. Rosenblatt&#x27;s $220 target (June 2026) sets a floor. A big new factory opens Q3 2026.</p></div>
+    <div class="pick-box red"><h5>The Risk</h5><p>Two customers (Digicomm + Microsoft) = 82% of 2025 revenue, and they buy on purchase orders, not long contracts. One hyperscaler cutting spend could drop revenue 20–30% in a quarter. Insiders sold ~$29M of stock in 3 months. Gross margin only 29% (target 40%).</p></div>
+    <div class="pick-box accent"><h5>Why Targets Look Low</h5><p>Analyst targets ($160–$220) assume smooth, linear growth — but the laser shortage is structural and won&#x27;t ease until 2028 (Goldman). AAOI&#x27;s factory build-out is a &#x27;make hay while the sun shines&#x27; window. If demand holds, the stock prints cash at a rate that makes today&#x27;s targets look cheap.</p></div>
+    <div class="pick-box"><h5>Wall Street Says</h5><p>Rosenblatt Buy $220 (June 2026). Raymond James Outperform $160. B. Riley $129. Stock trades 31% below Rosenblatt&#x27;s target and 33% below its 50-day avg — deep oversold vs estimates.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot (plain English)</h5><p>Support $100 / $70 / $45. Resistance $143 (20-day) / $165 (50-day) / $220. RSI(14) 22.4 — deeply oversold. Price is 33% below the 50-day avg. Classic oversold-bounce setup.</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">High</span></div>
+  <details class="full-report">
+    <summary><span class="fr-toggle">▸ Full In-Depth Report</span></summary>
+    <div class="fr-body"><p><strong>AAOI is the most leveraged US-listed bet on the AI optical bottleneck, offering a 2–3x asymmetric payoff if its InP laser capacity ramp executes at 80% of plan, but carries extreme binary risk from 81% customer concentration and PO-based revenue.</strong></p>
+<p>---</p>
+<h4>KEY EVIDENCE</h4>
+<h5>Earnings Transcript (Q1 2026, May 7, 2026)</h5>
+<ul>
+<li><strong>Revenue:</strong> $151.1M (+51% YoY, +13% QoQ) — 4th straight record quarter [SOURCE: Motley Fool transcript, May 7, 2026] [KNOWN]</li>
+<li><strong>Non-GAAP Gross Margin:</strong> 29.2%, in line with guidance of 29%–31%, down from 31.4% in Q4 2025 [KNOWN]</li>
+<li><strong>Data Center Revenue:</strong> $81.4M (+154% YoY) — 46.7% from 200G/400G, 5.6% from 800G (first volume shipment to a hyperscaler), 5.6% from 10G/40G [KNOWN]</li>
+<li><strong>CATV Revenue:</strong> $66.8M (+4% YoY, +24% QoQ) — driven by 1.8 GHz amplifier shipments to Digicomm [KNOWN]</li>
+<li><strong>FY2026 Guidance:</strong> Revenue to exceed $1.1B, non-GAAP operating income &gt;$140M [KNOWN]</li>
+<li><strong>Management comment — demand vs. capacity:</strong> &quot;Forecast demand continues to outpace our production capacity through mid-2027&quot; — Thompson Lin, CEO [SOURCE: Q1 transcript] [KNOWN]</li>
+<li><strong>Management comment — capacity constraint:</strong> &quot;This revenue level is limited by our production capacity and supply chain, not market demand, which we believe is much larger&quot; — Stefan Murry, CFO [KNOWN]</li>
+<li><strong>Q2 2026 Guidance:</strong> Revenue $180M–$198M, non-GAAP gross margin 29%–30% [KNOWN]</li>
+<li><strong>Mid-2027 monthly revenue target:</strong> $471M/month in data center transceiver revenue (40% US-based), comprising $90M (100G/400G), $217M (800G), $164M (1.6T) [KNOWN]</li>
+</ul>
+<h5>Capacity Ramp (from earnings call and press releases)</h5>
+<ul>
+<li><strong>Exited Q1 2026:</strong> ~100K units/month of 800G/1.6T [SOURCE: Daily Political / Q1 call highlights, May 9, 2026] [KNOWN]</li>
+<li><strong>End of Q2 2026:</strong> ~150K/month [KNOWN]</li>
+<li><strong>End of 2026:</strong> &gt;650K/month across 800G/1.6T lines, ~30% from Texas [KNOWN]</li>
+<li><strong>End of 2027:</strong> &gt;930K/month, &gt;50% from Texas [KNOWN]</li>
+<li><strong>InP laser fab expansion:</strong> 350% capacity increase by end-2027, upgrading to 6-inch wafers [SOURCE: GlobeNewswire, Apr 17, 2026] [KNOWN]</li>
+<li><strong>Total Texas footprint:</strong> ~900K sq ft across Sugar Land, Pearland, and Houston [SOURCE: AOI press release, Apr 17, 2026] [KNOWN]</li>
+<li><strong>$20.9M TSIF grant</strong> for Sugar Land expansion, 500+ jobs [SOURCE: @AppliedOpto tweet, Apr 29, 2026] [KNOWN]</li>
+</ul>
+<h5>Selloff Analysis (~$206 → ~$114, Jun–Jul 2026)</h5>
+<ul>
+<li><strong>Peak:</strong> $223.10 (all-time high, early May 2026) [SOURCE: Yahoo Finance] [KNOWN]</li>
+<li><strong>Current:</strong> $110.60 (Jul 13, 2026) — 50.4% peak-to-trough decline [KNOWN]</li>
+<li><strong>Catalysts for selloff:</strong></li>
+</ul>
+<p>1. Q1 earnings miss: EPS -$0.07 vs -$0.05 expected; stock fell 11.76% on May 7 [SOURCE: Gate Blog, Jun 10, 2026] [KNOWN]</p>
+<p>2. Q2 guidance midpoint ($189M) below consensus ($196M) [KNOWN]</p>
+<p>3. CPO rollout delay fears (SemiAnalysis report, Jun 9) — pushed CPO to 2028/2029, but bullish for pluggable transceiver runway [SOURCE: Seeking Alpha, Jun 9, 2026] [KNOWN]</p>
+<p>4. Insider selling: 3.14M shares / $29.26M over 3 months — mostly automated tax-withholding sales [SOURCE: Gate Blog, Jun 10, 2026] [KNOWN]</p>
+<p>5. Sector-wide risk-off: MRVL -13.3%, LITE -11.8%, COHR -15.2% same day [KNOWN]</p>
+<ul>
+<li><strong>Trefis on historical drawdowns:</strong> AAOI&#x27;s average peak-to-trough in 11 market shocks since 2013 was ~40% (vs 13% for S&amp;P 500); deepest was -72% in 2022 [SOURCE: Trefis, Jun 10, 2026] [KNOWN]</li>
+</ul>
+<h5>Rosenblatt + AMD Commentary</h5>
+<ul>
+<li><strong>Rosenblatt (May 8, 2026):</strong> Raised PT from $140 to $220, reiterated Buy. Cited Amazon 800G contribution, expected Oracle qualification, and stronger 2026 guidance [SOURCE: Insider Monkey, May 11, 2026] [KNOWN]</li>
+<li><strong>Rosenblatt (Jun 22, 2026):</strong> Reaffirmed $220 PT, ~36% upside from current levels [SOURCE: MarketBeat, Jun 22, 2026] [KNOWN]</li>
+<li><strong>Rosenblatt&#x27;s supply-demand model:</strong> Optical component manufacturers expected to expand capacity ~12x between 2025–2030, but supply will still lag demand by ~50% by end of decade [SOURCE: Gate Blog, Jun 10, 2026] [KNOWN]</li>
+<li><strong>AMD connection:</strong> Not directly cited in transcript, but AMD&#x27;s MI300/MI400 AI GPU ramp drives demand for 800G/1.6T optics in the same data centers where AAOI supplies. AAOI is not an AMD-specific supplier but rides the same hyperscaler wave. [INFERRED]</li>
+</ul>
+<h5>Goldman Sachs: Optical Devices &quot;Severely Constrained Through 2027&quot;</h5>
+<ul>
+<li><strong>Goldman Sachs Research (Apr 2026):</strong> Published &quot;Optical Networking: The Next Mega Trend in AI Infrastructure&quot; — projects optical networking TAM to expand from $15B (GB300 NVL72 cycle) to $154B (Rubin Ultra NVL576, 2028) [SOURCE: Goldman Sachs, Apr 2026] [KNOWN]</li>
+<li><strong>InP substrate bottleneck:</strong> &quot;Supply-demand tightness for InP substrates to persist in 2026... prices expected to rise ~15%... new capacity begins phased release no earlier than FY2028&quot; [SOURCE: Longbridge / Goldman Sachs, Apr 23, 2026] [KNOWN]</li>
+<li><strong>$154B TAM breakdown:</strong> 69% ($106B) from scale-up networking, 59% ($91B) from CPO assuming 29% penetration [KNOWN]</li>
+<li><strong>Asymmetrical Bets (Jun 13, 2026):</strong> Independently validated the shortage: &quot;demand exceeds supply by roughly 27–30% on units through 2027... ~$3.6B gap in 2026 alone... $12.4B of transceiver demand vs $8.8B of disclosed supply capacity&quot; [SOURCE: Asymmetrical Bets Substack, Jun 13, 2026] [KNOWN]</li>
+<li><strong>Nvidia&#x27;s request:</strong> Asked supply chain to increase InP laser capacity ~20x by 2030; suppliers have committed only ~12x [SOURCE: Gate Blog, Jun 10, 2026] [KNOWN]</li>
+</ul>
+<h5>Customer Concentration (from FY2025 10-K)</h5>
+<ul>
+<li><strong>Digicomm (CATV):</strong> 53.1% of FY2025 revenue (up from 34.1% in 2024, 11.3% in 2023) — a private company with no disclosed credit profile [SOURCE: AAOI 10-K FY2025, cited by Capital Blueprint Substack, Jun 21, 2026] [KNOWN]</li>
+<li><strong>Microsoft (data center):</strong> 28.8% of FY2025 revenue [KNOWN]</li>
+<li><strong>Digicomm + Microsoft combined:</strong> 81.9% of total revenue [KNOWN]</li>
+<li><strong>Top 10 customers:</strong> 96.6% of total revenue [KNOWN]</li>
+<li><strong>Amazon (AWS):</strong> Historically ~50% of revenue in prior periods; referenced as a primary hyperscaler customer for 800G [SOURCE: QuantAbundancia, May 29, 2026] [KNOWN]</li>
+<li><strong>Oracle:</strong> 12.4% of FY2024 revenue; expected qualification for 2026 orders [KNOWN]</li>
+<li><strong>No long-term contracts:</strong> &quot;Sells largely on purchase orders without long-term commitments&quot; [SOURCE: Null Exposure / 10-K] [KNOWN]</li>
+</ul>
+<p>---</p>
+<h4>SENTIMENT SYNTHESIS (X/Twitter + Reddit)</h4>
+<p><strong>Classification guide:</strong> FACT = verified company/analyst data | OPINION = subjective view | SPEC = unverified projection</p>
+<h5>X/Twitter Sentiment</h5>
+<p>| Source | Handle | Sentiment | Classification | Key Quote |</p>
+<p>|--------|--------|-----------|----------------|-----------|</p>
+<p>| @crux_capital_ (Gaetano) | Verified | Bullish | OPINION | &quot;Going into Photonics earning season... $AAOI... we are going to have lots of great opportunities especially if we go into them 30-40% off highs&quot; (Jul 12) |</p>
+<p>| @AgAuElements | Verified | Strong Bullish | OPINION | &quot;The base is built. Time to take us back to All-Time Highs... Bullish AFK $AAOI&quot; (Jul 13) — detailed thesis on CPO delay being bullish for pluggables |</p>
+<p>| @TW_trades_ | Verified | Bullish | OPINION | &quot;Purchased more $AAOI at $109.75... Buying the sell off again&quot; (Jul 13) |</p>
+<p>| @ciainvestor | Verified | Bullish | OPINION | &quot;Bought more $AAOI at 110$. Fair price for a 300$ stock&quot; (Jul 13) |</p>
+<p>| @TheBigBerbowski | Verified | Neutral/Bullish | OPINION | &quot;AAOI with all its pros and cons, is still the same company you wanted to own at $220. Now it&#x27;s cheaper&quot; (Jul 11) |</p>
+<p>| @BeardoTrader | Verified | Neutral/Technical | OPINION/SPEC | &quot;Distribution ranges... the bigger the rally, the bigger the range. Using $AAOI chart as an example&quot; (Jul 10) — viewing selloff as normal distribution, not trend change |</p>
+<p>| @SuperDuperInvst | Verified | Bearish | OPINION | &quot;Bought at $8.55... said to avoid at $170+... it did tank to $110... I have been following this stock for 10 yrs&quot; (Jul 11) |</p>
+<p>| @StockSavvyShay | Verified | Strong Bullish | OPINION | &quot;The reason I own $AAOI is because it builds the optical connectivity that lets AI chips move data across data centers&quot; (Jun 9) — 1,150 likes, 175K views |</p>
+<p>| @Gubloinvestor | Verified | Bearish | OPINION | &quot;i just bought $AAOI at $182 a share&quot; (Jun 8) — 400 likes, 73K views; bag-holder sentiment |</p>
+<p>| Anonymous bear | Unverified | Bearish | SPEC | &quot;After an insane +1,700% explosion... it&#x27;s normal to pull back... down more than 50%... monthly MACD bearish divergence... next real test is $100... if it doesn&#x27;t bounce there, $70, then $45, then $27&quot; (Jul 11) |</p>
+<p><strong>Sentiment Mix:</strong></p>
+<ul>
+<li><strong>Bullish (60%):</strong> Dip buyers citing Rosenblatt PT, CPO delay tailwind, InP shortage, structural AI demand. The dominant X narrative is &quot;buy the dip, this is a $200+ stock at $110.&quot;</li>
+<li><strong>Neutral/Technical (20%):</strong> Chartists viewing the 50% drop as normal distribution after a 1,700% rally. Watching $100 as key support.</li>
+<li><strong>Bearish (20%):</strong> Concerned about insider selling, technical breakdown, and the risk of further downside to $70 or $45. Long-term holders underwater from $180+.</li>
+</ul>
+<h5>Reddit Sentiment (via Exa search)</h5>
+<p>Reddit sentiment on r/wallstreetbets, r/investing, and r/options is <strong>mixed to bearish</strong> with a cautious tilt. The dominant narrative is that AAOI&#x27;s 800G ramp is real but the stock got ahead of itself. Many threads discussing the $250M ATM offering as a dilution risk. The &quot;priced for perfection&quot; critique is common — the stock needs flawless execution through 2027 to justify the current valuation even at $110.</p>
+<p>---</p>
+<h4>COMPETITIVE LANDSCAPE</h4>
+<p>| Company | Market Cap | 800G Status | Laser Source | Key Advantage | Key Risk for AAOI |</p>
+<p>|---------|-----------|-------------|-------------|---------------|-------------------|</p>
+<p>| <strong>AAOI</strong> | ~$8.9B | Shipping (Q1 2026) | In-house InP (proprietary) | Vertical integration, 400mW laser platform, US manufacturing | Small scale, high concentration |</p>
+<p>| <strong>Coherent (COHR)</strong> | ~$44B | Shipping | In-house (II-VI heritage) | Scale, diversified portfolio, mature supply chain | Less leverage to InP shortage |</p>
+<p>| <strong>Lumentum (LITE)</strong> | ~$40B | Shipping | In-house (premium lasers) | Cloud Innovations acq, established hyperscaler relationships | Same InP capacity constraints as AAOI |</p>
+<p>| <strong>InnoLight (300502.SZ)</strong> | ~$30B | Shipping at scale | External + some in-house | China cost advantage, NVIDIA supplier, massive volume | Unlisted on US exchanges, trade restrictions risk |</p>
+<p>| <strong>Ciena (CIEN)</strong> | ~$42B | System-level | In-house (coherent DSP) | Coherent DSP, system integration | System-level, not component-level play |</p>
+<p><strong>AAOI&#x27;s Competitive Moat:</strong></p>
+<ul>
+<li><strong>Only US-listed pure-play with in-house InP lasers.</strong> Most transceiver makers (including InnoLight) buy lasers externally, creating supply-chain dependency. AAOI&#x27;s vertical integration gives it a 15–20% BOM cost advantage via its 400mW laser platform [SOURCE: Atlas Peak Research, Mar 2026] [KNOWN]</li>
+<li><strong>US manufacturing footprint</strong> is a geopolitical asset — federal grants ($20.9M TSIF), near-shoring tailwind, and &gt;55% of 1.6T production planned US-based by end-2027</li>
+<li><strong>However, moat is narrow:</strong> Purchase-order-based revenue, no contractual lock-in, and Amazon is using AAOI as a second-source diversification play, not a sole-source relationship [SOURCE: Capital Blueprint, Jun 21, 2026] [KNOWN]</li>
+</ul>
+<p>---</p>
+<h4>KEY RISKS / CONTRARIAN VIEW</h4>
+<p><strong>1. Digicomm concentration risk (the under-discussed elephant):</strong> 53.1% of FY2025 revenue is from Digicomm (CATV) — a private company — not AI data centers. The &quot;pure AI optics play&quot; narrative is factually inaccurate. If Digicomm&#x27;s cable upgrade cycle peaks or Digicomm itself has credit issues, AAOI loses half its revenue base. [SOURCE: 10-K, Capital Blueprint analysis] [KNOWN]</p>
+<p><strong>2. The &quot;no long-term contracts&quot; problem:</strong> Hyperscalers place orders on a PO basis, not multi-year agreements. This creates a feast-or-famine dynamic where a single customer can swing revenue 20–30% in a quarter. Amazon&#x27;s stated diversification rationale (using multiple suppliers) directly undercuts the &quot;must-buy-from-AAOI&quot; thesis. [SOURCE: Null Exposure, Basis Report] [KNOWN]</p>
+<p><strong>3. InP shortage is a double-edged sword:</strong> The same shortage that creates pricing power for AAOI also limits its ability to ramp. Even with 350% InP fab expansion, the entire industry&#x27;s InP substrate capacity is constrained by ~70% demand-supply gap through 2026. If AAOI&#x27;s internal fab expansion slips, the revenue target is unreachable. [KNOWN]</p>
+<p><strong>4. Dilution risk:</strong> $250M ATM offering is open-ended. At current prices, full execution = ~2.3M additional shares (~3% dilution). But management could execute at any time, and the Q1 cash balance of $449M suggests they may need to tap it for CapEx. [SOURCE: Atlas Peak Research] [KNOWN]</p>
+<p><strong>5. Chinese competition:</strong> InnoLight already shipping 800G at scale to NVIDIA. Chinese cost advantages in module assembly are structural. AAOI&#x27;s US manufacturing advantage is a premium-cost model that works only if hyperscalers value &quot;made in USA&quot; enough to pay 10–15% more. [KNOWN]</p>
+<p><strong>6. Contrarian view — the &quot;goldilocks&quot; window is narrower than bulls admit:</strong> The InP shortage creates a 12–18 month window (mid-2026 to late 2027) where AAOI can charge premium prices. But Lumentum and Coherent are both doubling InP capacity. By 2028, the shortage could flip to a glut, collapsing AAOI&#x27;s pricing power. The current valuation (~$8.9B) assumes the window lasts through 2028, which is aggressive. [INFERRED, confidence: Med]</p>
+<p>---</p>
+<h4>CONFIDENCE</h4>
+<p><strong>Confidence: Medium-High (on the thesis at current price)</strong></p>
+<p><strong>Why:</strong> The structural InP shortage is well-documented by Goldman Sachs, management, and independent analysts. The demand side (hyperscaler AI capex of $392B in 2026) is not in question. AAOI&#x27;s vertical integration is a genuine competitive advantage. At $110, the stock is pricing in severe execution failure — the 50% drawdown from $223 overshoots the actual fundamental deterioration.</p>
+<p><strong>Why not High:</strong> Customer concentration (81% top 2) is extreme. The absence of long-term contracts means visibility is only 1-2 quarters. The $250M ATM overhang is real. And the &quot;53% CATV revenue&quot; fact means this is not a pure AI play — it&#x27;s a hybrid bet that also depends on Digicomm&#x27;s cable upgrade cycle through 2027.</p>
+<p>---</p>
+<h4>RE-RATE TRIGGERS / NEXT STEPS</h4>
+<p>1. <strong>Q2 2026 Earnings (early Aug 2026):</strong> The most immediate catalyst. Key metrics: (a) revenue beat vs $180–198M guidance, (b) 800G/1.6T volume shipment data, (c) gross margin trajectory toward 40%, (d) any FY2026 revenue guidance raise above $1.1B, (e) capacity update on 650K/month end-2026 target.</p>
+<p>2. <strong>Oracle qualification announcement:</strong> Rosenblatt flagged Oracle as a potential new revenue stream. An ORCL win would diversify the customer base and validate the 1.6T roadmap.</p>
+<p>3. <strong>Sugar Land 210K sq ft facility online (Q3 2026):</strong> This is the next capacity inflection point. On-time delivery will boost confidence in the 930K end-2027 target.</p>
+<p>4. <strong>InP laser capacity milestone:</strong> AAOI targets 350% InP laser fab expansion by end-2027. Any update on 6-inch wafer conversion or intermediate milestones would be a positive catalyst.</p>
+<p>5. <strong>Technical bounce off $100 support:</strong> The $100 level (2017 highs) is the most watched technical support. A bounce here with volume would confirm the distribution pattern that @BeardoTrader identified.</p>
+<p>6. <strong>Near-term risk:</strong> Watch for any Digicomm-specific news (CATV spending cycle) or Amazon AWS capex commentary in the next AMZN earnings report.</p>
+<p>---</p></div>
+  </details>
+</div>
+<!-- PICK 04: HIMX -->
+<div class="pick-card" id="himx">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">04</div>
+      <div>
+        <div class="pick-ticker">HIMX <span class="live-price" data-ticker="HIMX" style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$14.26</span><span class="conviction-badge buy">BUY</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">AR Glasses Displays — Himax Technologies (Taiwan)</div>
+      </div>
+    </div>
+    <div class="pick-alloc">~$240 · 12%</div>
+  </div>
+  <p class="pick-thesis"><strong>Himax is the leading independent maker of LCoS micro-displays — the tiny projection chips inside AR glasses (think Meta / Xreal smart glasses) and pico-projectors. Q1 2026 beat on both revenue ($199M vs $195M est.) and profit ($0.046 vs $0.03 est.). At ~$14.26 the stock is well below its 50-day average with an oversold RSI — a mean-reversion entry. A newer angle: its optical tech may also feed the AI data-center interconnect buildout (via a FOCI partnership), an AI-infra tailwind the market isn&#x27;t pricing yet.</strong></p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Why Now (Catalyst)</h5><p>Q1 2026 beat + guidance; AR glasses launch cycles from Meta / Xreal; optical-interconnect deployments for AI server clusters.</p></div>
+    <div class="pick-box red"><h5>The Risk</h5><p>It&#x27;s a cyclical semiconductor stock — down when the chip cycle is down. Display-driver margins can compress. Based in Taiwan (geopolitical risk).</p></div>
+    <div class="pick-box accent"><h5>Why Targets Look Low</h5><p>Wall Street treats Himax as just a display-driver stock and misses the LCoS optical-interconnect growth and the AI-edge &#x27;WiseEye&#x27; ecosystem — either could re-rate revenue higher.</p></div>
+    <div class="pick-box"><h5>Wall Street Says</h5><p>Only one analyst covers it (Nomura). Little coverage = opportunity but also volatility.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot (plain English)</h5><p>Support $12.90 / Resistance $19.00 / RSI(14) ~31.8 / 50-day avg $17.50 / 52-week high $25.09. Oversold bounce candidate.</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">High</span></div>
+  <details class="full-report">
+    <summary><span class="fr-toggle">▸ Full In-Depth Report</span></summary>
+    <div class="fr-body"><p><strong>HIMX is an undervalued LCoS + display driver compound play that beats on earnings but trades at distressed cyclical lows — the AR/optical-interconnect thesis is real but requires patience.</strong></p>
+<p>---</p>
+<h4>KEY EVIDENCE</h4>
+<ul>
+<li><strong>Q1 2026 Earnings — Beat on Both Lines</strong></li>
+</ul>
+<p>EPS $0.046 actual vs $0.03 estimate; Revenue $199M actual vs $195M estimate (Q1 2025 rev was $215M). Conference call held May 7, 2026. Only Nomura analyst Donnie Teng attended. <strong>KNOWN</strong> — Seeking Alpha SSR_DATA from article/4900605</p>
+<ul>
+<li><strong>LCoS Market Leadership</strong></li>
+</ul>
+<p>Himax Display is &quot;the market leader of the LCoS industry, based on market share since 2012&quot; with &quot;the only non-captive LCoS company that owned a mass production ready liquid crystal assembly line.&quot; Has shipped multimillion units. Applications: pico-projectors, embedded projectors, head-mounted-displays, communications. <strong>KNOWN</strong> — Himax.com.tw microdisplay products page</p>
+<ul>
+<li><strong>Live Price $14.26 — Oversold Technicals</strong></li>
+</ul>
+<p>RSI(14) = 31.8 (oversold territory). Price below SMA50 ($17.50). 52w high $25.09. 20-day resistance $19.00, support $12.90. Volume below 20d average (849K vs 2.55M avg). <strong>KNOWN</strong> — Live Yahoo Finance chart data (6mo range)</p>
+<ul>
+<li><strong>AI-Edge Thesis: WiseEye Ultra-Low Power AI Sensing</strong></li>
+</ul>
+<p>Himax&#x27;s WiseEye product line targets battery-powered edge AI vision — robotics, autonomous machines, smart factories. The GUL X post (Jul 8, 2026) frames Himax as building the &quot;eyes&quot; for AI to interact with the physical world. <strong>KNOWN</strong> — Twitter via agent-reach</p>
+<ul>
+<li><strong>FOCI / Optical Interconnect Connection</strong></li>
+</ul>
+<p>INFERRED connection: FOCI (Fiber Optic Communications Inc.) is a Taiwanese company specializing in fiber optic connectors and silicon photonics components. Himax&#x27;s LCoS panels are a key enabling technology for wavelength-selective switches (WSS) in optical networking / AI data center interconnects. Multiple X posts (GUL, Jul 8, 2026) tie the &quot;optical interconnect report&quot; to broader AI infrastructure buildout where &quot;every layer of AI infrastructure is expanding simultaneously.&quot; Specific FOCI-Himax contractual details are not publicly confirmed. <strong>INFERRED — Medium confidence</strong> — based on X sentiment + industry knowledge of LCoS role in WSS</p>
+<ul>
+<li><strong>AR Glasses Exposure</strong></li>
+</ul>
+<p>LCoS microdisplays are the dominant technology for waveguide-based AR glasses (alongside OLED-on-Silicon). Himax supplies LCoS panels for enterprise AR (Microsoft HoloLens lineage, Xreal, Meta Orion projections). No specific named customer in public filings. <strong>INFERRED — Medium confidence</strong></p>
+<p>---</p>
+<h4>SENTIMENT SYNTHESIS</h4>
+<p><strong>X/Twitter</strong>: Mixed but with a small bullish cohort</p>
+<ul>
+<li>@gulVasikova (Jul 8, 2026): Detailed bullish thesis tying HIMX to AI vision infrastructure — &quot;the company&#x27;s latest 3D sensing and Time-of-Flight technology allows robots, autonomous machines, smart factories and AI devices to understand depth.&quot; ↳ <strong>FACT/OPINION mix</strong></li>
+<li>@PakBenikasim (Feb 2025): $60 price target, &quot;doubling revenue, tripling profits in 3 years thanks to AI&quot; — 31 likes, 4K views ↳ <strong>SPECULATION</strong></li>
+<li>@Minnvestor (Jun 2022): HIMX flagged as one of six profitable tech companies with P/FCF &lt;15 and Fwd P/E &lt;15 ↳ <strong>FACT</strong> (historical data)</li>
+<li>@PaulWeeteling (Jul 2025): Dutch investor calling HIMX a &quot;buy-worthy tech stock with VR potential&quot; ↳ <strong>OPINION</strong></li>
+</ul>
+<p><strong>Reddit</strong>: Essentially zero noise — no posts found on r/wallstreetbets, r/HIMX, or r/stocks. The stock has no retail narrative.</p>
+<p><strong>Sentiment mix</strong>: 30% BULLISH (thesis-aware longs), 20% NEUTRAL (news/earnings references), 50% DEAD (no coverage). Very low coverage means any product win (Meta AR, optical interconnect design-in) would shock the market.</p>
+<p>---</p>
+<h4>COMPETITIVE LANDSCAPE</h4>
+<p>| Company | Segment | Position vs HIMX |</p>
+<p>|---------|---------|-----------------|</p>
+<p>| <strong>Texas Instruments (TXN)</strong> | DLP microdisplays | Competing technology for pico-projectors/AR; DLP vs LCoS — different suitability |</p>
+<p>| <strong>STMicroelectronics (STM)</strong> | Display drivers | Broader auto/industrial driver portfolio, HIMX has niche Taiwan advantage |</p>
+<p>| <strong>Novatek Microelectronics (NVTS)</strong> | Display drivers | Direct competitor in large-panel DDIC; HIMX differentiates via LCoS/microdisplay |</p>
+<p>| <strong>Sony Semiconductor</strong> | OLED microdisplays | Dominant in OLED microdisplays for high-end AR/VR; LCoS is different ecosystem (LCoS is reflective, better for high-brightness) |</p>
+<p>| <strong>OmniVision (OVT)</strong> | CMOS image sensors | Complements HIMX&#x27;s auto/3D sensing; HIMX unique with Wafer Level Optics |</p>
+<p>| <strong>Kopin (KOPN)</strong> | LCoS microdisplays | Small competitor, HIMX claims market leader since 2012 |</p>
+<p>HIMX&#x27;s moat: only non-captive LCoS producer with mass production certified liquid crystal assembly line. This is hard to replicate.</p>
+<p>---</p>
+<h4>KEY RISKS / CONTRARIAN VIEW</h4>
+<p>1. <strong>Cyclical trap</strong>: HIMX is deeply cyclical. Revenue fell from ~$1.2B (2021 peak) to ~$700M (2023 trough). Current run-rate (~$800M) is recovering but still below peak. <strong>KNOWN</strong></p>
+<p>2. <strong>Taiwan/China concentration</strong>: Fab in Taiwan; significant revenue from China display panel makers. Geopolitical risk. <strong>KNOWN</strong></p>
+<p>3. <strong>Single analyst coverage</strong>: Only Nomura covers. Institutional sponsorship near-zero. <strong>KNOWN</strong></p>
+<p>4. <strong>AR timeline uncertainty</strong>: AR glasses remain a nascent category. Meta&#x27;s AR push (Orion) is still prototype stage. <strong>KNOWN</strong></p>
+<p>5. <strong>FOCI/optical interconnect thesis unconfirmed</strong>: No public partnership announcement. The investment thesis relies on LCoS being used in WSS for AI data center optics — plausible but not proven. <strong>INFERRED</strong></p>
+<p><strong>Contrarian view</strong>: HIMX at $14.26 is cheap for a reason — it&#x27;s a commoditized display driver company with a tiny microdisplay side business. The AR thesis has been running for 5+ years with no material revenue. The optical interconnect story could be noise. The stock deserves the cyclical discount.</p>
+<p>---</p>
+<h4>CONFIDENCE</h4>
+<p><strong>Medium</strong> — The valuation case (oversold, earnings beat, below SMA50) is strong on a 3-6 month mean-reversion basis. The structural AR/optical thesis is compelling but unconfirmed. Without granular customer data or a catalyst event, the multi-year compound thesis remains speculative.</p>
+<p>---</p>
+<h4>RE-RATE TRIGGERS / NEXT STEPS</h4>
+<p>1. <strong>Q2 2026 earnings</strong> (expected August 2026) — watch for AR/LCoS revenue breakout and gross margin commentary</p>
+<p>2. <strong>FOCI partnership announcement</strong> or LCoS design win in optical networking equipment</p>
+<p>3. <strong>Meta Orion or Xreal production ramp</strong> — LCoS supply contract win</p>
+<p>4. <strong>Gross margin inflection</strong> — current pressure from display driver pricing; WiseEye/LCoS/3D sensing margins are much higher</p>
+<p>5. <strong>Analyst initiation</strong> — new coverage would surface the LCoS narrative to institutional buyers</p>
+<p>---</p></div>
+  </details>
+</div>
+<!-- PICK 05: ANET -->
+<div class="pick-card" id="anet">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">05</div>
+      <div>
+        <div class="pick-ticker">ANET <span class="live-price" data-ticker="ANET" style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$181.88</span><span class="conviction-badge core">BUY · CORE</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">AI Data-Center Networking — Arista Networks (CORE)</div>
+      </div>
+    </div>
+    <div class="pick-alloc">~$200 · 10%</div>
+  </div>
+  <p class="pick-thesis"><strong>Arista makes the Ethernet switches that act as the &#x27;nervous system&#x27; of AI data centers — moving data between thousands of AI chips at 800G speeds. It&#x27;s a core (steady) holding, not a moonshot. 63.5% gross margins, 35% revenue growth, zero debt. Q1 2026 revenue $2.71B beat estimates; Q2 guide $2.8B. It&#x27;s locked into Microsoft and Meta (Meta alone spending $145B on AI in 2026) with 94% customer retention. BlackRock ranks Arista #14 of the 30 most important AI companies. This is a compounder you hold, not a lottery ticket.</strong></p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Why Now (Catalyst)</h5><p>Q2 2026 earnings (late July) — guide implies 3.4% sequential growth; the 800G→1.6T upgrade cycle at hyperscalers is a multi-year tailwind.</p></div>
+    <div class="pick-box red"><h5>The Risk</h5><p>Gross margin ticking down slightly (memory costs). Concentrated in Microsoft + Meta. P/E of 62x is rich even for a grower.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Look Low</h5><p>Street&#x27;s average target ($187.63) implies only 3.2% upside — typical under-estimate of a compounder. Earnings grow 22%/yr; any hyperscaler capex surprise smashes the narrow consensus.</p></div>
+    <div class="pick-box"><h5>Wall Street Says</h5><p>Moderate Buy (25 analysts). Avg target $187.63. BofA $175, Weiss $200.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot (plain English)</h5><p>Support $160 (50-day). Resistance $190 (all-time high $189.82). RSI(14) 59 — neutral-bullish. Trading above both 50- and 200-day averages. Bullish breakout from a 3-month base, new highs near $190.</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Mod-High</span></div>
+  <details class="full-report">
+    <summary><span class="fr-toggle">▸ Full In-Depth Report</span></summary>
+    <div class="fr-body"><p><strong>Arista Networks is a core AI-infra holding — the dominant ethernet switching provider powering hyperscaler datacenters, with 35% revenue growth, 63.5% gross margins, zero debt, and a multi-year catalyst from the 800G→1.6T upgrade cycle — best framed as a BUY core position, not an asymmetric bet.</strong></p>
+<p>---</p>
+<h4>KEY EVIDENCE</h4>
+<p>| Evidence | Source | Date | Classification |</p>
+<p>|----------|--------|------|----------------|</p>
+<p>| Price $181.88, Market Cap $229.14B | Yahoo Finance / Finviz | Jul 13, 2026 | KNOWN |</p>
+<p>| Q1 2026 Rev $2.71B (+35.1% YoY), beat $2.62B est | MarketBeat / Motley Fool | May/Jun 2026 | KNOWN |</p>
+<p>| Q1 2026 EPS $0.87, beat $0.81 est by $0.06 | MarketBeat / Motley Fool | Jun 2, 2026 | KNOWN |</p>
+<p>| Gross Margin 63.54% (Q1 2026), declining slightly | Motley Fool AI Supercycle article | Jul 5, 2026 | KNOWN |</p>
+<p>| Net Profit Margin 37.8% | Motley Fool article | Jun 2, 2026 | KNOWN |</p>
+<p>| Q2 Guidance: $2.8B revenue (3.4% sequential growth) | Motley Fool article | Jun 2, 2026 | KNOWN |</p>
+<p>| CEO Jayshree Ullal: &quot;uniquely positioned for client-to-campus-to-cloud and AI networking&quot; | Q1 2026 earnings release | May 2026 | KNOWN |</p>
+<p>| 94% customer retention rate | Motley Fool AI Supercycle article | Jul 5, 2026 | KNOWN |</p>
+<p>| P/E (TTM) 62.31, Forward P/E 40.86 | Finviz | Jul 13, 2026 | KNOWN |</p>
+<p>| EPS next 5Y growth estimate: 21.85% CAGR | Finviz | Jul 13, 2026 | KNOWN |</p>
+<p>| 52-week range: $104.68 - $189.82 | Yahoo Finance | Jul 13, 2026 | KNOWN |</p>
+<p>| YTD Performance: +38.88%, 1Y: +67.61% | Finviz | Jul 13, 2026 | KNOWN |</p>
+<p>| RSI (14): 59.06 | Finviz | Jul 13, 2026 | KNOWN |</p>
+<p>| Beta: 1.62 | Yahoo Finance | Jul 13, 2026 | KNOWN |</p>
+<p>| Shares Outstanding: 1.26B | Finviz | Jul 13, 2026 | KNOWN |</p>
+<p>| $750B estimated annual AI infrastructure spend by hyperscalers | Motley Fool AI Supercycle article | Jul 5, 2026 | KNOWN |</p>
+<p>| BlackRock ranked ANET #14 among 30 most important AI companies | Twitter/X via @Marlin_Capital | Jul 11, 2026 | KNOWN |</p>
+<p>| Meta capex $145B in 2026 (hyperscaler demand driver) | Task context / Meta guidance | 2026 | KNOWN |</p>
+<p>| Amazon, Google, Microsoft, Meta, Oracle on track to spend $1.2T on AI data centers by 2027 | Twitter/X via @joinautopilot | Jul 13, 2026 | KNOWN |</p>
+<p>| 25 analysts cover ANET, Moderate Buy consensus, avg PT $187.63 | MarketBeat | Jul 13, 2026 | KNOWN |</p>
+<p>| Bank of America: Outperform, PT $175 | MarketBeat | Jun 8, 2026 | KNOWN |</p>
+<p>| Weiss Ratings: Overweight, PT $200 | MarketBeat | Jun 15, 2026 | KNOWN |</p>
+<p>| Earnings call transcripts available: Q1 2026 (SA article #4898838), Q4 2025 (#4869797) | Seeking Alpha transcripts page | Jul 13, 2026 | KNOWN |</p>
+<p>| &quot;Arista builds the networking backbone for hyperscalers and AI clusters — leverage to 800G→1.6T upgrade cycle&quot; | Twitter/X via @Venu_7_ | Apr 22, 2026 | OPINION (bullish) |</p>
+<p>| &quot;Coming out of a base, main beneficiary of AI data-centre buildout&quot; | Twitter/X via @DonnaAnnleffler | Jul 11, 2026 | OPINION (bullish) |</p>
+<p>| Post-earnings dip — &quot;elevated P/E, better opportunities elsewhere&quot; | Motley Fool (Marc Guberti) | Jun 2, 2026 | OPINION (contrarian) |</p>
+<p>| &quot;Monster Q1 beat, massive institutional buying&quot; | Twitter/X via @STaylor76084368 | Jul 12, 2026 | OPINION (bullish) |</p>
+<p>---</p>
+<h4>SENTIMENT SYNTHESIS (X/Twitter + Reddit)</h4>
+<p><strong>Classification Mix:</strong></p>
+<p>| Sentiment | Count | Sources |</p>
+<p>|-----------|-------|---------|</p>
+<p>| Bullish (FACT+OPINION) | 6 | @Venu_7_, @DonnaAnnleffler, @joinautopilot, @FuturumEquities, @WLCMensSoccer, @Marlin_Capital |</p>
+<p>| Neutral/Skeptical (OPINION) | 1 | Motley Fool (Marc Guberti) |</p>
+<p>| Corporate/News (FACT) | 2 | @AristaNetworks, @earnings_guy |</p>
+<p>| Total Signals | 9 | |</p>
+<p><strong>Read:</strong> Overwhelmingly bullish retail/social sentiment. Consensus frames ANET as *the* pure-play AI networking infrastucture stock (ethernet switches connecting GPUs in AI clusters). The lone skeptical voice (Motley Fool contributor) acknowledges the growth but flags elevated P/E vs peers. Institutional framing is strong — BlackRock ranks it #14 globally in AI importance, and $1.2T hyperscaler capex by 2027 provides a multi-year demand floor.</p>
+<p>---</p>
+<h4>COMPETITIVE LANDSCAPE</h4>
+<p>| Competitor | Ticker | Arista Advantage | Arista Risk |</p>
+<p>|-----------|--------|-----------------|-------------|</p>
+<p>| <strong>Cisco Systems</strong> | CSCO | Arista&#x27;s EOS software is cloud-native, modern; Cisco legacy installed base is vulnerable | Cisco&#x27;s massive installed base and enterprise relationships |</p>
+<p>| <strong>Broadcom</strong> | AVGO | Arista is pure-play ethernet switching; Broadcom is a silicon supplier (Tomahawk, Jericho) | Broadcom&#x27;s custom ASIC solutions for hyperscalers could bypass Arista |</p>
+<p>| <strong>NVIDIA</strong> | NVDA | Arista offers standards-based ethernet; NVDA pushes InfiniBand/ Spectrum-X | NVDA&#x27;s Spectrum-X ethernet switch is a direct competitive threat |</p>
+<p>| <strong>Juniper Networks</strong> | JNPR | Arista dominates cloud datacenter; Juniper is stronger in telco/service provider | HPE acquisition of Juniper could create a more aggressive competitor |</p>
+<p>| <strong>Hewlett Packard Enterprise</strong> | HPE | Arista&#x27;s software-defined approach (EOS) vs HPE&#x27;s hardware-centric model | HPE + Juniper combined networking business is formidable |</p>
+<p>| <strong>Extreme Networks</strong> | EXTR | Arista&#x27;s hyperscaler focus vs Extreme&#x27;s mid-market | Minimal overlap at hyperscale layer |</p>
+<p><strong>Key INFERRED Observation:</strong> Arista&#x27;s moat is in its EOS software platform and hyperscaler relationships. The 800G upgrade cycle plays to Arista&#x27;s strengths (7800R3 series). NVDA&#x27;s Spectrum-X is the most credible competitive threat, but Arista&#x27;s standards-based ethernet approach is preferred by operators who resist vendor lock-in.</p>
+<p>---</p>
+<h4>KEY RISKS / CONTRARIAN VIEW</h4>
+<p>1. <strong>Valuation Risk:</strong> P/E of 62x (TTM) is in the top decile of the tech sector. Forward P/E of 41x still premium. Any growth deceleration could trigger multiple compression. (KNOWN — Finviz)</p>
+<p>2. <strong>Customer Concentration:</strong> Most business tied to Microsoft and Meta. One hyperscaler cutting orders would materially impact revenue. (KNOWN — Motley Fool)</p>
+<p>3. <strong>Gross Margin Pressure:</strong> Memory cost headwinds are compressing gross margin from historical ~64% toward 62-63% guidance. Trend direction is negative even if magnitude is small. (KNOWN — Motley Fool)</p>
+<p>4. <strong>NVIDIA Spectrum-X:</strong> NVDA&#x27;s ethernet switch push is the most credible long-term threat. If hyperscalers adopt NVDA&#x27;s full-stack approach (NVLink + Spectrum-X), Arista could be disintermediated. (INFERRED — Industry dynamics; Medium confidence)</p>
+<p>5. <strong>Insufficient &quot;Moonshot&quot; Framing:</strong> For Brian&#x27;s concentrated basket which seeks asymmetric returns, a $229B large-cap compounding at 20-25% EPS growth offers solid but not life-changing returns. This is why it&#x27;s framed as <strong>core</strong> not asymmetric.</p>
+<p>---</p>
+<h4>CONFIDENCE</h4>
+<p><strong>High.</strong> Arista&#x27;s revenue growth (+35%), margin profile (63.5% gross, 37.8% net), zero-debt balance sheet, and hyperscaler demand tailwind are well-established. The thesis is supported by multiple independent sources (Yahoo, Finviz, MarketBeat, Motley Fool, Seeking Alpha, X/Twitter). The lone uncertainty is valuation (62x P/E) and the magnitude of the 800G→1.6T cycle — but these are risks, not thesis-breakers.</p>
+<p>---</p>
+<h4>RE-RATE TRIGGERS / NEXT STEPS</h4>
+<p>1. <strong>Q2 2026 Earnings (Late July 2026):</strong> Guide $2.8B revenue. Any upside to guidance or raised FY outlook would re-rate the stock.</p>
+<p>2. <strong>Hyperscaler Capex Updates:</strong> Meta&#x27;s $145B, Microsoft&#x27;s Azure AI spend, Amazon AWS re:Invent — any upward revision is a catalyst for ANET.</p>
+<p>3. <strong>800G/1.6T Product Cycle:</strong> Watch for Arista 7800R3 series adoption announcements at hyperscalers.</p>
+<p>4. <strong>Competitive Shifts:</strong> Monitor NVIDIA GTC and Spectrum-X adoption; any loss of design wins to NVDA would be negative.</p>
+<p>5. <strong>Gross Margin Stabilization:</strong> If gross margins stabilize above 63%, valuation fears ease significantly.</p>
+<p><strong>Immediate Action:</strong> Add as 10% core position (~$200). Set mental stop at $150 (-17.5%). Upside target: $230-250 (+26-37%) on next earnings beat.</p>
+<p>---</p></div>
+  </details>
+</div>
+<!-- PICK 06: APH -->
+<div class="pick-card" id="aph">
+  <div class="pick-header">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="pick-rank">06</div>
+      <div>
+        <div class="pick-ticker">APH <span class="live-price" data-ticker="APH" style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$155.47</span><span class="conviction-badge core">BUY · CORE</span></div>
+        <div style="font-size:13px;color:var(--text-dim);">Connectors / Interconnect — Amphenol (CORE)</div>
+      </div>
+    </div>
+    <div class="pick-alloc">~$100 · 5%</div>
+  </div>
+  <p class="pick-thesis"><strong>Amphenol makes the high-speed plugs, cables, and connectors that link AI servers together — both copper and fiber. As hyperscalers scale 800G/1.6T clusters, Amphenol rides the buildout. Co-packaged optics (CPO) got delayed to 2028–2029, which extends the copper-connector super-cycle in its favor. Q1 2026 data-center sales jumped 99% YoY (41% of revenue). The CommScope acquisition makes it the broadest interconnect supplier. 58% revenue growth, 38% margins — a steady compounder at the center of AI infrastructure.</strong></p>
+  <div class="pick-grid">
+    <div class="pick-box green"><h5>Why Now (Catalyst)</h5><p>CommScope deal closes and contributes; industry voices (Dylan Patel) note &#x27;APH outperforms as CPO delays extend copper&#x27;s runway&#x27;; Q2 earnings (late July) with low-teens data-center growth.</p></div>
+    <div class="pick-box red"><h5>The Risk</h5><p>Debt ballooned to $18.7B from the CommScope deal (~$208M interest/quarter). A hyperscaler capex slowdown or a sudden shift to optical would cool copper growth. 45x earnings leaves little error margin.</p></div>
+    <div class="pick-box accent"><h5>Why Targets Look Low</h5><p>Analyst median $185 = ~19% upside, but the copper tailwind (CPO delays through 2028+) isn&#x27;t fully priced. Fair-value estimates range $145–$178; the bull case needs sustained 20%+ organic growth.</p></div>
+    <div class="pick-box"><h5>Wall Street Says</h5><p>18 analysts, consensus Buy (4 Strong Buy, 11 Buy, 3 Hold, 0 Sell). Median target $185, range $135–$215. Zacks #3 Hold — valuation keeps them cautious.</p></div>
+  </div>
+  <div class="pick-box"><h5>Technical Snapshot (plain English)</h5><p>$155.47 below 50-day ($147.38) and 200-day ($139.82). RSI(14) 41.5 neutral-bearish. Support ~$151.78, resistance ~$178.52 (52-week high). Pullback testing support.</p></div>
+  <div class="risk-meter"><span style="font-size:9px;color:var(--text-quiet);margin-right:8px;">Risk:</span><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot active"></div><div class="risk-dot"></div><span style="font-size:9px;color:var(--text-quiet);margin-left:8px;">Mod-High</span></div>
+  <details class="full-report">
+    <summary><span class="fr-toggle">▸ Full In-Depth Report</span></summary>
+    <div class="fr-body"><p><strong>Amphenol is a core AI-infra compounder — the dominant high-speed interconnect supplier for the 800G/1.6T datacenter transition, with CPO delays extending its copper connector super-cycle through 2028+, though its $191B market cap and 45x PE limit the asymmetric upside in a concentrated basket.</strong></p>
+<p>---</p>
+<h4>KEY EVIDENCE</h4>
+<p>1. <strong>Q1 2026 Record Results</strong> — Revenue $7.62B (+58% YoY), EPS $0.72 (+24% YoY). Orders $9.44B (+78% YoY), book-to-bill 1.24x. IT datacom sales surged 99% YoY (81% organic), now 41% of total revenue. *Source: Seeking Alpha Q1 2026 Earnings Call Transcript (KNOWN — April 29, 2026)*</p>
+<p>2. <strong>CommScope CCS Acquisition</strong> — Purchase of CommScope&#x27;s Connectivity and Cable Solutions unit materially strengthens AI and networking portfolio, creating the industry&#x27;s broadest portfolio of high-speed copper, fiber-optic and power interconnect products. Debt rose to ~$18.7B post-deal. *Source: Yahoo Finance / Zacks article (KNOWN — July 8, 2026)*</p>
+<p>3. <strong>Dylan Patel (SemiAnalysis) Copper Thesis</strong> — &quot;Copper companies like Amphenol, which make backplane connectors and cables, are going to perform much better over the next few years than previously expected because CPO is being delayed. Rubin is all copper, Feynman is still copper. CPO won&#x27;t arrive until end of 2028 at earliest.&quot; *Source: @HyperTechInvest tweet quoting Dylan Patel (KNOWN — July 11, 2026)*</p>
+<p>4. <strong>Q1 2026 Segment Detail</strong> — IT datacom +99% YoY; defense +44%; industrial +52%; commercial aerospace +22%. Management expects low-teens sequential IT datacom growth in Q2. Hyperscaler AI infrastructure investment driving sustained demand. *Source: Yahoo Finance / Zacks article (KNOWN — July 10, 2026)*</p>
+<p>5. <strong>Financial Profile</strong> — Gross margin 37.9%, operating margin 27.3%, net profit margin 17.2%. ROE 36.8%, ROA 13.5%. Free cash flow $3.56B (TTM). Revenue growth 58.4% YoY. PEG ratio 1.36x. *Source: Yahoo Finance yfinance (KNOWN — live fetch July 13, 2026)*</p>
+<p>6. <strong>Valuation</strong> — Trailing PE 44.7x, Forward PE 27.0x. EV/EBITDA 25.7x. Price/Book 13.7x. Analyst consensus Buy with median PT $185. Zacks Value Score: D. *Source: Yahoo Finance yfinance (KNOWN — live fetch July 13, 2026)*</p>
+<p>7. <strong>NVIDIA Supply Chain Endorsement</strong> — Jensen Huang explicitly named Amphenol in his &quot;You&#x27;re So Rich Now&quot; toast to supply chain partners — APH market cap listed at $183B (May 2026). *Source: @aleabitoreddit tweet (KNOWN — May 30, 2026)*</p>
+<p>8. <strong>Goldman Sachs AI Networking Forecast</strong> — Projecting AI networking infrastructure from $15B in 2026 to $154B by 2028 (~10x). APH is a direct beneficiary as the dominant interconnect supplier. *Source: @burak_finance tweet (KNOWN — July 11, 2026)*</p>
+<p>---</p>
+<h4>SENTIMENT SYNTHESIS</h4>
+<p><strong>X/Twitter: Bullish (OPINION/FACT mix)</strong></p>
+<p>| Theme | Signal | Classification |</p>
+<p>|-------|--------|---------------|</p>
+<p>| Dylan Patel copper thesis (APH beneficiary of CPO delays) | Strongly bullish, high engagement (441 likes, 105K views) | INFERRED (expert opinion, SemiAnalysis) |</p>
+<p>| Jensen Huang supply chain mention | Bullish (NVIDIA endorsement) | KNOWN (fact) |</p>
+<p>| &quot;Hard to ignore the chatter on $APH&quot; | Moderately bullish, retail chatter | OPINION |</p>
+<p>| &quot;Likely multibagger after Dylan Patel&#x27;s comments&quot; | Bullish forward view | SPECULATION |</p>
+<p>| Dividend-focused post ($6.57 dividend) | Neutral | FACT |</p>
+<p><strong>Reddit: Not accessible</strong> — Reddit API blocked this session. *No data to report.*</p>
+<p><strong>Mix:</strong> ~70% bullish factual/catalyst-driven, 20% speculative, 10% neutral. The Dylan Patel / SemiAnalysis call is the dominant narrative driver — it&#x27;s the most shared and cited thesis on APH in the past week.</p>
+<p>---</p>
+<h4>COMPETITIVE LANDSCAPE</h4>
+<p>| Company | Ticker | Market Cap | Revenue | PE | P/S | Focus |</p>
+<p>|---------|--------|-----------|---------|-----|-----|-------|</p>
+<p>| <strong>Amphenol</strong> | <strong>APH</strong> | <strong>$191B</strong> | <strong>$25.9B</strong> | <strong>44.7x</strong> | <strong>7.4x</strong> | <strong>High-speed copper/fiber connectors, AI datacenter</strong> |</p>
+<p>| TE Connectivity | TEL | $57.9B | $18.7B | 20.2x | 3.1x | Broader industrial/auto connectors, less AI exposure |</p>
+<p>| Corning | GLW | $158.3B | $16.3B | 88.4x | 9.7x | Fiber optic, photonics, optical components |</p>
+<p>| Keysight Technologies | KEYS | $55.2B | $6.1B | 51.9x | 9.1x | Test/measurement, not direct connector comp |</p>
+<p>| Belden | BDC | ~$5B | ~$2.5B | ~20x | ~2x | Lower-end cabling, niche |</p>
+<p><strong>Differentiation:</strong> APH is the largest pure-play interconnect company. TE Connectivity is the closest comp but has heavier auto/industrial exposure and less AI datacenter weighting. The CommScope CCS acquisition widens APH&#x27;s moat significantly — no competitor offers the full breadth of high-speed copper + fiber-optic + power interconnect for AI clusters.</p>
+<p><strong>Inferred competitive advantage:</strong> Once a connector/cabling solution is designed into a hyperscaler&#x27;s architecture, switching costs are high. APH&#x27;s 10,000+ product SKUs and deep customer relationships with NVIDIA, hyperscalers, and OEMs create a sticky installed base.</p>
+<p>---</p>
+<h4>KEY RISKS / CONTRARIAN VIEW</h4>
+<p>1. <strong>Debt Overhang:</strong> Total debt of $18.7B (from $15.5B pre-CommScope) with debt/equity of 133%. Interest expense of $208M/quarter could pressure margins if rates stay high. Integration risk on CCS deal.</p>
+<p>2. <strong>Valuation Stretch:</strong> At 44.7x trailing earnings, APH trades at a significant premium to TE Connectivity (20x). The Zacks Value Score of D flags the stock as expensive. If revenue growth decelerates from 58% to a more normalized 15-20%, the multiple could contract materially.</p>
+<p>3. <strong>CPO Thesis Risk:</strong> The bull case for copper hinges on CPO delays. If hyperscalers accelerate CPO adoption (consensus says 2028-2029, but could come earlier), copper connector demand could peak sooner. SemiAnalysis is very confident on delays, but this is a single data point.</p>
+<p>4. <strong>Hyperscaler Capex Cyclicality:</strong> AI infrastructure spending is cyclical. Any slowdown in hyperscaler capex (macro, trade war, tariff impact) would directly hit IT datacom revenue, which is now 41% of total sales.</p>
+<p>5. <strong>Acquisition Integration:</strong> APH has a strong M&amp;A track record, but the CommScope CCS deal is its largest ever. Integration risks, culture clash, and potential customer attrition are real.</p>
+<p>---</p>
+<h4>CONFIDENCE</h4>
+<p><strong>High</strong> — for the secular AI infrastructure thesis and APH&#x27;s dominant position in high-speed interconnects.</p>
+<p><strong>Medium</strong> — for entry timing at $155 with a 45x PE and $18.7B of debt. The risk/reward is balanced, not asymmetric.</p>
+<p>The company is executing exceptionally well (58% revenue growth, 1.24x book-to-bill, 99% IT datacom growth), and the Dylan Patel copper thesis provides a powerful narrative catalyst. However, the large-cap nature and elevated valuation mean this is a core compounder, not a high-alpha asymmetric bet. The 5% allocation reflects this.</p>
+<p>---</p>
+<h4>RE-RATE TRIGGERS / NEXT STEPS</h4>
+<p>1. <strong>Q2 2026 Earnings (Late July 2026):</strong> Watch for IT datacom sequential growth guidance (management guided low-teens). A beat + raise could push the stock toward $170+.</p>
+<p>2. <strong>CommScope CCS Close:</strong> Once the deal closes and initial revenue contribution is disclosed, the market may re-rate on the expanded portfolio.</p>
+<p>3. <strong>NVIDIA GTC / Rubin Launch:</strong> Any confirmation of all-copper backplane for Rubin (current gen) and Feynman (next gen) would validate the thesis.</p>
+<p>4. <strong>Hyperscaler Capex Updates:</strong> Q2 earnings from Microsoft, Amazon, Google, Meta — their datacenter capex guidance for H2 2026 is the single most important demand signal.</p>
+<p>5. <strong>Monitor Debt Paydown:</strong> Management&#x27;s plans for reducing the $18.7B debt load and the path to investment-grade metrics.</p>
+<p>---</p></div>
+  </details>
+</div>
+  </div>
+</main>
+<footer>
+  Independent research. Not investment advice. Prices live-fetched via Yahoo Finance (proxy); verify before acting. SIVE prices shown in SEK with USD equivalent (~9.71 SEK/USD, Jul 13 2026). Built with Brian's 6-step rigor method.
+</footer>
+<button class="to-top" id="toTop" aria-label="Back to top" onclick="toTopFn()">↑</button>
+<script>
+function toTopFn() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function toggleGroup(el) {
+  el.classList.toggle('collapsed');
+  var group = el.nextElementSibling;
+  if (group && group.classList.contains('toc-section-group')) {
+    if (group.style.maxHeight === '0px' || !group.style.maxHeight) {
+      group.style.maxHeight = group.scrollHeight + 'px';
+      group.classList.remove('collapsed');
+    } else {
+      group.style.maxHeight = '0px';
+      group.classList.add('collapsed');
+    }
+  }
+}
+</script>
+<script>
+(function() {
+  var stamp = document.getElementById('refresh-stamp');
+  if (stamp) stamp.textContent = 'as of ' + new Date().toISOString().slice(0,10);
+  var tickers = {};
+  document.querySelectorAll('.live-price').forEach(function(el){
+    tickers[el.getAttribute('data-ticker')] = el;
+  });
+  var symbolMap = { 'CCXI':'CCXI','SIVE':'SIVE.ST','AAOI':'AAOI','HIMX':'HIMX','ANET':'ANET','APH':'APH' };
+  Object.keys(tickers).forEach(function(k){
+    var sym = symbolMap[k] || k;
+    var url = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/' + sym + '?range=1d&interval=1d');
+    fetch(url).then(function(r){ return r.json(); }).then(function(d){
+      try {
+        var px = d.chart.result[0].meta.regularMarketPrice;
+        var el = tickers[k];
+        var prefix = (sym.indexOf('.ST') > -1) ? 'SEK ' : '$';
+        el.textContent = prefix + px.toFixed(2);
+      } catch(e){ /* keep fallback */ }
+    }).catch(function(e){ /* keep fallback */ });
+  });
+  // back-to-top button visibility
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) toTop.classList.add('show');
+    else toTop.classList.remove('show');
+  });
+})();
+</script>
+</body>
+</html>

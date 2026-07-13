@@ -1,200 +1,373 @@
 #!/usr/bin/env python3
-import json, re
+"""
+Daily stock data refresh for Tech v3 and Deep-Dive v4 docs.
+Uses yahooquery for data fetching.
+"""
+
+import re
+import sys
+import json
 from datetime import datetime
+from pathlib import Path
 
-with open('/tmp/yf_data.json', 'r') as f:
-    data = json.load(f)
+from yahooquery import Ticker
 
-def fmt_big(val):
-    if val is None: return 'N/A'
-    abs_val = abs(val)
-    sign = '-' if val < 0 else ''
-    if abs_val >= 1e9:
-        b = abs_val / 1e9
-        return f'{sign}${b:.1f}B' if b >= 10 else f'{sign}${b:.2f}B'
-    elif abs_val >= 1e6:
-        return f'{sign}${abs_val/1e6:.0f}M'
+TECH_V3 = "Tech_Stock_Basket_May_2026_v3.html"
+DEEP_DIVE_V4 = "investment-deep-dive-v4.html"
+
+TECH_TICKERS = [
+    "DOCU","SNOW","OKTA","MNDY","VEEV","DDOG","ANET","GLW","AMKR",
+    "ETN","LUMN","QCOM","NTAP","AEP","VST","STX","MU","HIMX",
+    "AOSL","AMPX","SMCI","ARM","MRVL"
+]
+DEEP_DIVE_TICKERS = ["FLNC","AAOI","MU","SMCI","SNDK","APH","ANET","AMPX","VST"]
+ALL_TICKERS = list(dict.fromkeys(TECH_TICKERS + DEEP_DIVE_TICKERS))
+
+today = datetime.now()
+date_str = today.strftime("%B %d %Y")
+print(f"{'='*60}")
+print(f"Stock data refresh — {date_str}")
+print(f"{'='*60}")
+
+# ── 1. Fetch fresh data ──────────────────────────────────────────
+print("\nFetching current prices and history...")
+t = Ticker(ALL_TICKERS)
+prices_raw = t.price
+
+# Fetch full price history for returns
+hist = None
+try:
+    hist = t.history(period="6mo")
+    if hist is not None and not hist.empty:
+        print(f"  Got {len(hist)} history rows")
     else:
-        return f'{sign}${abs_val:,.0f}'
+        hist = None
+except Exception as e:
+    print(f"  History fetch failed: {e}")
 
-def fmt_pct(val):
-    if val is None: return 'N/A'
-    pct = val * 100
-    return f"{'+' if pct >= 0 else ''}{pct:.1f}%"
+prices = {}
+for sym in ALL_TICKERS:
+    d = prices_raw.get(sym)
+    if not d:
+        print(f"  WARNING: No data for {sym}")
+        continue
+    rp = d.get("regularMarketPrice")
+    if rp is None:
+        print(f"  WARNING: No regularMarketPrice for {sym}")
+        continue
+    prices[sym] = rp
+    prev = d.get("regularMarketPreviousClose")
+    chg = d.get("regularMarketChangePercent")
+    chg_str = f" (prev ${prev:.2f}, {chg*100:+.2f}%)" if prev and chg else ""
+    print(f"  {sym}: ${rp:.2f}{chg_str}")
 
-def fmt_ret(val):
-    if val is None: return 'N/A'
-    return f"{'+' if val >= 0 else ''}{val:.1f}%"
+if not prices:
+    sys.exit("FATAL: No prices fetched.")
 
-def get_cls(val): return 'up' if val >= 0 else 'down'
-def fmt_price(price): return f'{price:,.2f}'
+# ── Pre-compute period returns ───────────────────────────────────
+def get_returns(sym):
+    """Return {period: return_pct} for a ticker."""
+    if hist is None:
+        return {}
+    try:
+        sh = hist.xs(sym, level=0)
+    except Exception:
+        try:
+            sh = hist.xs(sym, level=0)
+        except Exception:
+            return {}
+    if sh.empty:
+        return {}
+    closes = sh['close'].sort_index()
+    if len(closes) < 2:
+        return {}
 
-print('=== Updating Tech v3 ===')
-with open('Tech_Stock_Basket_May_2026_v3.html', 'r', encoding='utf-8') as f:
-    tech_html = f.read()
+    today_c = closes.iloc[-1]
+    r = {}
+    for label, days in [("6M", 126), ("90D", 63), ("30D", 21)]:
+        if len(closes) > days:
+            past = closes.iloc[-(days+1)]
+            if past > 0:
+                r[label] = (today_c - past) / past * 100
+    # YTD
+    year_start = "2026-01-01"
+    try:
+        dates = sh.index.get_level_values('date')
+        mask = dates >= year_start
+        if mask.any():
+            first_idx = mask.argmax()
+            ytd_open = closes.iloc[first_idx]
+            if ytd_open > 0:
+                r["YTD"] = (today_c - ytd_open) / ytd_open * 100
+    except Exception:
+        pass
+    return r
 
-tech_tickers = sorted(set(re.findall(r'<div class="ticker"[^>]*>([A-Z]{2,5})', tech_html)))
-tech_updated = tech_html
+ret_cache = {sym: get_returns(sym) for sym in TECH_TICKERS}
+print(f"\n  Returns computed for {sum(1 for v in ret_cache.values() if v)} tickers")
+
+# ── 2. Read files ──────────────────────────────────────────────
+with open(TECH_V3, "r", encoding="utf-8") as f:
+    tech = f.read()
+with open(DEEP_DIVE_V4, "r", encoding="utf-8") as f:
+    dive = f.read()
+
+tech_orig = tech
+dive_orig = dive
+
+# ── 3. Update Deep-Dive v4: current prices ONLY ────────────────
+print("\n--- Deep-Dive v4 ---")
+dive_changes = []
+
+for sym in DEEP_DIVE_TICKERS:
+    if sym not in prices:
+        continue
+    np = prices[sym]
+    # Format: comma for >= 1000
+    nps = f"${np:,.2f}" if np >= 1000 else f"${np:.2f}"
+    old_np_str = None
+
+    # 3a. pick-ticker price span
+    # Pattern: <div class="pick-ticker">TICKER <span style="font-size:16px;font-weight:500;color:var(--text-dim);margin-left:8px;">$OLD</span></div>
+    pt = re.compile(
+        rf'(<div class="pick-ticker">{re.escape(sym)} <span style="font-size:16px;font-weight:500;color:var\(--text-dim\);margin-left:8px;">)(\$[0-9,]+\.\d+)(</span></div>)'
+    )
+    m = pt.search(dive)
+    if m:
+        ops = m.group(2)
+        old_np_str = ops
+        if ops != nps:
+            dive = dive[:m.start()] + m.group(1) + nps + m.group(3) + dive[m.end():]
+            print(f"  {sym} pick-ticker: {ops} -> {nps}")
+
+    # 3b. "(stock at $OLD)" in Wall Street box
+    idx = dive.find(f'class="pick-ticker">{sym}')
+    if idx >= 0:
+        sa = re.search(r'\(stock at (\$[0-9,]+\.[0-9]+)\)', dive[idx:idx+3000])
+        if sa:
+            ops = sa.group(1)
+            if ops != nps:
+                sa_start = idx + sa.start()
+                sa_end = idx + sa.end()
+                dive = dive[:sa_start] + f"(stock at {nps})" + dive[sa_end:]
+                print(f"  {sym} wall-st: {ops} -> {nps}")
+
+    # Track changes
+    if old_np_str is not None and old_np_str != nps:
+        try:
+            old_v = float(old_np_str.replace("$","").replace(",",""))
+            new_v = float(nps.replace("$","").replace(",",""))
+            pct_chg = (new_v - old_v) / old_v * 100
+            flag = " **" if abs(pct_chg) > 10 else ""
+            dive_changes.append((sym, old_np_str, nps, pct_chg, flag))
+        except ValueError:
+            pass
+
+# ── 4. Update Tech v3: full refresh ─────────────────────────────
+print("\n--- Tech v3 ---")
+
 tech_changes = []
 
-for ticker in tech_tickers:
-    if ticker not in data: continue
-    d = data[ticker]
-    price, ret_30d = d['price'], d['ret_30d']
-    
-    # Match: <div class="ticker" style="...">TICKER <span style="...">$PRICE</span> <span style="...">PERCENT% ARROW
-    # Note: The percentage span in Tech v3 has NO closing </span> tag, and there's a newline after the arrow
-    pattern = rf'(<div class="ticker"[^>]*>{re.escape(ticker)}\s+<span[^>]*>\$)[\d,]+\.\d{{2}}(</span>\s+<span[^>]*>)[\-\+]?\d+\.\d+% [↑↓]'
-    
-    def make_repl(tkr):
-        dd = data[tkr]
-        def repl(m):
-            arrow = chr(8593) if dd['ret_30d'] >= 0 else chr(8595)
-            return f'{m.group(1)}{fmt_price(dd["price"])}{m.group(2)}{dd["ret_30d"]:+.1f}% {arrow}'
-        return repl
-    
-    new_html, count = re.subn(pattern, make_repl(ticker), tech_updated)
-    if count > 0:
-        tech_updated = new_html
-        tech_changes.append(ticker)
-        print(f'  {ticker}: Header ${fmt_price(price)} ({ret_30d:+.1f}%)')
+for sym in TECH_TICKERS:
+    if sym not in prices:
+        continue
+    np = prices[sym]
+    nps = f"${np:.2f}"
+    syml = sym.lower()
+    sym_ret = ret_cache.get(sym, {})
 
-for ticker in tech_tickers:
-    if ticker not in data: continue
-    d = data[ticker]
-    price = d['price']
-    
-    ticker_pos = tech_updated.find(f'<div class="ticker" style="display:inline;margin-right:10px;">{ticker}')
-    if ticker_pos == -1:
-        ticker_pos = tech_updated.find(f'<div class="ticker">{ticker}')
-    if ticker_pos == -1: continue
-    
-    card_end = tech_updated.find('</details>', ticker_pos)
-    if card_end == -1: card_end = len(tech_updated)
-    
-    card_section = tech_updated[ticker_pos:card_end]
-    periods = [('6M', d['ret_6m']), ('90D', d['ret_90d']), ('30D', d['ret_30d']), ('YTD', d['ret_6m'])]
-    
-    metric_matches = list(re.finditer(
-        r'(<div class="metric">\s+<div class="metric-lbl">)(\w+)(</div>\s+<div class="metric-val )([\w\-]+)(">)([\-\+]?\d+\.\d+%|N/A)(</div>\s+<div class="metric-sub">)\$?[\d,]+\.\d{2}(<span class="reversal-badge[^>]*>[^<]*</span>)?',
+    # Find this stock card
+    card_tag = f'<details class="stock-card" id="{syml}">'
+    cs = tech.find(card_tag)
+    if cs == -1:
+        print(f"  {sym}: card not found")
+        continue
+    ce = tech.find("</details>", cs)
+    if ce == -1:
+        ce = cs + 8000
+
+    old_price_str = None
+
+    # 4a. Ticker price in summary header
+    tp = re.compile(
+        rf'(<div class="ticker" style="display:inline;margin-right:10px;">{re.escape(sym)} <span style="font-size:14px;font-weight:500;color:var\(--text-dim\);margin-left:6px;">)(\$[0-9]+\.\d+)(</span>)'
+    )
+    m = tp.search(tech, cs, ce)
+    if m:
+        ops = m.group(2)
+        old_price_str = ops
+        if ops != nps:
+            tech = tech[:m.start()] + m.group(1) + nps + m.group(3) + tech[m.end():]
+            ce += len(nps) - len(ops)
+            # print(f"  {sym} ticker: {ops} -> {nps}")
+
+    # 4b. Update metrics (period percentages + dollar subs)
+    for period in ["6M", "90D", "30D", "YTD"]:
+        ret_val = sym_ret.get(period)
+        if ret_val is None:
+            continue
+
+        # Find this period's metric block
+        card_section = tech[cs:ce]
+        lbl_str = f'<div class="metric-lbl">{period}</div>'
+        li = card_section.find(lbl_str)
+        if li == -1:
+            continue
+
+        sub = card_section[li:li+300]
+        abs_offset = cs + li
+
+        # Update percentage value
+        v = re.search(r'(<div class="metric-val )(up|down)(">)([+-]?\d+\.?\d*)(%</div>)', sub)
+        if v:
+            is_up = ret_val >= 0
+            new_class = "up" if is_up else "down"
+            new_val = f"{ret_val:+.1f}" if is_up else f"{ret_val:.1f}"
+            new_v_str = f'<div class="metric-val {new_class}">{new_val}%</div>'
+            if v.group(0) != new_v_str:
+                v_start = abs_offset + v.start()
+                v_end = abs_offset + v.end()
+                tech = tech[:v_start] + new_v_str + tech[v_end:]
+
+        card_section = tech[cs:ce]
+        li = card_section.find(lbl_str)
+        if li == -1:
+            continue
+        sub = card_section[li:li+300]
+        abs_offset = cs + li
+
+        # Update dollar sub (current price display next to metric)
+        s = re.search(r'(<div class="metric-sub">)(\$[0-9,]+\.[0-9]+)(</div>)', sub)
+        if s:
+            ops = s.group(2)
+            if ops != nps:
+                s_start = abs_offset + s.start()
+                s_end = abs_offset + s.end()
+                tech = tech[:s_start] + s.group(1) + nps + s.group(3) + tech[s_end:]
+
+    # 4c. Sparkline aria-label price
+    card_section = tech[cs:ce]
+    for sp in re.finditer(r'(aria-label="[^"]*?currently )(\$[0-9,]+\.[0-9]+)(")', card_section):
+        ops = sp.group(2)
+        if ops != nps:
+            sp_start = cs + sp.start()
+            sp_end = cs + sp.end()
+            tech = tech[:sp_start] + sp.group(1) + nps + sp.group(3) + tech[sp_end:]
+
+    # 4d. Sparkline svg text price
+    card_section = tech[cs:ce]
+    for tx in re.finditer(
+        r'(<text x="120" y="12" text-anchor="end" font-size="8" fill="var\(--text-muted\)">)(\$[0-9,]+\.[0-9]+)(</text>)',
         card_section
-    ))
-    
-    for i, m in enumerate(metric_matches):
-        if i < len(periods):
-            label, val = periods[i]
-            cls = get_cls(val)
-            old_text = m.group(0)
-            new_text = f'{m.group(1)}{label}{m.group(3)}{cls}{m.group(5)}{fmt_ret(val)}{m.group(7)}${fmt_price(price)}'
-            if label == '30D':
-                if val > 0 and d['ret_90d'] > 0:
-                    badge = '<span class="reversal-badge up">↑ Reversal</span>'
-                elif val > 0 and d['ret_90d'] <= 0:
-                    badge = '<span class="reversal-badge partial">Basing</span>'
-                else:
-                    badge = '<span class="reversal-badge down">↓ Downtrend</span>'
-                new_text += badge
-            card_section = card_section.replace(old_text, new_text, 1)
-    
-    card_section = re.sub(r'(<text[^>]*>\$)[\d,]+\.\d{2}(</text>)', lambda m: f'{m.group(1)}{fmt_price(price)}{m.group(2)}', card_section)
-    
-    rev, fcf, gm = d['rev'], d['fcf'], d['gm']
-    net_cash = (d['cash'] or 0) - (d['debt'] or 0)
-    op_margin, rev_growth = d['opMargin'], d['revGrowth']
-    
-    card_section = re.sub(r'(<div class="fund-item"><div class="lbl">Revenue</div><div class="val">)[^<]+(</div><div class="sub">)[^<]+(</div></div>)', lambda m: f'{m.group(1)}{fmt_big(rev)}{m.group(2)}{fmt_pct(rev_growth)} YoY{m.group(3)}', card_section, count=1)
-    card_section = re.sub(r'(<div class="fund-item"><div class="lbl">Free Cash Flow</div><div class="val">)[^<]+(</div></div>)', lambda m: f'{m.group(1)}{fmt_big(fcf)}{m.group(2)}', card_section, count=1)
-    if gm is not None:
-        card_section = re.sub(r'(<div class="fund-item"><div class="lbl">Gross Margin</div><div class="val">)[^<]+(</div></div>)', lambda m: f'{m.group(1)}{gm*100:.1f}%{m.group(2)}', card_section, count=1)
-    card_section = re.sub(r'(<div class="fund-item"><div class="lbl">Net Cash</div><div class="val">)[^<]+(</div></div>)', lambda m: f'{m.group(1)}{fmt_big(net_cash)}{m.group(2)}', card_section, count=1)
-    if op_margin is not None:
-        card_section = re.sub(r'(<div class="fund-item"><div class="lbl">Operating Margin</div><div class="val">)[^<]+(</div></div>)', lambda m: f'{m.group(1)}{op_margin*100:.1f}%{m.group(2)}', card_section, count=1)
-    
-    tech_updated = tech_updated[:ticker_pos] + card_section + tech_updated[card_end:]
+    ):
+        ops = tx.group(2)
+        if ops != nps:
+            tx_start = cs + tx.start()
+            tx_end = cs + tx.end()
+            tech = tech[:tx_start] + tx.group(1) + nps + tx.group(3) + tech[tx_end:]
 
-with open('Tech_Stock_Basket_May_2026_v3.html', 'w', encoding='utf-8') as f:
-    f.write(tech_updated)
-print(f'Tech v3 updated: {len(tech_changes)} tickers')
+    # 4e. Update 30d reversal badge
+    card_section = tech[cs:ce]
+    li30 = card_section.find('<div class="metric-lbl">30D</div>')
+    if li30 >= 0:
+        sub30 = card_section[li30:li30+200]
+        ret30 = sym_ret.get("30D")
+        if ret30 is not None:
+            badge_match = re.search(r'(<span class="reversal-badge )(up|down)(">)([↑↓] [A-Za-z]+)(</span>)', sub30)
+            if badge_match:
+                is_up = ret30 >= 0
+                new_bdir = "up" if is_up else "down"
+                new_arrow = "↑" if is_up else "↓"
+                new_label = "Reversal" if is_up else "Downtrend"
+                new_badge = f'<span class="reversal-badge {new_bdir}">{new_arrow} {new_label}</span>'
+                if badge_match.group(0) != new_badge:
+                    ba_start = cs + li30 + badge_match.start()
+                    ba_end = cs + li30 + badge_match.end()
+                    tech = tech[:ba_start] + new_badge + tech[ba_end:]
 
-print('\n=== Updating Deep-Dive v4 ===')
-with open('investment-deep-dive-v4.html', 'r', encoding='utf-8') as f:
-    deep_html = f.read()
+    # Track price change
+    if old_price_str is not None and old_price_str != nps:
+        try:
+            old_v = float(old_price_str.replace("$","").replace(",",""))
+            new_v = float(nps.replace("$","").replace(",",""))
+            pct_chg = (new_v - old_v) / old_v * 100
+            flag = " **" if abs(pct_chg) > 10 else ""
+            tech_changes.append((sym, old_price_str, nps, pct_chg, flag))
+        except ValueError:
+            pass
 
-deep_tickers = ['FLNC', 'AAOI', 'MU', 'SMCI', 'SNDK', 'APH', 'ANET', 'AMPX', 'VST']
-deep_updated = deep_html
-deep_changes = []
+# ── 5. Detect changes & write ──────────────────────────────────
+print("\n" + "=" * 60)
 
-for ticker in deep_tickers:
-    if ticker not in data: continue
-    d = data[ticker]
-    price = d['price']
-    new_price_str = fmt_price(price)
-    
-    pattern = rf'(<div class="pick-ticker">{re.escape(ticker)}\s+<span[^>]*>\$)[\d,]+(\.\d{{2}})?(</span></div>)'
-    
-    def make_price_repl(tkr, nps):
-        def repl(m):
-            return f'{m.group(1)}{nps}{m.group(3)}'
-        return repl
-    
-    new_html, count = re.subn(pattern, make_price_repl(ticker, new_price_str), deep_updated)
-    if count > 0:
-        deep_updated = new_html
-        deep_changes.append(ticker)
-        print(f'  {ticker}: pick-ticker -> ${new_price_str}')
+any_change = False
 
-for ticker in deep_tickers:
-    if ticker not in data: continue
-    d = data[ticker]
-    price = d['price']
-    new_price_str = fmt_price(price)
-    
-    ticker_match = re.search(rf'<div class="pick-ticker">{re.escape(ticker)}', deep_updated)
-    if not ticker_match: continue
-    # Find "stock at $X" in the next 2500 chars
-    search_start = ticker_match.end()
-    search_end = min(search_start + 2500, len(deep_updated))
-    search_region = deep_updated[search_start:search_end]
-    
-    stock_at_pattern = r'(\(stock at \$)[\d,]+(\.\d{2})?(\))'
-    
-    def make_stock_repl(nps):
-        def repl(m):
-            return f'{m.group(1)}{nps}{m.group(3)}'
-        return repl
-    
-    new_region, count = re.subn(stock_at_pattern, make_stock_repl(new_price_str), search_region)
-    if count > 0:
-        deep_updated = deep_updated[:search_start] + new_region + deep_updated[search_end:]
-        print(f'  {ticker}: "stock at" -> ${new_price_str}')
+# Build change summary
+all_changes = []  # (sym, old, new, pct, flag, source)
 
-with open('investment-deep-dive-v4.html', 'w', encoding='utf-8') as f:
-    f.write(deep_updated)
-print(f'Deep-Dive v4 updated: {len(deep_changes)} tickers')
+if dive != dive_orig:
+    any_change = True
+    print("  Deep-Dive v4: prices updated")
+    for c in dive_changes:
+        sym, old, new, pct, flag = c
+        print(f"  DD {sym}: {old} -> {new} ({pct:+.1f}%){flag}")
+        all_changes.append(c + ("dd",))
+else:
+    print("  Deep-Dive v4: no price changes")
 
-print('\n=== Summary ===')
-print(f'Tech v3: {len(tech_changes)} tickers updated')
-print(f'Deep-Dive v4: {len(deep_changes)} tickers updated')
+if tech != tech_orig:
+    any_change = True
+    print("  Tech v3: updated")
+    for c in tech_changes:
+        sym, old, new, pct, flag = c
+        print(f"  Tech {sym}: {old} -> {new} ({pct:+.1f}%){flag}")
+        all_changes.append(c + ("tech",))
+else:
+    print("  Tech v3: no price changes")
 
-movers = []
-for ticker in deep_tickers:
-    if ticker in data:
-        ret_30d = data[ticker]['ret_30d']
-        if abs(ret_30d) > 10:
-            movers.append(f'{ticker}: {ret_30d:+.1f}% (30d)')
+if not any_change:
+    print("No changes — prices are identical.")
+    print("[SILENT]")
+    sys.exit(0)
 
-if movers:
-    print(f'\nMovers >10% (30d):')
-    for m in movers:
-        print(f'  {m}')
+# Write files
+with open(TECH_V3, "w", encoding="utf-8") as f:
+    f.write(tech)
+with open(DEEP_DIVE_V4, "w", encoding="utf-8") as f:
+    f.write(dive)
 
-summary = {
-    'tech_changes': tech_changes,
-    'deep_changes': deep_changes,
-    'movers': movers,
-    'date': datetime.now().strftime('%B %d %Y')
-}
-with open('/tmp/refresh_summary.json', 'w') as f:
-    json.dump(summary, f, indent=2)
+tech_size = len(tech)
+dive_size = len(dive)
+print(f"\nFiles written: {TECH_V3} ({tech_size}B), {DEEP_DIVE_V4} ({dive_size}B)")
 
-print('\nDone. Ready to commit.')
+# Build structured commit summary
+commit_body_lines = ["auto-refresh: live stock data update"]
+
+if all_changes:
+    commit_body_lines.append("")
+    commit_body_lines.append("Tickers with price changes:")
+    for c in all_changes:
+        sym, old, new, pct, flag, src = c
+        commit_body_lines.append(f"  {sym}: {old} -> {new} ({pct:+.1f}%){flag}")
+
+    # Check for big movers > 10%
+    big_movers = [c for c in all_changes if abs(c[3]) > 10]
+    if big_movers:
+        commit_body_lines.append("")
+        commit_body_lines.append("Movers >10% since last refresh:")
+        for c in big_movers:
+            sym, old, new, pct, flag, src = c
+            commit_body_lines.append(f"  {sym}: {pct:+.1f}% ({old} -> {new})")
+
+commit_body = "\n".join(commit_body_lines)
+print(f"\nCommit body:\n{commit_body}")
+
+# Save the commit message
+msg_path = "/tmp/stock_refresh_commit_msg.txt"
+with open(msg_path, "w") as f:
+    f.write(f"auto-refresh: live stock data update [{date_str}]\n")
+    f.write("\n")
+    f.write(commit_body)
+    f.write("\n")
+
+print(f"\nCommit message saved to {msg_path}")
+print("Done.")
