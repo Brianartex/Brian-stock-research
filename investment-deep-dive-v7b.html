@@ -55,26 +55,26 @@
   .hero .stamp b { color: var(--accent); }
   .portfolio-hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 26px; }
   .ph-card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-sm-ext); padding: 16px 18px; border-left: 3px solid var(--accent); transition: all .2s; }
-  .ph-card:hover { box-shadow: var(--shadow-md-ext); transform: translateY(-2px); }
+  .ph-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-2px); }
   .ph-card .ph-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-quiet); }
   .ph-card .ph-value { font-size: 22px; font-weight: 700; margin-top: 4px; }
   .ph-card .ph-note { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
   .sector-split { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
   .sector-tag { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; padding: 4px 10px; border-radius: 20px; background: var(--accent-bg); color: var(--accent); border: 1px solid rgba(38,96,156,0.2); }
   .section-title { font-size: 13px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-quiet); margin: 44px 0 18px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
-  .macro-card { background: var(--bg); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg-ext); padding: 28px; margin-bottom: 24px; transition: all .2s; }
+  .macro-card { background: var(--bg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm-ext); padding: 28px; margin-bottom: 24px; transition: all .2s; }
   .macro-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-2px); }
   .macro-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
   .macro-card p { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
   .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-quiet); margin-bottom: 20px; text-transform: uppercase; }
-  .neo-card { background: var(--bg); border-radius: var(--radius); box-shadow: var(--shadow-md-ext); padding: 20px; transition: all .2s; }
+  .neo-card { background: var(--bg); border-radius: var(--radius); box-shadow: var(--shadow-sm-ext); padding: 20px; transition: all .2s; }
   .neo-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-2px); }
   .macro-dash { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0 16px; }
   .macro-dash-item { background: var(--bg); border-radius: var(--radius); box-shadow: var(--shadow-sm-inset); padding: 14px 10px; text-align: center; }
   .macro-dash-item .val { font-size: 20px; font-weight: 700; letter-spacing: -0.03em; }
   .macro-dash-item .lbl { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-quiet); margin-top: 4px; }
   .macro-dash-item .sub { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
-  .pick-card { background: var(--surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md-ext); padding: 24px 26px; margin-bottom: 26px; transition: all .25s ease; }
+  .pick-card { background: var(--surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm-ext); padding: 24px 26px; margin-bottom: 26px; transition: all .25s ease; }
   .pick-card:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-3px); }
   .pick-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
   .pick-rank { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700; color: var(--accent); }
@@ -88,8 +88,8 @@
   .live-price { font-variant-numeric: tabular-nums; }
   .pick-thesis { font-size: 15px; line-height: 1.7; margin: 16px 0; }
   .pick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
-  .pick-box { background: var(--surface-alt); border-radius: var(--radius); padding: 12px 14px; box-shadow: var(--shadow-sm-inset); border-left: 3px solid var(--border-strong); transition: all .2s; }
-  .pick-box:hover { box-shadow: var(--shadow-md-ext); transform: translateY(-1px); }
+  .pick-box { background: var(--surface-alt); border-radius: var(--radius); padding: 12px 14px; box-shadow: var(--shadow-sm-ext); border-left: 3px solid var(--border-strong); transition: all .2s; }
+  .pick-box:hover { box-shadow: var(--shadow-lg-ext); transform: translateY(-1px); }
   .pick-box.green { border-left-color: var(--green); background: var(--green-bg); }
   .pick-box.red { border-left-color: var(--red); background: var(--red-bg); }
   .pick-box.accent { border-left-color: var(--accent); background: var(--accent-bg); }
@@ -139,6 +139,7 @@
   </div>
   <div class="toc-section-group collapsed" style="max-height:0">
     <a href="#intro" class="toc-item">The Big Picture</a>
+    <a href="#ibm-shift" class="toc-item">IBM &amp; The Capex Shift</a>
     <a href="#methodology" class="toc-item">Our Method</a>
     <a href="#wind" class="toc-item">Wind Indicators</a>
   </div>
@@ -184,6 +185,17 @@
   <p style="margin-top:12px;">Instead of spreading money across 50 stocks, this list bets bigger on a few names where the upside case is asymmetric — meaning the potential gain (3x–5x or more) is far larger than the likely loss if it doesn't work out. Four of the six are "asymmetric" bets; two (Arista and Amphenol) are "core" holdings — steadier compounders you hold for the long run rather than moon-shots.</p>
   <p style="margin-top:12px;">The common thread: each company sits at a <strong>bottleneck</strong> the AI boom can't avoid. You can't build an AI data center without the lasers (Sivers, AAOI), the switches (Arista), or the connectors (Amphenol). And you can't deploy humanoid robots at scale without a company like Agility. When supply is tight at the bottleneck, the companies that own it win.</p>
   <p style="margin-top:12px;font-size:12px;color:var(--text-dim);"><strong>How to read each card:</strong> a one-paragraph thesis, four quick boxes (Why Now / The Risk / Why Targets Look Low / Wall Street Says), a plain-English technical snapshot, and a 5-dot risk meter. Click <em>"▸ Full In-Depth Report"</em> to expand the deeper research. Prices update live on load; "as of July 2026" is the fallback.</p>
+</div>
+
+<div class="macro-card" id="ibm-shift" style="margin-top:24px;border-left:4px solid var(--accent);">
+  <div class="sec-label">Why This Basket, Right Now</div>
+  <h3>IBM's Warning Is the Bull Case in Disguise</h3>
+  <p>On July 14, 2026, IBM <strong>preannounced a miss on Q2 results</strong> — revenues of ~$17.2bn vs. ~$17.9bn consensus, EPS ~$2.93 vs. ~$3.02 — and the stock dropped <strong>17–22% in premarket</strong> (figures per Goldman and UBS notes cited in a widely-circulated ZeroHedge thread). The reason management gave is the most important sentence for this basket:</p>
+  <blockquote style="margin:14px 0;padding:12px 16px;background:var(--accent-bg);border-left:3px solid var(--accent);border-radius:var(--radius-sm);font-size:13px;color:var(--text-dim);">"In the last few weeks of June, we saw clients shift their quarterly capex spend toward servers, storage, and memory purchases to secure supply-constrained infrastructure ahead of expected price increases. We did not anticipate the magnitude of the capex reprioritization."</blockquote>
+  <p><strong>What it means:</strong> Enterprise buyers are pulling forward spend from software, legacy mainframes, and IT services into <strong>physical AI infrastructure</strong> — servers, storage, memory, optics. IBM's high-margin Transaction Processing business (the zSeries mainframe software stack, ~30% of its Software segment) fell mid-teens year-over-year because the budgets that used to flow there are now buying GPUs and the boxes around them.</p>
+  <p style="margin-top:12px;">Two independent desks read it the same way. <strong>Goldman</strong> called it a "fully play into the Software bear case" with broad weakness across software + services. <strong>UBS (Keirstead/Vogt)</strong> said the budget redirection toward AI had been a known risk for "incumbent SaaS suppliers and IT services companies" and warned it could "weigh on sentiment incrementally" as Q2 reporting season progresses. Translation: IBM may be the first domino, not the only one.</p>
+  <p style="margin-top:12px;"><strong>Why this helps our picks:</strong> Every name in this basket sits <em>on the receiving end</em> of that redirected capex. The money leaving IBM's mainframe software is becoming orders for the lasers (Sivers/AAOI), switches (Arista), and connectors (Amphenol) that physically build AI data centers. IBM's pain is evidence the AI-infrastructure cycle is crowding out legacy spend faster than the Street modeled — which is exactly the asymmetry this basket is built to capture. The counter-risk: if the capex pull-forward is a one-quarter scramble rather than a durable shift, the optics names could face an air-pocket later. We rate this development <strong>constructive but early</strong> — a sentiment tailwind, not yet a fundamentals confirmation.</p>
+  <p style="margin-top:12px;font-size:11px;color:var(--text-quiet);"><em>Source: @zerohedge thread (July 14, 2026) quoting Goldman and UBS analyst notes; price-move figures from those notes. Live IBM price unavailable at publish (Yahoo rate-limited); verify before citing a current quote. KNOWN: IBM preannounced a Q2 miss and cited capex reprioritization toward AI infrastructure. INFERRED: this accelerates, rather than threatens, demand for our infrastructure picks.</em></p>
 </div>
 
 <div class="macro-card" id="wind" style="margin-top:24px;">
