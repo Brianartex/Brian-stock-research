@@ -6,6 +6,19 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Versions are
 
 ---
 
+## 2026-11-04 — Daily data refresh
+
+### Changed
+- **Tech v3:** Prices, 6M/90D/30D/YTD returns, 6-month sparklines and fundamentals refreshed to the Nov 3, 2026 close (23 cards, plus AMBA watchlist numbers). Hero now stamps the data date.
+- **Deep-Dive v4:** Current prices refreshed for all 9 picks. Entry zones, take-profit levels and analyst targets left untouched.
+
+### Fixed
+- **Tech v3:** Rebuilt card headers. 24 of 25 cards had lost their `</summary>` and nested `.stock-card-body` inside `<summary>`; every `.metric-sub` carried two concatenated prices (`$71.9170.46`); the fourth metric had been relabelled `30D` instead of `YTD`.
+- **Deep-Dive v4:** Restored the AAOI, SMCI, APH and AMPX pick cards, deleted by the Sept 9 refresh. Their thesis/risk/technical text had been merged into the preceding cards' Wall Street boxes.
+- **Deep-Dive v4:** APH traded 2:1 on 2026-09-03. The card now carries a note that its per-share targets, entry and moving averages are pre-split while the quoted price is post-split.
+
+---
+
 ## [Unreleased] — 2026-05-07
 
 ### Fixed — All Docs
