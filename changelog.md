@@ -6,6 +6,22 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Versions are
 
 ---
 
+## 2026-11-05 — Daily data refresh
+
+### Changed
+- **Tech v3:** Prices, 6M/90D/30D/YTD returns, 6-month sparklines and fundamentals refreshed to the 9:32 AM ET snapshot (23 cards, plus AMBA watchlist numbers). Hero stamp now carries the snapshot time.
+- **Deep-Dive v4:** Current prices refreshed for all 9 picks, including the "stock at $X" figure in each Wall Street box. Entry zones, take-profit levels and analyst mean/high/low targets left untouched by design.
+
+### Market context
+- Broad AI-hardware selloff: 13 of the 27 tracked names fell 10%+ from the Nov 3 close. HIMX -23.5%, DDOG -21.2%, STX -16.0%, SNDK -15.9%, VST -15.7%, ARM -15.4%, AAOI -13.9%, MRVL -12.7%, ETN -12.4%, MU -11.7%, AMKR -10.5%, GLW -10.1%, APH -10.1%.
+- Two earnings reactions in the basket: QCOM -10.3% after a weak December-quarter guide citing memory costs; HIMX -21.6% after Q3 2026 results and Q4 guidance.
+
+### Notes
+- Prices are an intraday snapshot (9:32 AM ET), not a close. The hero stamp on both docs states the time so the figure is never mistaken for a settlement price.
+- Money cells round half-up, so Yahoo's 3-decimal averages (e.g. 33.665) display the way a person would round them.
+
+---
+
 ## 2026-11-04 — Daily data refresh
 
 ### Changed
