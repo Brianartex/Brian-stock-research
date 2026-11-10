@@ -6,6 +6,25 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Versions are
 
 ---
 
+## 2026-11-10 — Daily data refresh
+
+### Changed
+- **Tech v3:** Prices, 6M/90D/30D/YTD returns, 6-month sparklines and fundamentals refreshed to the 9:30 AM ET snapshot (23 cards, plus the AMBA watchlist card). Hero stamp now carries the snapshot time.
+- **Deep-Dive v4:** Current prices refreshed for all 9 picks, including the "stock at $X" figure in each Wall Street box (FLNC, AAOI, MU, SMCI, SNDK, ANET, AMPX). APH and VST quote upside percentages rather than an absolute price, so those boxes carry no price to refresh. Entry zones, take-profit levels and analyst mean/high/low targets left untouched by design.
+
+### Movers since the Nov 5 snapshot
+- Up: AOSL +43.1%, AMPX +15.5%, VST +11.8%, ANET +10.2%, QCOM +9.1%, APH +6.3%, SNOW +5.8%, ARM +5.6%, AMBA +4.4%, LUMN +4.0%, HIMX +3.8%.
+- Down: MNDY -16.3%, FLNC -11.3%, AAOI -10.6%, SNDK -8.7%, MU -4.6%, DOCU -3.3%, AEP -3.0%, NTAP -3.0%, STX -3.0%.
+- Breadth: 15 up, 13 down across the 28 tracked names. The move is two-sided rather than a single sector wave: storage/memory gave back ground (SNDK -8.7%, MU -4.6%, STX -3.0%) while networking and power names gained (ANET +10.2%, VST +11.8%).
+- AOSL and MNDY moved on volume well above their recent averages (AOSL 1.4M shares on Nov 9 versus a ~0.5M baseline; MNDY 3.1M versus ~1.2M). The size and volume are consistent with a news or earnings reaction, but the cause was not verified for this refresh.
+
+### Notes
+- Prices are an intraday snapshot (9:30 AM ET), not a close. The hero stamp on both docs states the time so the figure is never mistaken for a settlement price.
+- The snapshot was taken minutes after the opening bell, so quotes were still moving. The pull cross-checks every ticker between two independent Yahoo endpoints and logs any gap; 13 tickers showed 0.4-1.7% differences, all consistent with open-bell volatility rather than a stale or bad feed.
+- Money cells round half-up, so Yahoo's 3-decimal averages (e.g. 33.665) display the way a person would round them.
+
+---
+
 ## 2026-11-05 — Daily data refresh
 
 ### Changed
