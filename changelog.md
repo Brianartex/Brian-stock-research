@@ -6,6 +6,26 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Versions are
 
 ---
 
+## 2026-11-12 — Daily data refresh
+
+### Changed
+- **Tech v3:** Prices, 6M/90D/30D/YTD returns, 6-month sparklines and fundamentals refreshed to the 9:30 AM ET snapshot (23 cards, plus the AMBA watchlist card). Hero stamp carries the snapshot time.
+- **Deep-Dive v4:** Current prices refreshed for all 9 picks, including the "stock at $X" figure in 7 Wall Street boxes (FLNC, AAOI, MU, SMCI, SNDK, ANET, AMPX). APH and VST quote upside percentages rather than an absolute price, so those boxes carry no price to refresh. Entry zones, take-profit levels and analyst mean/high/low targets left untouched by design.
+- **Reversal badges:** one fewer than the Nov 10 build. AMPX is now -3.1% over 30 days against -30.5% over 90; both negative, so the badge condition (30D and 90D disagree in sign) no longer holds. OKTA and QCOM keep the down-reversal badge, AOSL keeps the up-reversal.
+
+### Movers since the Nov 10 snapshot
+- Up: MU +7.1%, AMKR +6.5%, ARM +6.4%, STX +6.3%, AAOI +5.7%, ANET +4.6%, MRVL +3.8%, DOCU +3.6%, QCOM +3.5%, AEP +3.2%, NTAP +2.7%.
+- Down: AMPX -12.1%, FLNC -7.7%, APH -3.7%, LUMN -3.1%, SMCI -2.4%, MNDY -1.9%.
+- Breadth: 18 up, 9 down across the 27 refreshed names. Only AMPX cleared the 10% threshold.
+
+### Notes
+- Read the two directions separately. Since the Nov 10 snapshot the basket is net higher, but that window contains a strong Nov 11 session. On today's open alone 24 of 27 names are red (SNDK -10.0%, SMCI -9.8%, MRVL -7.0%, AAOI -6.8%). Because the previous refresh was taken at the Nov 10 open, "since last refresh" spans two sessions and can point the opposite way from today's tape.
+- Prices are an intraday snapshot (9:30 AM ET), not a close. The hero stamp on both docs states the time so the figure is never mistaken for a settlement price.
+- Every ticker is cross-checked between two independent Yahoo endpoints before it is accepted; 17 names showed 0.5-3.2% differences, all consistent with open-bell volatility rather than a stale or bad feed.
+- Money cells round half-up, so Yahoo's 3-decimal averages (e.g. 33.665) display the way a person would round them.
+
+---
+
 ## 2026-11-10 — Daily data refresh
 
 ### Changed
