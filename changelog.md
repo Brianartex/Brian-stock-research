@@ -6,6 +6,29 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Versions are
 
 ---
 
+## 2026-11-17 — Daily data refresh
+
+### Changed
+- **Tech v3:** Prices, 6M/90D/30D/YTD returns, 6-month sparklines and fundamentals refreshed to the 9:30 AM ET snapshot (23 cards, plus the AMBA watchlist card). Hero stamp carries the snapshot time.
+- **Deep-Dive v4:** Current prices refreshed for all 9 picks, including the "stock at $X" figure in 7 Wall Street boxes (FLNC, AAOI, MU, SMCI, SNDK, ANET, AMPX). APH and VST quote upside percentages rather than an absolute price, so those boxes carry no price to refresh. Entry zones, take-profit levels and analyst mean/high/low targets left untouched by design.
+- **Reversal badges:** 3 → 5. VEEV joins with a down-reversal (30D -3.1% against 90D +23.9%) and ANET with an up-reversal (30D +6.3% against 90D -2.6%). OKTA and QCOM keep the down-reversal, AOSL keeps the up.
+
+### Movers since the Nov 12 snapshot
+- Down >10%: AMPX -14.0%, AOSL -11.6%, FLNC -10.8%, AAOI -10.6%.
+- Other notable declines: SNDK -9.3%, SMCI -8.9%, ARM -7.7%, HIMX -7.4%, MU -6.8%, AMKR -6.0%, LUMN -5.8%, GLW -5.4%, MRVL -5.0%.
+- Up: MNDY +2.5%, OKTA +1.2%, NTAP +0.7%. Nothing else closed higher.
+- Breadth: 3 up, 24 down across the 27 names present in both snapshots.
+
+### Notes
+- This was a three-session drawdown between snapshots, not a one-day event. The Nov 12 snapshot was taken at the open; the decline ran through the Nov 13 and Nov 16 sessions. Today's open is a partial rebound in a few names (MRVL +2.6%, AAOI +3.1%, ARM +1.6%), so "since last refresh" and "today's tape" point in opposite directions again.
+- Storage and optical took the heaviest damage: SNDK -9.3% and now 66% below its 52-week high, AAOI -10.6% and 80% below, MU -6.8% and 43% below.
+- FLNC printed $4.28, a rounding error off its 52-week low of $4.28 (0.1% above). AMPX at $7.14 is 1.7% off its low of $7.02. Both are at the floor of their ranges, not in a pullback.
+- Prices are an intraday snapshot (9:30 AM ET), not a close. The hero stamp on both docs states the time so the figure is never mistaken for a settlement price.
+- Every ticker is cross-checked between two independent Yahoo endpoints before it is accepted; 6 names showed 0.4-0.9% differences, all consistent with open-bell volatility rather than a stale or bad feed.
+- Verified after writing: both docs rendered headless, all 40 value checks read back out of the live DOM against the data file, zero page errors, zero horizontal overflow, zero empty or zero-size cells.
+
+---
+
 ## 2026-11-12 — Daily data refresh
 
 ### Changed
