@@ -6,6 +6,32 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Versions are
 
 ---
 
+## 2026-11-19 — Daily data refresh
+
+### Changed
+- **Tech v3:** Prices, 6M/90D/30D/YTD returns, 6-month sparklines and fundamentals refreshed to the 9:32 AM ET snapshot (23 cards, plus the AMBA watchlist card). Hero stamp carries the snapshot time.
+- **Deep-Dive v4:** Current prices refreshed for all 9 picks, including the "stock at $X" figure in 7 Wall Street boxes (FLNC, AAOI, MU, SMCI, SNDK, ANET, AMPX). APH and VST quote upside percentages rather than an absolute price, so those boxes carry no price to refresh. Entry zones, take-profit levels and analyst mean/high/low targets left untouched by design.
+- **Reversal badges:** 5 → 4. DOCU and AEP join with down-reversals (30D -3.4% against 90D +24.5%, and 30D -1.1% against 90D +0.1%). OKTA, ANET and AOSL lose theirs as the 30D and 90D signs converge. VEEV and QCOM keep the down-reversal.
+
+### Movers since the Nov 17 snapshot
+- Up >10%: OKTA +14.6% — the only name to clear the threshold.
+- Other notable gains: AMBA +9.4%, STX +8.6%, ARM +6.3%, AMKR +5.9%, ANET +5.8%, LUMN +5.6%, GLW +5.1%, SNDK +3.9%, APH +3.5%, SNOW +3.3%, MU +3.1%.
+- Down: AAOI -8.0%, VEEV -7.2%, MNDY -5.7%, AEP -2.1%, NTAP -1.8%, QCOM -1.5%, VST -1.5%, FLNC -0.7%, AMPX -0.7%, DOCU -0.6%.
+- Breadth: 19 up, 10 down across all 29 names present in both snapshots. Median move +1.9%.
+
+### Notes
+- This reverses the Nov 17 tape. That snapshot caught a three-session drawdown (3 up, 24 down); two sessions later the basket is broadly green (19 up, 10 down). The whole book moved together, which is rotation into the group rather than a single catalyst.
+- AAOI and VEEV are the exceptions and both are now the weakest large positions: AAOI -8.0% to $42.81 (82% below its 52-week high), VEEV -7.2% to $279.02.
+- SNDK at $829.30 sits 353% above its 52-week low of $183 and 65% below its high of $2,354. Wide range, still the most volatile name in the set.
+- FLNC at $4.25 is 6.6% off its 52-week low, having bounced off $4.28 on Nov 17. AMPX at $7.09 is 9.0% off its low. The floor held for now.
+- **Data-source note:** Yahoo truncated SNDK's daily history to 3 bars for every requested range on this run. Its series was spliced onto the Nov 17 snapshot's 128 daily closes; the overlap bar (Nov 17: 796.21 in the old file against 797.24 fresh, 0.13%) confirms adjustment drift rather than a split, so the splice is clean. SNDK is deep-dive-only, so no Tech v3 cell depends on the reconstructed history.
+- **Known stale prose, deliberately not changed:** the APH, VST and ANET pick cards still quote pre-refresh absolute prices inside their upside sentences (“42% upside from $128”, “55% upside from $148”, “at $142”) and stale 50d/200d moving averages. Those are thesis prose, not data cells, and rewriting them changes analyst-upside claims. Flagged for a human edit rather than patched by the refresh.
+- Prices are an intraday snapshot (9:32 AM ET), not a close. The hero stamp on both docs states the time so the figure is never mistaken for a settlement price.
+- Every ticker is cross-checked between two independent Yahoo endpoints before it is accepted; AMPX (0.62%) and SNDK (0.55%) showed the only differences, both consistent with open-bell volatility.
+- Verified after writing: both docs rendered headless (Edge), all 40 value checks read back out of the live DOM against the data file, zero page errors, zero console errors, no horizontal overflow at 1440 or 1024, zero empty or zero-size cells. The 15px horizontal overflow at 390px in Tech v3 is pre-existing and byte-identical in the pre-refresh copy — it comes from `.neo-card`, not from this refresh.
+
+---
+
 ## 2026-11-17 — Daily data refresh
 
 ### Changed
